@@ -1,0 +1,15 @@
+.navbar {
+  display: flex;
+  flex: 1;
+  border: 2px;
+  border-style: hidden;
+  background-color: #1a1a1d;
+  list-style-type: none;
+}
+
+.navbar,
+li {
+  margin: 5px;
+  color: white;
+  text-decoration: none;
+}
