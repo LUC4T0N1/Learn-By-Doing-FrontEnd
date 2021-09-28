@@ -1,8 +1,9 @@
 import React from 'react'
+import './erro.css'
 
 function Erro() {
   return (
-    <div>
+    <div className="mensagemErro">
       <h1>ERRO - PAGINA NAO ENCONTRADA</h1>
     </div>
   )
