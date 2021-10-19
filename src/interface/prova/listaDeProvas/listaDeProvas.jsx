@@ -1,13 +1,10 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 import { CircularProgress } from '@material-ui/core'
 import ProvaCard from './provaCard'
 import { useParams } from 'react-router'
 import { useHistory } from 'react-router-dom';
-import { BuscarProvasService }from '../../../teste-service';
-
-
-
-
+import { getProvas } from '../../../application/provaSlice';
+import { useSelector, useDispatch } from "react-redux";
 
 function ListaDeProvas() {
 
@@ -17,7 +14,12 @@ function ListaDeProvas() {
  const {idConteudo} = useParams();
  const body = { idConteudo : parseInt(`${idConteudo}`) , ordemAlfabetica: true, dificuldade: false, popularidade: false}
  
- const provas = BuscarProvasService(pagina, body);
+ const dispatch = useDispatch();
+ useEffect(() => {
+   dispatch(getProvas({pagina: pagina, body: body}))
+ }, [dispatch])
+
+ const provas = useSelector((state) => state.provas.provas);
  
 
   return (

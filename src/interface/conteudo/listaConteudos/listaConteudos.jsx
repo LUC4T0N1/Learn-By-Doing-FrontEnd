@@ -2,13 +2,20 @@ import { CircularProgress } from '@material-ui/core'
 import ConteudoCard from './conteudoCard';
 import CriarConteudo from '../criarConteudo/criarConteudo';
 import { useHistory } from 'react-router-dom';
-import { BuscarConteudosService } from '../../../teste-service';
+import { useSelector, useDispatch } from "react-redux";
+import { getConteudos } from '../../../application/conteudoSlice';
+import { useEffect } from "react"; 
+
 
 export default function ListaConteudos() {
   let pagina = 0;
   let history = useHistory();
-  const conteudos = BuscarConteudosService(pagina);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getConteudos({pagina: pagina}))
+  }, [dispatch])
 
+  const conteudos = useSelector((state) => state.conteudos.conteudos);
   return (
     <>
     {conteudos ? (

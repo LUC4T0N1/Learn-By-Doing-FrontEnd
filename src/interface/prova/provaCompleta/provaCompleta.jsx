@@ -1,22 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { useParams } from 'react-router'
-import axios from 'axios'
-import { CircularProgress } from '@material-ui/core'
-import { useHistory } from 'react-router-dom';
+import { getProva } from '../../../application/provaSlice';
+import { useSelector, useDispatch } from "react-redux";
+
 
 export default function ProvaCompleta() {
-  const [prova, setProva] = useState();
   const {idProva} = useParams();
-   
-   useEffect(() => {
-     axios.get(`http://localhost:8080/api/prova/buscarID?id=${idProva}`).then((res) => {
-       const responseProva = res.data;
-       setProva(responseProva);
-       console.log(responseProva);
-     });
-   }, []);
-
   
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProva({idProva: idProva}))
+  }, [dispatch])
+ 
+  const prova = useSelector((state) => state.provas.prova);
+
   return (
     <div>
         <p>{`Prova completa de id ${idProva}`}</p>

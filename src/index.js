@@ -13,28 +13,32 @@ import store from "./application/configureStore";
 import PaginaInicial from  "./interface/pagina-inicial/paginaInicial";
 import Registrar from  "./interface/registrar/registrar";
 import CriarProva from  "./interface/prova/criar-prova/criarProva";
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+import DateFnsAdapter from '@material-ui/lab/AdapterDateFns';
 
 
 function App() {
   return (
-  <div className="App">
-    <Provider store = {store}>
-      <Router>
-        <Navbar/>
-        <Switch>
-          <Route exact path="/login" children={<Login/>}/>
-          <Route exact path="/perfil" children={<Perfil/>}/>
-          <Route exact path="/registrar" children={<Registrar/>}/>
-          <Route exact path="/conteudos" children={<ListaConteudos/>}/>
-          <Route exact path="/criar" children={<CriarProva/>}/>
-          <Route exact path="/" children={<PaginaInicial/>}/>
-          <Route exact path="/:idConteudo/" children={<ListaDeProvas/>}/>
-          <Route exact path="/:idConteudo/:idProva/" children={<ProvaCompleta/>}/>
-          <Route path='*'><Erro/></Route>
-        </Switch>
-      </Router>
-    </Provider>
-  </div>
+  <LocalizationProvider dateAdapter={DateFnsAdapter}>
+    <div className="App">
+      <Provider store = {store}>
+        <Router>
+          <Navbar/>
+          <Switch>
+            <Route exact path="/login" children={<Login/>}/>
+            <Route exact path="/perfil" children={<Perfil/>}/>
+            <Route exact path="/registrar" children={<Registrar/>}/>
+            <Route exact path="/conteudos" children={<ListaConteudos/>}/>
+            <Route exact path="/criar" children={<CriarProva/>}/>
+            <Route exact path="/" children={<PaginaInicial/>}/>
+            <Route exact path="/:idConteudo/" children={<ListaDeProvas/>}/>
+            <Route exact path="/:idConteudo/:idProva/" children={<ProvaCompleta/>}/>
+            <Route path='*'><Erro/></Route>
+          </Switch>
+        </Router>
+      </Provider>
+    </div>
+  </LocalizationProvider>
         );
 }
 

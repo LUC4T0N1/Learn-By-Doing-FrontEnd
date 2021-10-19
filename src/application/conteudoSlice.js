@@ -1,31 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userSlice =  createSlice({
-  name: "user",
-  initialState: {},
+const conteudoSlice =  createSlice({
+  name: "conteudo",
+  initialState: {conteudos: [], conteudo: {nome: ""}},
   reducers:{
-    getUser() {},
-    setUser(state, action){
-      const userData = action.payload;
-      /*  
-      {
-        id: 3
-        name: "ANTONIO"
-        LASTName: "bundas"
-        role: "programmer"
-      }
-      { role: "senior programmer"}
-      {
-        id: 3
-        name: "ANTONIO"
-        LASTName: "bundas"
-        role: "senior programmer"
-      }
-      */
-     return { ...state, ...userData}
+    getConteudos() {},
+    criarConteudo(){},
+    setConteudos(state, action){
+      const conteudosData = action.payload;
+     return { ...state, ...conteudosData}
+    },
+    setConteudo(state, action){
+      const conteudoData = action.payload;
+      return ({ ...state, conteudo: conteudoData })
     }
   }
 });
 
-export const { getUser, setUser } = userSlice.actions;
-export default userSlice.reducer;
+export const { getConteudos, setConteudos, criarConteudo, setConteudo } = conteudoSlice.actions;
+export default conteudoSlice.reducer;

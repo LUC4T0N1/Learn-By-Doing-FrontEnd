@@ -6,10 +6,10 @@ const PaginaInicial = () =>{
   return(
     <div className="inicio">
       <div>
-        <Link to="/conteudos">Realizar Prova</Link>
+        <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/conteudos">Realizar Prova</Link>
       </div>
       <div>
-        <Link to="/criar">Criar Prova</Link>
+        <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/criar">Criar Prova</Link>
       </div>
     </div>
   

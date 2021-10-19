@@ -1,18 +1,25 @@
-import React, {useState} from 'react'
-import { CriarConteudoService } from '../../../teste-service';
+import React from 'react'
+import { criarConteudo, setConteudo } from '../../../application/conteudoSlice';
+import { useSelector, useDispatch } from "react-redux";
+
 
 function CriarConteudo () {
-  const [conteudo, setConteudo] =  useState({ nome : '' });
+
+  const dispatch = useDispatch();
+
+  const conteudo = useSelector((state) => state.conteudos.conteudo);
+
   const handleChange = (e) => {
     const nome = e.target.name;
     const value = e.target.value;
-    setConteudo({...conteudo, [nome]: value});
+    dispatch(setConteudo({...conteudo, [nome]: value}));
+
   }
   const handleSubmit = (e) => {
     e.preventDefault();
     if(conteudo.nome){
-      CriarConteudoService(conteudo);
-      setConteudo({ nome : '' });
+      dispatch(criarConteudo({conteudo: conteudo}))
+      dispatch(setConteudo({ nome : '' }));
   }else{
     alert('preencha nome conteudo');
   }
