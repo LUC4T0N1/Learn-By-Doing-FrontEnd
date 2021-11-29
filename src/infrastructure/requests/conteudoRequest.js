@@ -1,13 +1,13 @@
 import axios from "axios";
+import authHeader from '../../AuthContext';
+
+const url = "http://localhost:8080/api/"
 
 export function obterConteudos (pagina) {
-  return axios.request({
-    method: 'get',
-    url: `http://localhost:8080/api/conteudo/buscarOA?pagina=${pagina}`
-  })
+  return axios.get(`${url}conteudo/buscarOA?pagina=${pagina}`, { headers: authHeader() })
 }
 
 export function criarConteudo (conteudo) {
-  return axios.post(`http://localhost:8080/api/conteudo`, conteudo)
+  return axios.post(`${url}conteudo`, conteudo, { headers: authHeader() })
 }
  

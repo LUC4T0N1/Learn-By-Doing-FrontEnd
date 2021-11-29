@@ -6,6 +6,8 @@ import conteudoSlice from "./conteudoSlice";
 import provaSlice from "./provaSlice";
 import questaoSlice from "./questaoSlice";
 import alternativaSlice from "./alternativaSlice";
+import perfilSlice from "./perfilSlice";
+import autenticacaoSlice from "./autenticacaoSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,7 +15,9 @@ const reducer = combineReducers({
   conteudos: conteudoSlice,
   provas: provaSlice,
   questoes: questaoSlice,
-  alternativas: alternativaSlice
+  alternativas: alternativaSlice,
+  perfil: perfilSlice,
+  autenticacao: autenticacaoSlice
 })
 
 const store =  configureStore({ 

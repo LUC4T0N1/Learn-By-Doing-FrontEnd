@@ -1,22 +1,39 @@
 import React, {useState} from 'react'
 import './registrar.css'
+import {
+  createUserWithEmailAndPassword
+} from "firebase/auth";
+import { auth } from "../../firebase"
 
 function Registrar () {
-  const [conteudo, setConteudo] =  useState({ senha : '', email: '' });
+
+  const registrar = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        login.email,
+        login.senha
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const [login, setLogin] =  useState({ senha : '', email: '' });
   const handleChangeEmail = (e) => {
-    const email = e.target.email;
     const value = e.target.value;
-    setConteudo({...conteudo, [email]: value});
+    setLogin({...login, email: value});
   }  
   const handleChangeSenha = (e) => {
-    const senha = e.target.senha;
     const value = e.target.value;
-    setConteudo({...conteudo, [senha]: value});
+    setLogin({...login, senha: value});
   }  
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(conteudo.senha && conteudo.email){
-      setConteudo({ nome : '' });
+    if(login.senha && login.email){
+      registrar();
+      setLogin({ nome : '' });
   }else{
     alert('preencha senha e email');
   }
@@ -32,7 +49,7 @@ function Registrar () {
             type='text'
             id='email'
             name='email'
-            value={conteudo.email}
+            value={login.email}
             onChange={handleChangeEmail}/>
         </div>
         <div className='form-control'>
@@ -41,7 +58,7 @@ function Registrar () {
             type='text'
             id='senha'
             name='senha'
-            value={conteudo.senha}
+            value={login.senha}
             onChange={handleChangeSenha}/>
         </div>
         <button type='submit' onClick={handleSubmit}>

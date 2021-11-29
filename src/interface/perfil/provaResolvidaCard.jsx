@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '@material-ui/core/Card';
 import ListItemText from '@material-ui/core/ListItemText';
-import CardContent from '@material-ui/core/CardContent';
+import Badge from '@material-ui/core/Badge';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import Box from '@material-ui/core/Box';
@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 
-function ProvaCard({nome, quantidadeQuestoes, mediaNotas, popularidade}) {
+function ProvaResolvidaCard({  nomeProva, conteudos, corrigida, publica, dataResolucao, nota}) {
   return (
     <div>
       <ListItem alignItems="flex-start">
@@ -17,16 +17,25 @@ function ProvaCard({nome, quantidadeQuestoes, mediaNotas, popularidade}) {
           secondary={
             <React.Fragment>
               <Typography component="div" variant="h5">
-          {nome}
+          {nomeProva}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" component="div">
-        Média Das Notas: {mediaNotas}
+         {corrigida? <div>Já foi corrigida</div>: <div>Não foi corrigida</div>}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" component="div">
-          Realizações: {popularidade}
+          {publica? <div>publica</div>: <div>privada</div>}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" component="div">
-          Quantidade de Questões: {quantidadeQuestoes}
+          Resolvida em:{dataResolucao}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary" component="div">
+          Nota: {nota}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary" component="div">
+          Conteúdos:  
+          {conteudos.map((conteudo) => (
+             <Badge badgeContent={conteudo} color="primary" sx={{margin:"0px 30px 0px 30px"}}/>
+      ))}
         </Typography>
             </React.Fragment>
           }
@@ -37,4 +46,4 @@ function ProvaCard({nome, quantidadeQuestoes, mediaNotas, popularidade}) {
   )
 }
 
-export default ProvaCard
+export default ProvaResolvidaCard

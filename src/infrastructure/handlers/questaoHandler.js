@@ -1,11 +1,19 @@
 import { call, put } from "@redux-saga/core/effects";
-import { criarQuestao } from "../requests/questaoRequest";
+import { setProva } from "../../application/provaSlice";
+import { setQuestoes } from "../../application/questaoSlice";
+import { criarQuestao, obterQuestoes } from "../requests/questaoRequest";
 
 export function* handleCriarQuestao(action){
   try{
     const { payload } = action
-    const response = yield call(criarQuestao, payload.questao)
-    const status = response.status;
+    let questao = payload.questao
+
+    const newObj = Object.assign({selected: false}, questao);
+
+    const response = yield call(criarQuestao, questao)
+    const status = response.status
+    newObj["id"] = response.data
+    yield put(setProva({...payload.prova, questoes: payload.prova.questoes.concat(newObj)}))
     if(status == '200'){
       alert('sucesso')
     }else{
@@ -15,3 +23,17 @@ export function* handleCriarQuestao(action){
     console.log(error)
   }
 }   
+
+
+export function* handleObterQuestoes(action){
+  try{
+    const { payload } = action
+    const response = yield call(obterQuestoes, payload.body)
+    const {data} = response
+    const retorno = {filtroQuestoes: data}
+    console.log("questoes: "+ JSON.stringify(data))
+    yield put(setQuestoes({...retorno}))
+  }catch (error){
+    console.log(error)
+  }
+}  

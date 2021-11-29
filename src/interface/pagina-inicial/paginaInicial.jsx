@@ -9,7 +9,13 @@ const PaginaInicial = () =>{
         <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/conteudos">Realizar Prova</Link>
       </div>
       <div>
-        <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/criar">Criar Prova</Link>
+        <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/criar">C riar Prova</Link>
+      </div>
+      <div>
+        <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/corrigir">Corrigir Prova</Link>
+      </div>
+      <div>
+        <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/perfil">Histórico</Link>
       </div>
     </div>
   

@@ -15,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import { cadastrarNovaQuestao, setConteudosQuestao, setQuestao } from '../../../../application/questaoSlice';
 import CriarAlternativa from './alternativa/criarAlternativa';
 import EscolherConteudosQuestao from './escolherConteudos';
+import { setProva } from '../../../../application/provaSlice';
 
 
 
@@ -36,15 +37,14 @@ export default function CriarQuestao(conteudosObjetos) {
     const nome = e.target.name;
     console.log(nome)
     const value = e.target.value;
-    /* dispatch(setQuestao({...questao, conteudos: prova.conteudos})); */
     dispatch(setQuestao({...questao, [nome]: value}));
   }  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(questao.enunciado && questao.valor){
-      dispatch(cadastrarNovaQuestao({questao: questao}))
-      dispatch(setQuestao({...questao,  enunciado: "", multiplaEscolha: false, resposta: "", valor: 0, alternativas: [] }));  
+      dispatch(cadastrarNovaQuestao({questao: questao, prova: prova}))
+      dispatch(setQuestao({...questao,  enunciado: "", multiplaEscolha: false, resposta: "", valor: 0, alternativas: [] }));   
       setOpen(false);
     }else{
       alert('preencha todos os campos');
@@ -62,12 +62,11 @@ export default function CriarQuestao(conteudosObjetos) {
 
   const handleClose = () => {
     setOpen(false);
-   /*  dispatch(setQuestao({questao : {enunciado: "", multiplaEscolha: true, resposta: "", valor: 0, alternativas: [] }}));   */
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen}>
         Criar Nova Questão
       </Button>
       <Dialog

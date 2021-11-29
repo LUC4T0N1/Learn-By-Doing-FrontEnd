@@ -9,6 +9,9 @@ import { getConteudos } from '../../../application/conteudoSlice';
 import ResponsiveDialog from './questao/criarQuestao';
 import EscolherConteudosProva from './escolherConteudos';
 import CriarQuestao from './questao/criarQuestao';
+import QuestaoCard from './questao/questaoCard';
+import EscolherQuestao from './questao/escolherQuestao';
+import AdicionarQuestao from './questao/adicionarQuestao';
 
 
 
@@ -32,8 +35,9 @@ function CriarProva () {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(prova.nome){
-      dispatch(cadastrarNovaProva({prova: prova}))
-      dispatch(setProva({ prova : {} }));  
+      const idQuestoes = prova.questoes.map(quest => quest.id); 
+      dispatch(cadastrarNovaProva({ ...prova, idsQuestoes : idQuestoes, quantidadeQuestoes: idQuestoes.length})) 
+      dispatch(setProva({ prova : {} })); 
   }else{
     alert('preencha todos os campos');
   }
@@ -67,9 +71,9 @@ function CriarProva () {
               <input
                 type='number'
                 min="0"
-                id='duracao'
-                name='duracao'
-                value={prova.duracao}
+                id='tempo'
+                name='tempo'
+                value={prova.tempo}
                 onChange={handleChange}/>
             </div>    
                     </div>
@@ -92,11 +96,22 @@ function CriarProva () {
         {/*   <BasicDateRangePicker/> */}
         <EscolherConteudosProva/>
         </div>
+        <div>
+        {prova.questoes.length !==0 ? (
+        <div style = {{ display : "block", flexWrap : "wrap"}} >
+          {prova.questoes.map((questao) => (
+            <QuestaoCard className="campo" key={questao.idProva} {...questao} />
+          ))}
+        </div>
+        ): (
+          <p> Nenhuma Questão Ainda </p>
+        )}
+        </div>
         <div className="campo">
-          <CriarQuestao/>
+          <AdicionarQuestao/>
         </div>
         <button type='submit' onClick={handleSubmit}>
-          CRIAR
+          CRIAR PROVA
         </button>
       </form>
     </article>

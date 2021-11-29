@@ -1,16 +1,21 @@
 import * as React from 'react';
-import { useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Select from '@material-ui/core/Select';
 import Chip from '@material-ui/core/Chip';
 import { useSelector, useDispatch } from "react-redux";
 import { getConteudos } from '../../../application/conteudoSlice';
 import { useEffect } from "react"; 
 import { setProva } from '../../../application/provaSlice';
+import  CriarConteudo  from '../../conteudo/criarConteudo/criarConteudo'
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 export default function EscolherConteudosProva() {
 
@@ -34,17 +39,6 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-  const theme = useTheme();
-
   const prova = useSelector((state) => state.provas.prova);
 
   const handleChange = (e) => {
@@ -54,9 +48,22 @@ function getStyles(name, personName, theme) {
     dispatch(setProva({...prova, nomeConteudos: typeof value === 'string' ? value.split(',') : value, conteudos: idConteudos})); 
   }  
 
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleClickOpen = (e) => {
+    e.preventDefault();
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <div className="bundas">
+    <div >
+      <div>
         <InputLabel id="demo-multiple-chip-label">Conteúdos</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
@@ -78,12 +85,29 @@ function getStyles(name, personName, theme) {
             <MenuItem
               key={name}
               value={name}
-              /* style={getStyles(name, prova.conteudos, theme)} */
             >
               {name}
             </MenuItem>
           ))}
         </Select>
+        </div>
+        <Button variant="contained" onClick={handleClickOpen}>
+          Criar Conteúdo
+        </Button>
+         <Dialog
+          fullScreen={fullScreen}
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="responsive-dialog-title"
+         >
+        <DialogTitle id="responsive-dialog-title">
+          {"Adicionar Conteúdo"}
+        </DialogTitle>
+        <DialogContent>
+          <CriarConteudo />
+        </DialogContent>
+        </Dialog>
     </div>
+
   );
 }

@@ -1,6 +1,5 @@
 import { CircularProgress } from '@material-ui/core'
 import ConteudoCard from './conteudoCard';
-import CriarConteudo from '../criarConteudo/criarConteudo';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { getConteudos } from '../../../application/conteudoSlice';
@@ -29,7 +28,6 @@ export default function ListaConteudos() {
      ): (
        <CircularProgress />
     )}
-    <CriarConteudo />
     </>
   );
 };

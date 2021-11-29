@@ -1,0 +1,7 @@
+.ProvaCard {
+  cursor: pointer;
+}
+
+.ProvaCard:hover {
+  background: #bfbfbf;
+}
