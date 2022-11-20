@@ -1,0 +1,26 @@
+.escolher-tipo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.escolher-tipo .items-container{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-right: 0px;
+  margin-left: 0px;
+  gap: 40px;
+  margin-bottom: 200px;
+}
+
+.escolher-titulo{
+  font-size: 80px;
+  background: linear-gradient(165.57deg, rgb(179, 105, 8),
+  rgb(202, 35, 85),
+  rgb(61, 11, 54));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

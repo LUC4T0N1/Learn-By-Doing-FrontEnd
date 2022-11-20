@@ -1,59 +1,29 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import './paginaInicial.css'
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faFolderPlus} from '@fortawesome/free-solid-svg-icons' 
+import "./escolherTipo.css";
 
 const Historico = () =>{
 
   return(
-
-      <Grid
-  container
-  spacing={0}
-  direction="column"
-  alignItems="center"
-  justify="center"
-  style={{ minHeight: '100vh' }}
- >
-   <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/perfil/provas-criadas">
-       <Card className="card" sx={{   maxWidth: 800, minWidth: 800,
-      textAlign: 'center',
-      margin: '10px'}}
-      >
-      <CardActionArea>
-        <CardContent>
-          <Typography gutterBottom  component="div">
-            <h1>Provas Criadas</h1>
-          </Typography>
-          <Typography >
-            Veja todas as provas já criadas por você
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-    </Link>
-    <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/perfil/provas-resolvidas">
-       <Card className="card" sx={{   maxWidth: 800,  minWidth: 800,
-      textAlign: 'center',
-      margin: '10px'}}
-      >
-      <CardActionArea>
-        <CardContent>
-          <Typography gutterBottom  component="div">
-            <h1>Provas Resolvidas</h1>
-          </Typography>
-          <Typography >
-            Veja todas as provas já resolvidas por você
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-    </Link>
-    </Grid>
+      <div className='escolher-tipo'>
+        <h1 className='escolher-titulo'>Escolha uma Das Opções</h1>
+        <div className='items-container'>
+            <Link className='item' to="/perfil/provas-resolvidas">
+              <div className='item-title'>Provas Resolvidas
+              <i><FontAwesomeIcon icon={faCheck} rel="noreferrer" className='icon'></FontAwesomeIcon></i>
+              </div>
+              <div className='item-desc'>Ver todas as provas que você já resolveu</div>
+            </Link>
+            <Link className='item' to="/perfil/provas-criadas">
+              <div className='item-title'>Provas Criadas
+              <i><FontAwesomeIcon icon={faFolderPlus} rel="noreferrer" className='icon'></FontAwesomeIcon></i>
+              </div>
+              <div className='item-desc'>Ver todas as provas já criadas por você</div>
+            </Link>
+        </div>
+      </div>
   )
 }
 

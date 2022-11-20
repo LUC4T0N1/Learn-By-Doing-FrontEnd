@@ -1,57 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import './paginaInicial.css'
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUnlock, faLock} from '@fortawesome/free-solid-svg-icons' 
+import "./escolherTipo.css";
 
 const EscolherTipo = () =>{
   return(
-    <Grid
-    container
-    spacing={0}
-    direction="column"
-    alignItems="center"
-    justify="center"
-    style={{ minHeight: '100vh' }}
-   >
-     <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/escolherProvaPrivada">
-         <Card className="card" sx={{   maxWidth: 800, minWidth: 800,
-        textAlign: 'center',
-        margin: '10px'}}
-        >
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom  component="div">
-              <h1>Prova Privada</h1>
-            </Typography>
-            <Typography >
-              Realizar uma prova privada a partir de um id secretp
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      </Link>
-      <Link style={{ textDecoration: 'none', color: 'inherit', color: 'white'}} to="/conteudos">
-         <Card className="card" sx={{   maxWidth: 800,  minWidth: 800,
-        textAlign: 'center',
-        margin: '10px'}}
-        >
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom  component="div">
-              <h1>Prova Pública</h1>
-            </Typography>
-            <Typography >
-              Escolher uma prova pública por conteúdo, tamanho ou popularidade
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      </Link>
-      </Grid>
+    <div className='escolher-tipo'>
+      <h1 className='escolher-titulo'>Escolha uma Das Opções</h1>
+      <div className='items-container'>
+          <Link className='item' to="/escolherProvaPrivada">
+            <div className='item-title'>Prova Privada
+            <i><FontAwesomeIcon icon={faLock} rel="noreferrer" className='icon'></FontAwesomeIcon></i>
+            </div>
+            <div className='item-desc'>Resolver uma prova privada a partir de um ID único e secreto</div>
+          </Link>
+          <Link className='item' to="/conteudos">
+            <div className='item-title'>Prova Pública
+            <i><FontAwesomeIcon icon={faUnlock} rel="noreferrer" className='icon'></FontAwesomeIcon></i>
+            </div>
+            <div className='item-desc'>Escolher uma prova pública por conteúdo, tamanho ou popularidade</div>
+          </Link>
+      </div>
+    </div>
   )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import "./items.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faFileUpload, faPlus, faPenFancy, faHistory} from '@fortawesome/free-solid-svg-icons' 
+import { faFileUpload, faPlus, faPenFancy, faHistory} from '@fortawesome/free-solid-svg-icons' 
 function Items() {
   return (
     <div className='items-container'>

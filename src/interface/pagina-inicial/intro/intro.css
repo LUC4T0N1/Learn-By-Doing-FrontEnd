@@ -19,7 +19,7 @@
   font-size: 80px;
   background: linear-gradient(165.57deg, rgb(179, 105, 8),
   rgb(202, 35, 85),
-  rgb(77, 8, 65));
+  rgb(61, 11, 54));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -30,12 +30,11 @@
 }
 
 .intro-background{
-  clip-path: polygon(90% 4%, 82% 22%, 97% 100%, 80% 90%, 99% 33%, 75% 0%);
-
+  clip-path: polygon(90% 10%, 82% 22%, 97% 100%, 80% 90%, 99% 33%, 75% 10%);
   background: linear-gradient(
     rgb(179, 105, 8),
     rgb(202, 35, 85),
-    rgb(77, 8, 65)
+    rgb(49, 5, 42)
     );
   width: 2000px;
   height: 70%;

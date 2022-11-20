@@ -32,3 +32,13 @@ html{
   font-family: 'Baloo 2', cursive;
 }
 
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  margin: 0%;
+  padding: 0%;
+}
+
