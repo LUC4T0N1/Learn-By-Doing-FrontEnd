@@ -12,32 +12,28 @@ import ResponderQuestaoMultiplaEscolha from './responderQuestaoMultiplaEscolha';
 
 
 export default function ResolverProva(props) {
+  
 
-
-  const prova = useSelector((state) => state.provas.realizarProva);
   const dispatch = useDispatch();
-
+  const prova = useSelector((state) => state.provas.realizarProva);
   const finalizarProva = (e) => {
-    e.preventDefault();
+    console.log("1")
     dispatch(realizarProva({ ...prova})) 
+    console.log("22")
     dispatch(setRealizarProva({ realizarProva: {nome: "", publica: true, conteudos: [],
     nomeConteudos: [], questoes:[], idsQuestoes:[],
-    quantidadeQuestoes: 0, tempo: 0, questoesRespondidasDto:[]}
- } )); 
+    quantidadeQuestoes: 0, tempo: 0, questoesRespondidasDto:[]}})); 
+    console.log("3")
   }
+
   return (
 
        <div>
- 
-
-          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
-            Tempo: 2:00:00
-          </Typography>
           {prova.questoes.map((questao, index) => 
               questao.multiplaEscolha ? (
-              <ResponderQuestaoMultiplaEscolha key={index} questao={{numeroQuestao: index+1, enunciado: questao.enunciado, idQuestao: questao.id, alternativas: questao.alternativas}} atualizarRespostaQuestao = {props.atualizarRespostaQuestao}/>
+              <ResponderQuestaoMultiplaEscolha key={index} questao={{numeroQuestao: index+1, enunciado: questao.enunciado, idQuestao: questao.id, alternativas: questao.alternativas, valor: questao.valor}} atualizarRespostaQuestao = {props.atualizarRespostaQuestao}/>
               ): (
-                <ResponderQuestaoDissertativa key={index} questao={{numeroQuestao: index+1, enunciado: questao.enunciado, idQuestao: questao.id}} atualizarRespostaQuestao = {props.atualizarRespostaQuestao}/>
+                <ResponderQuestaoDissertativa key={index} questao={{numeroQuestao: index+1, enunciado: questao.enunciado, idQuestao: questao.id, valor: questao.valor}} atualizarRespostaQuestao = {props.atualizarRespostaQuestao}/>
               )
               )}
             <CardActions style={{justifyContent: 'center'}}>

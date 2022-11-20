@@ -64,8 +64,9 @@ const MenuProps = {
   return (
     <div >
       <div>
-        <InputLabel id="demo-multiple-chip-label">Conteúdos</InputLabel>
+        <InputLabel style = {{width: 400, margin: 10}} id="demo-multiple-chip-label">Conteúdos</InputLabel>
         <Select
+         style = {{width: 400, margin: 10}}
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
@@ -91,9 +92,11 @@ const MenuProps = {
           ))}
         </Select>
         </div>
-        <Button variant="contained" onClick={handleClickOpen}>
-          Criar Conteúdo
-        </Button>
+        <Button variant="contained" sx={{ 
+                backgroundColor: 'rgb(23, 109, 109)',
+                marginTop: '6px',
+                minWidth: '50px',
+                minHeight: '4vh' }} onClick={handleClickOpen}>Criar Conteúdo</Button>
          <Dialog
           fullScreen={fullScreen}
           open={open}

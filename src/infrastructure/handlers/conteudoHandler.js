@@ -1,6 +1,6 @@
 import { call, put } from "@redux-saga/core/effects";
 import { setConteudos } from "../../application/conteudoSlice";
-import { criarConteudo, obterConteudos } from "../requests/conteudoRequest";
+import { criarConteudo, filtrarConteudos, obterConteudos } from "../requests/conteudoRequest";
 
 export function* handleObterConteudos(action){
   try{
@@ -29,6 +29,19 @@ export function* handleCriarConteudo(action){
     console.log(error)
   }
 }   
+
+export function* handleFiltrarConteudos(action){
+  try{
+    const { payload } = action
+    const response = yield call(filtrarConteudos, payload.nome, payload.pagina, payload.ordenacao)
+    const {data} = response
+    console.log("resp: "+ JSON.stringify(data))
+    yield put(setConteudos({...data}))
+  }catch (error){
+    console.log(error)
+  }
+}   
+
 
 
 

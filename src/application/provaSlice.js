@@ -3,10 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const provaSlice =  createSlice({
   name: "provas",
   initialState: {
+    quantidade: 0, 
     provas: [],
     prova: {nome: "", publica: true, conteudos: [],
          nomeConteudos: [], questoes:[], idsQuestoes:[], 
-         quantidadeQuestoes: 0, tempo: 0}, 
+         quantidadeQuestoes: 0, tempo: 0, dataInicial: new Date(), dataFinal: new Date()}, 
     realizarProva: {nome: "", publica: true, conteudos: [],
          nomeConteudos: [], questoes:[], idsQuestoes:[],
          quantidadeQuestoes: 0, tempo: 0, questoesRespondidasDto:[]},
@@ -19,12 +20,13 @@ const provaSlice =  createSlice({
     setRespostaQuestao() {
 
     },
-    getProvas() {},
+    getProvasPorConteudo() {},
     getProvasCriadas() {},
     getProvasFeitas() {},
     getProvasRealizadas() {},
     getProvaFeita() {},
     getProva() {},
+    getProvaPrivada(){},
     realizarProva() {},
     cadastrarNovaProva() {},
     corrigirProva() {},
@@ -55,10 +57,10 @@ const provaSlice =  createSlice({
   }
 });
 
-export const { getProvas, getProva, setProvas,
+export const { getProvasPorConteudo, getProva, setProvas,
    setProva, cadastrarNovaProva, setRealizarProva, 
    setRespostaQuestao, realizarProva, 
    getProvasCriadas, setProvasCriadas, getProvasFeitas,
    getProvaFeita, setCorrecaoProva, corrigirProva,
-   getProvasRealizadas } = provaSlice.actions;
+   getProvasRealizadas, getProvaPrivada } = provaSlice.actions;
 export default provaSlice.reducer;

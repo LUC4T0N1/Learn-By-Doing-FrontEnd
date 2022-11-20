@@ -88,17 +88,14 @@ export default function ProvaFeita() {
     backgroundColor: '#dddddd' }}>
          <CardContent>
           <Typography variant="h2" color="text.secondary" gutterBottom sx={{  textTransform: 'uppercase'  }}>
-          {prova.nome}
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Tempo de execução:  | Total de Questões : {prova.provaDto.quantidadeQuestoes}
+          {prova.provaDto.nome}
           </Typography>
         </CardContent>
-          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
+          <Typography variant="h5" color="text.secondary" sx={{ width: "100%", justifyContent: 'right'}}>
             Feita por: {prova.nomeAluno} 
           </Typography>
          { open ? (<div>
-            <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
+            <Typography variant="h5" color="text.secondary" sx={{ width: "100%", justifyContent: 'right'}}>
               Nota: {prova.notaAluno} 
             </Typography>
 

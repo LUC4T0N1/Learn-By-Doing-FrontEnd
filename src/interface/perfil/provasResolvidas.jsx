@@ -27,7 +27,9 @@ function ProvasResolvidas () {
 
   return (
     <div>
-               <Grid
+      {provas ?  
+       ( 
+    <Grid
           container
           spacing={0}
           direction="column"
@@ -35,20 +37,23 @@ function ProvasResolvidas () {
           justify="center"
           style={{ minHeight: '100vh' }}
         >
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    {provas ? (
-    <div >
-      {provas.map((prova) => (
-       <div className="ProvaCard"  onClick={() => history.push(`/perfil/provas-resolvidas/${prova.id}`)}> 
-        <ProvaResolvidaCard key={prova.id} {...prova} />
-       </div>
-      ))}
-    </div>
-     ): (
-       <CircularProgress />
-    )}
+      <List sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}>
+        {provas ? (
+        <div >
+          {provas.map((prova) => (
+          <div className="ItemLista"  onClick={() => history.push(`/perfil/provas-resolvidas/${prova.id}`)}> 
+            <ProvaResolvidaCard key={prova.id} {...prova} />
+          </div>
+          ))}
+        </div>
+        ): (
+          <CircularProgress />
+        )}
     </List>
     </Grid>
+       ) : (<h2 sx={{  maxWidth: 360, bgcolor: 'background.paper' }}>
+       Nenhuma Prova Foi Resolvida
+     </h2>)}
     </div>
   );
 }

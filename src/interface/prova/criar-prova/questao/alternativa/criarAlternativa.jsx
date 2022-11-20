@@ -6,6 +6,8 @@ import { setAlternativa } from '../../../../../application/alternativaSlice';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 
 export default function CriarAlternativa() {
@@ -38,21 +40,23 @@ export default function CriarAlternativa() {
 
 
   return (
-    <div>
+    <>
         {criandoAlternativa ?
         (
-        <div>
-        <div>
-          <label htmlFor='enunciado'>Enunciado: </label>
-            <input
-            type='text'
-            id='enunciado'
+        <>
+        <TextField
+            id="outlined-password-input"
+            label="Enunciado"
             name='enunciado'
             value={alternativa.enunciado}
-            onChange={handleChange}/>
-        </div>
+            onChange={handleChange}
+            style = {{width: 400, marginTop: 10, textAlign: 'center'}}
+          />
+
         <div className="campo">
-            <InputLabel id="demo-simple-select-autowidth-label">Correta</InputLabel>
+            <InputLabel 
+            style = {{width: 400, marginTop: 10}}
+            id="demo-simple-select-autowidth-label">Correta</InputLabel>
             <Select
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
@@ -60,22 +64,27 @@ export default function CriarAlternativa() {
               value={alternativa.correta}
               onChange={handleChange}
               autoWidth
-              label="Correta">
+              label="Correta"
+              style = {{width: 400, marginTop: 10}}>
               <MenuItem value={true}>Sim</MenuItem>
               <MenuItem value={false}>Não</MenuItem>
             </Select>
         </div>
-          <button type='submit' onClick={(e) =>handleSubmit(e)}>
-          add
-          </button>
-        </div>
+        <Button variant="contained" sx={{ 
+                backgroundColor: 'black',
+                margin: '16px',
+                minWidth: '100px',
+                minHeight: '3vh' }} onClick={(e) =>handleSubmit(e)}>adicionar alternativa</Button>
+        </>
          ): 
     (
-      <button type='submit' onClick={() => setCriandoAlternativa(true)}>
-       +
-      </button>
+      <Button variant="contained" sx={{ 
+        backgroundColor: 'black',
+        margin: '16px',
+        minWidth: '40px',
+        minHeight: '3vh' }} onClick={() => setCriandoAlternativa(true)}>+</Button>
     )}
       
-    </div>
+    </>
   );
 }

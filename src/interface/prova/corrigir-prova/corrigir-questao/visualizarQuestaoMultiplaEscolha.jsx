@@ -50,16 +50,16 @@ const RedTextTypography = withStyles({
 
   return (
        <div style={styles}>
-          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
+          <Typography variant="h5" color="text.secondary" sx={{ width: "100%", justifyContent: 'right'}}>
             Questão {props.questao.numeroQuestao}
           </Typography>
-          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
+          <Typography variant="h5" color="text.secondary" sx={{ width: "100%", justifyContent: 'right'}}>
             Valor: {props.questao.valor}
           </Typography>
-          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
+          <Typography variant="h5" color="text.secondary" sx={{ width: "100%", justifyContent: 'right'}}>
             Nota: {props.questao.nota}
           </Typography>
-          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
+          <Typography variant="h5" color="text.secondary" sx={{ width: "100%", justifyContent: 'right'}}>
           { props.questao.nota > 0 ? (<div>
                 Correta
               </div>
@@ -69,8 +69,9 @@ const RedTextTypography = withStyles({
         </div>
         )  }
           </Typography>
-            <h3>Enunciado: {props.questao.enunciado}</h3>
-
+          <Typography variant="h5" color="text.secondary" sx={{ width: "100%", justifyContent: 'right'}}>
+          Enunciado: {props.questao.enunciado}
+          </Typography>
          <FormControl component="fieldset">
           <FormLabel component="legend"></FormLabel>
           <RadioGroup

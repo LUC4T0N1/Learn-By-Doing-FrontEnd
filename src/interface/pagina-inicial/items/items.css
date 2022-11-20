@@ -1,0 +1,43 @@
+.items-container{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-right: 550px;
+  margin-left: 100px;
+  gap: 20px;
+}
+
+.item{
+  background-color: rgb(29, 28, 28);
+  padding: 35px;
+  height: 270px;
+  width: 300px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.items-container .item:hover{
+  background: linear-gradient(
+    165.57deg,
+    rgb(196, 112, 3, 0.8),
+    rgb(202, 35, 85, 0.8),
+    rgb(77, 8, 65, 0.8)
+    );
+    cursor: pointer;
+}
+
+.item-title{
+  font-size: 26px;
+  margin-bottom: 5px;
+  color: rgb(250, 224, 190);
+  display: flex;
+}
+
+
+.icon{
+  color: rgb(250, 224, 190);
+  text-decoration: none;
+  font-size: 28px;
+  margin-left: 15px;
+}

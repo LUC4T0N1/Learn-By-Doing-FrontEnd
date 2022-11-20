@@ -23,16 +23,24 @@ import ProvasCriadas from './interface/perfil/provasCriadas';
 import ProvaCriada from './interface/perfil/provaCriada';
 import ProvasResolvidas from './interface/perfil/provasResolvidas';
 import ProvaResolvida from './interface/perfil/provaResolvida';
+import { useContext } from 'react';
 
 import {AuthProvider} from './AuthContext';
+import EscolherTipo from './interface/prova/escolherTipo';
+import ProvaPrivada from './interface/prova/provaPrivada';
+import ProvaCompletaPrivada from './interface/prova/provaCompleta/provaCompletaPrivada';
+import Historico from './interface/prova/historico';
+import './app.css';
 
 function CustomRoute({ isPrivate, ...rest }) {
   const autenticacao = useSelector((state) => state.autenticacao);
+  const perfil = useSelector((state) => state.perfil);
   console.log("isprivate: "+ isPrivate)
-  if (isPrivate && autenticacao.token=="") {
+/*   if (isPrivate && autenticacao.token=="") {
+    console.log("deslogado")
     return <Redirect to="/login" />
-  }
-
+  } */
+  console.log("completo")
   return <Route {...rest} />;
 }
 
@@ -46,6 +54,9 @@ function App() {
             <Navbar/>
             <Switch>
               <CustomRoute exact path="/login" children={<Login/>}/>
+              <CustomRoute exact path="/escolherProvaPrivada" children={<ProvaPrivada/>}/>    
+              <CustomRoute exact path="/realizarProvaPrivada/:idProva" children={<ProvaCompletaPrivada/>}/>  
+              <CustomRoute isPrivate exact path="/historico" children={<Historico/>}/> 
               <CustomRoute isPrivate exact path="/perfil" children={<Perfil/>}/>
               <CustomRoute isPrivate exact path="/perfil/provas-resolvidas" children={<ProvasResolvidas/>}/>
               <CustomRoute isPrivate exact path="/perfil/provas-resolvidas/:idProva" children={<ProvaResolvida/>}/>
@@ -58,8 +69,9 @@ function App() {
               <CustomRoute isPrivate exact path="/corrigir/:idProva" children={<ProvasFeitas/>}/>
               <CustomRoute isPrivate exact path="/corrigir/:idProva/:idProvaFeita" children={<ProvaFeita/>}/>
               <CustomRoute exact path="/" children={<PaginaInicial/>}/>
+              <CustomRoute exact path="/tipo-de-prova" children={<EscolherTipo/>}/>
               <CustomRoute isPrivate exact path="/:idConteudo/" children={<ListaDeProvas/>}/>
-              <CustomRoute isPrivate exact path="/:idConteudo/:idProva/" children={<ProvaCompleta/>}/>
+              <CustomRoute isPrivate exact path="/realizar-prova-publica/:idProva" children={<ProvaCompleta/>}/>
               <Route path='*'><Erro/></Route>
             </Switch>
           </Router>

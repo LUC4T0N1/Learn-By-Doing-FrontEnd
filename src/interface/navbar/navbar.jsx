@@ -16,19 +16,19 @@ const Navbar = () =>{
     <nav >
       <ul className="navbar">
         <li >
-          <Link style={{ textDecoration: 'none', color: 'inherit'}} to="/registrar">Registrar</Link>
+          <Link className='link' style={{ textDecoration: 'none', color: 'inherit'}} to="/registrar">Registrar</Link>
         </li>
         <li >
-          <Link style={{ textDecoration: 'none', color: 'inherit'}} to="/perfil">Perfil</Link>
+          <Link className='link' style={{ textDecoration: 'none', color: 'inherit'}} to="/perfil">Perfil</Link>
         </li>
         <li >
-          <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/login">Login</Link>
+          <Link className='link' style={{ textDecoration: 'none', color: 'inherit' }} to="/login">Login</Link>
         </li>
         <li >
-          <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/">Home</Link>
+          <Link className='link' style={{ textDecoration: 'none', color: 'inherit' }} to="/">Home</Link>
         </li>
         <li >
-          <Link style={{ textDecoration: 'none', color: 'inherit' }} onClick={logout} to="/login">Logout</Link>
+          <Link className='link' style={{ textDecoration: 'none', color: 'inherit' }} onClick={logout} to="/login">Logout</Link>
         </li>
       </ul>
     </nav>

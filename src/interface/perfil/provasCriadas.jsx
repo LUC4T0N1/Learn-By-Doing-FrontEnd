@@ -25,30 +25,36 @@ function ProvasCriadas () {
 
   return (
     <div>
-             <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '100vh' }}
-        >
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      {provas ?  
+       ( <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
+    <List sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}>
 
-     {provas ? (
-        <div >
-          {provas.map((prova) => (
-          <div className="ProvaCard"  onClick={() => history.push(`/perfil/provas-criadas/${prova.id}`)}> 
-            <ProvaCard  key={prova.idProva} {...prova} />
-          </div>
-          ))}
+   {provas ? (
+      <div >
+        {provas.map((prova) => (
+        <div className="ProvaCard"  onClick={() => history.push(`/perfil/provas-criadas/${prova.id}`)}> 
+          <ProvaCard  key={prova.idProva} {...prova} />
         </div>
-        ): (
-          <CircularProgress />
-        )}
-    </List>
+        ))}
+      </div>
+      ): (
+        <CircularProgress />
+      )}
+  </List>
 
-            </Grid>
+          </Grid>
+          ) : (<h2 sx={{  maxWidth: 360, bgcolor: 'background.paper' }}>
+          Nenhuma Prova Foi Criada
+        </h2>)
+          }
+            
         
     </div>
   );

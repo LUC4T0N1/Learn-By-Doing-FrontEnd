@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import './corrigirProva.css'
 import { CircularProgress } from '@material-ui/core'
+import List from '@material-ui/core/List'
+import Grid from '@material-ui/core/Grid'
 import { useHistory } from 'react-router-dom';
 import { getProvasFeitas } from '../../../application/provaSlice';
 import { useParams } from 'react-router'
@@ -25,6 +27,15 @@ function ProvasFeitas () {
 
   return (
     <>
+      <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justify="center"
+          style={{ minHeight: '100vh' }}
+        >
+       <List sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}>
     {provas ? (
     <div style = {{ display : "flex", flexWrap : "wrap"}}>
       {provas.map((prova) => (
@@ -36,6 +47,8 @@ function ProvasFeitas () {
      ): (
        <CircularProgress />
     )}
+    </List>
+    </Grid>
     </>
   );
 }

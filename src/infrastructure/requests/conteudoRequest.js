@@ -10,4 +10,9 @@ export function obterConteudos (pagina) {
 export function criarConteudo (conteudo) {
   return axios.post(`${url}conteudo`, conteudo, { headers: authHeader() })
 }
+
+export function filtrarConteudos (nome, pagina, ordenacao) {
+  return axios.get(`${url}conteudo/filtro?nome=${nome}&pagina=${pagina}&ordenacao=${ordenacao}`, { headers: authHeader() })
+}
+ 
  

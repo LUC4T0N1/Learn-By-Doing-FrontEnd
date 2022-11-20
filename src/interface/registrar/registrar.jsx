@@ -1,11 +1,29 @@
 import React, {useState} from 'react'
 import './registrar.css'
 import {
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword, 
+  signOut
 } from "firebase/auth";
 import { auth } from "../../firebase"
+import { useHistory } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+
+
+
 
 function Registrar () {
+  let history = useHistory();
+
+
+  const logout = async () => {
+    await signOut(auth);
+  };
+
 
   const registrar = async () => {
     try {
@@ -14,13 +32,16 @@ function Registrar () {
         login.email,
         login.senha
       );
-      console.log(user);
+       alert('sucesso')
+       setOk(true); 
     } catch (error) {
       console.log(error.message);
+      alert('erro: '+ error.message)
     }
   };
 
   const [login, setLogin] =  useState({ senha : '', email: '' });
+  const [ok, setOk] =  useState(false);
   const handleChangeEmail = (e) => {
     const value = e.target.value;
     setLogin({...login, email: value});
@@ -29,43 +50,81 @@ function Registrar () {
     const value = e.target.value;
     setLogin({...login, senha: value});
   }  
-  const handleSubmit = (e) => {
+
+  function ToLogin () {
+    console.log("indo pro login")
+    history.push(`/login`)
+  }  
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if(login.senha && login.email){
-      registrar();
-      setLogin({ nome : '' });
+      console.log("vou registrar ein")
+      await registrar();
+      await logout();
   }else{
     alert('preencha senha e email');
   }
 
   }
+
+
   return (
-    <article className="regitrarForm">
-      <h1>CRIAR NOVA CONTA</h1>
-      <form className='form'>
-        <div className='form-control'>
-          <label htmlFor='email'>Email: </label>
-          <input
-            type='text'
-            id='email'
-            name='email'
-            value={login.email}
-            onChange={handleChangeEmail}/>
-        </div>
-        <div className='form-control'>
-          <label htmlFor='senha'>Senha: </label>
-          <input
-            type='text'
-            id='senha'
-            name='senha'
-            value={login.senha}
-            onChange={handleChangeSenha}/>
-        </div>
-        <button type='submit' onClick={handleSubmit}>
-          CRIAR
-        </button>
-      </form>
-    </article>
+
+<div>
+      {ok? ( ToLogin()):(
+            <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+          >
+          <Card  sx={{ width: "70%",  textAlign: 'center',
+      justifyContent: 'center',
+      alignContent: 'center',
+      backgroundColor: '#dddddf',
+      minHeight: '70vh',
+      marginTop: '80px' }}>
+         <Typography gutterBottom  component="div">
+            <h1 className="titulo">Criar Nova Conta</h1>
+          </Typography>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            marginTop="10px"
+          >
+        <TextField
+          id="outlined-password-input"
+          label="Email"
+          value={login.email}
+          onChange={handleChangeEmail}
+          style = {{width: 400, marginTop: 10}}
+        />
+        <TextField
+          id="outlined-password-input"
+          label="Senha"
+          type="password"
+          autoComplete="current-password"
+          value={login.senha}
+          onChange={handleChangeSenha}
+          style = {{width: 400, marginTop: 10}}
+        />
+        <Button variant="contained" sx={{ 
+      backgroundColor: 'black',
+      marginTop: '36px',
+      minWidth: '300px',
+      minHeight: '6vh' }} onClick={handleSubmit}>Criar</Button>
+      </Grid>
+      </Card>
+      </Grid>)}
+      </div>
+
   );
 }
 

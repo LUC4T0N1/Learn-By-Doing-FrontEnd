@@ -15,8 +15,8 @@ import Select from '@material-ui/core/Select';
 import { cadastrarNovaQuestao, setConteudosQuestao, setQuestao } from '../../../../application/questaoSlice';
 import CriarAlternativa from './alternativa/criarAlternativa';
 import EscolherConteudosQuestao from './escolherConteudos';
-import { setProva } from '../../../../application/provaSlice';
-
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -42,7 +42,7 @@ export default function CriarQuestao(conteudosObjetos) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(questao.enunciado && questao.valor){
+    if(questao.enunciado){
       dispatch(cadastrarNovaQuestao({questao: questao, prova: prova}))
       dispatch(setQuestao({...questao,  enunciado: "", multiplaEscolha: false, resposta: "", valor: 0, alternativas: [] }));   
       setOpen(false);
@@ -66,9 +66,10 @@ export default function CriarQuestao(conteudosObjetos) {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
-        Criar Nova Questão
-      </Button>
+       <Button variant="contained" sx={{ 
+                backgroundColor: 'rgb(23, 109, 109)',
+                minWidth: '213px',
+                minHeight: '4vh' }} onClick={handleClickOpen}>Criar Nova Questão</Button>
       <Dialog
         fullScreen={fullScreen}
         open={open}
@@ -79,17 +80,28 @@ export default function CriarQuestao(conteudosObjetos) {
           {"Criar Nova Questão"}
         </DialogTitle>
         <DialogContent>
-        <label htmlFor='enunciado'>Enunciado: </label>
-            <input
-              type='text'
-              id='enunciado'
-              name='enunciado'
-              value={questao.enunciado}
-              onChange={handleChange}/>
-        </DialogContent>
-        <DialogContent>
-        <div className="campo">
-            <InputLabel id="demo-simple-select-autowidth-label">Privacidade</InputLabel>
+        <Grid
+    container
+    spacing={0}
+    direction="column"
+    alignItems="center"
+    justify="center"
+    style={{ minHeight: '10vh' }}
+  >
+
+      <TextField
+            id="outlined-password-input"
+            label="Enunciado"
+            name='enunciado'
+            value={questao.enunciado}
+            onChange={handleChange}
+            style = {{width: 400, marginTop: 10, textAlign: 'center'}}
+          />
+  
+                
+            <InputLabel
+             style = {{width: 400, marginTop: 10}}
+            id="demo-simple-select-autowidth-label">Privacidade</InputLabel>
             <Select
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
@@ -98,30 +110,20 @@ export default function CriarQuestao(conteudosObjetos) {
               onChange={handleChange}
               autoWidth
               label="Privacidade"
+              style = {{width: 400, marginTop: 10}}
             >
               <MenuItem value={true}>Publica</MenuItem>
               <MenuItem value={false}>Privada</MenuItem>
             </Select>
-        </div>
-        </DialogContent>
-        <EscolherConteudosQuestao />
-        <DialogContent>
-        <div className="campo">
-              <label htmlFor='tentativas'>Valor: </label>
-              <input
-                type='number'
-                min="1"
-                id='valor'
-                name='valor'
-                value={questao.valor}
-                onChange={handleChange}/>
-            </div>
-            </DialogContent>
-        <DialogContent>
-        <div>
-          <FormControl sx={{ m: 3, minWidth: 130 }}>
-            <InputLabel id="demo-simple-select-autowidth-label">Tipo da questão</InputLabel>
+ 
+             <EscolherConteudosQuestao />
+
+            <InputLabel 
+            style = {{width: 400, marginTop: 10}}
+            id="demo-simple-select-autowidth-label">Tipo da questão</InputLabel>
+
             <Select
+            style = {{width: 400, marginTop: 10}}
               labelId="demo-simple-select-autowidth-label"
               id="demo-simple-select-autowidth"
               name='multiplaEscolha'
@@ -133,40 +135,42 @@ export default function CriarQuestao(conteudosObjetos) {
               <MenuItem value={true}>Múltipla Escolha</MenuItem>
               <MenuItem value={false}>Dissertativa</MenuItem>
             </Select>
-          </FormControl>
-        </div>
-        </DialogContent>
-        {questao.multiplaEscolha ? (
-          <DialogContent>
+
+            {questao.multiplaEscolha ? (
+          <>
             <div>
             {questao.alternativas.length !==0 ? (
     <div style = {{ display : "block", flexWrap : "wrap"}}>
       {questao.alternativas.map((alt) => (
-        <p> {questao.alternativas.findIndex(a => a ===alt)+1}) {alt.enunciado} {alt.correta ? ('correta') : ('incorreta')} </p>
+        
+        <h3> {questao.alternativas.findIndex(a => a ===alt)+1}) {alt.enunciado} {alt.correta ? ('correta') : ('incorreta')} </h3>
       ))}
     </div>
      ): (
-       <p> Nenhuma Alternativa Por Enquanto </p>
+       <h3> Nenhuma Alternativa Por Enquanto </h3>
     )}
             </div>
             <CriarAlternativa/>
-          </DialogContent>
+          </>
      ): (
-      <DialogContent>
-       <label htmlFor='enunciado'>Resposta: </label>
-        <input
-          type='text'
-          id='resposta'
-          name='resposta'
+      <TextField
+      multiline
+          rows={10}
+      id="outlined-password-input"
+      label="Resposta"
+      name='resposta'
           value={questao.resposta}
-          onChange={handleChange}/>
-      </DialogContent>
+          onChange={handleChange}
+      style = {{width: 400, marginTop: 10, textAlign: 'center'}}
+    />
     )}
-      <DialogActions>
-          <Button autoFocus onClick={handleSubmit}>
-            Criar
-          </Button>
-      </DialogActions>
+                        <Button variant="contained" sx={{ 
+                backgroundColor: 'rgb(23, 109, 109)',
+                margin: '9px',
+                minWidth: '50px',
+                minHeight: '4vh' }} onClick={handleSubmit}>Criar Questão</Button>
+      </Grid>
+        </DialogContent>
       <DialogActions>
           <Button autoFocus onClick={handleClose}>
             Cancelar

@@ -11,9 +11,10 @@ const autenticacaoSlice =  createSlice({
     setToken(state, action){
       const authData = action.payload;
      return { ...state, token: authData.token}
-    }
+    },
+    setRegistrar(){}
   }
 });
 
-export const { setUid, setToken } = autenticacaoSlice.actions;
+export const { setUid, setToken, setRegistrar } = autenticacaoSlice.actions;
 export default autenticacaoSlice.reducer;

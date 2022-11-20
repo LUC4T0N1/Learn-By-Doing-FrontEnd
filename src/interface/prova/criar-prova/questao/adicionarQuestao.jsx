@@ -68,9 +68,10 @@ export default function AdicionarQuestao(conteudosObjetos) {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
-        Adicionar Questão
-      </Button>
+       <Button variant="contained" sx={{ 
+                backgroundColor: 'rgb(23, 109, 109)',
+                minWidth: '100px',
+                minHeight: '4vh' }} onClick={handleClickOpen}>Adicionar Questão</Button>
       <Dialog
         fullScreen={fullScreen}
         open={open}

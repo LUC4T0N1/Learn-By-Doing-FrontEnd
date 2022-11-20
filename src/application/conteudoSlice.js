@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const conteudoSlice =  createSlice({
   name: "conteudo",
-  initialState: {conteudos: [], conteudo: {nome: ""}},
+  initialState: {conteudos: [], conteudo: {nome: ""}, quantidade: 0},
   reducers:{
     getConteudos() {},
+    filtrarConteudos() {},
     criarConteudo(){},
     setConteudos(state, action){
       const conteudosData = action.payload;
@@ -17,5 +18,5 @@ const conteudoSlice =  createSlice({
   }
 });
 
-export const { getConteudos, setConteudos, criarConteudo, setConteudo } = conteudoSlice.actions;
+export const { getConteudos, setConteudos, criarConteudo, setConteudo, filtrarConteudos } = conteudoSlice.actions;
 export default conteudoSlice.reducer;

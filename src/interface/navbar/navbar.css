@@ -3,13 +3,26 @@
   flex: 1;
   border: 2px;
   border-style: hidden;
-  background-color: #1a1a1d;
+  background-color: #000000;
   list-style-type: none;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
 }
 
 .navbar,
 li {
   margin: 5px;
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
+  font-size: x-large;
+}
+
+.navbar .link:hover{
+  background: linear-gradient(165.57deg, rgb(179, 105, 8),
+  rgb(202, 35, 85),
+  rgb(77, 8, 65));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

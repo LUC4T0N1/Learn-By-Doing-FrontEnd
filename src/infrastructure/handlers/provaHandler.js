@@ -1,11 +1,11 @@
 import { call, put } from "@redux-saga/core/effects";
-import { setProva, setProvas, setProvasCriadas, setRealizarProva } from "../../application/provaSlice";
-import { cadastrarNovaProva, corrigirProva, corrigirQuestoesMultiplaEscolha, obterProva, obterProvaFeita, obterProvas, obterProvasCriadas, obterProvasFeitas, obterProvasRealizadas, realizarProva } from "../requests/provaRequest";
+import { setProvas, setRealizarProva } from "../../application/provaSlice";
+import { cadastrarNovaProva, corrigirProva, obterProva, obterProvaFeita, obterProvaPrivada, obterProvas, obterProvasCriadas, obterProvasFeitas, obterProvasPorConteudo, obterProvasRealizadas, realizarProva } from "../requests/provaRequest";
 
-export function* handleObterProvas(action){
+export function* handleObterProvasPorConteudo(action){
   try{
     const { payload } = action
-    const response = yield call(obterProvas, payload.pagina, payload.body)
+    const response = yield call(obterProvasPorConteudo, payload.pagina, payload.nome, payload.ordenacao, payload.idConteudo)
     const {data} = response
     console.log(JSON.stringify(response))
     yield put(setProvas({...data}))
@@ -18,6 +18,20 @@ export function* handleObterProva(action){
   try{
     const { payload } = action
     const response = yield call(obterProva, payload.idProva)
+    const prova = response.data
+    const newObj = Object.assign({selected: false}, prova);
+    newObj["questoesRespondidasDto"] = []
+    yield put(setRealizarProva({...newObj}))
+  }catch (error){
+    console.log(error)
+  }
+} 
+
+
+export function* handleObterProvaPrivada(action){
+  try{
+    const { payload } = action
+    const response = yield call(obterProvaPrivada, payload.idProva)
     const prova = response.data
     const newObj = Object.assign({selected: false}, prova);
     newObj["questoesRespondidasDto"] = []
@@ -47,7 +61,7 @@ export function* handleCadastrarNovaProva(action){
 export function* handleRealizarProva(action){
   try{
     const provaData = action.payload;
-    console.log(JSON.stringify(provaData))
+    console.log("objeto prova feita: "+JSON.stringify(provaData))
     const response = yield call(realizarProva, provaData)
     const status = response.status;
     if(status == '200'){

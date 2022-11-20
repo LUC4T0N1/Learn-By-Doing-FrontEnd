@@ -1,3 +1,6 @@
-.regitrarForm {
-  text-align: center;
+.titulo {
+  background: -webkit-linear-gradient(rgb(26, 27, 27), rgb(156, 149, 149));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 50px;
 }

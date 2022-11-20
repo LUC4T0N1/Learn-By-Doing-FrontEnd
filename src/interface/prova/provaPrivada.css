@@ -1,0 +1,12 @@
+.card {
+  background: linear-gradient(
+    to bottom right,
+    rgb(0, 0, 0),
+    rgb(15, 34, 31),
+    rgb(0, 0, 0),
+    rgb(15, 34, 31)
+  );
+  border-color: rgb(9, 41, 39);
+  border-style: groove;
+  color: rgb(255, 255, 255);
+}

@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import '.././criarProva.css'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import FormControl from '@material-ui/core/FormControl';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -13,7 +11,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { setProva } from "../../../../application/provaSlice";
-import { cadastrarNovaQuestao, getQuestoes, setConteudosQuestao, setQuestao } from '../../../../application/questaoSlice';
+import {  getQuestoes, setQuestao } from '../../../../application/questaoSlice';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -48,7 +47,7 @@ export default function EscolherQuestao(conteudosObjetos) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(questao.enunciado && questao.valor){
+    if(questao.enunciado){
       dispatch(setProva({...prova, questoes: prova.questoes.concat(questao)}))
       dispatch(setQuestao({...questao,  enunciado: "", multiplaEscolha: false, resposta: "", valor: 0, alternativas: [] }));   
       setOpen(false);
@@ -72,23 +71,35 @@ export default function EscolherQuestao(conteudosObjetos) {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
-        Buscar Nova Questão
-      </Button>
+         <Button variant="contained" sx={{ 
+                backgroundColor: 'rgb(23, 109, 109)',
+                minWidth: '100px',
+                minHeight: '4vh'
+                 }} onClick={handleClickOpen}>Buscar Nova Questão</Button>
       <Dialog
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
+        sx={{ m: 12, minWidth: 300 }}
       >
         <DialogTitle id="responsive-dialog-title">
           {"Buscar Questão"}
         </DialogTitle>
         <DialogContent>
-        <div>
-      <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Questão</InputLabel>
+        <Grid
+    container
+    spacing={0}
+    direction="column"
+    alignItems="center"
+    justify="center"
+    style={{ minHeight: '10vh' }}
+  >
+        <InputLabel
+        style = {{width: 400, marginTop: 10}}
+         id="demo-simple-select-autowidth-label">Questão</InputLabel>
         <Select
+        style = {{width: 400, marginTop: 10}}
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
           value={questao}
@@ -105,13 +116,12 @@ export default function EscolherQuestao(conteudosObjetos) {
             </MenuItem>
           ))}
         </Select>
-      </FormControl>
-    </div>
-    <DialogActions>
-          <Button autoFocus onClick={handleSubmit}>
-            Adicionar
-          </Button>
-      </DialogActions>
+        <Button variant="contained" sx={{ 
+                backgroundColor: 'rgb(23, 109, 109)',
+                margin: '10px',
+                minWidth: '213px',
+                minHeight: '4vh' }} onClick={handleSubmit}>Adicionar Questão</Button>
+ </Grid>
         </DialogContent>
       </Dialog>
     </div>

@@ -1,7 +1,9 @@
 import React from 'react'
 import { criarConteudo, setConteudo } from '../../../application/conteudoSlice';
 import { useSelector, useDispatch } from "react-redux";
-
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 function CriarConteudo () {
 
@@ -26,22 +28,29 @@ function CriarConteudo () {
 
   }
   return (
-    <article>
-      <form className='form'>
-        <div className='form-control'>
-          <label htmlFor='nome'>Nome do Conteudo: </label>
-          <input
-            type='text'
-            id='nome'
+    <Grid
+    container
+    spacing={0}
+    direction="column"
+    alignItems="center"
+    justify="center"
+    style={{ minHeight: '10vh' }}
+  >
+
+      <TextField
+            id="outlined-password-input"
+            label="Nome"
             name='nome'
             value={conteudo.nome}
-            onChange={handleChange}/>
-        </div>
-        <button type='submit' onClick={handleSubmit}>
-          CRIAR
-        </button>
-      </form>
-    </article>
+            onChange={handleChange}
+            style = {{width: 400, marginTop: 10, textAlign: 'center'}}
+          />
+        <Button variant="contained" sx={{ 
+                backgroundColor: 'rgb(23, 109, 109)',
+                margin: '9px',
+                minWidth: '50px',
+                minHeight: '4vh' }} onClick={handleSubmit}>Criar Conteúdo</Button>
+      </Grid>
   );
 }
 

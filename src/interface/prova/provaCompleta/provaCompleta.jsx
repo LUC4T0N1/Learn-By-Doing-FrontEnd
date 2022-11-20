@@ -15,6 +15,7 @@ import { realizarProva } from '../../../infrastructure/requests/provaRequest';
 export default function ProvaCompleta() {
   const {idProva} = useParams();
   
+ 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProva({idProva: idProva}))
@@ -24,6 +25,15 @@ export default function ProvaCompleta() {
 
   const [open, setOpen] = React.useState(false);
 
+  const finalizarProva = (e) => {
+    console.log("1")
+    dispatch(realizarProva({ ...prova, fodase: ""})) 
+    console.log("22")
+    dispatch(setRealizarProva({ realizarProva: {nome: "", publica: true, conteudos: [],
+    nomeConteudos: [], questoes:[], idsQuestoes:[],
+    quantidadeQuestoes: 0, tempo: 0, questoesRespondidasDto:[]}})); 
+    console.log("3")
+  }
   const handleClickOpen = (e) => {
 
     setOpen(true);
@@ -61,25 +71,27 @@ export default function ProvaCompleta() {
     justifyContent: 'center',
     alignContent: 'center',
     backgroundColor: '#dddddd' }}>
+         <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              marginTop="10px"
+            >
          <CardContent>
           <Typography variant="h2" color="text.secondary" gutterBottom sx={{  textTransform: 'uppercase'  }}>
           {prova.nome}
           </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Tempo de duração: {prova.tempo}  |  Tentativas permitidas: {prova.tentativas} | Total de Questões : {prova.quantidadeQuestoes}
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Realizações: {prova.popularidade}  |  Nota Média: {prova.mediaNotas}
-          </Typography>
           </CardContent>
-               
             {open ? (
-        <ResolverProva atualizarRespostaQuestao = {atualizarRespostaQuestao}/>
+        <ResolverProva atualizarRespostaQuestao = {atualizarRespostaQuestao} finalizarProva = {finalizarProva}/>
         ): (
           <CardActions style={{justifyContent: 'center'}}>
               <Button  variant="contained"  sx={{ width: "40%"}} onClick={handleClickOpen} >Iniciar</Button>
             </CardActions>
-        )}     
+        )}    
+        </Grid> 
         </Card>
     </Grid>
     </div>

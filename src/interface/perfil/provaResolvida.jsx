@@ -40,17 +40,13 @@ export default function ProvaResolvida() {
     backgroundColor: '#dddddd' }}>
          <CardContent>
           <Typography variant="h2" color="text.secondary" gutterBottom sx={{  textTransform: 'uppercase'  }}>
-          {prova.nome}
+          {prova.provaDto.nome}
           </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Tempo de execução:  | Total de Questões : {prova.provaDto.quantidadeQuestoes}
-          </Typography>
+
         </CardContent>
-          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
-            Feita por: {prova.nomeAluno} 
-          </Typography>
+
          <div>
-            <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
+            <Typography variant="h2" color="text.secondary" sx={{ width: "100%", justifyContent: 'right'}}>
               Nota: {prova.notaAluno} 
             </Typography>
 

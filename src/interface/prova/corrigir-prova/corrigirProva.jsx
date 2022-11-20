@@ -31,7 +31,7 @@ function CorrigirProva () {
           justify="center"
           style={{ minHeight: '100vh' }}
         >
-       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+       <List sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}>
     {provas ? (
     <div style = {{ display : "flex", flexWrap : "wrap"}}>
       {provas.map((prova) => (

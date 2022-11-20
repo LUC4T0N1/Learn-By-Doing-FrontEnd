@@ -11,10 +11,18 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 export default function ResponderQuestaoMultiplaEscolha(props) {
+  const styles = {
+    border: '1px solid',
+    width: '700px', 
+    margin: '10px'
+};
   return (
-       <div>
+       <div style={styles}>
           <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
             Questão {props.questao.numeroQuestao}
+          </Typography>
+          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
+            Valor: {props.questao.valor}
           </Typography>
             <h3>Enunciado: {props.questao.enunciado}</h3>
          <FormControl component="fieldset">

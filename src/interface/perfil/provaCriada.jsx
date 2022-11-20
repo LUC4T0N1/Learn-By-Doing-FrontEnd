@@ -30,7 +30,7 @@ export default function ProvaCriada() {
 
   return (
        <div>
-        <Grid
+  <Grid
           container
           spacing={0}
           direction="column"
@@ -42,21 +42,19 @@ export default function ProvaCriada() {
     justifyContent: 'center',
     alignContent: 'center',
     backgroundColor: '#dddddd' }}>
+         <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              marginTop="10px"
+            >
          <CardContent>
           <Typography variant="h2" color="text.secondary" gutterBottom sx={{  textTransform: 'uppercase'  }}>
           {prova.nome}
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Tempo de duração: {prova.tempo}  |  Tentativas permitidas: {prova.tentativas} | Total de Questões : {prova.quantidadeQuestoes}
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Realizações: {prova.popularidade}  |  Nota Média: {prova.mediaNotas}
-          </Typography>
-          </CardContent>     
+          </Typography>   
           <div>
-          <Typography variant="h5" color="text.secondary" sx={{ width: "20%", justifyContent: 'right'}}>
-            Tempo: 2:00:00
-          </Typography>
           {prova.questoes.map((questao, index) => 
               questao.multiplaEscolha ? (
               <ResponderQuestaoMultiplaEscolha key={index} questao={{numeroQuestao: index+1, enunciado: questao.enunciado, idQuestao: questao.id, alternativas: questao.alternativas}} atualizarRespostaQuestao = {atualizarRespostaQuestao}/>
@@ -66,6 +64,8 @@ export default function ProvaCriada() {
               )}
          <Button  variant="contained"  sx={{ width: "40%"}}  onClick={() => history.push(`/perfil/provas-criadas`)}>Voltar</Button>
     </div>  
+    </CardContent>  
+    </Grid>
         </Card>
     </Grid>
     </div>

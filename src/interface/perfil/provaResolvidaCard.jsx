@@ -1,10 +1,8 @@
 import React from 'react'
-import Card from '@material-ui/core/Card';
 import ListItemText from '@material-ui/core/ListItemText';
 import Badge from '@material-ui/core/Badge';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 
@@ -20,13 +18,10 @@ function ProvaResolvidaCard({  nomeProva, conteudos, corrigida, publica, dataRes
           {nomeProva}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" component="div">
-         {corrigida? <div>Já foi corrigida</div>: <div>Não foi corrigida</div>}
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary" component="div">
           {publica? <div>publica</div>: <div>privada</div>}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" component="div">
-          Resolvida em:{dataResolucao}
+          Resolvida em: {dataResolucao}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" component="div">
           Nota: {nota}

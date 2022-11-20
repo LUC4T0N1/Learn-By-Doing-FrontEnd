@@ -39,9 +39,10 @@ const MenuProps = {
 
 
   return (
-    <div className="bundas">
-        <InputLabel id="demo-multiple-chip-label">Conteúdos</InputLabel>
+    <>
+        <InputLabel id="demo-multiple-chip-label" style = {{width: 400, marginTop: 10}}>Conteúdos</InputLabel>
         <Select
+          style = {{width: 400, margin: 10}}
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
@@ -66,6 +67,6 @@ const MenuProps = {
             </MenuItem>
           ))}
         </Select>
-    </div>
+    </>
   );
 }
