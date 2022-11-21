@@ -1,0 +1,44 @@
+.buscar-conteudos{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.criar-conteudo{
+  background-color: rgb(75, 74, 74);
+  position: fixed;
+  padding: 100px;
+  border-radius: 20px;
+  margin-top: 400px;
+  color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.criar-conteudo .input-texto-simples{
+  margin-right: 10px;
+}
+
+.botao-fechar{
+  right: 111;
+  background-color: rgb(75, 74, 74);
+  border-style: none; 
+  position: relative;
+  bottom: 90px;
+  left: 215px;
+}
+
+.botao-fechar:hover{
+  cursor: pointer;
+}
+
+.icon-fechar{
+  font-size: 20px;
+}
+
+.conteudo{
+  margin-bottom: 20px;
+}

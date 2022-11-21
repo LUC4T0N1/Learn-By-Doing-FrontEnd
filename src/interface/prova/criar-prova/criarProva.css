@@ -5,3 +5,10 @@
 .campo {
   margin: 15px;
 }
+
+.criar-prova{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
