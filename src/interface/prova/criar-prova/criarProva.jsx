@@ -20,8 +20,10 @@ import VisualizarQuestaoMultiplaEscolha from '../corrigir-prova/corrigir-questao
 import VisualizarQuestaoDissertativaCorrigida from '../../perfil/visualizarQuestaoDissertativaCorrigida';
 import PreviewQuestaoMultiplaEscolha from './questao/previewQuestaoMultiplaEscolha';
 import PreviewQuestaoDissertativa from './questao/previewQuestaoDissertativa';
-import InfosBasicas from './InfosBasicas';
-import BuscarConteudos from './BuscarConteudos';
+import InfosBasicas from './infos-basicas/InfosBasicas';
+import BuscarConteudos from './buscar-conteudos/BuscarConteudos';
+import VisualizacaoQuestao from './questoes/VisualizacaoQuestao';
+import AdicionarQuestoes from './questoes/AdicionarQuestao';
 
 
 
@@ -69,7 +71,9 @@ function CriarProva () {
     <div className='criar-prova'>
     <InfosBasicas/>
     <BuscarConteudos/>
-              {/*  <Grid
+    <VisualizacaoQuestao prova={prova}/>
+    <AdicionarQuestoes/>
+                 {/* <Grid
               container
               spacing={0}
               direction="column"
@@ -182,7 +186,7 @@ function CriarProva () {
   
       </Grid>
         </Card>
-        </Grid>  */}
+        </Grid>    */}
         </div>
   );
 }
