@@ -6,7 +6,7 @@ import { cadastrarNovaQuestao, setConteudosQuestao, setQuestao } from '../../../
 import "./CriarQuestoes.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons' 
-import BuscarSelect from '../../buscar-conteudos/BuscarSelect';
+import BuscarSelect from '../../../../filtroBuscar/BuscarSelect';
 import CriarAlternativa from '../../questao/alternativa/criarAlternativa';
 import CriarAlternativas from './criar-alternativas/CriarAlternativas';
 

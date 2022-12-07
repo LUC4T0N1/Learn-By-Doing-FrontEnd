@@ -1,10 +1,9 @@
 import React from 'react'
 import "./BuscarConteudos.css"
-import Select from "react-select"
 import makeAnimated from "react-select/animated"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons' 
-import BuscarSelect from './BuscarSelect';
+import BuscarSelect from '../../../filtroBuscar/BuscarSelect';
 
 export default function BuscarConteudos() {
 
@@ -65,7 +64,7 @@ export default function BuscarConteudos() {
   
   return (
     <div className='buscar-conteudos'> 
-    <BuscarSelect/>
+    <BuscarSelect multiplo={true}/>
       <button className='botao-simples' onClick={handleClickOpen}>Criar Conteúdo</button>
       {open ? 
         (<div className='criar-conteudo'>

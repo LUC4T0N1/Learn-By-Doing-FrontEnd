@@ -13,6 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormLabel from '@material-ui/core/FormLabel';
+import Buscar from '../../filtroBuscar/Buscar';
 
 export default function ListaConteudos() {
   
@@ -63,7 +64,8 @@ export default function ListaConteudos() {
   }
   
   return (
-    <div>
+    <Buscar opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}/>);
+    {/* <div>
       {conteudos? ( <Grid
           container
           spacing={0}
@@ -117,5 +119,5 @@ export default function ListaConteudos() {
           }
     
     </div>
-  );
+  ); */}
 };

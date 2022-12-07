@@ -19,8 +19,8 @@
   justify-content: center;
   flex-direction: column;
   background:  linear-gradient(
-    rgb(53, 52, 52),
-    rgb(22, 21, 21)
+    rgb(53, 52, 52, 0.7),
+    rgb(22, 21, 21, 0.7)
     );
   width: 60%;
   height: 100%;

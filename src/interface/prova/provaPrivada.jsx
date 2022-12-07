@@ -24,7 +24,17 @@ function ProvaPrivada () {
   }
   
   return (
-    <Grid
+    <div className='login'>
+    <div className='login-container'>
+    <div className='login-mini-container'>
+        <div className='login-title' style={{"fontSize":"40px"}}>Buscar Prova Privada</div>
+        <input type="text" name="nome-prova" className='input-texto-simples' placeholder="ID Secreto..."></input>
+        <button className='botao-simples' onClick={handleSubmit}>Enviar</button>
+      </div>
+    </div>
+  </div>
+    )
+    {/* <Grid
             container
             spacing={0}
             direction="column"
@@ -65,8 +75,7 @@ function ProvaPrivada () {
       minHeight: '6vh' }} onClick={handleSubmit}>Buscar</Button>
       </Grid>
       </Card>
-      </Grid>
-  );
+      </Grid> */}
 }
 
 export default ProvaPrivada

@@ -1,0 +1,69 @@
+.filtro-busca-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.filtro-busca-formulario{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:  linear-gradient(
+    rgb(53, 52, 52, 0.7),
+    rgb(22, 21, 21, 0.7)
+    );
+  width: 60%;
+  margin-bottom: 500px;
+  border-radius: 30px;
+  padding-bottom: 100px;
+  flex-direction: column;
+}
+
+.busca-filtro{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opcoes-filtro{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.filtro{
+  display: flex;
+  width: 100%;
+}
+
+.busca-titulo{
+  font-size: 80px;
+  background: linear-gradient(165.57deg, rgb(179, 105, 8),
+  rgb(202, 35, 85),
+  rgb(61, 11, 54));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+
+.filtro-opcao{
+  margin-bottom: 4px;
+}
+
+.trocar-pagina{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: -100px;
+}
+
+.trocar-pagina .botao-simples{
+padding-top: 0px;
+padding-bottom: 0px;
+font-size: 15px;
+height: 33px;
+}

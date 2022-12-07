@@ -2,7 +2,7 @@ import React from 'react'
 import Select from "react-select"
 import makeAnimated from "react-select/animated"
 
-export default function BuscarSelect() {
+export default function BuscarSelect({multiplo}) {
  
   const animatedComponents = makeAnimated();
 
@@ -53,7 +53,7 @@ export default function BuscarSelect() {
       styles={colourStyles}
       components={animatedComponents}
       className='select'
-      isMulti
+      isMulti={multiplo}
       options={options}
       /* onChange={(item) = > atualizarstate} */
       isClearable={true}

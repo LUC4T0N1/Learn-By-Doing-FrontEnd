@@ -5,7 +5,7 @@
   border: none;
   border-radius: 10px;
   padding: 20px;
-  background-color:  rgb(15, 15, 15, 0.6);
+  background-color:  rgba(0, 0, 0, 0.6);
   box-shadow: rgb(179, 105, 8, 0.4) 0px 0px 2px, rgb(202, 35, 85, 0.4) 0px 0px 2px, rgb(61, 11, 54, 0.4) 0px 0px 2px;
   color: aliceblue;
 }
@@ -13,14 +13,12 @@
 .visualizar-enunciado{
   margin-bottom: 30px;
   margin-top: 22px;
-  color: rgb(190, 184, 177);
+  color: rgb(238, 226, 212);
 }
 
 .questao-header{
   margin-top: -17px;
-  color: rgb(194, 136, 29);
-}
-.questao-header .questao-numero{
+  color: rgb(240, 213, 177);
 }
 
 .campo-resposta{
@@ -43,7 +41,7 @@
 }
 
 .area-resposta{
-  background-color:  rgba(49, 49, 49, 0.6);
+  background-color:  rgba(61, 61, 61, 0.6);
   border-radius: 20px;
   padding-left: 15px;
   padding-right: 15px;

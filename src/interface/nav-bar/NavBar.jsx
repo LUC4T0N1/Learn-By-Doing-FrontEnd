@@ -29,7 +29,7 @@ const NavBar = () => {
             <Link to="/tipo-de-prova" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Resolver Prova</Link>
           </li>
           <li className="nav-item">
-            <Link to="/criar-prova" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Criar Prova</Link>
+            <Link to="/criar" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Criar Prova</Link>
           </li>
           <li className="nav-item">
             <Link to="/corrigir" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Corrigir Prova</Link>
