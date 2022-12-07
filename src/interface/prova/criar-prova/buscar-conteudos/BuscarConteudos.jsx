@@ -4,6 +4,7 @@ import Select from "react-select"
 import makeAnimated from "react-select/animated"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons' 
+import BuscarSelect from './BuscarSelect';
 
 export default function BuscarConteudos() {
 
@@ -64,20 +65,7 @@ export default function BuscarConteudos() {
   
   return (
     <div className='buscar-conteudos'> 
-    <Select
-      placeholder="Escolha os Conteúdos"
-      styles={colourStyles}
-      components={animatedComponents}
-      className='select'
-      isMulti
-      options={options}
-      /* onChange={(item) = > atualizarstate} */
-      isClearable={true}
-      isSearchable={true}
-      isDisabled={false}
-      isLoading={false}
-      isRtl={false}
-      />
+    <BuscarSelect/>
       <button className='botao-simples' onClick={handleClickOpen}>Criar Conteúdo</button>
       {open ? 
         (<div className='criar-conteudo'>

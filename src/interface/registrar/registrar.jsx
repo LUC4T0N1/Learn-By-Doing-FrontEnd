@@ -72,8 +72,19 @@ function Registrar () {
 
   return (
 
-<div>
-      {ok? ( ToLogin()):(
+<>
+
+<div className='login'>
+      <div className='login-container'>
+      <div className='login-mini-container'>
+          <div className='login-title'>Criar Conta</div>
+          <input type="email" name="nome-prova" className='input-texto-simples' placeholder="E-mail..."></input>
+          <input type="password" name="nome-prova" className='input-texto-simples' placeholder="Senha..."></input>
+          <button className='botao-simples' onClick={handleSubmit}>Registrar</button>
+        </div>
+      </div>
+    </div>
+      {/* {ok? ( ToLogin()):(
             <Grid
             container
             spacing={0}
@@ -122,8 +133,8 @@ function Registrar () {
       minHeight: '6vh' }} onClick={handleSubmit}>Criar</Button>
       </Grid>
       </Card>
-      </Grid>)}
-      </div>
+      </Grid>)} */}
+      </>
 
   );
 }

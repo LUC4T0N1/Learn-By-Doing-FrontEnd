@@ -10,10 +10,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   margin-top: 150px;
   width: 100%;
   margin-bottom: 10px;
+}
+
+.primeira-linha .input-texto-simples{
+  margin-left: 12px;
 }
 
 .datas-prova{
@@ -24,4 +28,8 @@
   border-bottom-style: solid;
   border-image: linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1;
   padding: 5px;
+}
+
+.datas-prova label{
+  color: aliceblue;
 }

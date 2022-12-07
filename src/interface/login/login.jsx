@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+
 function Login () {
 
 let history = useHistory();
@@ -37,7 +38,7 @@ function ToHome () {
   console.log("indo pro home")
   history.push(`/perfil`)
 }  
-  const [ok, setOk] =  useState(false);
+  const [ok, setOk] =  useState(true);
   const [login, setLogin] =  useState({ senha : '', email: '' });
 
   const handleChangeEmail = (e) => {
@@ -57,9 +58,20 @@ function ToHome () {
     alert('preencha senha e email');
   }
 
+
   }
   return (
-    <div>
+     <div className='login'>
+      <div className='login-container'>
+      <div className='login-mini-container'>
+          <div className='login-title'>Login</div>
+          <input type="email" name="nome-prova" className='input-texto-simples' placeholder="E-mail..."></input>
+          <input type="password" name="nome-prova" className='input-texto-simples' placeholder="Senha..."></input>
+          <button className='botao-simples' onClick={handleSubmit}>Enviar</button>
+        </div>
+      </div>
+    </div>) 
+     {/* <div>
     {ok? (ToHome()) : (
       <div>
      <Grid
@@ -115,8 +127,7 @@ minHeight: '6vh' }} onClick={handleSubmit}>Entrar</Button>
 </div>
     
   ) }
-    </div>
-  );
+    </div> ) */}
 }
 
 export default Login

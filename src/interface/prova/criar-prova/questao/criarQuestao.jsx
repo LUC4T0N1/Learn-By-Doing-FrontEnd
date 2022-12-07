@@ -136,7 +136,7 @@ export default function CriarQuestao(conteudosObjetos) {
               <MenuItem value={false}>Dissertativa</MenuItem>
             </Select>
 
-            {questao.multiplaEscolha ? (
+            {!questao.multiplaEscolha ? (
           <>
             <div>
             {questao.alternativas.length !==0 ? (

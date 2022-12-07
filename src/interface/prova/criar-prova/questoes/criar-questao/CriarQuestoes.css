@@ -1,16 +1,9 @@
-.adicionar-questao{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.escolher-opcao{
+.criar-questoes{
   background-color: rgb(75, 74, 74);
   position: fixed;
   padding: 70px;
   border-radius: 20px;
-  margin-top: 30px;
+  margin-top: -130px;
   color: aliceblue;
   display: flex;
   align-items: center;
@@ -18,18 +11,20 @@
   flex-direction: column;
 }
 
-.escolher-opcao .botao-simples{
-  margin: 3px;
-}
-
-.escolher-opcao .botao-fechar{
-  right: 111;
+.criar-questoes .botao-fechar{
   background-color: rgb(75, 74, 74);
   border-style: none; 
   position: relative;
   bottom: 60px;
-  left: 215px;
+  left: 415px;
 }
 
+.criar-questoes .input-texto-simples{
+  min-width: 80%;
+  
+}
 
+/* .criar-questoes .mini-container .select-simples{
+  width: 17%;
+} */
 

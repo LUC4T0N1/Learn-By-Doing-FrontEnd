@@ -1,0 +1,50 @@
+.visualizar-questao{
+  margin-top: 10px;
+  width: 90%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  background-color:  rgb(15, 15, 15, 0.6);
+  box-shadow: rgb(179, 105, 8, 0.4) 0px 0px 2px, rgb(202, 35, 85, 0.4) 0px 0px 2px, rgb(61, 11, 54, 0.4) 0px 0px 2px;
+  color: aliceblue;
+}
+
+.visualizar-enunciado{
+  margin-bottom: 30px;
+  margin-top: 22px;
+  color: rgb(190, 184, 177);
+}
+
+.questao-header{
+  margin-top: -17px;
+  color: rgb(194, 136, 29);
+}
+.questao-header .questao-numero{
+}
+
+.campo-resposta{
+  display: flex;
+  align-items: left;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.questao-dados{
+  display: flex;
+  gap: 4px;
+}
+
+.questao-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.area-resposta{
+  background-color:  rgba(49, 49, 49, 0.6);
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}

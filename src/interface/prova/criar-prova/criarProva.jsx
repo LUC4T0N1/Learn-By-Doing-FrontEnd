@@ -24,6 +24,7 @@ import InfosBasicas from './infos-basicas/InfosBasicas';
 import BuscarConteudos from './buscar-conteudos/BuscarConteudos';
 import VisualizacaoQuestao from './questoes/VisualizacaoQuestao';
 import AdicionarQuestoes from './questoes/AdicionarQuestao';
+import VisualizarQuestoes from './questoes/visualizar-questoes/VisualizarQuestoes';
 
 
 
@@ -69,10 +70,16 @@ function CriarProva () {
 
   return (
     <div className='criar-prova'>
-    <InfosBasicas/>
-    <BuscarConteudos/>
-    <VisualizacaoQuestao prova={prova}/>
-    <AdicionarQuestoes/>
+      <div className='formulario-criar-prova'>
+        <InfosBasicas/>
+        <BuscarConteudos/>
+        <VisualizacaoQuestao prova={prova}/>
+        <AdicionarQuestoes/>
+        <VisualizarQuestoes/>
+        <VisualizarQuestoes/>
+        <VisualizarQuestoes/>
+        <VisualizarQuestoes/>
+      </div>
                  {/* <Grid
               container
               spacing={0}
