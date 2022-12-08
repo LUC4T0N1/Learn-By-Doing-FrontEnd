@@ -35,12 +35,12 @@ import { ThemeContext } from './infrastructure/context';
 
 function CustomRoute({ isPrivate, ...rest }) {
   const autenticacao = useSelector((state) => state.autenticacao);
-  const perfil = useSelector((state) => state.perfil);
+  /* const perfil = useSelector((state) => state.perfil); */
   console.log("isprivate: "+ isPrivate)
-/*   if (isPrivate && autenticacao.token=="") {
+   if (isPrivate && autenticacao.token=="") {
     console.log("deslogado")
     return <Redirect to="/login" />
-  } */
+  } 
   console.log("completo")
   return <Route {...rest} />;
 }

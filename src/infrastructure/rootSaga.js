@@ -5,8 +5,10 @@ import { cadastrarNovaProva, corrigirProva, getProva, getProvaFeita, getProvaPri
 import { handleCadastrarNovaProva, handleCorrigirProva, handleObterProva, handleObterProvaFeita, handleObterProvaPrivada, handleObterProvasCriadas, handleObterProvasFeitas, handleObterProvasPorConteudo, handleObterProvasRealizadas, handleRealizarProva } from "./handlers/provaHandler";
 import { cadastrarNovaQuestao, getQuestoes } from "../application/questaoSlice";
 import { handleCriarQuestao, handleObterQuestoes } from "./handlers/questaoHandler";
-import { handleBuscarPerfil, handleCompletarPerfil } from "./handlers/perfilHandler";
-import { completarPerfil, getPerfil } from "../application/perfilSlice";
+import { handleBuscarPerfil, handleCompletarPerfil, handleCriarConta } from "./handlers/perfilHandler";
+import { handleLogar } from "./handlers/autenticacaoHandler";
+import { completarPerfil, getPerfil, criarConta } from "../application/perfilSlice";
+import { logar } from "../application/autenticacaoSlice";
 
 
 export function* watcherSaga(){
@@ -27,6 +29,8 @@ export function* watcherSaga(){
   yield takeLatest(getPerfil.type, handleBuscarPerfil)
   yield takeLatest(filtrarConteudos.type, handleFiltrarConteudos)
   yield takeLatest(getProvaPrivada.type, handleObterProvaPrivada)
+  yield takeLatest(criarConta.type, handleCriarConta)
+  yield takeLatest(logar.type, handleLogar)
 
   
 

@@ -14,6 +14,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormLabel from '@material-ui/core/FormLabel';
+import Buscar from '../../filtroBuscar/Buscar';
 
 function ListaDeProvas() {
 
@@ -66,7 +67,8 @@ function ListaDeProvas() {
  
 
   return (
-    <div>
+    <Buscar titulo={"Prova"} opcoesFiltro={["Ordem Alfabética", "Popularidade", "Dificuldade", "Tamanho"]}/>);
+  /*   <div>
     <Grid
          container
          spacing={0}
@@ -117,7 +119,7 @@ function ListaDeProvas() {
    
     </Grid>
     </div>
-  );
+  ); */
 }
 
 export default ListaDeProvas

@@ -1,133 +1,70 @@
 import React, {useState} from 'react'
 import './login.css'
-import {
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../../firebase"
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { logar } from '../../application/autenticacaoSlice';
+import { getPerfil } from '../../application/perfilSlice';
 
 
 function Login () {
 
 let history = useHistory();
+const dispatch = useDispatch();
 
-const autenticacao = useSelector((state) => state.autenticacao);
-
-const logar = async () => {
+const logarFunction = async () => {
   try {
-    const user = await signInWithEmailAndPassword(
-      auth,
-      login.email,
-      login.senha
-    );
-    alert('sucesso')
-    setOk(true); 
+    await dispatch(logar({ ...login}))
+    await delay(1000);
+    await dispatch(getPerfil()) 
+    await delay(1000);
+    toHome();
  } catch (error) {
    console.log(error.message);
    alert('erro: '+ error.message)
   }
 };
 
-function ToHome () {
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
+
+function toHome () {
   console.log("indo pro home")
   history.push(`/perfil`)
 }  
-  const [ok, setOk] =  useState(true);
   const [login, setLogin] =  useState({ senha : '', email: '' });
 
-  const handleChangeEmail = (e) => {
+  const handleChange = (e) => {
     const value = e.target.value;
-    setLogin({...login, email : value});
+    const nome = e.target.name
+    setLogin({...login, [nome]: value});
+    console.log("login: " + JSON.stringify(login))
   }  
-  const handleChangeSenha = (e) => {
-    const value = e.target.value;
-    setLogin({...login, senha: value});
-  }  
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if(login.senha && login.email){
-      logar();
-/*       setLogin({ nome : '' }); */
+      await logarFunction();
   }else{
-    alert('preencha senha e email');
+    alert('preencha senha e email!');
   }
 
 
   }
   return (
+    <>
      <div className='login'>
       <div className='login-container'>
       <div className='login-mini-container'>
           <div className='login-title'>Login</div>
-          <input type="email" name="nome-prova" className='input-texto-simples' placeholder="E-mail..."></input>
-          <input type="password" name="nome-prova" className='input-texto-simples' placeholder="Senha..."></input>
+          <input type="email" name="email" className='input-texto-simples' placeholder="E-mail..." onChange={handleChange}></input>
+          <input type="password" name="senha" className='input-texto-simples' placeholder="Senha..." onChange={handleChange}></input>
           <button className='botao-simples' onClick={handleSubmit}>Enviar</button>
         </div>
       </div>
-    </div>) 
-     {/* <div>
-    {ok? (ToHome()) : (
-      <div>
-     <Grid
-     container
-     spacing={0}
-     direction="column"
-     alignItems="center"
-     justify="center"
-     style={{ minHeight: '100vh' }}
-   >
-   <Card  sx={{ width: "70%",  textAlign: 'center',
-justifyContent: 'center',
-alignContent: 'center',
-backgroundColor: '#dddddf',
-minHeight: '70vh',
-marginTop: '80px' }}>
-  <Typography gutterBottom  component="div">
-     <h1 className="titulo">Fazer Login</h1>
-   </Typography>
-   <Grid
-     container
-     spacing={0}
-     direction="column"
-     alignItems="center"
-     justify="center"
-     marginTop="10px"
-   >
- <TextField
-   id="outlined-password-input"
-   label="Email"
-   value={login.email}
-   onChange={handleChangeEmail}
-   style = {{width: 400, marginTop: 10}}
- />
- <TextField
-   id="outlined-password-input"
-   label="Senha"
-   type="password"
-   autoComplete="current-password"
-   value={login.senha}
-   onChange={handleChangeSenha}
-   style = {{width: 400, marginTop: 10}}
- />
- <Button variant="contained" sx={{ 
-backgroundColor: 'black',
-marginTop: '36px',
-minWidth: '300px',
-minHeight: '6vh' }} onClick={handleSubmit}>Entrar</Button>
-</Grid>
-</Card>
-</Grid>
-    
-</div>
-    
-  ) }
-    </div> ) */}
+    </div>
+    </>
+  )
 }
 
 export default Login

@@ -12,9 +12,19 @@ const autenticacaoSlice =  createSlice({
       const authData = action.payload;
      return { ...state, token: authData.token}
     },
-    setRegistrar(){}
+    setAuth(state, action){
+     const authData = action.payload;
+     localStorage.setItem('token', authData.token); 
+     return {...state, token: authData.token, uid: authData.usuario}
+    },
+    setRegistrar(){},
+    logar(){},
+    logout(state, action){
+      localStorage.setItem('token', null); 
+      return {...state, token: "", uid: ""}
+     }
   }
 });
 
-export const { setUid, setToken, setRegistrar } = autenticacaoSlice.actions;
+export const { setUid, setToken, setRegistrar, logar, setAuth, logout } = autenticacaoSlice.actions;
 export default autenticacaoSlice.reducer;

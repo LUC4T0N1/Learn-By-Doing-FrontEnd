@@ -64,7 +64,7 @@ export default function ListaConteudos() {
   }
   
   return (
-    <Buscar opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}/>);
+    <Buscar titulo={"Conteúdos"} opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}/>);
     {/* <div>
       {conteudos? ( <Grid
           container

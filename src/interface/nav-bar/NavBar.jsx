@@ -9,12 +9,22 @@ import { Link } from "react-router-dom";
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { ThemeContext } from "../../infrastructure/context";
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../application/autenticacaoSlice"
 
 const NavBar = () => {
+
+  const dispatch = useDispatch();
 
   const [isMobile, setIsMobile] = useState(false);
   const {t} = useTranslation()
   const theme =  useContext(ThemeContext);
+  
+  const handleDeslogar = () => {
+    console.log("deslogando...")
+    dispatch(logout({ ...{}}))
+  } 
+
   return (
     <nav className="navbar">
       <div className="nav-menu" id="nav-menu">
@@ -38,7 +48,7 @@ const NavBar = () => {
             <Link to="/historico" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Histórico</Link>
           </li>
           <li className="nav-item">
-            <Link to="/login" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Logout</Link>
+            <Link to="/login" onClick={handleDeslogar} className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Logout</Link>
           </li>
         </ul>
         <div>

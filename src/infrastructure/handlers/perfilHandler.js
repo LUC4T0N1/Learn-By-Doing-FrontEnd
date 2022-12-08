@@ -20,12 +20,28 @@ export function* handleCompletarPerfil(action){
 
 export function* handleBuscarPerfil(){
   try{
+    console.log("buscando perfil..")
     const response = yield call(buscarUsuario)
     const {data} = response
-    console.log(JSON.stringify(response))
+    console.log("resposta busca perfil: " + JSON.stringify(response))
     yield put(setPerfil({...data}))
   }catch (error){
     console.log(error)
+  }
+} 
+
+export function* handleCriarConta(action){
+  try{
+    const data = action.payload;
+    console.log("corpo criar conta: "+ JSON.stringify(data))
+    yield call(cadastrarNovoUsuario, data)
+    alert('sucesso')
+  }catch (error){
+    if(error.message.includes("409")){
+      alert('Email já cadastrado!')
+    }else{
+      alert("erro!");
+    }
   }
 } 
 
