@@ -29,7 +29,7 @@ para inscrição do Sítio Arqueológico do Cais do Valongo na
 lista do Patrimônio Mundial. Com base no documento, a
 história do Cais do Val</p>
       <div className='campo-resposta'>
-        <p>Resposta: </p>
+        <p className='resposta-label'>Resposta: </p>
         <div className='area-resposta'>
         <p>A deficiência na enzima G6PD é uma condição recessiva ligada
 ao cromossomo X, que pode ser diagnosticada no teste do

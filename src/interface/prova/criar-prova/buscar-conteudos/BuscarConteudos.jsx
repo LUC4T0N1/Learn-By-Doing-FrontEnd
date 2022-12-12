@@ -1,14 +1,35 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./BuscarConteudos.css"
-import makeAnimated from "react-select/animated"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons' 
 import BuscarSelect from '../../../filtroBuscar/BuscarSelect';
-
+import { criarConteudo, setConteudo } from '../../../../application/conteudoSlice';
+import { useSelector, useDispatch } from "react-redux";
 export default function BuscarConteudos() {
 
-  const animatedComponents = makeAnimated();
+  const dispatch = useDispatch();
 
+ /*  const conteudo = useSelector((state) => state.conteudos.conteudo); */
+
+  const [conteudo, setConteudo] =  useState({nome: ''});
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setConteudo({...conteudo, nome: value});
+    console.log("conteudo: " + JSON.stringify(conteudo))
+
+  }
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
+    if(conteudo!==""){
+      console.log("conteudo: " + JSON.stringify(conteudo))
+      dispatch(criarConteudo({conteudo: conteudo}))
+/*       dispatch(setConteudo({ nome : '' }));  */
+  }else{
+    alert('preencha nome conteudo');
+  }
+}
   const [open, setOpen] = React.useState(false);
 
   const options = [
@@ -70,8 +91,8 @@ export default function BuscarConteudos() {
         (<div className='criar-conteudo'>
           <button className='botao-fechar' onClick={handleClose}><i><FontAwesomeIcon icon={faX} rel="noreferrer" className='icon-fechar'></FontAwesomeIcon></i></button>
           <div className='conteudo'>
-            <input type="text" name="nome-conteudo" className='input-texto-simples' placeholder="Conteúdo..."></input>
-            <button className='botao-simples' onClick={handleClose}>Criar</button>
+            <input type="text" name="nome" className='input-texto-simples' placeholder="Conteúdo..." onChange={handleChange}></input>
+            <button className='botao-simples' onClick={handleSubmit}>Criar</button>
           </div>
         </div>)
        : 

@@ -1,24 +1,33 @@
 .visualizar-questao{
-  margin-top: 10px;
+  margin-top: 14px;
   width: 90%;
   height: 100%;
   border: none;
   border-radius: 10px;
-  padding: 20px;
+  padding: 23px;
   background-color:  rgba(0, 0, 0, 0.6);
-  box-shadow: rgb(179, 105, 8, 0.4) 0px 0px 2px, rgb(202, 35, 85, 0.4) 0px 0px 2px, rgb(61, 11, 54, 0.4) 0px 0px 2px;
   color: aliceblue;
 }
 
 .visualizar-enunciado{
   margin-bottom: 30px;
   margin-top: 22px;
-  color: rgb(238, 226, 212);
+  color: rgb(255, 255, 255);
 }
 
 .questao-header{
   margin-top: -17px;
   color: rgb(240, 213, 177);
+}
+
+.questao-numero{
+  font-size: 19px;
+}
+
+.resposta-label{
+  font-size: 19px;
+  color: rgb(240, 213, 177);
+  margin-left: 8px;
 }
 
 .campo-resposta{
@@ -41,7 +50,7 @@
 }
 
 .area-resposta{
-  background-color:  rgba(61, 61, 61, 0.6);
+  background-color:  rgba(77, 76, 76, 0.4);
   border-radius: 20px;
   padding-left: 15px;
   padding-right: 15px;

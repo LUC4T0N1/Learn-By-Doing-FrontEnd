@@ -14,6 +14,14 @@ export default function BuscarSelect({multiplo}) {
     {value: "produto 05", label: "Produto 05"},
   ]
 
+  const handleChange = (item, e) => {
+    if(item){
+      console.log("item: "+ item);
+    }else{
+      console.log("escrita: " + e.target.value)
+    }
+  };
+
 
   const colourStyles = {
     control: styles => ({ ...styles, backgroundColor: 'rgb(241, 237, 237)',
@@ -55,7 +63,7 @@ export default function BuscarSelect({multiplo}) {
       className='select'
       isMulti={multiplo}
       options={options}
-      /* onChange={(item) = > atualizarstate} */
+      onChange={handleChange} 
       isClearable={true}
       isSearchable={true}
       isDisabled={false}

@@ -32,12 +32,17 @@ import Historico from './interface/prova/historico';
 import './App.css';
 import NavBar from './interface/nav-bar/NavBar';
 import { ThemeContext } from './infrastructure/context';
+import FiltroBuscar from './interface/filtroBuscar/FiltroBuscar';
 
 function CustomRoute({ isPrivate, ...rest }) {
   const autenticacao = useSelector((state) => state.autenticacao);
   /* const perfil = useSelector((state) => state.perfil); */
   console.log("isprivate: "+ isPrivate)
-   if (isPrivate && autenticacao.token=="") {
+  const token = localStorage.getItem('token');
+  console.log("token:::: " + token.length)
+
+   if (isPrivate && token.length == 4) {
+    /* todo: ver se token esta expirado */
     console.log("deslogado")
     return <Redirect to="/login" />
   } 
@@ -56,7 +61,7 @@ const App = () => {
         <Provider store = {store}>
         <AuthProvider>
         <div className="App" style={{
-      backgroundColor: darkMode ? "black" : "white",
+      background: darkMode ? "black" : "linear-gradient(rgba(206, 201, 201, 0.5), rgba(128, 125, 125, 0.4))",
       color: darkMode && "white",
       }}>
           <Router>
@@ -79,6 +84,7 @@ const App = () => {
               <CustomRoute isPrivate exact path="/corrigir/:idProva/:idProvaFeita" children={<ProvaFeita/>}/>
               <CustomRoute exact path="/" children={<PaginaInicial/>}/>
               <CustomRoute exact path="/tipo-de-prova" children={<EscolherTipo/>}/>
+              <CustomRoute exact path="/busc" children={<FiltroBuscar titulo={"Conteúdos"} opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}/>}/>
               <CustomRoute isPrivate exact path="/:idConteudo/" children={<ListaDeProvas/>}/>
               <CustomRoute isPrivate exact path="/realizar-prova-publica/:idProva" children={<ProvaCompleta/>}/>
               <Route path='*'><Erro/></Route>

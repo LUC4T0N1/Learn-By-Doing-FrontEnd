@@ -1,0 +1,126 @@
+.filtro-buscar-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.filtro-buscar-form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:  linear-gradient(
+    rgba(206, 201, 201, 0.9),
+    rgba(128, 125, 125, 0.9)
+    );
+  width: 60%;
+  border-radius: 30px;
+  padding-bottom: 100px;
+  flex-direction: column;
+  height: 82%;
+  margin-top: 58px;
+}
+
+.busca-filtro{
+  width: 60%;
+  gap: 10px;
+  margin-bottom: 30px;
+  position: absolute;
+  top: 220px;
+  margin-left: 110px;
+}
+.busca-filtro .input-texto-simples{
+  width: 60%;
+}
+
+.resultado-card{
+  background-color:  rgb(241, 237, 237);
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  height: 50px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+/*   border-bottom-style: solid;
+ *//*   border-image: linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1;
+ */  font-size: 16px;
+  padding-left: 10px;
+  border-radius: 7px;
+  background-color: rgb(241, 237, 237);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: rgb(0, 0, 0);
+}
+
+.resultado-card:hover{
+  cursor: pointer;
+  background-color: rgb(77, 76, 76, 0.7);
+}
+
+.resultado-card-esquerda{
+  margin-left: 15px;
+  font-size: 30px;
+  color: rgb(58, 58, 58);
+}
+
+.dado-card-resultado{
+  margin: 0;
+}
+
+.resultado-card-direita{
+  margin-right: 15px;
+  font-size: 15px;
+  font-weight: 900;
+  background: linear-gradient(165.57deg, rgb(179, 105, 8),
+  rgb(202, 35, 85),
+  rgb(61, 11, 54));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.resultados{
+  width: 60%;
+  margin-top: -25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 159px;
+  gap: 4px;
+  margin-bottom: 30px;
+  margin-left: 110px;
+  position: absolute;
+  top: 300px;
+}
+
+.busca-titulo{
+  font-size: 80px;
+  background: linear-gradient(165.57deg, rgb(179, 105, 8),
+  rgb(202, 35, 85),
+  rgb(61, 11, 54));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  position: absolute;
+  top: 90px;
+}
+
+.trocar-pagina{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: aliceblue;
+  position: absolute; 
+  bottom: 10px; 
+}
+
+.trocar-pagina .botao-simples{
+padding-top: 0px;
+padding-bottom: 0px;
+font-size: 15px;
+height: 33px;
+}

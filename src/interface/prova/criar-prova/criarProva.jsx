@@ -71,6 +71,7 @@ function CriarProva () {
   return (
     <div className='criar-prova'>
       <div className='formulario-criar-prova'>
+      <p className='criar-prova-titulo'>Criar Prova</p>
         <InfosBasicas/>
         <BuscarConteudos/>
         <VisualizacaoQuestao prova={prova}/>

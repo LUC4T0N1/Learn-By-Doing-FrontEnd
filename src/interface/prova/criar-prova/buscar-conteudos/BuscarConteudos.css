@@ -6,11 +6,11 @@
 }
 
 .criar-conteudo{
-  background-color: rgb(75, 74, 74);
+  background-color: rgba(0, 0, 0, 1);
   position: fixed;
   padding: 100px;
   border-radius: 20px;
-  margin-top: 400px;
+  margin-top: 365px;
   color: aliceblue;
   display: flex;
   align-items: center;
@@ -24,7 +24,7 @@
 
 .botao-fechar{
   right: 111;
-  background-color: rgb(75, 74, 74);
+  background-color: rgba(0, 0, 0, 1);
   border-style: none; 
   position: relative;
   bottom: 90px;
@@ -37,6 +37,7 @@
 
 .icon-fechar{
   font-size: 20px;
+  color: aliceblue;
 }
 
 .conteudo{

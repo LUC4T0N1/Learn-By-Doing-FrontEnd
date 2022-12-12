@@ -14,7 +14,7 @@ const dispatch = useDispatch();
 const logarFunction = async () => {
   try {
     await dispatch(logar({ ...login}))
-    await delay(1000);
+    await delay(2000);
     await dispatch(getPerfil()) 
     await delay(1000);
     toHome();

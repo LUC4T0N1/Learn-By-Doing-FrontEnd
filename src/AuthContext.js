@@ -25,7 +25,7 @@ function AuthProvider({children}){
   const autenticacao = useSelector((state) => state.autenticacao);
 
 
-  useEffect(() => {
+/*   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if(currentUser){
       console.log("oii")
@@ -43,7 +43,7 @@ function AuthProvider({children}){
         dispatch(setPerfil({email: "", nome: "", foto: "", completo: false, carregou: false}))
       }
   });
-}, [dispatch])
+}, [dispatch]) */
 
   return(
     <Context.Provider value={{authenticated:false}}>

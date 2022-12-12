@@ -3,10 +3,14 @@ import "./Buscar.css"
 import BuscarSelect from './BuscarSelect'
 import Filtro from './Filtro'
 import TrocarPagina from './TrocarPagina'
+import { ThemeContext } from "../../infrastructure/context";
+import { useContext } from "react";
+
 export default function Buscar({titulo, opcoesFiltro}) {
+  const theme =  useContext(ThemeContext);
   return (
     <div className='filtro-busca-container'>
-      <div className='filtro-busca-formulario'>
+      <div className='filtro-busca-formulario' >
         <p className='busca-titulo'>Buscar {titulo}</p>
         <div className='busca-filtro'>
           <BuscarSelect multiplo={false}/>
@@ -16,7 +20,8 @@ export default function Buscar({titulo, opcoesFiltro}) {
             ))}
           </div>
         </div>
-        <TrocarPagina/>
+        
+{/*         <TrocarPagina/> */}
       </div>
     </div>
   )
