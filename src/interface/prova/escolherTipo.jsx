@@ -15,7 +15,7 @@ const EscolherTipo = () =>{
             </div>
             <div className='item-desc'>Resolver uma prova privada a partir de um ID único e secreto</div>
           </Link>
-          <Link className='item' to="/conteudos">
+          <Link className='item' to="/buscar-conteudos">
             <div className='item-title'>Prova Pública
             <i><FontAwesomeIcon icon={faUnlock} rel="noreferrer" className='icon'></FontAwesomeIcon></i>
             </div>

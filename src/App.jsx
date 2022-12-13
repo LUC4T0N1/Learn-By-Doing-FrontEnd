@@ -77,16 +77,15 @@ const App = () => {
               <CustomRoute isPrivate exact path="/perfil/provas-criadas" children={<ProvasCriadas/>}/>
               <CustomRoute isPrivate exact path="/perfil/provas-criadas/:idProva" children={<ProvaCriada/>}/>
               <CustomRoute exact path="/registrar" children={<Registrar/>}/>
-              <CustomRoute isPrivate exact path="/conteudos" children={<ListaConteudos/>}/>
+              <CustomRoute isPrivate exact path="/buscar-conteudos" children={<ListaConteudos/>}/>
               <CustomRoute isPrivate exact path="/criar" children={<CriarProva/>}/>
               <CustomRoute isPrivate exact path="/corrigir" children={<CorrigirProva/>}/>
               <CustomRoute isPrivate exact path="/corrigir/:idProva" children={<ProvasFeitas/>}/>
               <CustomRoute isPrivate exact path="/corrigir/:idProva/:idProvaFeita" children={<ProvaFeita/>}/>
               <CustomRoute exact path="/" children={<PaginaInicial/>}/>
               <CustomRoute exact path="/tipo-de-prova" children={<EscolherTipo/>}/>
-              <CustomRoute exact path="/busc" children={<FiltroBuscar titulo={"Conteúdos"} opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}/>}/>
-              <CustomRoute isPrivate exact path="/:idConteudo/" children={<ListaDeProvas/>}/>
-              <CustomRoute isPrivate exact path="/realizar-prova-publica/:idProva" children={<ProvaCompleta/>}/>
+              <CustomRoute isPrivate exact path="/buscar-provas" children={<ListaDeProvas/>}/>
+              <CustomRoute isPrivate exact path="/realizar-prova-publica" children={<ProvaCompleta/>}/>
               <Route path='*'><Erro/></Route>
             </Switch>
           </Router>

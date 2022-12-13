@@ -5,14 +5,43 @@
   height: 100vh;
 }
 
+.busca-filtro{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+
+}
+
+.opcoes-filtro{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 1px;
+}
+
+.opcao{
+  width: 100%;
+}
+
+.filtro{
+  display: flex;
+  width: 100%;
+}
+
+
+
+.filtro-opcao{
+  margin-bottom: 4px;
+}
+
+
 .filtro-buscar-form{
   display: flex;
   align-items: center;
   justify-content: center;
-  background:  linear-gradient(
-    rgba(206, 201, 201, 0.9),
-    rgba(128, 125, 125, 0.9)
-    );
+  background-color: rgb(66, 65, 65, 1);
   width: 60%;
   border-radius: 30px;
   padding-bottom: 100px;
@@ -34,6 +63,7 @@
 }
 
 .resultado-card{
+  text-decoration: none;
   background-color:  rgb(241, 237, 237);
   color: black;
   display: flex;
@@ -52,12 +82,11 @@
   border-radius: 7px;
   background-color: rgb(241, 237, 237);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  color: rgb(0, 0, 0);
 }
 
 .resultado-card:hover{
   cursor: pointer;
-  background-color: rgb(77, 76, 76, 0.7);
+  background-color: rgba(131, 131, 131, 0.9);
 }
 
 .resultado-card-esquerda{
@@ -91,7 +120,22 @@
   margin-right: 159px;
   gap: 4px;
   margin-bottom: 30px;
-  margin-left: 110px;
+  margin-left: 111px;
+  position: absolute;
+  top: 300px;
+}
+
+.resultados-provas{
+  width: 60%;
+  margin-top: -25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 159px;
+  gap: 4px;
+  margin-bottom: 30px;
+  margin-left: 117px;
   position: absolute;
   top: 300px;
 }
@@ -124,3 +168,4 @@ padding-bottom: 0px;
 font-size: 15px;
 height: 33px;
 }
+

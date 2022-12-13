@@ -1,5 +1,4 @@
 import React from 'react'
-import "./Buscar.css"
 
 export default function ({index, nomeFiltro, mudarOrdenacao}) {
   console.log("index: " + index + "nome: " + nomeFiltro)

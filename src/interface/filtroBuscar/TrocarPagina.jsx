@@ -1,13 +1,23 @@
 import React from 'react'
-import "./Buscar.css"
 
 function TrocarPagina({quantidade, paginaAtual, proximaPagina, paginaAnterior}) {
-  const divisaoSimples = Math.floor(quantidade / 10) ;
-  const resto = quantidade % 10;
+  const calcularTotalPaginas = () => {
+    const divisaoSimples = Math.floor(quantidade / 10) ;
+    const resto = quantidade % 10;
+    let totalPaginas = 1;
+    if(quantidade != 0){
+      if(resto == 0){
+        totalPaginas = divisaoSimples
+      }else{
+        totalPaginas = divisaoSimples + 1
+      }
+    }
+    return totalPaginas;
+  }
   return (
     <div className='trocar-pagina'>
     <button className='botao-simples' onClick={paginaAnterior}>Pagina anterior</button>
-    <p>{paginaAtual}/{resto == 0 ? divisaoSimples : divisaoSimples + 1}</p>
+    <p>{paginaAtual}/{calcularTotalPaginas()}</p>
     <button className='botao-simples' onClick={proximaPagina}>Proxima Pagina</button>
   </div>
   )

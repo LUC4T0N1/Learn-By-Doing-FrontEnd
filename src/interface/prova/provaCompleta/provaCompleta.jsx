@@ -10,11 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ResolverProva from './resolverProva';
 import { realizarProva } from '../../../infrastructure/requests/provaRequest';
-
+import { useLocation } from 'react-router-dom';
 
 export default function ProvaCompleta() {
-  const {idProva} = useParams();
-  
+  const location = useLocation();
+  const idProva = location.state.idProva;
+  console.log("idProva: " + idProva);
  
   const dispatch = useDispatch();
   useEffect(() => {
