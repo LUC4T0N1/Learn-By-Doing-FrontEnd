@@ -48,7 +48,7 @@ export default function CorrigirQuestaoDissertativa(props) {
             id="outlined-password-input"
             label="Comentários"
             name="nome"
-            onChange={(e)=>props.atualizarComentarioQuestao(e,props.questao.idQuestaoResolivda)}
+            onChange={(e)=>props.atualizarComentarioQuestao(e,props.questao.idQuestaoResolvida)}
             style = {{width: 400, marginTop: 10}}
           />
            
@@ -65,7 +65,7 @@ export default function CorrigirQuestaoDissertativa(props) {
                  min: 0
             }}}    
             style = {{width: 400, margin: 10, textAlign: 'center'}}
-          onChange={(e)=>props.atualizarNotaQuestao(e,props.questao.idQuestaoResolivda)}
+          onChange={(e)=>props.atualizarNotaQuestao(e,props.questao.idQuestaoResolvida)}
           name="Nota"
         />
         </Grid>

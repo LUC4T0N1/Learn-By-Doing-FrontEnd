@@ -20,7 +20,7 @@ function Items() {
           <div className='item-desc'>Crie provas públicas para que todos possam resolver, ou crie uma prova privada.
             Utilize questões públicas feitas por outras pessoas ou crie suas próprias questões</div>
         </Link>
-        <Link className='item' to="/corrigir">
+        <Link className='item' to="/corrigir/buscarProva">
           <div className='item-title'>Corrigir Prova
           <i><FontAwesomeIcon icon={faPenFancy} rel="noreferrer" className='icon'></FontAwesomeIcon></i>
           </div>

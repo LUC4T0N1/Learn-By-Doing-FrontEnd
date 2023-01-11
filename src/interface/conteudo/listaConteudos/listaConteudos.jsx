@@ -3,15 +3,27 @@ import './listaConteudos.css'
 import FiltroBuscar from '../../filtroBuscar/FiltroBuscar';
 import axios from "axios";
 import AuthHeader from '../../../AuthContext';
+import { useDispatch } from "react-redux";
+import { logout } from "../../../application/autenticacaoSlice"
+import { useHistory } from 'react-router-dom';
+
+
 export default function ListaConteudos() {
 
   const [quantidade, setQuantidade] = useState(0)
   const [conteudos, setConteudos] = useState([])
+  const dispatch = useDispatch();
+  let history = useHistory();
 
   const buscarFiltrado = async (nome, busca) => {
-    const res = await axios.get(`http://localhost:8080/api/conteudo/filtro?nome=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}`, { headers: AuthHeader() })
-    setConteudos(res.data.conteudos);
-    setQuantidade(res.data.quantidade) 
+    try{
+      const response = await axios.get(`http://localhost:8080/api/conteudo/filtro?nome=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`, { headers: AuthHeader() })
+      setConteudos(response.data.conteudos);
+      setQuantidade(response.data.quantidade); 
+    }catch (error){
+      dispatch(logout({ ...{}}))
+      history.push(`/login`)
+    }
  };
   
   return (

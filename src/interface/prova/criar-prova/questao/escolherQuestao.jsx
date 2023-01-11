@@ -116,11 +116,11 @@ export default function EscolherQuestao(conteudosObjetos) {
             </MenuItem>
           ))}
         </Select>
-        <Button variant="contained" sx={{ 
+        {/* <Button variant="contained" sx={{ 
                 backgroundColor: 'rgb(23, 109, 109)',
                 margin: '10px',
                 minWidth: '213px',
-                minHeight: '4vh' }} onClick={handleSubmit}>Adicionar Questão</Button>
+                minHeight: '4vh' }} onClick={handleSubmit}>Adicionar Questão</Button> */}
  </Grid>
         </DialogContent>
       </Dialog>

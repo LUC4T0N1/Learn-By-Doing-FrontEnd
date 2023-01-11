@@ -33,6 +33,7 @@ import './App.css';
 import NavBar from './interface/nav-bar/NavBar';
 import { ThemeContext } from './infrastructure/context';
 import FiltroBuscar from './interface/filtroBuscar/FiltroBuscar';
+import FiltroBuscarSelect from './interface/filtroBuscar/FiltroBuscarSelect';
 
 function CustomRoute({ isPrivate, ...rest }) {
   const autenticacao = useSelector((state) => state.autenticacao);
@@ -69,23 +70,23 @@ const App = () => {
             <Switch>
               <CustomRoute exact path="/login" children={<Login/>}/>
               <CustomRoute exact path="/escolherProvaPrivada" children={<ProvaPrivada/>}/>    
-              <CustomRoute exact path="/realizarProvaPrivada/:idProva" children={<ProvaCompletaPrivada/>}/>  
               <CustomRoute isPrivate exact path="/historico" children={<Historico/>}/> 
               <CustomRoute isPrivate exact path="/perfil" children={<Perfil/>}/>
               <CustomRoute isPrivate exact path="/perfil/provas-resolvidas" children={<ProvasResolvidas/>}/>
-              <CustomRoute isPrivate exact path="/perfil/provas-resolvidas/:idProva" children={<ProvaResolvida/>}/>
+              <CustomRoute isPrivate exact path="/perfil/prova-resolvida" children={<ProvaResolvida/>}/>
               <CustomRoute isPrivate exact path="/perfil/provas-criadas" children={<ProvasCriadas/>}/>
-              <CustomRoute isPrivate exact path="/perfil/provas-criadas/:idProva" children={<ProvaCriada/>}/>
+              <CustomRoute isPrivate exact path="/perfil/prova-criada" children={<ProvaCriada/>}/>
               <CustomRoute exact path="/registrar" children={<Registrar/>}/>
               <CustomRoute isPrivate exact path="/buscar-conteudos" children={<ListaConteudos/>}/>
               <CustomRoute isPrivate exact path="/criar" children={<CriarProva/>}/>
-              <CustomRoute isPrivate exact path="/corrigir" children={<CorrigirProva/>}/>
-              <CustomRoute isPrivate exact path="/corrigir/:idProva" children={<ProvasFeitas/>}/>
-              <CustomRoute isPrivate exact path="/corrigir/:idProva/:idProvaFeita" children={<ProvaFeita/>}/>
+              <CustomRoute isPrivate exact path="/corrigir/buscarProva" children={<CorrigirProva/>}/>
+              <CustomRoute isPrivate exact path="/corrigir/buscarProvaFeita" children={<ProvasFeitas/>}/>
+              <CustomRoute isPrivate exact path="/corrigir" children={<ProvaFeita/>}/>
               <CustomRoute exact path="/" children={<PaginaInicial/>}/>
+              <CustomRoute exact path="/busc" children={<FiltroBuscarSelect/>}/>
               <CustomRoute exact path="/tipo-de-prova" children={<EscolherTipo/>}/>
               <CustomRoute isPrivate exact path="/buscar-provas" children={<ListaDeProvas/>}/>
-              <CustomRoute isPrivate exact path="/realizar-prova-publica" children={<ProvaCompleta/>}/>
+              <CustomRoute isPrivate exact path="/realizar-prova" children={<ProvaCompleta/>}/>
               <Route path='*'><Erro/></Route>
             </Switch>
           </Router>

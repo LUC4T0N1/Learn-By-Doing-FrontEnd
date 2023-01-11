@@ -55,7 +55,7 @@ body {
  *//*   border-image: linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1;
  */  font-size: 16px;
   padding-left: 10px;
-  border-radius: 7px;
+  border-radius: 4px;
   background-color: rgb(241, 237, 237);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: rgb(0, 0, 0);
@@ -75,22 +75,22 @@ body {
   border-radius: 3px;
   background-color: rgb(241, 237, 237);
   color: rgb(0, 0, 0);
+  margin-bottom: 10px;
 }
 
 .input-numero-simples{
   min-width: 10%;
-  height: 50px;
+  height: 45px;
   border-top-style: none;
   border-left-style: none;
   border-right-style: none;
-  border-bottom-style: solid;
-  border-image: linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1;
+  border-bottom-style: none;
+/*   border-image: linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1; */
   font-size: 16px;
   padding-left: 10px;
-  border-radius: 3px;
+  border-radius: 4px;
   background-color: rgb(241, 237, 237);
   color: aliceblue;
-  margin-bottom: 10px;
   color: rgb(0, 0, 0);
 }
 
@@ -110,7 +110,7 @@ body {
   font-size: 16px;
   padding-left: 12px;
   padding-right: 5px;
-  border-radius: 7px;
+  border-radius: 4px;
   background-color: rgb(241, 237, 237);
 }
 
@@ -146,13 +146,14 @@ body {
 
 .input-data{
   padding: 10px;
-  background-color: rgb(94, 93, 93);
+  background-color: rgb(206, 206, 206);
   border-top-style: none;
   border-left-style: none;
   border-right-style: none;
   border-bottom-style: none;
   border-radius: 10px;
   margin-right: 2px;
+  width: 20%;
 }
 
 .mini-container{
@@ -162,3 +163,21 @@ body {
   width: 100%;
   gap: 10px;
 }
+
+.campo-simples{
+  min-width: 50%;
+  height: 50px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+/*   border-bottom-style: solid;
+ *//*   border-image: linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1;
+ */  font-size: 16px;
+  padding-left: 10px;
+  border-radius: 4px;
+  background-color: rgb(241, 237, 237);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: rgb(0, 0, 0);
+}
+

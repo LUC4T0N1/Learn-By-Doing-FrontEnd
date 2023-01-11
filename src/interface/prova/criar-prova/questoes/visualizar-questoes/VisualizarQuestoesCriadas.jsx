@@ -3,14 +3,15 @@ import './VisualizarQuestoes.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 
-export default function VisualizarQuestoes({questao, resposta}) {
+export default function VisualizarQuestoesCriadas({questao, resposta}) {
   return (
     <div className="visualizar-questao">
       <div className='questao-header'>
         <p className='questao-numero'>Questão {questao.numeroQuestao}</p>
         <div className='questao-dados'>
-          <p>· Valor: {questao.valor}</p>
-          <p>· Nota: {questao.notaAluno}</p>
+        {questao.multiplaEscolha ? <p>· Multipla Escolha</p> : <p>· Dissertativa</p>}
+          {questao.publica ? <p>· Publica</p> : <p>· Privada</p>}
+          {<p>· Valor: {questao.valor}</p>}
         </div>
       </div>
       <p className='visualizar-enunciado'>{questao.enunciado}</p>
@@ -23,7 +24,7 @@ export default function VisualizarQuestoes({questao, resposta}) {
         :
         (<div className='area-resposta'>
           {questao.alternativas.map((alt) =>
-              ( <p className={alt.id == questao.respostaAluno ? 'visualizar-alternativa-respondida' : 'visualizar-alternativa'}>
+              ( <p className='visualizar-alternativa'>
                 {alt.correta ? 
                     (<FontAwesomeIcon icon={faCheck} className='alt-icon-verdadeiro'></FontAwesomeIcon>) 
                     :
@@ -33,17 +34,6 @@ export default function VisualizarQuestoes({questao, resposta}) {
         }
    
       </div>
-      {!questao.multiplaEscolha ? 
-      (<div className='campo-resposta'>
-        <p className='resposta-label'>Comentário Professor: </p>
-        <div className='area-resposta'>
-          <p>{questao.comentario}</p>
-        </div>  
-      </div>)
-      :
-      (<></>)
-      }
-
     </div>
   )
 }

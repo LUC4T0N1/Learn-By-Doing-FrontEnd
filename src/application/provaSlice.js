@@ -26,6 +26,7 @@ const provaSlice =  createSlice({
     getProvasRealizadas() {},
     getProvaFeita() {},
     getProva() {},
+    getProvaFazer() {},
     getProvaPrivada(){},
     realizarProva() {},
     cadastrarNovaProva() {},
@@ -52,6 +53,7 @@ const provaSlice =  createSlice({
     },
     setProvas(state, action){
       const provasData = action.payload;
+      console.log("Provasd data: " + JSON.stringify(provasData))
      return { ...state, ...provasData}
     }
   }
@@ -62,5 +64,5 @@ export const { getProvasPorConteudo, getProva, setProvas,
    setRespostaQuestao, realizarProva, 
    getProvasCriadas, setProvasCriadas, getProvasFeitas,
    getProvaFeita, setCorrecaoProva, corrigirProva,
-   getProvasRealizadas, getProvaPrivada } = provaSlice.actions;
+   getProvasRealizadas, getProvaPrivada, getProvaFazer } = provaSlice.actions;
 export default provaSlice.reducer;

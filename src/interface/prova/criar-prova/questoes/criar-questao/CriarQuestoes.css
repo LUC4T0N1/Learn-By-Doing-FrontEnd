@@ -1,9 +1,11 @@
 .criar-questoes{
-  background-color: rgb(75, 74, 74);
   position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(75, 74, 74);
   padding: 70px;
   border-radius: 20px;
-  margin-top: -130px;
   color: aliceblue;
   display: flex;
   align-items: center;

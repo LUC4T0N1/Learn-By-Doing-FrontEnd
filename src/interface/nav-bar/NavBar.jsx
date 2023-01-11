@@ -42,7 +42,7 @@ const NavBar = () => {
             <Link to="/criar" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Criar Prova</Link>
           </li>
           <li className="nav-item">
-            <Link to="/corrigir" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Corrigir Prova</Link>
+            <Link to="/corrigir/buscarProva" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Corrigir Prova</Link>
           </li>
           <li className="nav-item">
             <Link to="/historico" className="nav-link" style={{ color: theme.state.darkMode ?   "white" : "black" }}>Histórico</Link>

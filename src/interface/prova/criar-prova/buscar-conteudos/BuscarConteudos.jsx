@@ -4,8 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons' 
 import BuscarSelect from '../../../filtroBuscar/BuscarSelect';
 import { criarConteudo, setConteudo } from '../../../../application/conteudoSlice';
-import { useSelector, useDispatch } from "react-redux";
-export default function BuscarConteudos() {
+import { useDispatch } from "react-redux";
+import FiltroConteudos from '../../../filtroBuscar/FiltroConteudos';
+import axios from "axios";
+import { logout } from "../../../../application/autenticacaoSlice"
+import { useHistory } from 'react-router-dom';
+import AuthHeader from '../../../../AuthContext';
+
+export default function BuscarConteudos({adicionarConteudosProva}) {
 
   const dispatch = useDispatch();
 
@@ -13,7 +19,7 @@ export default function BuscarConteudos() {
 
   const [conteudo, setConteudo] =  useState({nome: ''});
 
-  const handleChange = (e) => {
+  const handleChangeCriarConteudo = (e) => {
     const value = e.target.value;
     setConteudo({...conteudo, nome: value});
     console.log("conteudo: " + JSON.stringify(conteudo))
@@ -31,6 +37,7 @@ export default function BuscarConteudos() {
   }
 }
   const [open, setOpen] = React.useState(false);
+  const [openEscolher, setOpenEscolher] = React.useState(false);
 
   const options = [
     {value: "produto 01", label: "Produto 01"},
@@ -43,60 +50,60 @@ export default function BuscarConteudos() {
   const handleClickOpen = (e) => {
     e.preventDefault();
     setOpen(true);
+    setOpenEscolher(false);
   };
+
+  const handleClickOpenEscolher = (e) => {
+    e.preventDefault();
+    setOpenEscolher(true);
+    setOpen(false);
+  };
+
 
   const handleClose = () => {
     setOpen(false);
+    setOpenEscolher(false);
     /* todo enviar prop back */
   };
 
 
-  const colourStyles = {
-    control: styles => ({ ...styles, backgroundColor: 'rgb(48, 47, 47)',
-     minWidth: '585px',
-     minHeight: "53px",
-     "color":"aliceblue","borderRadius":"3px","borderTopStyle":"none","borderLeftStyle":"none","borderRightStyle":"none","borderBottomStyle":"solid","borderImage":"linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1"}),
-     option: provided => ({
-      ...provided,
-      color: 'aliceblue',
-      backgroundColor: 'rgb(48, 47, 47)',
-      "borderRadius":"3px","borderTopStyle":"none","borderLeftStyle":"none","borderRightStyle":"none","borderBottomStyle":"solid","borderImage":"linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1"
-    }),
-    input: provided => ({
-      ...provided,
-      color: 'aliceblue'
-    }),
-    placeholder: provided => ({
-      ...provided,
-      color: 'aliceblue'
-    }),
-    menu: provided => ({
-      ...provided,
-      backgroundColor: 'rgb(48, 47, 47)',
-      "borderRadius":"3px","borderTopStyle":"none","borderLeftStyle":"none","borderRightStyle":"none","borderBottomStyle":"none"
-    }),
-    multiValue: provided => ({
-      ...provided,
-      "backgroundColor":"white",
-      color: "black",
-      "borderRadius":"10px"
-    })
-  };
+  const [quantidade, setQuantidade] = useState(0)
+  const [conteudos, setConteudos] = useState([])
+  let history = useHistory();
+
+  const buscarFiltrado = async (nome, busca) => {
+    try{
+      const response = await axios.get(`http://localhost:8080/api/conteudo/filtro?nome=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`, { headers: AuthHeader() })
+      console.log("conteudos!!!: " + JSON.stringify(response.data.conteudos))
+      setConteudos(response.data.conteudos);
+      setQuantidade(response.data.quantidade); 
+    }catch (error){
+      dispatch(logout({ ...{}}))
+      history.push(`/login`)
+    }
+ };
   
   return (
     <div className='buscar-conteudos'> 
-    <BuscarSelect multiplo={true}/>
-      <button className='botao-simples' onClick={handleClickOpen}>Criar Conteúdo</button>
+    {/* <BuscarSelect multiplo={true}/> */}
+      
       {open ? 
-        (<div className='criar-conteudo'>
+        (<>
+        <div className='criar-conteudo'>
           <button className='botao-fechar' onClick={handleClose}><i><FontAwesomeIcon icon={faX} rel="noreferrer" className='icon-fechar'></FontAwesomeIcon></i></button>
           <div className='conteudo'>
-            <input type="text" name="nome" className='input-texto-simples' placeholder="Conteúdo..." onChange={handleChange}></input>
+            <input type="text" name="nome" className='input-texto-simples' placeholder="Conteúdo..." onChange={handleChangeCriarConteudo}></input>
             <button className='botao-simples' onClick={handleSubmit}>Criar</button>
           </div>
-        </div>)
+        </div>
+        </>)
        : 
-        (<></>)}
+        (<button className='botao-simples' onClick={handleClickOpen}>Criar Conteúdo</button>)}
+
+{openEscolher ? 
+        (<FiltroConteudos adicionarConteudosProva={adicionarConteudosProva} handleClose = {handleClose} titulo={"Escolher Conteudos"} opcoesFiltro={["Ordem Alfabética", "Número de Provas"]} buscarFiltrado={buscarFiltrado} objetos={conteudos} quantidade={quantidade} tipo={1}/>)
+       : 
+        (<button className='botao-simples' onClick={handleClickOpenEscolher}>Escolher Conteúdos</button>)}
     </div>
     
   )

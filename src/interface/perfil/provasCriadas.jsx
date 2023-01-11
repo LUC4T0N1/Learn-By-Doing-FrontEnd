@@ -1,63 +1,36 @@
-import React, {useEffect} from 'react'
-import { useSelector, useDispatch } from "react-redux";
-import { CircularProgress } from '@material-ui/core'
-import  List  from '@material-ui/core/List'
-import  Grid  from '@material-ui/core/Grid'
-import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router'
-import { getProvasCriadas } from '../../application/provaSlice';
-import ProvaCard from '../prova/listaDeProvas/provaCard';
+import React, {useState} from 'react'
 import './listaProvas.css'
-
+import axios from "axios";
+import AuthHeader from '../../AuthContext';
+import FiltroBuscar from '../filtroBuscar/FiltroBuscar';
+import { useDispatch } from "react-redux";
+import { logout } from "../../application/autenticacaoSlice"
+import { useHistory } from 'react-router-dom';
 
 function ProvasCriadas () {
 
- let pagina = 0;
- let history = useHistory();
- const {idProva} = useParams();
- 
- const dispatch = useDispatch();
- useEffect(() => {
-   dispatch(getProvasCriadas({pagina: pagina}))
- }, [dispatch])
+  const [quantidade, setQuantidade] = useState(0)
+  const [provas, setProvas] = useState([])
 
- const provas = useSelector((state) => state.provas.provasCriadas);
+  const dispatch = useDispatch();
+  let history = useHistory();
+
+  const buscarFiltrado = async (nome, busca) => {
+    try{
+      const res = await axios.get(`http://localhost:8080/api/prova/buscarPU?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`, { headers: AuthHeader() })
+      setProvas(res.data.provas);
+      setQuantidade(res.data.quantidade) 
+    }catch (error){
+      dispatch(logout({ ...{}}))
+      history.push(`/login`)
+    }
+ };
 
   return (
-    <div>
-      {provas ?  
-       ( <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justify="center"
-        style={{ minHeight: '100vh' }}
-      >
-    <List sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}>
-
-   {provas ? (
-      <div >
-        {provas.map((prova) => (
-        <div className="ProvaCard"  onClick={() => history.push(`/perfil/provas-criadas/${prova.id}`)}> 
-          <ProvaCard  key={prova.idProva} {...prova} />
-        </div>
-        ))}
-      </div>
-      ): (
-        <CircularProgress />
-      )}
-  </List>
-
-          </Grid>
-          ) : (<h2 sx={{  maxWidth: 360, bgcolor: 'background.paper' }}>
-          Nenhuma Prova Foi Criada
-        </h2>)
-          }
-            
-        
-    </div>
-  );
+    <>
+    <FiltroBuscar titulo={"Provas"} opcoesFiltro={["Ordem Alfabética", "Tamanho", "Popularidade"]} buscarFiltrado={buscarFiltrado} objetos={provas} quantidade={quantidade} tipo={4}/>
+  </>
+  )
 }
 
 export default ProvasCriadas

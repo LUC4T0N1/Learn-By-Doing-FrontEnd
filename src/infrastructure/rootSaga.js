@@ -1,8 +1,8 @@
 import {takeLatest} from "redux-saga/effects";
 import { handleCriarConteudo, handleFiltrarConteudos, handleObterConteudos } from "./handlers/conteudoHandler";
 import {criarConteudo, filtrarConteudos, getConteudos} from '../application/conteudoSlice'
-import { cadastrarNovaProva, corrigirProva, getProva, getProvaFeita, getProvaPrivada, getProvasCriadas, getProvasFeitas, getProvasPorConteudo, getProvasRealizadas, realizarProva } from "../application/provaSlice";
-import { handleCadastrarNovaProva, handleCorrigirProva, handleObterProva, handleObterProvaFeita, handleObterProvaPrivada, handleObterProvasCriadas, handleObterProvasFeitas, handleObterProvasPorConteudo, handleObterProvasRealizadas, handleRealizarProva } from "./handlers/provaHandler";
+import { cadastrarNovaProva, corrigirProva, getProva, getProvaFeita, getProvaPrivada, getProvasCriadas, getProvasFeitas, getProvasPorConteudo, getProvasRealizadas, realizarProva, getProvaFazer } from "../application/provaSlice";
+import { handleCadastrarNovaProva, handleCorrigirProva, handleObterProva, handleObterProvaFazer, handleObterProvaFeita, handleObterProvaPrivada, handleObterProvasCriadas, handleObterProvasFeitas, handleObterProvasPorConteudo, handleObterProvasRealizadas, handleRealizarProva } from "./handlers/provaHandler";
 import { cadastrarNovaQuestao, getQuestoes } from "../application/questaoSlice";
 import { handleCriarQuestao, handleObterQuestoes } from "./handlers/questaoHandler";
 import { handleBuscarPerfil, handleCompletarPerfil, handleCriarConta } from "./handlers/perfilHandler";
@@ -31,6 +31,7 @@ export function* watcherSaga(){
   yield takeLatest(getProvaPrivada.type, handleObterProvaPrivada)
   yield takeLatest(criarConta.type, handleCriarConta)
   yield takeLatest(logar.type, handleLogar)
+  yield takeLatest(getProvaFazer.type, handleObterProvaFazer)
 
   
 

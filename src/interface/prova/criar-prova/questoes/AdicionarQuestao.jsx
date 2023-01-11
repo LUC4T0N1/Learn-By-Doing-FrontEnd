@@ -15,6 +15,7 @@ export default function AdicionarQuestoes() {
 
     const handleClose = () => {
     setOpen(false);
+    setCriar(false);
     /* todo enviar prop back */
   };
 
@@ -47,7 +48,7 @@ export default function AdicionarQuestoes() {
        (<></>)
        }
         {criar ?
-       (<CriarQuestoes/>) 
+       (<CriarQuestoes handleClose={handleClose}/>) 
        :
        (<></>)
        }

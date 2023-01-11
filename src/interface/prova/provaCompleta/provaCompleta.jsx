@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router'
-import { getProva, setProva, setRealizarProva } from '../../../application/provaSlice';
+import { getProva, getProvaFazer, setProva, setRealizarProva, realizarProva } from '../../../application/provaSlice';
 import { useSelector, useDispatch } from "react-redux";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -9,17 +9,21 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ResolverProva from './resolverProva';
-import { realizarProva } from '../../../infrastructure/requests/provaRequest';
 import { useLocation } from 'react-router-dom';
+import '../criar-prova/criarProva.css'
+import InfosProva from './InfosProva';
+import ResponderQuestao from '../criar-prova/questoes/responder-questao/ResponderQuestao';
 
 export default function ProvaCompleta() {
   const location = useLocation();
   const idProva = location.state.idProva;
   console.log("idProva: " + idProva);
+
+  const [comecou, setComecou] = useState(false);
  
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProva({idProva: idProva}))
+    dispatch(getProvaFazer({idProva: idProva}))
   }, [dispatch])
  
   const prova = useSelector((state) => state.provas.realizarProva);
@@ -52,15 +56,47 @@ export default function ProvaCompleta() {
     console.log("respossta: "+ resposta)
     let questoesRespondidas = prova.questoesRespondidasDto;
     let questoesRespondidasDto = JSON.parse(JSON.stringify(questoesRespondidas));
+    if(questoesRespondidasDto.length == 0){
+      prova.questoes.map(q => {
+        questoesRespondidasDto.push({ idQuestao: q.id, respostaAluno: ""})
+      })
+    }
     let objIndex = questoesRespondidasDto.findIndex((obj => obj.idQuestao == idQuestao));
+    console.log("aaa: "+ idQuestao)
+    console.log("aaa: "+ objIndex)
+    console.log("Before update: ", questoesRespondidasDto)
     console.log("Before update: ", questoesRespondidasDto[objIndex])
     questoesRespondidasDto[objIndex].respostaAluno = resp
-    console.log("After update: ", questoesRespondidasDto[objIndex])
+    console.log("After update: ", JSON.stringify(questoesRespondidasDto))
+    console.log("After update: ", JSON.stringify(questoesRespondidasDto[objIndex]))
+    console.log("After update tt: ", objIndex)
     dispatch(setRealizarProva({ ...prova, questoesRespondidasDto : questoesRespondidasDto}));
   }
+
+
+
+  const comecarProva = () =>{
+    setComecou(true);
+  }
   return (
-       <div>
-        <Grid
+       <div className='criar-prova'>
+        <div className='formulario-criar-prova'>
+          <p className='criar-prova-titulo'>{prova.nome}</p>
+          <InfosProva prova={prova}/>
+          {comecou ? 
+            (<>
+              {prova.questoes.map(questao =>
+              <ResponderQuestao questao={questao} atualizarRespostaQuestao={atualizarRespostaQuestao}/>)}
+              <button className='botao-simples' onClick={finalizarProva}>Finalizar Prova</button>
+              </>
+              )
+          :
+          (<>
+            <button className='botao-simples' onClick={comecarProva}>Começar Prova</button>
+          </>)
+          }
+        </div>
+       {/*  <Grid
           container
           spacing={0}
           direction="column"
@@ -94,7 +130,7 @@ export default function ProvaCompleta() {
         )}    
         </Grid> 
         </Card>
-    </Grid>
+    </Grid> */}
     </div>
   )
 }

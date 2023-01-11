@@ -1,4 +1,5 @@
 import './intro.css';
+import Logo from "../../../assets/img/logo.png";
 
 function Intro() {
   return (
@@ -13,6 +14,7 @@ function Intro() {
         </div>
      </div>
      <div className='intro-right'/>
+      <img src={Logo} alt="" className="logo-icon"/>
     </div>
   );
 }

@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-/* import './provaPrivada.css' */
+import axios from "axios";
+import AuthHeader from '../../AuthContext';
 
 function ProvaPrivada () {
 
@@ -17,10 +18,20 @@ function ProvaPrivada () {
     const value = e.target.value;
     setId(value);
   }  
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(id)
-    history.push(`/realizarProvaPrivada/${id}`)
+
+    try{
+      const response = await axios.get(`http://localhost:8080/api/prova/obterIdProvaPrivada?idSecreto=${id}`, 
+      { headers: AuthHeader() })
+      history.push({
+        pathname: '/realizar-prova',
+        state: {idProva : response.data}
+      })
+    }catch (error){
+      alert("Id inválido!")
+    }
+
   }
   
   return (
@@ -28,7 +39,7 @@ function ProvaPrivada () {
     <div className='login-container'>
     <div className='login-mini-container'>
         <div className='login-title' style={{"fontSize":"40px"}}>Buscar Prova Privada</div>
-        <input type="text" name="nome-prova" className='input-texto-simples' placeholder="ID Secreto..."></input>
+        <input type="text" name="nome-prova" className='input-texto-simples' placeholder="ID Secreto..." onChange={handleChange}></input>
         <button className='botao-simples' onClick={handleSubmit}>Enviar</button>
       </div>
     </div>

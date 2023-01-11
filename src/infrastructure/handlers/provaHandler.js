@@ -1,6 +1,6 @@
 import { call, put } from "@redux-saga/core/effects";
 import { setProvas, setRealizarProva } from "../../application/provaSlice";
-import { cadastrarNovaProva, corrigirProva, obterProva, obterProvaFeita, obterProvaPrivada, obterProvas, obterProvasCriadas, obterProvasFeitas, obterProvasPorConteudo, obterProvasRealizadas, realizarProva } from "../requests/provaRequest";
+import { cadastrarNovaProva, corrigirProva, obterProva, obterProvaFeita, obterProvaPrivada, obterProvas, obterProvasCriadas, obterProvasFeitas, obterProvasPorConteudo, obterProvasRealizadas, realizarProva, obterProvaFazer } from "../requests/provaRequest";
 
 export function* handleObterProvasPorConteudo(action){
   try{
@@ -26,6 +26,21 @@ export function* handleObterProva(action){
     console.log(error)
   }
 } 
+
+export function* handleObterProvaFazer(action){
+  try{
+    const { payload } = action
+    const response = yield call(obterProvaFazer, payload.idProva)
+    const prova = response.data
+    const newObj = Object.assign({selected: false}, prova);
+    newObj["questoesRespondidasDto"] = []
+    yield put(setRealizarProva({...newObj}))
+  }catch (error){
+    console.log(error)
+  }
+} 
+
+
 
 
 export function* handleObterProvaPrivada(action){
@@ -106,7 +121,7 @@ export function* handleObterProvaFeita(action){
     const { payload } = action
     const response = yield call(obterProvaFeita, payload.id)
     console.log("abaa "+ JSON.stringify(response.data))
-    const data = {corrigirProva: response.data}
+    const data = {corrigirProva: response.data, provaCorrigida: {idProvaRealizada: response.data.id, questoes: []}}
     yield put(setProvas({...data}))
   }catch (error){
     console.log(error)

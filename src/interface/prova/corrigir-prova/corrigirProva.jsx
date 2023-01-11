@@ -1,52 +1,27 @@
-import React, {useEffect} from 'react'
-import { useSelector, useDispatch } from "react-redux";
+import React, {useState} from 'react'
 import './corrigirProva.css'
-import { CircularProgress } from '@material-ui/core'
-import List from '@material-ui/core/List'
-import Grid from '@material-ui/core/Grid'
-import ProvaCard from '../listaDeProvas/provaCard'
-import { useHistory } from 'react-router-dom';
-import { getProvasCriadas, setCorrecaoProva } from '../../../application/provaSlice';
+import FiltroBuscar from '../../filtroBuscar/FiltroBuscar';
+import axios from "axios";
+import AuthHeader from '../../../AuthContext';
 
 function CorrigirProva () {
 
- let pagina = 0;
- let history = useHistory();
+  const [quantidade, setQuantidade] = useState(0)
+  const [provas, setProvas] = useState([])
 
- 
- const dispatch = useDispatch();
- useEffect(() => {
-   dispatch(getProvasCriadas({pagina: pagina}))
- }, [dispatch])
 
- const provas = useSelector((state) => state.provas.provasCriadas);
+  const buscarFiltrado = async (nome, busca) => {
+    const res = await axios.get(`http://localhost:8080/api/prova/buscarPU?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`, { headers: AuthHeader() })
+    setProvas(res.data.provas);
+    setQuantidade(res.data.quantidade) 
+ };
 
   return (
-    <div>
-           <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '100vh' }}
-        >
-       <List sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}>
-    {provas ? (
-    <div style = {{ display : "flex", flexWrap : "wrap"}}>
-      {provas.map((prova) => (
-       <div onClick={() => history.push(`/corrigir/${prova.id}`)}> 
-        <ProvaCard key={prova.idProva} {...prova} />
-       </div>
-      ))}
-    </div>
-     ): (
-       <CircularProgress />
-    )}
-    </List>
-    </Grid>
-    </div>
-  );
+    <>
+    <FiltroBuscar titulo={"Provas"} opcoesFiltro={["Ordem Alfabética", "Tamanho", "Popularidade"]} buscarFiltrado={buscarFiltrado} objetos={provas} quantidade={quantidade} tipo={5}/>
+  </>
+  )
 }
+
 
 export default CorrigirProva

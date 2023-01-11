@@ -13,7 +13,7 @@ function ListaDeProvas() {
   const idConteudo = location.state.idConteudo;
 
   const buscarFiltrado = async (nome, busca) => {
-    const res = await axios.get(`http://localhost:8080/api/prova/buscarPorConteudo?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&idConteudo=${idConteudo}`, { headers: AuthHeader() })
+    const res = await axios.get(`http://localhost:8080/api/prova/buscarPorConteudo?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&idConteudo=${idConteudo}&ordem=${busca.ordem}`, { headers: AuthHeader() })
     setProvas(res.data.provas);
     setQuantidade(res.data.quantidade) 
  };

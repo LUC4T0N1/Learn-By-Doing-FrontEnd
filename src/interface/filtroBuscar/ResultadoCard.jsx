@@ -6,15 +6,23 @@ function ResultadoCard({nome, dados, idObjeto, tipo}) {
   const definirCaminho = () => {
       if(tipo == 1){
         return "/buscar-provas"
-      }else{
-        return "/realizar-prova-publica"
+      }else if(tipo == 2){
+        return "/realizar-prova"
+      }else if(tipo == 3){
+        return "/perfil/prova-resolvida"
+      }else if(tipo == 4){
+        return "/perfil/prova-criada"
+      }else if(tipo == 5){
+        return "/corrigir/buscarProvaFeita"
+      }else if(tipo == 6){
+        return "/corrigir"
       }
   } 
 
   const definirState = () => {
     if(tipo == 1){
       return {idConteudo : idObjeto}
-    }else{
+    }else {
       return {idProva : idObjeto}
     }
 } 

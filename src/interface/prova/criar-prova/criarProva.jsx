@@ -25,6 +25,7 @@ import BuscarConteudos from './buscar-conteudos/BuscarConteudos';
 import VisualizacaoQuestao from './questoes/VisualizacaoQuestao';
 import AdicionarQuestoes from './questoes/AdicionarQuestao';
 import VisualizarQuestoes from './questoes/visualizar-questoes/VisualizarQuestoes';
+import VisualizarQuestoesCriadas from './questoes/visualizar-questoes/VisualizarQuestoesCriadas';
 
 
 
@@ -37,26 +38,21 @@ function CriarProva () {
   const prova = useSelector((state) => state.provas.prova);
 
   const handleChange = (e) => {
+    console.log("oi")
     const nome = e.target.name;
     console.log(nome)
     const value = e.target.value;
     dispatch(setProva({...prova, [nome]: value}));
   }  
 
-  const handleChangeDataInicial = (data) => {
-    console.log("data inicial: "+data)
-    setInicio(data)
-    dispatch(setProva({...prova, dataInicial: data}));
-  } 
-
-  const handleChangeDataFinal = (data) => {
-    console.log("data final: "+data)
-    setFim(data)
-    dispatch(setProva({...prova, dataFinal: data}));
-  } 
+  const adicionarConteudosProva = (id) => {
+    dispatch(setProva({...prova, conteudos: prova.conteudos.concat(id)}));
+  }
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("cadastrando prova?")
     if(prova.nome){
       const idQuestoes = prova.questoes.map(quest => quest.id); 
       dispatch(cadastrarNovaProva({ ...prova, idsQuestoes : idQuestoes, quantidadeQuestoes: idQuestoes.length})) 
@@ -72,14 +68,20 @@ function CriarProva () {
     <div className='criar-prova'>
       <div className='formulario-criar-prova'>
       <p className='criar-prova-titulo'>Criar Prova</p>
-        <InfosBasicas/>
-        <BuscarConteudos/>
-        <VisualizacaoQuestao prova={prova}/>
+        <InfosBasicas handleChange={handleChange}/>
+        <BuscarConteudos adicionarConteudosProva={adicionarConteudosProva}/>
+        {prova.questoes.length > 0
+         ? 
+         (prova.questoes.map((questao, index) => 
+         <VisualizarQuestoesCriadas key={index} questao={{numeroQuestao: index+1, enunciado: questao.enunciado, publica: questao.publica, multiplaEscolha: questao.multiplaEscolha, id: questao.id, valor: questao.valor, resposta: questao.resposta, alternativas: questao.alternativas}} resposta={ questao.respostaAluno} />
+           )) 
+           :
+           (<h1>Nenhuma Questão Adicionada</h1>)
+        }
         <AdicionarQuestoes/>
-        <VisualizarQuestoes/>
-        <VisualizarQuestoes/>
-        <VisualizarQuestoes/>
-        <VisualizarQuestoes/>
+        <div className='footer-criar-prova'>
+         <button className='botao-simples' onClick={handleSubmit}>Criar Prova</button>
+        </div>
       </div>
                  {/* <Grid
               container

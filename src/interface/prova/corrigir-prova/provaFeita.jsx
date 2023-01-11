@@ -10,11 +10,18 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CorrigirQuestaoDissertativa from './corrigir-questao/corrigirQuestaoDissertativa';
 import VisualizarQuestaoMultiplaEscolha from './corrigir-questao/visualizarQuestaoMultiplaEscolha';
-
+import { useLocation, useHistory } from 'react-router-dom';
+import InfosProva from '../provaCompleta/InfosProva';
+import VisualizarQuestoes from '../criar-prova/questoes/visualizar-questoes/VisualizarQuestoes';
+import CorrigirQuestao from '../criar-prova/questoes/corrigirQuestao/CorrigirQuestao';
 
 export default function ProvaFeita() {
 
-  const {idProvaFeita} = useParams();
+  const location = useLocation();
+  const idProvaFeita = location.state.idProva;
+  console.log("idProva: " + idProvaFeita);
+  let history = useHistory(); 
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProvaFeita({id: idProvaFeita}))
@@ -29,51 +36,61 @@ export default function ProvaFeita() {
  } 
 
   const atualizarNotaQuestao = (e, idQuestao) => {
-   console.log("nota: "+ e.target.value)
-   console.log("id: "+ idQuestao)
    const nota = e.target.value;
    const notaQuestao = nota
    let questoesCorrigidas= correcao.questoes;
    let questoesCorrigidasDto = JSON.parse(JSON.stringify(questoesCorrigidas));
-   let objIndex = questoesCorrigidasDto.findIndex((obj => obj.idQuestaoResolivda == idQuestao));
-   console.log("Before update: ", questoesCorrigidasDto[objIndex])
+   if(questoesCorrigidasDto.length == 0){
+    console.log("oi")
+  prova.provaDto.questoes.map(questao =>{
+    if(!questao.multiplaEscolha){
+    let corr = {notaQuestao: 0, idQuestaoResolvida: questao.idQuestaoResolvida, comentarioProfessor: ""};
+    questoesCorrigidasDto.push(corr)
+  }
+  })
+}
+   let objIndex = questoesCorrigidasDto.findIndex((obj => obj.idQuestaoResolvida == idQuestao));
    questoesCorrigidasDto[objIndex].notaQuestao = notaQuestao
-   console.log("After update: ", questoesCorrigidasDto[objIndex])
    dispatch(setCorrecaoProva({ ...correcao, questoes : questoesCorrigidasDto}));
  }
  
  const atualizarComentarioQuestao = (e, idQuestao) => {
-  console.log("nota: "+ e.target.value)
-  console.log("id: "+ idQuestao)
+  console.log("id: "+idQuestao)
   const comentario = e.target.value;
   const comentarioQuestao = comentario
-  let questoesCorrigidas= correcao.questoes;
+  console.log("comentario: "+comentario)
+  let questoesCorrigidas = correcao.questoes;
+  console.log("tamanho: "+questoesCorrigidas.length)
   let questoesCorrigidasDto = JSON.parse(JSON.stringify(questoesCorrigidas));
-  let objIndex = questoesCorrigidasDto.findIndex((obj => obj.idQuestaoResolivda == idQuestao));
-  console.log("Before update: ", questoesCorrigidasDto[objIndex])
-  questoesCorrigidasDto[objIndex].comentarioProfessor = comentarioQuestao
-  console.log("After update: ", questoesCorrigidasDto[objIndex])
-  dispatch(setCorrecaoProva({ ...correcao, questoes : questoesCorrigidasDto}));
- }
- const [open, setOpen] = React.useState(false);
- const handleClickOpen = (e) => {
-
-  setOpen(true);
-/*   dispatch(corrigirQuestoesMultiplaEscolha({id: idProvaFeita})) */
-  let correcaoProva = []
+  if(questoesCorrigidasDto.length == 0){
+    console.log("oi")
   prova.provaDto.questoes.map(questao =>{
     if(!questao.multiplaEscolha){
-    let corr = {notaQuestao: 0, idQuestaoResolivda: questao.idQuestaoResolvida, comentarioProfessor: ""};
-    correcaoProva.push(corr)
+    let corr = {notaQuestao: 0, idQuestaoResolvida: questao.idQuestaoResolvida, comentarioProfessor: ""};
+    questoesCorrigidasDto.push(corr)
   }
   })
-  dispatch(setCorrecaoProva({ ...correcao, questoes : correcaoProva, idProvaRealizada: prova.id })) 
-};
+}
+  let objIndex = questoesCorrigidasDto.findIndex((obj => obj.idQuestaoResolvida == idQuestao));
+  questoesCorrigidasDto[objIndex].comentarioProfessor = comentarioQuestao
+  dispatch(setCorrecaoProva({ ...correcao, questoes : questoesCorrigidasDto}));
+ }
+ 
+
 
 
 
   return (
-       <div>
+    <div className='criar-prova'>
+    <div className='formulario-criar-prova'> 
+      <p className='criar-prova-titulo'>{prova.nome}</p>
+      <InfosProva prova={prova.provaDto}/>
+      {prova.provaDto.questoes.map((questao, index) => 
+     <CorrigirQuestao key={index} questao={{idQuestaoResolvida:questao.idQuestaoResolvida, numeroQuestao: index+1, enunciado: questao.enunciado, publica: questao.publica, multiplaEscolha: questao.multiplaEscolha, id: questao.id, valor: questao.valor, resposta: questao.resposta, respostaAluno: questao.respostaAluno, notaAluno : questao.notaAluno, alternativas: questao.alternativas}} atualizarComentarioQuestao={atualizarComentarioQuestao} atualizarNotaQuestao={atualizarNotaQuestao}/>)}
+     <button className='botao-simples' onClick={() => history.push("/perfil/provas-criadas")}>Voltar</button>
+     <button className='botao-simples' onClick={finalizarCorrecao}>Finalizar Correção</button>
+    </div>
+       {/* <div>
         <Grid
           container
           spacing={0}
@@ -118,7 +135,7 @@ export default function ProvaFeita() {
         )  }
          
         </Card>
-    </Grid>      
+    </Grid>       */}
     </div>
   )
 }

@@ -8,7 +8,7 @@ export function* handleObterConteudos(action){
     const response = yield call(obterConteudos, payload.pagina)
     const {data} = response
     yield put(setConteudos({...data}))
-  }catch (error){
+  }catch (error){ 
     console.log(error)
   }
 }   

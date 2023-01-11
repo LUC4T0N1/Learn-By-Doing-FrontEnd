@@ -5,11 +5,14 @@
   border: none;
   border-radius: 10px;
   padding: 23px;
-  background-color:  rgba(0, 0, 0, 0.6);
+  background-color: rgb(29, 28, 28);
   color: aliceblue;
+  box-shadow: rgba(121, 121, 121, 0.15) 0px 5px 15px;
 }
 
 .visualizar-enunciado{
+  margin-right: 15px;
+  margin-left: 15px;
   margin-bottom: 30px;
   margin-top: 22px;
   color: rgb(255, 255, 255);
@@ -17,7 +20,7 @@
 
 .questao-header{
   margin-top: -17px;
-  color: rgb(240, 213, 177);
+  color: rgb(250, 224, 190);
 }
 
 .questao-numero{
@@ -26,7 +29,7 @@
 
 .resposta-label{
   font-size: 19px;
-  color: rgb(240, 213, 177);
+  color: rgb(250, 224, 190);
   margin-left: 8px;
 }
 
@@ -54,4 +57,33 @@
   border-radius: 20px;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.alt-icon-verdadeiro{
+  font-size: 15px;
+  color: rgb(16, 138, 97);
+
+}
+
+.alt-icon-falso{
+  font-size: 15px;
+  color: rgb(126, 45, 64);
+
+}
+
+.visualizar-alternativa{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.visualizar-alternativa-respondida{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(165.57deg, rgb(230, 144, 33, 0.2),
+  rgb(202, 35, 85, 0.2),
+  rgb(146, 8, 123, 0.2));
+  border-radius: 10px;
+  padding: 3px;
 }

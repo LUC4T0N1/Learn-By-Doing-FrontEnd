@@ -43,3 +43,18 @@
 .conteudo{
   margin-bottom: 20px;
 }
+
+.escolher-conteudo{
+  background-color: rgb(145, 143, 143);
+  position: fixed;
+  padding: 100px;
+  border-radius: 20px;
+  margin-top: 365px;
+  color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 59%;
+  height: 59%;
+}

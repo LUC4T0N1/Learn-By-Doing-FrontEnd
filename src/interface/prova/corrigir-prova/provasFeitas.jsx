@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import './corrigirProva.css'
 import { CircularProgress } from '@material-ui/core'
@@ -8,13 +7,37 @@ import { useHistory } from 'react-router-dom';
 import { getProvasFeitas } from '../../../application/provaSlice';
 import { useParams } from 'react-router'
 import ProvaFeitaCard from './provaFeitaCard';
-
-
+import { useLocation } from 'react-router-dom';
+import React, {useState} from 'react'
+import FiltroBuscar from '../../filtroBuscar/FiltroBuscar';
+import axios from "axios";
+import AuthHeader from '../../../AuthContext';
 function ProvasFeitas () {
+
+  const [quantidade, setQuantidade] = useState(0)
+  const [provas, setProvas] = useState([])
+  const location = useLocation();
+  const idProva = location.state.idProva;
+
+  const buscarFiltrado = async (nome, busca) => {
+    const res = await axios.get(`http://localhost:8080/api/prova/buscarResolucoes?id=${idProva}&pagina=${busca.pagina}`, { headers: AuthHeader() })
+    setProvas(res.data);
+    setQuantidade(res.data.length) 
+ };
+
+  return (
+    <>
+    <FiltroBuscar titulo={"Provas"} opcoesFiltro={["Ordem Alfabética", "Tamanho", "Popularidade"]} buscarFiltrado={buscarFiltrado} objetos={provas} quantidade={quantidade} tipo={6}/>
+  </>
+  )
+}
+
+  /* const location = useLocation();
+  const idProva = location.state.idProva;
+  console.log("idProva: " + idProva);
 
  let pagina = 0;
  let history = useHistory();
- const {idProva} = useParams();
  
  const dispatch = useDispatch();
  useEffect(() => {
@@ -51,6 +74,6 @@ function ProvasFeitas () {
     </Grid>
     </>
   );
-}
+} */
 
 export default ProvasFeitas

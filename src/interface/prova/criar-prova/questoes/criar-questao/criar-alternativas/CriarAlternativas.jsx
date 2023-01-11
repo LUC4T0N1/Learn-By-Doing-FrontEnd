@@ -1,11 +1,24 @@
 import React, {useState} from 'react'
+import './CriarAlternativas.css'
 
-export default function CriarAlternativas() {
+export default function CriarAlternativas({handleAdicionarAlternativa}) {
   const [add, setAdd] = useState(false);
+  const [alternativa, setAlternativa] = useState({enunciado: "", correta: false})
 
   const handleAdd = (e) => {
       setAdd(true);
   }  
+
+  const handleChange = (e) => {
+    const nome = e.target.name;
+    const value = e.target.value;
+    setAlternativa({...alternativa, [nome]: value})
+    console.log("Açlt: "+ alternativa.correta)
+  }
+  const addAlt = (e) => {
+    setAdd(false);
+    handleAdicionarAlternativa(alternativa)
+  }
 
   return (
     <div className='container-alternativas'>
@@ -15,12 +28,14 @@ export default function CriarAlternativas() {
         </>) 
         : 
         (<>
-         <input type="text" name="nome-prova" className='input-texto-simples' placeholder="Enunciado..."></input>
-        <select name="privacidade" id="privacidade" className='select-simples' onChange={handleAdd}>
-          <option value={true}>Verdadeira</option>
-          <option value={false}>Falsa</option>
-        </select>
-        <button className='botao-simples' onClick={handleAdd}>Adicionar</button>
+        <div className='mini-container'>
+          <input type="text" name="enunciado" className='input-texto-simples' placeholder="Enunciado..." onChange={handleChange}></input>
+          <select name="correta" id="correta" className='select-simples' onChange={handleChange}>
+            <option value={false}>Falsa</option>
+            <option value={true}>Verdadeira</option>
+          </select>
+        </div>
+        <button className='botao-simples' onClick={addAlt}>Adicionar</button>
         </>)}
        
     </div>

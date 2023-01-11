@@ -1,0 +1,14 @@
+.infos-prova{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 250px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.area-resposta{
+  display: flex;
+  flex-direction: column;
+}

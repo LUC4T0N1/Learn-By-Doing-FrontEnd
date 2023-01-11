@@ -1,0 +1,39 @@
+.area-correcao{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1%;
+  margin-top: 10px;
+}
+
+.nota-questao{
+  width: 23%;
+  min-height: 60px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-image: linear-gradient(to right, rgb(196, 112, 3, 0.6), rgb(202, 35, 85, 0.6), rgb(77, 8, 65, 0.6)) 1;
+  font-size: 16px;
+  border-radius: 4px;
+  background-color: rgb(189, 187, 187);
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+}
+
+.comentario-questao{
+  width: 75%;
+  resize: none;
+  min-height: 60px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-image: linear-gradient(to right, rgb(196, 112, 3, 0.6), rgb(202, 35, 85, 0.6), rgb(77, 8, 65, 0.6)) 1;
+  font-size: 16px;
+  padding-left: 10px;
+  border-radius: 4px;
+  background-color: rgb(189, 187, 187);
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+}
