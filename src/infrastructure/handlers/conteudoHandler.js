@@ -24,7 +24,6 @@ export function* handleCriarConteudo(action){
     }else{
       alert('erro')
     }
-    window.location.reload();
   }catch (error){
     console.log(error)
   }

@@ -7,9 +7,10 @@ import ResultadoCard from './ResultadoCard';
 import TrocarPagina from './TrocarPagina';
 import ResultadoCardConteudo from './ResultadoCardConteudo';
 import Tag from './Tag';
+import BuscarConteudos from '../prova/criar-prova/buscar-conteudos/BuscarConteudos';
 
 
-export default function FiltroConteudos({handleClose, titulo, opcoesFiltro, buscarFiltrado, quantidade, objetos, tipo, conteudosSelecionados, addConteudo}) {
+export default function FiltroQuestoes({handleClose, titulo, opcoesFiltro, buscarFiltrado, quantidade, objetos, tipo, conteudosSelecionados, addConteudo}) {
 
 
   const [busca, setBusca] = useState({nome:'', pagina:0 , ordenacao: 0, ordem: 0})
@@ -43,6 +44,18 @@ export default function FiltroConteudos({handleClose, titulo, opcoesFiltro, busc
   }
 
 
+  const adicionarConteudosQuestao = (id) => {
+/*     var selecionado = questao.conteudos.filter(cont => cont == id);
+    console.log("selecionado: " + JSON.stringify(selecionado))
+    console.log("tamanho porra: " + selecionado.length)
+    if(selecionado.length == 0){
+      dispatch(setQuestao({...questao, conteudos: questao.conteudos.concat(id)}));
+    }else{
+      dispatch(setQuestao({...questao, conteudos: questao.conteudos.filter(cont => cont != id)}));
+    } */
+  }
+
+
    useEffect(() => {
       if(busca.nome!=''){
         buscarFiltrado(busca.nome, busca)
@@ -57,6 +70,7 @@ export default function FiltroConteudos({handleClose, titulo, opcoesFiltro, busc
           <div className='filtro-buscar-container'>
         <div className='filtro-buscar-form'>
           <p className='busca-titulo'>Buscar {titulo}</p>
+          <BuscarConteudos adicionarConteudos={adicionarConteudosQuestao}/>
           <div className='busca-filtro'>
             <input type="text" name="nome" className='input-texto-simples' placeholder={"Buscar " + titulo} onChange={handleChange}></input>
             <div className='filtros-container'>

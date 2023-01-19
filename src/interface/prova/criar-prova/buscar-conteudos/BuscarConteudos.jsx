@@ -10,12 +10,26 @@ import axios from "axios";
 import { logout } from "../../../../application/autenticacaoSlice"
 import { useHistory } from 'react-router-dom';
 import AuthHeader from '../../../../AuthContext';
+import Tag from '../../../filtroBuscar/Tag';
 
-export default function BuscarConteudos({adicionarConteudosProva}) {
+
+export default function BuscarConteudos({adicionarConteudos}) {
 
   const dispatch = useDispatch();
 
  /*  const conteudo = useSelector((state) => state.conteudos.conteudo); */
+
+ const [conteudosSelecionados, setConteudosSelecionados] = useState([])
+
+ const addConteudo = (nome, id) => {
+  var selecionado = conteudosSelecionados.filter(cont => cont.nome == nome);
+  if(selecionado.length == 0){
+    setConteudosSelecionados(conteudosSelecionados.concat({nome: nome, id: id}));
+  }else{
+    setConteudosSelecionados(conteudosSelecionados.filter(cont => cont.nome != nome));
+  }
+  adicionarConteudos(id)
+}
 
   const [conteudo, setConteudo] =  useState({nome: ''});
 
@@ -39,13 +53,6 @@ export default function BuscarConteudos({adicionarConteudosProva}) {
   const [open, setOpen] = React.useState(false);
   const [openEscolher, setOpenEscolher] = React.useState(false);
 
-  const options = [
-    {value: "produto 01", label: "Produto 01"},
-    {value: "produto 02", label: "Produto 02"},
-    {value: "produto 03", label: "Produto 03"},
-    {value: "produto 04", label: "Produto 04"},
-    {value: "produto 05", label: "Produto 05"},
-  ]
 
   const handleClickOpen = (e) => {
     e.preventDefault();
@@ -85,6 +92,11 @@ export default function BuscarConteudos({adicionarConteudosProva}) {
   
   return (
     <div className='buscar-conteudos'> 
+      <div className='conteudos-selecionados'>
+      {conteudosSelecionados.map((c) =>
+        <Tag id={c.id} nome={c.nome} handleRemove={addConteudo}/>
+      )}
+    </div>
     {/* <BuscarSelect multiplo={true}/> */}
       
       {open ? 
@@ -101,7 +113,7 @@ export default function BuscarConteudos({adicionarConteudosProva}) {
         (<button className='botao-simples' onClick={handleClickOpen}>Criar Conteúdo</button>)}
 
 {openEscolher ? 
-        (<FiltroConteudos adicionarConteudosProva={adicionarConteudosProva} handleClose = {handleClose} titulo={"Escolher Conteudos"} opcoesFiltro={["Ordem Alfabética", "Número de Provas"]} buscarFiltrado={buscarFiltrado} objetos={conteudos} quantidade={quantidade} tipo={1}/>)
+        (<FiltroConteudos handleClose = {handleClose} titulo={"Escolher Conteudos"} opcoesFiltro={["Ordem Alfabética", "Número de Provas"]} buscarFiltrado={buscarFiltrado} objetos={conteudos} quantidade={quantidade} tipo={1} conteudosSelecionados={conteudosSelecionados} addConteudo={addConteudo}/>)
        : 
         (<button className='botao-simples' onClick={handleClickOpenEscolher}>Escolher Conteúdos</button>)}
     </div>

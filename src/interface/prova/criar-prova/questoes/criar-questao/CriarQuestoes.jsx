@@ -9,6 +9,7 @@ import { faX } from '@fortawesome/free-solid-svg-icons'
 import BuscarSelect from '../../../../filtroBuscar/BuscarSelect';
 import CriarAlternativa from '../../questao/alternativa/criarAlternativa';
 import CriarAlternativas from './criar-alternativas/CriarAlternativas';
+import BuscarConteudos from '../../buscar-conteudos/BuscarConteudos';
 
 export default function CriarQuestoes({handleClose}) {
   const [publica, setPublica] = useState(true);
@@ -67,6 +68,17 @@ export default function CriarQuestoes({handleClose}) {
     }
   } 
 
+  const adicionarConteudosQuestao = (id) => {
+    var selecionado = questao.conteudos.filter(cont => cont == id);
+    console.log("selecionado: " + JSON.stringify(selecionado))
+    console.log("tamanho porra: " + selecionado.length)
+    if(selecionado.length == 0){
+      dispatch(setQuestao({...questao, conteudos: questao.conteudos.concat(id)}));
+    }else{
+      dispatch(setQuestao({...questao, conteudos: questao.conteudos.filter(cont => cont != id)}));
+    }
+  }
+
 
   return (
     <div className='criar-questoes'>
@@ -79,7 +91,9 @@ export default function CriarQuestoes({handleClose}) {
         </select>
       </div>
       <div className='mini-container'>
-        <BuscarSelect/>
+        <BuscarConteudos adicionarConteudos={adicionarConteudosQuestao}/>
+      </div>
+      <div className='mini-container'>
         <input type="number" name="valor" className='input-numero-simples' placeholder="Valor..." onChange={handleChange}></input>
         <select name="multiplaEscolha" id="tipo-questao" className='select-simples' onChange={mudarTipoQuestao}>
             <option value={false}>Dissertativa</option>

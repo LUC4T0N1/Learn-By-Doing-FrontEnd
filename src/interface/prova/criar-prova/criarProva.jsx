@@ -46,7 +46,14 @@ function CriarProva () {
   }  
 
   const adicionarConteudosProva = (id) => {
-    dispatch(setProva({...prova, conteudos: prova.conteudos.concat(id)}));
+    var selecionado = prova.conteudos.filter(cont => cont == id);
+    console.log("selecionado: " + JSON.stringify(selecionado))
+    console.log("tamanho porra: " + selecionado.length)
+    if(selecionado.length == 0){
+      dispatch(setProva({...prova, conteudos: prova.conteudos.concat(id)}));
+    }else{
+      dispatch(setProva({...prova, conteudos: prova.conteudos.filter(cont => cont != id)}));
+    }
   }
   
 
@@ -69,7 +76,7 @@ function CriarProva () {
       <div className='formulario-criar-prova'>
       <p className='criar-prova-titulo'>Criar Prova</p>
         <InfosBasicas handleChange={handleChange}/>
-        <BuscarConteudos adicionarConteudosProva={adicionarConteudosProva}/>
+        <BuscarConteudos adicionarConteudos={adicionarConteudosProva}/>
         {prova.questoes.length > 0
          ? 
          (prova.questoes.map((questao, index) => 
