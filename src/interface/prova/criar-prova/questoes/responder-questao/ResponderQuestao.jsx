@@ -8,6 +8,7 @@ function ResponderQuestao({questao, atualizarRespostaQuestao}) {
         <div className='questao-dados'>
           {questao.multiplaEscolha ? <p>· Multipla Escolha</p> : <p>· Dissertativa</p>}
           {questao.publica ? <p>· Publica</p> : <p>· Privada</p>}
+          {<p>· Valor: {questao.valor}</p>}
         </div>
       </div>
       <p className='visualizar-enunciado'>{questao.enunciado}</p>

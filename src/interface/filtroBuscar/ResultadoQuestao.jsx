@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from "react-redux";
@@ -8,10 +8,22 @@ export default function ResultadoQuestao({questao, handleClose}) {
 
   const dispatch = useDispatch();
   const prova = useSelector((state) => state.provas.prova);
+  const [valorQuestao, setValorQuestao] = useState(0)
 
   const addQuestao = () => {
-    dispatch(setProva({...prova, questoes: prova.questoes.concat(questao)}))
-    handleClose()
+    if(valorQuestao>0){
+      let q = questao;
+      q.valor = valorQuestao;
+      dispatch(setProva({...prova, questoes: prova.questoes.concat(q)}))
+      handleClose()
+    }else{
+      alert("O valor da questao deve ser maior que 0")
+    }
+  }
+
+  const changeValor = (e) => {
+    const valor = e.target.value
+    setValorQuestao(valor);
   }
 
   return (
@@ -21,7 +33,7 @@ export default function ResultadoQuestao({questao, handleClose}) {
         <div className='questao-dados'>
         {questao.multiplaEscolha ? <p>· Multipla Escolha</p> : <p>· Dissertativa</p>}
           {questao.publica ? <p>· Publica</p> : <p>· Privada</p>}
-          {<p>· Valor: {questao.valor}</p>}
+          <input type="number" name="valor" onChange={changeValor} className='input-numero-simples' placeholder="Valor.."></input>
         </div>
       </div>
       <p className='visualizar-enunciado'>{questao.enunciado}</p>
