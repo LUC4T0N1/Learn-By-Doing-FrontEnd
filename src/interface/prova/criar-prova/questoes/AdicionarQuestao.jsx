@@ -42,22 +42,29 @@ export default function AdicionarQuestoes() {
     setCriar(false);
   };
 
-  const [conteudosSelecionados, setConteudosSelecionados] = useState([])
   const [questoes, setQuestoes] = useState([])
   const [quantidade, setQuantidade] = useState([])
 
-
-
   const buscarFiltrado = async (nome, busca) => {
     try{
-      const response = await axios.get(`http://localhost:8080/api/conteudo/filtro?nome=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`, { headers: AuthHeader() })
-      setQuestoes(response.data.conteudos);
-      setQuantidade(response.data.quantidade); 
+      const response = await axios.get(`http://localhost:8080/api/questao/filtrar?enunciado=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}&multiplaEscolha=${busca.tipo}&publica=${busca.publica}`+ stringQueryConteudos(busca.conteudos), { headers: AuthHeader() })
+      console.log("res: " + JSON.stringify(response))
+      setQuestoes(response.data);
+      setQuantidade(response.data.length); 
+      console.log("quant: " + response.data.length)
     }catch (error){
       dispatch(logout({ ...{}}))
       history.push(`/login`)
     }
  };
+
+ const stringQueryConteudos = (conteudos) => {
+  var queryParam = ""
+  if(conteudos.length > 0){
+    conteudos.map((cont) => queryParam = queryParam + "&conteudos=" + cont)
+  }
+  return queryParam;
+ }
 
   return (
     <div className='adicionar-questao'>
@@ -81,7 +88,7 @@ export default function AdicionarQuestoes() {
        (<></>)
        }
           {escolher ?
-       (<FiltroQuestoes handleClose={handleClose} buscarFiltrado={buscarFiltrado} objetos={questoes} opcoesFiltro={["ordem alfabética", "popularidade", "data"]} conteudosSelecionados={conteudosSelecionados}/>) 
+       (<FiltroQuestoes quantidade={quantidade} handleClose={handleClose} buscarFiltrado={buscarFiltrado} objetos={questoes} opcoesFiltro={["ordem alfabética", "data"]}/>) 
        :
        (<></>)
        }

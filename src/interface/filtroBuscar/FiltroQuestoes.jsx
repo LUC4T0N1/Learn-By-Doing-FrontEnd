@@ -8,13 +8,27 @@ import TrocarPagina from './TrocarPagina';
 import ResultadoCardConteudo from './ResultadoCardConteudo';
 import Tag from './Tag';
 import BuscarConteudos from '../prova/criar-prova/buscar-conteudos/BuscarConteudos';
+import VisualizarQuestoesCriadas from '../prova/criar-prova/questoes/visualizar-questoes/VisualizarQuestoesCriadas';
+import "./FiltrarQuestao.css"
+import ResultadoQuestao from './ResultadoQuestao';
+
+export default function FiltroQuestoes({handleClose, opcoesFiltro, buscarFiltrado, quantidade, objetos, tipo, conteudosSelecionados}) {
 
 
-export default function FiltroQuestoes({handleClose, titulo, opcoesFiltro, buscarFiltrado, quantidade, objetos, tipo, conteudosSelecionados, addConteudo}) {
+  const [busca, setBusca] = useState({nome:'', pagina:0 , ordenacao: 0, ordem: 0, tipo: 0, publica: true, conteudos: [],
+    multiplaEscolha: true, dissertativa: true})
 
-
-  const [busca, setBusca] = useState({nome:'', pagina:0 , ordenacao: 0, ordem: 0})
-  const [clicado, setClicado] = useState(false)
+  const adicionarConteudosFiltro = (id) => {
+    console.log("id: " + id)
+    var selecionado = busca.conteudos.filter(cont => cont == id);
+    console.log("selecionado: " + JSON.stringify(selecionado))
+    console.log("tamanho porra: " + selecionado.length)
+    if(selecionado.length == 0){
+      setBusca({...busca, conteudos: busca.conteudos.concat(id)});
+    }else{
+      setBusca({...busca, conteudos: busca.conteudos.filter(cont => cont != id)});
+    }
+  }
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -44,18 +58,6 @@ export default function FiltroQuestoes({handleClose, titulo, opcoesFiltro, busca
   }
 
 
-  const adicionarConteudosQuestao = (id) => {
-/*     var selecionado = questao.conteudos.filter(cont => cont == id);
-    console.log("selecionado: " + JSON.stringify(selecionado))
-    console.log("tamanho porra: " + selecionado.length)
-    if(selecionado.length == 0){
-      dispatch(setQuestao({...questao, conteudos: questao.conteudos.concat(id)}));
-    }else{
-      dispatch(setQuestao({...questao, conteudos: questao.conteudos.filter(cont => cont != id)}));
-    } */
-  }
-
-
    useEffect(() => {
       if(busca.nome!=''){
         buscarFiltrado(busca.nome, busca)
@@ -64,17 +66,86 @@ export default function FiltroQuestoes({handleClose, titulo, opcoesFiltro, busca
       }
   }, [busca]) 
 
+  const mudarPublica = (e) => {
+      const value = e.target.value;
+      setBusca({...busca, publica:value})
+  }
+
+  const mudarTipo = (e) => {
+    const nome = e.target.name;
+    if(nome=="opcao-filtro-ME"){
+      if(busca.multiplaEscolha == true){
+        console.log("11111111111111")
+          setBusca({...busca, tipo:2, multiplaEscolha:false})
+      }else{
+        console.log("222222222")
+          setBusca({...busca, tipo:0, multiplaEscolha:true})
+      }
+    }else{
+      if(busca.dissertativa == true){
+        console.log("44444444444444")
+        setBusca({...busca, tipo:1, dissertativa:false})
+      }else{
+        console.log("5555555555555")
+          setBusca({...busca, tipo:0, dissertativa:true})
+      } 
+    }
+}
+
   return (
-    <div className='escolher-conteudo'>
+    <div className='escolher-questao'>
           <button className='botao-fechar' onClick={handleClose}><i><FontAwesomeIcon icon={faX} rel="noreferrer" className='icon-fechar'></FontAwesomeIcon></i></button>
           <div className='filtro-buscar-container'>
         <div className='filtro-buscar-form'>
-          <p className='busca-titulo'>Buscar {titulo}</p>
-          <BuscarConteudos adicionarConteudos={adicionarConteudosQuestao}/>
-          <div className='busca-filtro'>
-            <input type="text" name="nome" className='input-texto-simples' placeholder={"Buscar " + titulo} onChange={handleChange}></input>
+          <p className='busca-titulo'>Buscar Questão</p>
+          <div className='busca-filtro-questao'>
+            <input type="text" name="nome" className='input-texto-simples' placeholder={"Buscar Questão"} onChange={handleChange}></input>
             <div className='filtros-container'>
-                <div className='opcoes-filtro'>
+
+                <div className='opcoes-filtro-questao'>
+                  <div className='opcao'>
+                    <input className='filtro-opcao' type="radio"  name="opcao-filtro-q" value={true} 
+                      defaultChecked onChange={mudarPublica}/>
+                    <label>Questões Públicas</label>
+                  </div>
+                  <div className='opcao'>
+                    <input className='filtro-opcao' type="radio"  name="opcao-filtro-q" value={false} 
+                      onChange={mudarPublica}/>
+                    <label>Suas Questões</label>
+                  </div>
+                  </div>
+                  <div className='opcoes-filtro-questao'>
+                    <div className='opcao'>
+                      {busca.dissertativa==true? 
+                      (<>
+                        <input defaultChecked className='filtro-opcao' type="checkbox"  name="opcao-filtro-ME"
+                        onChange={mudarTipo}/>
+                      <label>Multipla Escolha</label>
+                      </>)
+                      :
+                      (<>
+                        <input disabled="disabled" checked="checked" className='filtro-opcao' type="checkbox"  name="opcao-filtro-ME"/>
+                      <label>Multipla Escolha</label>
+                      </>)}
+                    </div>
+                    {busca.multiplaEscolha==true?
+                    (<>
+                      <div className='opcao'>
+                      <input defaultChecked className='filtro-opcao' type="checkbox"  name="opcao-filtro-D"  
+                        onChange={mudarTipo}/>
+                      <label>Dissertativa</label>
+                    </div>
+                    </>)
+                    :
+                    (<>
+                      <div className='opcao'>
+                      <input disabled="disabled" checked="checked" className='filtro-opcao' type="checkbox"  name="opcao-filtro-D"/>
+                      <label>Dissertativa</label>
+                    </div>
+                    </>)}
+             
+                  </div>
+                <div className='opcoes-filtro-questao'>
                   {opcoesFiltro.map((opcao, index) =>
                   (<Filtro key={index} index={index} nomeFiltro={opcao} mudarOrdenacao={mudarOrdenacao}/>
                   ))}
@@ -82,17 +153,15 @@ export default function FiltroQuestoes({handleClose, titulo, opcoesFiltro, busca
                   <AscDesc ordem={busca.ordem} ascendente={ascendente} descendente={descendente}/>
             </div>
           </div>
-          <div className={tipo==1?'resultados' : 'resultados-provas'}>
-          <div className='conteudos-selecionados'>
+          <div className={'resultados-questoes'}>
+          <BuscarConteudos adicionarConteudos={adicionarConteudosFiltro}/>
+{/*           <div className='conteudos-selecionados'>
               {conteudosSelecionados.map((c) =>
                 <Tag id={c.id} nome={c.nome} handleRemove={addConteudo}/>
               )}
-          </div>
+          </div> */}
           {objetos.map((objeto, index) =>
-                  (tipo==1 ? 
-                    (<ResultadoCardConteudo addConteudo={addConteudo} key={index} tipo={tipo} nome={objeto.nome} idObjeto={objeto.idConteudo}   dados={["Provas: " + objeto.numeroProvas]}/>) 
-                    :
-                  (<ResultadoCardConteudo addConteudo={addConteudo} key={index} tipo={tipo} nome={objeto.nome} idObjeto={objeto.id} dados={["Questoes: " + objeto.quantidadeQuestoes, "Realizações: " + objeto.popularidade]}/>) )
+                (<ResultadoQuestao key={index} questao={{numeroQuestao: index+1, enunciado: objeto.enunciado, publica: objeto.publica, multiplaEscolha: objeto.multiplaEscolha, id: objeto.id, valor: objeto.valor, resposta: objeto.resposta, alternativas: objeto.alternativas}} handleClose={handleClose} />) 
                   )}
           </div>
         {busca.nome==""? 

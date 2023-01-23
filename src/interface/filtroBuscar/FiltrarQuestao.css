@@ -1,3 +1,38 @@
+.escolher-questao{
+  background-color: rgb(44, 44, 44);
+  position: fixed;
+  padding: 100px;
+  bottom: 90px;
+  border-radius: 20px;
+  color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 69%;
+  height: 65%;
+  overflow: auto;
+}
+
+.escolher-questao::-webkit-scrollbar {
+  background-color: rgb(112, 111, 111);
+  width: 10px;
+}
+
+.escolher-questao::-webkit-scrollbar-track {
+  background-color: rgb(112, 111, 111);
+}
+
+.escolher-questao::-webkit-scrollbar-thumb {
+  background:  linear-gradient(
+    165.57deg,
+    rgb(196, 112, 3, 0.7),
+    rgb(202, 35, 85, 0.7),
+    rgb(77, 8, 65, 0.7)
+    );
+  border-radius: 16px;
+}
+
 .filtro-buscar-container{
   display: flex;
   align-items: center;
@@ -5,20 +40,14 @@
   height: 100vh;
 }
 
-.busca-filtro{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: aliceblue;
-
-}
-
-.opcoes-filtro{
+.opcoes-filtro-questao{
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 1px;
+  font-size: 12px;
+  min-width: 130px;
 }
 
 .opcao{
@@ -50,15 +79,18 @@
   margin-top: 58px;
 }
 
-.busca-filtro{
+.busca-filtro-questao{
   width: 60%;
   gap: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   position: absolute;
   top: 220px;
-  margin-left: 167px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
 }
-.busca-filtro .input-texto-simples{
+.busca-filtro-questao .input-texto-simples{
   width: 60%;
 }
 
@@ -164,7 +196,6 @@
   margin-left: 111px;
   position: absolute;
   top: 300px;
-  overflow: hidden;
 }
 
 .resultados-provas{
