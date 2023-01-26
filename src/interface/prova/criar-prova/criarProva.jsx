@@ -1,96 +1,87 @@
-import React from 'react'
-import { useSelector, useDispatch } from "react-redux";
-import './criarProva.css'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
-import { setProva, cadastrarNovaProva } from '../../../application/provaSlice';
-import EscolherConteudosProva from './escolherConteudos';
-import QuestaoCard from './questao/questaoCard';
-import AdicionarQuestao from './questao/adicionarQuestao';
-import DateTimePicker from '@material-ui/lab/DateTimePicker';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ResponderQuestaoMultiplaEscolha from '../provaCompleta/responderQuestaoMultiplaEscolha';
-import ResponderQuestaoDissertativa from '../provaCompleta/responderQuestaoDissertativa';
-import VisualizarQuestaoMultiplaEscolha from '../corrigir-prova/corrigir-questao/visualizarQuestaoMultiplaEscolha';
-import VisualizarQuestaoDissertativaCorrigida from '../../perfil/visualizarQuestaoDissertativaCorrigida';
-import PreviewQuestaoMultiplaEscolha from './questao/previewQuestaoMultiplaEscolha';
-import PreviewQuestaoDissertativa from './questao/previewQuestaoDissertativa';
-import InfosBasicas from './infos-basicas/InfosBasicas';
-import BuscarConteudos from './buscar-conteudos/BuscarConteudos';
-import VisualizacaoQuestao from './questoes/VisualizacaoQuestao';
-import AdicionarQuestoes from './questoes/AdicionarQuestao';
-import VisualizarQuestoes from './questoes/visualizar-questoes/VisualizarQuestoes';
-import VisualizarQuestoesCriadas from './questoes/visualizar-questoes/VisualizarQuestoesCriadas';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cadastrarNovaProva, setProva } from "../../../application/provaSlice";
+import BuscarConteudos from "./buscar-conteudos/BuscarConteudos";
+import "./criarProva.css";
+import InfosBasicas from "./infos-basicas/InfosBasicas";
+import AdicionarQuestoes from "./questoes/AdicionarQuestao";
+import VisualizarQuestoesCriadas from "./questoes/visualizar-questoes/VisualizarQuestoesCriadas";
 
-
-
-
-function CriarProva () {
-
+function CriarProva() {
   const [inicio, setInicio] = React.useState(new Date());
   const [fim, setFim] = React.useState(new Date());
   const dispatch = useDispatch();
   const prova = useSelector((state) => state.provas.prova);
 
   const handleChange = (e) => {
-    console.log("oi")
+    console.log("oi");
     const nome = e.target.name;
-    console.log(nome)
+    console.log(nome);
     const value = e.target.value;
-    dispatch(setProva({...prova, [nome]: value}));
-  }  
+    dispatch(setProva({ ...prova, [nome]: value }));
+  };
 
   const adicionarConteudosProva = (id) => {
-    var selecionado = prova.conteudos.filter(cont => cont == id);
-    console.log("selecionado: " + JSON.stringify(selecionado))
-    console.log("tamanho porra: " + selecionado.length)
-    if(selecionado.length == 0){
-      dispatch(setProva({...prova, conteudos: prova.conteudos.concat(id)}));
-    }else{
-      dispatch(setProva({...prova, conteudos: prova.conteudos.filter(cont => cont != id)}));
+    var selecionado = prova.conteudos.filter((cont) => cont == id);
+    console.log("selecionado: " + JSON.stringify(selecionado));
+    console.log("tamanho porra: " + selecionado.length);
+    if (selecionado.length == 0) {
+      dispatch(setProva({ ...prova, conteudos: prova.conteudos.concat(id) }));
+    } else {
+      dispatch(
+        setProva({
+          ...prova,
+          conteudos: prova.conteudos.filter((cont) => cont != id),
+        })
+      );
     }
-  }
-  
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("cadastrando prova?")
-    if(prova.nome){
-      const idQuestoes = prova.questoes.map(quest => quest.id); 
-      dispatch(cadastrarNovaProva({ ...prova, idsQuestoes : idQuestoes, quantidadeQuestoes: idQuestoes.length})) 
+    console.log("cadastrando prova?");
+    if (prova.nome) {
+      const idQuestoes = prova.questoes.map((quest) => quest.id);
+      dispatch(
+        cadastrarNovaProva({
+          ...prova,
+          idsQuestoes: idQuestoes,
+          quantidadeQuestoes: idQuestoes.length,
+        })
+      );
       /* dispatch(setProva({ prova :  {nome: "", publica: true, conteudos: [],
       nomeConteudos: [], questoes:[], idsQuestoes:[], 
       quantidadeQuestoes: 0, tempo: 0} }));  */
-  }else{
-    alert('preencha todos os campos');
-  }
-  }
+    } else {
+      alert("preencha todos os campos");
+    }
+  };
 
   return (
-    <div className='criar-prova'>
-      <div className='formulario-criar-prova'>
-      <p className='criar-prova-titulo'>Criar Prova</p>
-        <InfosBasicas handleChange={handleChange}/>
-        <BuscarConteudos adicionarConteudos={adicionarConteudosProva}/>
-        {prova.questoes.length > 0
-         ? 
-         (prova.questoes.map((questao, index) => 
-         <VisualizarQuestoesCriadas key={index} questao={{numeroQuestao: index+1, enunciado: questao.enunciado, publica: questao.publica, multiplaEscolha: questao.multiplaEscolha, id: questao.id, valor: questao.valor, resposta: questao.resposta, alternativas: questao.alternativas}} resposta={ questao.respostaAluno} />
-           )) 
-           :
-           (<h1>Nenhuma Questão Adicionada</h1>)
-        }
-        <AdicionarQuestoes/>
-        <div className='footer-criar-prova'>
-         <button className='botao-simples' onClick={handleSubmit}>Criar Prova</button>
+    <div className="criar-prova">
+      <div className="formulario-criar-prova">
+        <p className="criar-prova-titulo">Criar Prova</p>
+        <InfosBasicas handleChange={handleChange} />
+        <BuscarConteudos adicionarConteudos={adicionarConteudosProva} />
+        {prova.questoes.length > 0 ? (
+          prova.questoes.map((questao, index) => (
+            <VisualizarQuestoesCriadas
+              key={index}
+              questao={questao}
+              resposta={questao.respostaAluno}
+            />
+          ))
+        ) : (
+          <h1>Nenhuma Questão Adicionada</h1>
+        )}
+        <AdicionarQuestoes />
+        <div className="footer-criar-prova">
+          <button className="botao-simples" onClick={handleSubmit}>
+            Criar Prova
+          </button>
         </div>
       </div>
-                 {/* <Grid
+      {/* <Grid
               container
               spacing={0}
               direction="column"
@@ -204,8 +195,8 @@ function CriarProva () {
       </Grid>
         </Card>
         </Grid>    */}
-        </div>
+    </div>
   );
 }
 
-export default CriarProva
+export default CriarProva;

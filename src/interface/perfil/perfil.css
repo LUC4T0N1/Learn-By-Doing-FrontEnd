@@ -1,0 +1,41 @@
+.perfil {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 200px;
+}
+
+.perfil-campo {
+  display: flex;
+  gap: 8px;
+  font-size: 25px;
+}
+
+.perfil-campo-nome {
+  color: rgba(204, 180, 148, 0.767);
+}
+
+.perfil-campo-valor {
+  background: linear-gradient(
+    90deg,
+    rgb(179, 105, 8),
+    rgb(202, 35, 85),
+    rgb(61, 11, 54)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.perfil-direita {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.perfil-esquerda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

@@ -1,4 +1,4 @@
-.visualizar-questao{
+.visualizar-questao {
   margin-top: 14px;
   width: 90%;
   height: 100%;
@@ -10,7 +10,7 @@
   box-shadow: rgba(121, 121, 121, 0.15) 0px 5px 15px;
 }
 
-.visualizar-enunciado{
+.visualizar-enunciado {
   margin-right: 15px;
   margin-left: 15px;
   margin-bottom: 30px;
@@ -18,72 +18,144 @@
   color: rgb(255, 255, 255);
 }
 
-.questao-header{
+.questao-header {
   margin-top: -17px;
   color: rgb(250, 224, 190);
 }
 
-.questao-numero{
+.questao-numero {
   font-size: 19px;
 }
 
-.resposta-label{
+.resposta-label {
   font-size: 19px;
   color: rgb(250, 224, 190);
   margin-left: 8px;
 }
 
-.campo-resposta{
+.campo-resposta {
   display: flex;
   align-items: left;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.questao-dados{
+.questao-dados {
   display: flex;
-  gap: 4px;
+  gap: 6px;
+  position: absolute;
+  right: 28px;
+  /*   width: 30%; */
 }
 
-.questao-header{
+.questao-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 15px;
 }
 
-.area-resposta{
-  background-color:  rgba(77, 76, 76, 0.4);
+.area-resposta {
+  background-color: rgba(77, 76, 76, 0.4);
   border-radius: 20px;
   padding-left: 15px;
   padding-right: 15px;
 }
 
-.alt-icon-verdadeiro{
+.alt-icon-verdadeiro {
   font-size: 15px;
   color: rgb(16, 138, 97);
-
 }
 
-.alt-icon-falso{
+.alt-icon-falso {
   font-size: 15px;
   color: rgb(126, 45, 64);
-
 }
 
-.visualizar-alternativa{
+.visualizar-alternativa {
   display: flex;
   align-items: center;
   gap: 3px;
 }
 
-.visualizar-alternativa-respondida{
+.visualizar-alternativa-respondida {
   display: flex;
   align-items: center;
   gap: 3px;
-  background: linear-gradient(165.57deg, rgb(230, 144, 33, 0.2),
-  rgb(202, 35, 85, 0.2),
-  rgb(146, 8, 123, 0.2));
+  background: linear-gradient(
+    165.57deg,
+    rgb(230, 144, 33, 0.2),
+    rgb(202, 35, 85, 0.2),
+    rgb(146, 8, 123, 0.2)
+  );
   border-radius: 10px;
   padding: 3px;
+}
+
+.input-valor {
+  width: 18%;
+  height: 16px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: solid;
+  border-image: linear-gradient(
+      to right,
+      rgb(196, 112, 3, 0.8),
+      rgb(202, 35, 85, 0.8),
+      rgb(77, 8, 65, 0.8)
+    )
+    1;
+  font-size: 16px;
+  border-radius: 3px;
+  background-color: rgb(185, 184, 184);
+  color: aliceblue;
+  color: rgb(0, 0, 0);
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.botao-remover-questao {
+  border-radius: 5px;
+  height: 35px;
+  width: 17%;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(75, 50, 60);
+  color: rgb(243, 243, 243);
+  position: absolute;
+  right: 65px;
+  top: 10px;
+}
+
+.botao-remover-questao:hover {
+  cursor: pointer;
+  background-color: rgb(105, 28, 58);
+}
+
+.botoes-questao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao-editar-questao {
+  border-radius: 5px;
+  height: 35px;
+  width: 17%;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(94, 72, 54);
+  color: rgb(243, 243, 243);
+  position: absolute;
+  right: 65px;
+  top: 50px;
+}
+
+.botao-editar-questao:hover {
+  cursor: pointer;
+  background-color: rgb(175, 111, 28);
 }

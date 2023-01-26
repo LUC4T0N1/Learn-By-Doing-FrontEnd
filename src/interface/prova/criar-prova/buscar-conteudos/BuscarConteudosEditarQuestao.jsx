@@ -1,5 +1,3 @@
-import { faX } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -10,12 +8,18 @@ import FiltroConteudos from "../../../filtroBuscar/FiltroConteudos";
 import Tag from "../../../filtroBuscar/Tag";
 import "./BuscarConteudos.css";
 
-export default function BuscarConteudos({ adicionarConteudos }) {
+export default function BuscarConteudosEditarQuestao({
+  adicionarConteudos,
+  conteudosPreSelecionados,
+}) {
   const dispatch = useDispatch();
 
   /*  const conteudo = useSelector((state) => state.conteudos.conteudo); */
 
-  const [conteudosSelecionados, setConteudosSelecionados] = useState([]);
+  const [conteudosSelecionados, setConteudosSelecionados] = useState(
+    conteudosPreSelecionados
+  );
+  console.log("ass: " + JSON.stringify(conteudosSelecionados));
 
   const addConteudo = (nome, id) => {
     var selecionado = conteudosSelecionados.filter((cont) => cont.nome == nome);
@@ -57,12 +61,6 @@ export default function BuscarConteudos({ adicionarConteudos }) {
   const [open, setOpen] = React.useState(false);
   const [openEscolher, setOpenEscolher] = React.useState(false);
 
-  const handleClickOpen = (e) => {
-    e.preventDefault();
-    setOpen(true);
-    setOpenEscolher(false);
-  };
-
   const handleClickOpenEscolher = (e) => {
     e.preventDefault();
     setOpenEscolher(true);
@@ -102,39 +100,6 @@ export default function BuscarConteudos({ adicionarConteudos }) {
         ))}
       </div>
       {/* <BuscarSelect multiplo={true}/> */}
-
-      {open ? (
-        <>
-          <div className="criar-conteudo">
-            <button className="botao-fechar" onClick={handleClose}>
-              <i>
-                <FontAwesomeIcon
-                  icon={faX}
-                  rel="noreferrer"
-                  className="icon-fechar"
-                ></FontAwesomeIcon>
-              </i>
-            </button>
-            <div className="conteudo">
-              <input
-                type="text"
-                name="nome"
-                className="input-texto-simples"
-                placeholder="Conteúdo..."
-                onChange={handleChangeCriarConteudo}
-              ></input>
-              <button className="botao-simples" onClick={handleSubmit}>
-                Criar
-              </button>
-            </div>
-          </div>
-        </>
-      ) : (
-        <button className="botao-simples" onClick={handleClickOpen}>
-          Criar Conteúdo
-        </button>
-      )}
-
       {openEscolher ? (
         <FiltroConteudos
           handleClose={handleClose}

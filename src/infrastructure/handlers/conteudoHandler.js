@@ -24,6 +24,7 @@ export function* handleCriarConteudo(action){
     }else{
       alert('erro')
     }
+    return response;
   }catch (error){
     console.log(error)
   }

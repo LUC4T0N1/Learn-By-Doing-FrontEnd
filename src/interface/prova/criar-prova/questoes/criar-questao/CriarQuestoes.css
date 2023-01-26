@@ -1,4 +1,4 @@
-.criar-questoes{
+.criar-questoes {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -11,22 +11,21 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  min-width: 50%;
 }
 
-.criar-questoes .botao-fechar{
+.criar-questoes .botao-fechar {
   background-color: rgb(75, 74, 74);
-  border-style: none; 
+  border-style: none;
   position: relative;
   bottom: 60px;
   left: 415px;
 }
 
-.criar-questoes .input-texto-simples{
+.criar-questoes .input-texto-simples {
   min-width: 80%;
-  
 }
 
 /* .criar-questoes .mini-container .select-simples{
   width: 17%;
 } */
-

@@ -1,44 +1,84 @@
-import React from 'react'
-import './perfil.css'
-import { Link } from 'react-router-dom'
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import { completarPerfil, setPerfil } from '../../application/perfilSlice';
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  completarPerfil,
+  getPerfil,
+  setPerfil,
+} from "../../application/perfilSlice";
+import "./perfil.css";
 
 function Perfil() {
   const dispatch = useDispatch();
 
   const perfil = useSelector((state) => state.perfil);
 
+  useEffect(() => {
+    dispatch(getPerfil());
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(perfil.nome != null){
-      dispatch(completarPerfil({ body : perfil })); 
-  }else{
-    alert('preencha todos os campos');
-  }
-  if(!perfil.completo){
-    window.location.reload();
-  }
-  }
+    if (perfil.nome != null) {
+      dispatch(completarPerfil({ body: perfil }));
+    } else {
+      alert("preencha todos os campos");
+    }
+    if (!perfil.completo) {
+      window.location.reload();
+    }
+  };
 
   const handleChange = (e) => {
     const nome = e.target.name;
-    console.log(nome)
+    console.log(nome);
     const value = e.target.value;
-    dispatch(setPerfil({...perfil, nome: value}));
-  }  
+    dispatch(setPerfil({ ...perfil, nome: value }));
+  };
 
   return (
     <div className="perfil">
-       <Grid
+      <div className="perfil-esquerda">
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Nome: </p>
+          <p className="perfil-campo-valor">{perfil.nome}</p>
+        </div>
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Email: </p>
+          <p className="perfil-campo-valor">{perfil.email}</p>
+        </div>
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Data de Criação do Perfil: </p>
+          <p className="perfil-campo-valor">{perfil.dataCriacao}</p>
+        </div>
+      </div>
+      <div className="perfil-direita">
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Provas Criadas: </p>
+          <p className="perfil-campo-valor">{perfil.provasCriadas}</p>
+        </div>
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Provas Resolvidas: </p>
+          <p className="perfil-campo-valor">{perfil.provasResolvidas}</p>
+        </div>
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Resolucoes das suas provas: </p>
+          <p className="perfil-campo-valor">{perfil.provasCorrigidas}</p>
+        </div>
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Questões Criadas: </p>
+          <p className="perfil-campo-valor">{perfil.questoesCriadas}</p>
+        </div>
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Questões Resolvidas: </p>
+          <p className="perfil-campo-valor">{perfil.questoesResolvidas}</p>
+        </div>
+        <div className="perfil-campo">
+          <p className="perfil-campo-nome">Conteudos Criados: </p>
+          <p className="perfil-campo-valor">{perfil.conteudosCriados}</p>
+        </div>
+      </div>
+
+      {/*        <Grid
      container
      spacing={0}
      direction="column"
@@ -107,9 +147,9 @@ marginTop: '80px' }}>
               onClick={handleSubmit} >Alterar Nome</Button>
 </Grid>
 </Card>
-</Grid>
-  </div>
-  )
+</Grid> */}
+    </div>
+  );
 }
 
-export default Perfil
+export default Perfil;
