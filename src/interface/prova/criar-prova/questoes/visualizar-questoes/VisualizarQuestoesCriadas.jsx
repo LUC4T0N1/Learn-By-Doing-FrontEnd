@@ -7,9 +7,13 @@ import { setQuestao } from "../../../../../application/questaoSlice";
 import EditarQuestoes from "../editar-questao/EditarQuestoes";
 import "./VisualizarQuestoes.css";
 
-export default function VisualizarQuestoesCriadas({ questao, nomeConteudos }) {
+export default function VisualizarQuestoesCriadas({
+  questao,
+  nomeConteudos,
+  podeRemover,
+  numeroQuestao,
+}) {
   const dispatch = useDispatch();
-  console.log("aaaaa: " + JSON.stringify(questao) + " bbbbb: " + nomeConteudos);
 
   const prova = useSelector((state) => state.provas.prova);
 
@@ -53,7 +57,7 @@ export default function VisualizarQuestoesCriadas({ questao, nomeConteudos }) {
       ) : (
         <div className="visualizar-questao">
           <div className="questao-header">
-            <p className="questao-numero">Questão {questao.numeroQuestao}</p>
+            <p className="questao-numero">Questão {numeroQuestao}</p>
             <div className="questao-dados">
               {questao.multiplaEscolha ? (
                 <p>· Multipla Escolha</p>
@@ -66,6 +70,7 @@ export default function VisualizarQuestoesCriadas({ questao, nomeConteudos }) {
                   · Valor:{" "}
                   <input
                     type="number"
+                    min="0.1"
                     name="valor"
                     onChange={changeValor}
                     className="input-valor"
@@ -74,12 +79,17 @@ export default function VisualizarQuestoesCriadas({ questao, nomeConteudos }) {
                 </p>
               }
               <div className="botoes-questao">
-                <button
-                  className="botao-remover-questao"
-                  onClick={removerQuestao}
-                >
-                  Remover
-                </button>
+                {podeRemover ? (
+                  <button
+                    className="botao-remover-questao"
+                    onClick={removerQuestao}
+                  >
+                    Remover
+                  </button>
+                ) : (
+                  <></>
+                )}
+
                 {questao.editavel == true || questao.editavel == "true" ? (
                   <button
                     className="botao-editar-questao"

@@ -36,14 +36,12 @@ export default function CriarQuestoes({ handleClose }) {
   const prova = useSelector((state) => state.provas.prova);
 
   const handleAdicionarAlternativa = (alt) => {
-    console.log("aquii");
     dispatch(
       setQuestao({ ...questao, alternativas: questao.alternativas.concat(alt) })
     );
   };
 
   useEffect(() => {
-    console.log("inicioy:" + prova);
     dispatch(
       setQuestao({
         ...questao,
@@ -52,7 +50,6 @@ export default function CriarQuestoes({ handleClose }) {
         resposta: "",
         valor: 0,
         alternativas: [],
-        // /* conteudos: prova.conteudos, */
       })
     );
   }, [dispatch]);
@@ -60,16 +57,56 @@ export default function CriarQuestoes({ handleClose }) {
   const questao = useSelector((state) => state.questoes.questao);
 
   const handleChange = (e) => {
-    console.log("enunciado questao:" + e.value + " nome: " + e.name);
     const nome = e.target.name;
-    console.log(nome);
     const value = e.target.value;
     dispatch(setQuestao({ ...questao, [nome]: value }));
   };
 
+  const validar = () => {
+    if (
+      questao.enunciado &&
+      questao.valor > 0 &&
+      questao.conteudos.length > 0
+    ) {
+      if (questao.multiplaEscolha) {
+        if (questao.alternativas.length <= 1) {
+          alert("Crie pelo menos duas alternativas");
+          return false;
+        } else {
+          let certos = 0;
+          for (var i = 0; i < questao.alternativas.length; i++) {
+            if (
+              questao.alternativas[i].correta == true ||
+              questao.alternativas[i].correta == "true"
+            ) {
+              certos = certos + 1;
+            }
+          }
+          if (certos != 1) {
+            alert("é permitido apenas uma alternativa correta");
+            return false;
+          } else {
+            return true;
+          }
+        }
+      } else {
+        if (questao.resposta == "" || questao.resposta == null) {
+          alert("Escreva a resposta");
+          return false;
+        } else {
+          return true;
+        }
+      }
+    } else {
+      alert("preencha todos os campos");
+      return false;
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (questao.enunciado) {
+    let questaoValida = validar();
+    if (questaoValida == true) {
       let q = Object.assign({}, questao, { selected: false });
       q.editavel = true;
       dispatch(cadastrarNovaQuestao({ questao: q, prova: prova }));
@@ -81,18 +118,26 @@ export default function CriarQuestoes({ handleClose }) {
           resposta: "",
           valor: 0,
           alternativas: [],
+          conteudos: [],
+          nomeConteudos: [],
         })
       );
       handleClose();
-    } else {
-      alert("preencha todos os campos");
     }
+  };
+
+  const removerAlternativa = (alt) => {
+    let alts = questao.alternativas.map((item) =>
+      Object.assign({}, item, { selected: false })
+    );
+    alts = alts.filter(function (a) {
+      return a.enunciado != alt.enunciado;
+    });
+    dispatch(setQuestao({ ...questao, alternativas: alts }));
   };
 
   const adicionarConteudosQuestao = (id, nome) => {
     var selecionado = questao.conteudos.filter((cont) => cont == id);
-    console.log("selecionado: " + JSON.stringify(selecionado));
-    console.log("tamanho porra: " + selecionado.length);
     if (selecionado.length == 0) {
       dispatch(
         setQuestao({
@@ -142,11 +187,15 @@ export default function CriarQuestoes({ handleClose }) {
         </select>
       </div>
       <div className="mini-container">
-        <BuscarConteudos adicionarConteudos={adicionarConteudosQuestao} />
+        <BuscarConteudos
+          tamanhoPagina={5}
+          adicionarConteudos={adicionarConteudosQuestao}
+        />
       </div>
       <div className="mini-container">
         <input
           type="number"
+          min="0.1"
           name="valor"
           className="input-numero-simples"
           placeholder="Valor..."
@@ -178,11 +227,23 @@ export default function CriarQuestoes({ handleClose }) {
             {questao.alternativas.length !== 0 ? (
               <div style={{ display: "block", flexWrap: "wrap" }}>
                 {questao.alternativas.map((alt) => (
-                  <h3>
-                    {" "}
-                    {questao.alternativas.findIndex((a) => a === alt) + 1}){" "}
-                    {alt.enunciado} {alt.correta ? "incorreta" : "correta"}{" "}
-                  </h3>
+                  <div className="alternativa">
+                    <h3>
+                      {" "}
+                      {questao.alternativas.findIndex((a) => a === alt) +
+                        1}{" "}
+                      {alt.enunciado}{" "}
+                      {alt.correta == true || alt.correta == "true"
+                        ? "correta"
+                        : "incorreta"}{" "}
+                    </h3>
+                    <button
+                      className="remover-alternativa-botao"
+                      onClick={() => removerAlternativa(alt)}
+                    >
+                      -
+                    </button>
+                  </div>
                 ))}
               </div>
             ) : (

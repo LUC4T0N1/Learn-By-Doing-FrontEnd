@@ -29,3 +29,28 @@
 /* .criar-questoes .mini-container .select-simples{
   width: 17%;
 } */
+
+.alternativa {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.remover-alternativa-botao {
+  min-width: 5%;
+  background: linear-gradient(167.57deg, #434343, #000000);
+  font-size: 16px;
+  border-radius: 3px;
+  color: aliceblue;
+  border-style: none;
+}
+
+.remover-alternativa-botao:hover {
+  cursor: pointer;
+  background: linear-gradient(
+    165.57deg,
+    rgb(196, 112, 3, 0.8),
+    rgb(202, 35, 85, 0.8),
+    rgb(77, 8, 65, 0.8)
+  );
+}

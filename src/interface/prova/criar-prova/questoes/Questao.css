@@ -1,12 +1,11 @@
-.adicionar-questao{
+.adicionar-questao {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
-.escolher-opcao{
-  position: fixed;
+.escolher-opcao {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -21,18 +20,15 @@
   flex-direction: column;
 }
 
-.escolher-opcao .botao-simples{
+.escolher-opcao .botao-simples {
   margin: 3px;
 }
 
-.escolher-opcao .botao-fechar{
+.escolher-opcao .botao-fechar {
   right: 111;
   background-color: rgb(75, 74, 74);
-  border-style: none; 
+  border-style: none;
   position: relative;
   bottom: 60px;
   left: 215px;
 }
-
-
-

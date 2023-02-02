@@ -13,28 +13,27 @@ export default function EditarQuestoes({ handleClose }) {
   const prova = useSelector((state) => state.provas.prova);
   const questao = useSelector((state) => state.questoes.questao);
 
-  console.log("eh esse: " + JSON.stringify(questao));
-  console.log("A" + questao.publica);
-
   const dispatch = useDispatch();
 
   const handleAdicionarAlternativa = (alt) => {
-    console.log("aquii");
     dispatch(
       setQuestao({ ...questao, alternativas: questao.alternativas.concat(alt) })
     );
   };
 
-  // /*   useEffect(() => {
-  //     console.log("inicioy:" + prova);
-  //     dispatch(setQuestao({ ...questao, conteudos: prova.conteudos }));
-  //   }, [dispatch]); */
+  const removerAlternativa = (alt) => {
+    let alts = questao.alternativas.map((item) =>
+      Object.assign({}, item, { selected: false })
+    );
+    alts = alts.filter(function (a) {
+      return a.enunciado != alt.enunciado;
+    });
+    dispatch(setQuestao({ ...questao, alternativas: alts }));
+  };
 
   const handleChange = (e) => {
     const nome = e.target.name;
-    console.log(nome);
     const value = e.target.value;
-    console.log(value);
     dispatch(setQuestao({ ...questao, [nome]: value }));
   };
 
@@ -46,7 +45,6 @@ export default function EditarQuestoes({ handleClose }) {
         questao,
         { headers: AuthHeader() }
       );
-      console.log("res: " + JSON.stringify(res));
       let questoes = prova.questoes.map((item) =>
         Object.assign({}, item, { selected: false })
       );
@@ -74,36 +72,33 @@ export default function EditarQuestoes({ handleClose }) {
     }
   };
 
-  const adicionarConteudosQuestao = (id) => {
+  const adicionarConteudosQuestao = (id, nome) => {
     var selecionado = questao.conteudos.filter((cont) => cont == id);
-    console.log("selecionado: " + JSON.stringify(selecionado));
-    console.log("tamanho porra: " + selecionado.length);
+
     if (selecionado.length == 0) {
       dispatch(
-        setQuestao({ ...questao, conteudos: questao.conteudos.concat(id) })
+        setQuestao({
+          ...questao,
+          conteudos: questao.conteudos.concat(id),
+          nomeConteudos: questao.nomeConteudos.concat(nome),
+        })
       );
     } else {
       dispatch(
         setQuestao({
           ...questao,
           conteudos: questao.conteudos.filter((cont) => cont != id),
+          nomeConteudos: questao.nomeConteudos.filter((cont) => cont != nome),
         })
       );
     }
   };
 
   const getConteudosPreSelecionados = () => {
-    console.log("aikjsas1: " + JSON.stringify(questao.conteudos));
-    console.log("aikjsas2: " + JSON.stringify(questao.nomeConteudos));
-
     let array = [];
     questao.conteudos.map((cont, index) => {
-      console.log(
-        "^^ " + cont + " ll " + index + "  a " + questao.nomeConteudos[index]
-      );
       array = array.concat({ id: cont, nome: questao.nomeConteudos[index] });
     });
-    console.log("aikjsas: " + JSON.stringify(array));
     return array;
   };
 
@@ -152,6 +147,7 @@ export default function EditarQuestoes({ handleClose }) {
       </div>
       <div className="mini-container">
         <BuscarConteudosEditarQuestao
+          tamanhoPagina={5}
           adicionarConteudos={adicionarConteudosQuestao}
           conteudosPreSelecionados={getConteudosPreSelecionados}
         />
@@ -205,11 +201,20 @@ export default function EditarQuestoes({ handleClose }) {
             {questao.alternativas.length !== 0 ? (
               <div style={{ display: "block", flexWrap: "wrap" }}>
                 {questao.alternativas.map((alt) => (
-                  <h3>
-                    {" "}
-                    {questao.alternativas.findIndex((a) => a === alt) + 1}{" "}
-                    {alt.enunciado} {alt.correta ? "incorreta" : "correta"}{" "}
-                  </h3>
+                  <div className="alternativa">
+                    <h3>
+                      {" "}
+                      {questao.alternativas.findIndex((a) => a === alt) +
+                        1}{" "}
+                      {alt.enunciado} {alt.correta ? "correta" : "incorreta"}{" "}
+                    </h3>
+                    <button
+                      className="remover-alternativa-botao"
+                      onClick={() => removerAlternativa(alt)}
+                    >
+                      -
+                    </button>
+                  </div>
                 ))}
               </div>
             ) : (

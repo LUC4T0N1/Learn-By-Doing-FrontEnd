@@ -1,10 +1,10 @@
-.nav-menu > *{
+.nav-menu > * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.navbar{
+.navbar {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -14,13 +14,13 @@
   z-index: 1;
 }
 
-.nav-links{
+.nav-links {
   display: flex;
   justify-content: center;
   list-style: none;
 }
 
-.nav-icon{
+.nav-icon {
   font-size: 1.3rem;
   margin-right: 10px;
   margin-bottom: 3px;
@@ -30,40 +30,42 @@
   left: 15px;
 }
 
-.nav-item{
+.nav-item {
   padding: 19px 20px;
   margin: 0 10px;
   cursor: pointer;
 }
 
-.navbar .nav-item:hover{
-  background: linear-gradient(165.57deg, rgb(230, 144, 33),
-  rgb(202, 35, 85),
-  rgb(146, 8, 123));
+.navbar .nav-item:hover {
+  background: linear-gradient(
+    165.57deg,
+    rgb(230, 144, 33),
+    rgb(202, 35, 85),
+    rgb(146, 8, 123)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.nav-icon:hover{
+.nav-icon:hover {
   color: rgb(233, 126, 26);
 }
 
-
-.nav-link{
+.nav-link {
   text-decoration: none;
   font-size: 20px;
 }
 
-.mobile-menu-icon{
+.mobile-menu-icon {
   display: none;
 }
 
 @media screen and (max-width: 800px) {
-  .nav-links{
+  .nav-links {
     display: none;
   }
 
-  .nav-links-mobile{
+  .nav-links-mobile {
     position: absolute;
     display: block;
     list-style: none;
@@ -78,7 +80,7 @@
     border-width: 1px;
   }
 
-  .nav-item{
+  .nav-item {
     border-bottom: solid;
     border-color: rgb(165, 21, 69);
     background-color: #05090a;
@@ -87,14 +89,14 @@
     align-items: center;
     justify-content: center;
     display: flex;
-    margin: 0
+    margin: 0;
   }
 
-  #last{
+  #last {
     border-bottom: none;
   }
 
-  .nav-link{
+  .nav-link {
     text-decoration: none;
     left: 0;
     font-size: 25px;
@@ -104,13 +106,13 @@
     width: 100%;
     transition: all 0.5s ease-out;
   }
-  
-  .mobile-menu-icon{
+
+  .mobile-menu-icon {
     display: block;
     position: absolute;
     font-size: 21px;
     color: white;
-    background-color:  rgb(104, 21, 46);
+    background-color: rgb(104, 21, 46);
     border: none;
     outline: none;
     top: 0px;
@@ -119,9 +121,7 @@
     width: 10%;
   }
 
-  .navbar{
+  .navbar {
     height: 32px;
   }
-
-
 }

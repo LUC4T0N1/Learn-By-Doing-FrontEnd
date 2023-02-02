@@ -1,4 +1,4 @@
-.t{
+.t {
   width: 50px;
   height: 25px;
   border-radius: 20px;
@@ -15,12 +15,12 @@
   border-width: 2px;
 }
 
-.t-icon{
+.t-icon {
   width: 15px;
   height: 15px;
 }
 
-.t-button{
+.t-button {
   width: 25px;
   height: 25px;
   border-radius: 20px;
@@ -30,7 +30,7 @@
   border-width: 1px;
   position: absolute;
   cursor: pointer;
-  left : 0;
+  left: 0;
 }
 
 @media screen and (max-width: 800px) {
@@ -40,14 +40,14 @@
     left: 47px;
     width: 40px;
     height: 20px;
-  } 
+  }
 
-  .t-button{
+  .t-button {
     width: 20px;
     height: 20px;
   }
 
-  .t-icon{
+  .t-icon {
     width: 12px;
     height: 12px;
   }

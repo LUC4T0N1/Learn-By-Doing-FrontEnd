@@ -126,6 +126,17 @@ body {
   background-color: rgb(241, 237, 237);
 }
 
+.botao-simples-sem-hover {
+  min-width: 5%;
+  height: 53px;
+  background: linear-gradient(167.57deg, #4343439c, #00000091);
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  color: aliceblue;
+  border-style: none;
+}
+
 .botao-simples {
   min-width: 5%;
   height: 53px;

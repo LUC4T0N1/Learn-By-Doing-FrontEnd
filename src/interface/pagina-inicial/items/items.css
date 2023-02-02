@@ -1,4 +1,4 @@
-.items-container{
+.items-container {
   display: flex;
   align-items: center;
   justify-content: left;
@@ -7,7 +7,7 @@
   gap: 20px;
 }
 
-.item{
+.item {
   background-color: rgb(29, 28, 28);
   padding: 35px;
   height: 270px;
@@ -17,25 +17,24 @@
   color: white;
 }
 
-.items-container .item:hover{
+.items-container .item:hover {
   background: linear-gradient(
     165.57deg,
     rgb(196, 112, 3, 1),
     rgb(202, 35, 85, 1),
     rgb(77, 8, 65, 1)
-    );
-    cursor: pointer;
+  );
+  cursor: pointer;
 }
 
-.item-title{
+.item-title {
   font-size: 26px;
   margin-bottom: 5px;
   color: rgb(250, 224, 190);
   display: flex;
 }
 
-
-.icon{
+.icon {
   color: rgb(250, 224, 190);
   text-decoration: none;
   font-size: 28px;

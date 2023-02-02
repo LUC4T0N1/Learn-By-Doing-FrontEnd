@@ -1,25 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const provaSlice =  createSlice({
+const provaSlice = createSlice({
   name: "provas",
   initialState: {
-    quantidade: 0, 
+    quantidade: 0,
     provas: [],
-    prova: {nome: "", publica: true, conteudos: [],
-         nomeConteudos: [], questoes:[], idsQuestoes:[], 
-         quantidadeQuestoes: 0, tempo: 0, dataInicial: new Date(), dataFinal: new Date()}, 
-    realizarProva: {nome: "", publica: true, conteudos: [],
-         nomeConteudos: [], questoes:[], idsQuestoes:[],
-         quantidadeQuestoes: 0, tempo: 0, questoesRespondidasDto:[]},
+    prova: {
+      nome: "",
+      publica: true,
+      conteudos: [],
+      nomeConteudos: [],
+      questoes: [],
+      idsQuestoes: [],
+      quantidadeQuestoes: 0,
+      tempo: 0,
+      dataInicial: new Date(),
+      dataFinal: new Date(),
+    },
+    realizarProva: {
+      nome: "",
+      publica: true,
+      conteudos: [],
+      nomeConteudos: [],
+      questoes: [],
+      idsQuestoes: [],
+      quantidadeQuestoes: 0,
+      tempo: 0,
+      questoesRespondidasDto: [],
+    },
     provasCriadas: [],
     provasFeitas: [],
-    corrigirProva: {provaDto: {quantidadeQuestoes: 0, questoes: []}},
-    provaCorrigida: {idProvaRealizada: 0, questoes: []}
-      },
-  reducers:{
-    setRespostaQuestao() {
-
-    },
+    corrigirProva: { provaDto: { quantidadeQuestoes: 0, questoes: [] } },
+    provaCorrigida: { idProvaRealizada: 0, questoes: [] },
+  },
+  reducers: {
+    setRespostaQuestao() {},
     getProvasPorConteudo() {},
     getProvasCriadas() {},
     getProvasFeitas() {},
@@ -27,42 +42,55 @@ const provaSlice =  createSlice({
     getProvaFeita() {},
     getProva() {},
     getProvaFazer() {},
-    getProvaPrivada(){},
+    getProvaPrivada() {},
     realizarProva() {},
     cadastrarNovaProva() {},
     corrigirProva() {},
-    setProva(state, action){
+    setProva(state, action) {
       const provaData = action.payload;
-      console.log(" prova: "+JSON.stringify(provaData))
-      return ({ ...state, prova: provaData })
+      return { ...state, prova: provaData };
     },
-    setRealizarProva(state, action){
+    setRealizarProva(state, action) {
       const provaData = action.payload;
-      console.log("realizar prova: "+JSON.stringify(provaData))
-      return ({ ...state, realizarProva: provaData })
+      return { ...state, realizarProva: provaData };
     },
-    setCorrecaoProva(state, action){
+    setCorrecaoProva(state, action) {
       const provaData = action.payload;
-      console.log("realizar prova: "+JSON.stringify(provaData))
-      return ({ ...state, provaCorrigida: provaData })
+      return { ...state, provaCorrigida: provaData };
     },
-    setProvasCriadas(state, action){
+    setCorrigirProva(state, action) {
       const provaData = action.payload;
-      console.log("provas criadas: "+provaData)
-      return ({ ...state, provasCriadas: provaData })
+      return { ...state, corrigirProva: provaData };
     },
-    setProvas(state, action){
+    setProvasCriadas(state, action) {
+      const provaData = action.payload;
+      return { ...state, provasCriadas: provaData };
+    },
+    setProvas(state, action) {
       const provasData = action.payload;
-      console.log("Provasd data: " + JSON.stringify(provasData))
-     return { ...state, ...provasData}
-    }
-  }
+      return { ...state, ...provasData };
+    },
+  },
 });
 
-export const { getProvasPorConteudo, getProva, setProvas,
-   setProva, cadastrarNovaProva, setRealizarProva, 
-   setRespostaQuestao, realizarProva, 
-   getProvasCriadas, setProvasCriadas, getProvasFeitas,
-   getProvaFeita, setCorrecaoProva, corrigirProva,
-   getProvasRealizadas, getProvaPrivada, getProvaFazer } = provaSlice.actions;
+export const {
+  getProvasPorConteudo,
+  getProva,
+  setProvas,
+  setProva,
+  cadastrarNovaProva,
+  setRealizarProva,
+  setRespostaQuestao,
+  realizarProva,
+  getProvasCriadas,
+  setProvasCriadas,
+  getProvasFeitas,
+  getProvaFeita,
+  setCorrecaoProva,
+  corrigirProva,
+  getProvasRealizadas,
+  getProvaPrivada,
+  getProvaFazer,
+  setCorrigirProva,
+} = provaSlice.actions;
 export default provaSlice.reducer;

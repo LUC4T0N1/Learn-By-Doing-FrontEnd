@@ -46,5 +46,24 @@
 }
 
 .footer-criar-prova {
-  margin-top: 355px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.infos-prova-footer {
+  display: flex;
+  gap: 20px;
+  min-width: 200px;
+  left: 5%;
+  position: absolute;
+  color: rgb(143, 99, 19);
+}
+
+.botao-criar-footer {
+  display: flex;
+  gap: 20px;
+  justify-content: left;
+  right: 4.3%;
+  position: absolute;
 }

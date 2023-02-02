@@ -1,92 +1,57 @@
-import React , {useState}from 'react'
-import { useHistory } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import axios from "axios";
-import AuthHeader from '../../AuthContext';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import AuthHeader from "../../AuthContext";
 
-function ProvaPrivada () {
-
-  const [id, setId] =  useState("");
+function ProvaPrivada() {
+  const [id, setId] = useState("");
 
   let history = useHistory();
 
   const handleChange = (e) => {
     const value = e.target.value;
     setId(value);
-  }  
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try{
-      const response = await axios.get(`http://localhost:8080/api/prova/obterIdProvaPrivada?idSecreto=${id}`, 
-      { headers: AuthHeader() })
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/prova/obterIdProvaPrivada?idSecreto=${id}`,
+        { headers: AuthHeader() }
+      );
       history.push({
-        pathname: '/realizar-prova',
-        state: {idProva : response.data}
-      })
-    }catch (error){
-      alert("Id inválido!")
+        pathname: "/realizar-prova",
+        state: { idProva: response.data },
+      });
+    } catch (error) {
+      alert("Id inválido!");
     }
+  };
 
-  }
-  
   return (
-    <div className='login'>
-    <div className='login-container'>
-    <div className='login-mini-container'>
-        <div className='login-title' style={{"fontSize":"40px"}}>Buscar Prova Privada</div>
-        <input type="text" name="nome-prova" className='input-texto-simples' placeholder="ID Secreto..." onChange={handleChange}></input>
-        <button className='botao-simples' onClick={handleSubmit}>Enviar</button>
+    <div className="login">
+      <div className="login-container">
+        <div className="login-mini-container">
+          <div className="login-title" style={{ fontSize: "40px" }}>
+            Buscar Prova Privada
+          </div>
+          <input
+            type="text"
+            name="nome-prova"
+            className="input-texto-simples"
+            placeholder="ID Secreto..."
+            onChange={handleChange}
+          ></input>
+          <button className="botao-simples" onClick={handleSubmit}>
+            Enviar
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-    )
-    {/* <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-            style={{ minHeight: '100vh' }}
-          >
-          <Card  sx={{ width: "70%",  textAlign: 'center',
-      justifyContent: 'center',
-      alignContent: 'center',
-      backgroundColor: '#dddddf',
-      minHeight: '70vh',
-      marginTop: '80px' }}>
-         <Typography gutterBottom  component="div">
-            <h1 className="titulo">Buscar Prova Privada</h1>
-          </Typography>
-          <Grid
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-            marginTop="10px"
-          >
-        <TextField
-          id="outlined-password-input"
-          label="ID Secreto"
-          name='id'
-          value={id}
-          onChange={handleChange}
-          style = {{width: 400, marginTop: 10}}
-        />
-       
-        <Button variant="contained" sx={{ 
-      backgroundColor: 'black',
-      marginTop: '36px',
-      minWidth: '300px',
-      minHeight: '6vh' }} onClick={handleSubmit}>Buscar</Button>
-      </Grid>
-      </Card>
-      </Grid> */}
+  );
+  {
+  }
 }
 
-export default ProvaPrivada
+export default ProvaPrivada;

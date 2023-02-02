@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import "./Questao.css";
-import CriarQuestoes from "./criar-questao/CriarQuestoes";
-import FiltroQuestoes from "../../../filtroBuscar/FiltroQuestoes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import AuthHeader from "../../../../AuthContext";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../../../application/autenticacaoSlice";
 import { useHistory } from "react-router-dom";
+import { logout } from "../../../../application/autenticacaoSlice";
+import AuthHeader from "../../../../AuthContext";
+import FiltroQuestoes from "../../../filtroBuscar/FiltroQuestoes";
+import CriarQuestoes from "./criar-questao/CriarQuestoes";
+import "./Questao.css";
 
-export default function AdicionarQuestoes() {
+export default function AdicionarQuestoes({ idsQuestoes }) {
   const [open, setOpen] = useState(false);
   const [criar, setCriar] = useState(false);
   const [escolher, setEscolher] = useState(false);
@@ -26,7 +26,6 @@ export default function AdicionarQuestoes() {
     setOpen(false);
     setCriar(false);
     setEscolher(false);
-    /* todo enviar prop back */
   };
 
   const handleOpenCriar = () => {
@@ -48,13 +47,12 @@ export default function AdicionarQuestoes() {
     try {
       const response = await axios.get(
         `http://localhost:8080/api/questao/filtrar?enunciado=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}&multiplaEscolha=${busca.tipo}&publica=${busca.publica}` +
-          stringQueryConteudos(busca.conteudos),
+          stringQueryConteudos(busca.conteudos) +
+          stringQueryQuestoes(idsQuestoes),
         { headers: AuthHeader() }
       );
-      console.log("res: " + JSON.stringify(response));
-      setQuestoes(response.data);
-      setQuantidade(response.data.length);
-      console.log("quant: " + response.data.length);
+      setQuestoes(response.data.questoes);
+      setQuantidade(response.data.quantidade);
     } catch (error) {
       dispatch(logout({ ...{} }));
       history.push(`/login`);
@@ -65,6 +63,14 @@ export default function AdicionarQuestoes() {
     var queryParam = "";
     if (conteudos.length > 0) {
       conteudos.map((cont) => (queryParam = queryParam + "&conteudos=" + cont));
+    }
+    return queryParam;
+  };
+
+  const stringQueryQuestoes = (ids) => {
+    var queryParam = "";
+    if (ids.length > 0) {
+      ids.map((id) => (queryParam = queryParam + "&questoes=" + id));
     }
     return queryParam;
   };

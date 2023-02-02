@@ -39,6 +39,7 @@ export default function ResultadoQuestao({ questao, handleClose }) {
           {questao.publica ? <p>· Publica</p> : <p>· Privada</p>}
           <input
             type="number"
+            min="0.1"
             name="valor"
             onChange={changeValor}
             className="input-valor"

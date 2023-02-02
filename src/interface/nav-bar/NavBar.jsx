@@ -1,6 +1,6 @@
 import { faBars, faHome, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -14,18 +14,22 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   const [isMobile, setIsMobile] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const autenticacao = useSelector((state) => state.autenticacao);
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
-  const autenticacao = useSelector((state) => state.autenticacao);
-
   const handleDeslogar = () => {
-    console.log("deslogando...");
     dispatch(logout({ ...{} }));
+    setToken("null");
   };
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, [autenticacao]);
 
   return (
     <nav className="navbar">
-      {autenticacao.token !== "" ? (
+      {token.length !== 4 ? (
         <>
           <div className="nav-menu" id="nav-menu">
             <ul
@@ -156,6 +160,8 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
+          <Languages />
+          <Toggle />
         </div>
       )}
     </nav>

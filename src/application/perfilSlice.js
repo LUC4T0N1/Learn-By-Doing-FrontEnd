@@ -13,12 +13,11 @@ const perfilSlice = createSlice({
     questoesResolvidas: 0,
     provasCorrigidas: 0,
     conteudosCriados: 0,
-    dataCriacao: new Date(),
+    dataCriacao: 0,
   },
   reducers: {
     setPerfil(state, action) {
       const perfilData = action.payload;
-      console.log("perfilData: " + JSON.stringify(perfilData));
       return { ...state, ...perfilData };
     },
     completarPerfil() {},

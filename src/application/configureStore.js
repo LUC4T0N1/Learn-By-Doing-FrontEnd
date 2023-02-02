@@ -1,13 +1,13 @@
+import createSagaMiddleware from "@redux-saga/core";
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import createSagaMiddleware from "@redux-saga/core";
-import {watcherSaga} from "../infrastructure/rootSaga"
+import { watcherSaga } from "../infrastructure/rootSaga";
+import alternativaSlice from "./alternativaSlice";
+import autenticacaoSlice from "./autenticacaoSlice";
 import conteudoSlice from "./conteudoSlice";
+import perfilSlice from "./perfilSlice";
 import provaSlice from "./provaSlice";
 import questaoSlice from "./questaoSlice";
-import alternativaSlice from "./alternativaSlice";
-import perfilSlice from "./perfilSlice";
-import autenticacaoSlice from "./autenticacaoSlice";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -17,14 +17,14 @@ const reducer = combineReducers({
   questoes: questaoSlice,
   alternativas: alternativaSlice,
   perfil: perfilSlice,
-  autenticacao: autenticacaoSlice
-})
+  autenticacao: autenticacaoSlice,
+});
 
-const store =  configureStore({ 
+const store = configureStore({
   reducer,
-  middleware: [sagaMiddleware]
- })
+  middleware: [sagaMiddleware],
+});
 
- sagaMiddleware.run(watcherSaga);
+sagaMiddleware.run(watcherSaga);
 
 export default store;

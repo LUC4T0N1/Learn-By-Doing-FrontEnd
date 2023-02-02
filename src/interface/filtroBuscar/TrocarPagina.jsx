@@ -1,26 +1,47 @@
-import React from 'react'
+import React from "react";
 
-function TrocarPagina({quantidade, paginaAtual, proximaPagina, paginaAnterior}) {
+function TrocarPagina({
+  tamanhoPagina,
+  quantidade,
+  paginaAtual,
+  proximaPagina,
+  paginaAnterior,
+}) {
   const calcularTotalPaginas = () => {
-    const divisaoSimples = Math.floor(quantidade / 10) ;
-    const resto = quantidade % 10;
+    const divisaoSimples = Math.floor(quantidade / tamanhoPagina);
+    const resto = quantidade % tamanhoPagina;
     let totalPaginas = 1;
-    if(quantidade != 0){
-      if(resto == 0){
-        totalPaginas = divisaoSimples
-      }else{
-        totalPaginas = divisaoSimples + 1
+    if (quantidade != 0) {
+      if (resto == 0) {
+        totalPaginas = divisaoSimples;
+      } else {
+        totalPaginas = divisaoSimples + 1;
       }
     }
     return totalPaginas;
-  }
+  };
   return (
-    <div className='trocar-pagina'>
-    <button className='botao-simples' onClick={paginaAnterior}>Pagina anterior</button>
-    <p>{paginaAtual}/{calcularTotalPaginas()}</p>
-    <button className='botao-simples' onClick={proximaPagina}>Proxima Pagina</button>
-  </div>
-  )
+    <div className="trocar-pagina">
+      {paginaAtual == 1 ? (
+        <button className="botao-simples-sem-hover">Pagina anterior</button>
+      ) : (
+        <button className="botao-simples" onClick={paginaAnterior}>
+          Pagina anterior
+        </button>
+      )}
+
+      <p>
+        {paginaAtual}/{calcularTotalPaginas()}
+      </p>
+      {paginaAtual == calcularTotalPaginas() ? (
+        <button className="botao-simples-sem-hover">Proxima Pagina</button>
+      ) : (
+        <button className="botao-simples" onClick={proximaPagina}>
+          Proxima Pagina
+        </button>
+      )}
+    </div>
+  );
 }
 
-export default TrocarPagina
+export default TrocarPagina;

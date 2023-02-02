@@ -10,10 +10,8 @@ import FiltroConteudos from "../../../filtroBuscar/FiltroConteudos";
 import Tag from "../../../filtroBuscar/Tag";
 import "./BuscarConteudos.css";
 
-export default function BuscarConteudos({ adicionarConteudos }) {
+export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
   const dispatch = useDispatch();
-
-  /*  const conteudo = useSelector((state) => state.conteudos.conteudo); */
 
   const [conteudosSelecionados, setConteudosSelecionados] = useState([]);
 
@@ -36,20 +34,22 @@ export default function BuscarConteudos({ adicionarConteudos }) {
   const handleChangeCriarConteudo = (e) => {
     const value = e.target.value;
     setConteudo({ ...conteudo, nome: value });
-    console.log("conteudo: " + JSON.stringify(conteudo));
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (conteudo !== "") {
-      console.log("conteudo: " + JSON.stringify(conteudo));
-      const res = await axios.post(
-        `http://localhost:8080/api/conteudo`,
-        conteudo,
-        { headers: AuthHeader() }
-      );
-      addConteudo(res.data.nome, res.data.idConteudo);
-      console.log("res cont novo: " + JSON.stringify(res));
-      /* dispatch(setConteudo({ nome : '' }));  */
+    if (conteudo.nome !== "") {
+      try {
+        const res = await axios.post(
+          `http://localhost:8080/api/conteudo`,
+          conteudo,
+          { headers: AuthHeader() }
+        );
+        addConteudo(res.data.nome, res.data.idConteudo);
+        setConteudo({ ...conteudo, nome: "" });
+        setOpen(false);
+      } catch {
+        alert("Conteudo já existente");
+      }
     } else {
       alert("preencha nome conteudo");
     }
@@ -72,7 +72,6 @@ export default function BuscarConteudos({ adicionarConteudos }) {
   const handleClose = () => {
     setOpen(false);
     setOpenEscolher(false);
-    /* todo enviar prop back */
   };
 
   const [quantidade, setQuantidade] = useState(0);
@@ -85,7 +84,6 @@ export default function BuscarConteudos({ adicionarConteudos }) {
         `http://localhost:8080/api/conteudo/filtro?nome=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`,
         { headers: AuthHeader() }
       );
-      console.log("conteudos!!!: " + JSON.stringify(response.data.conteudos));
       setConteudos(response.data.conteudos);
       setQuantidade(response.data.quantidade);
     } catch (error) {
@@ -101,7 +99,6 @@ export default function BuscarConteudos({ adicionarConteudos }) {
           <Tag id={c.id} nome={c.nome} handleRemove={addConteudo} />
         ))}
       </div>
-      {/* <BuscarSelect multiplo={true}/> */}
 
       {open ? (
         <>
@@ -137,6 +134,7 @@ export default function BuscarConteudos({ adicionarConteudos }) {
 
       {openEscolher ? (
         <FiltroConteudos
+          tamanhoPagina={tamanhoPagina}
           handleClose={handleClose}
           titulo={"Escolher Conteudos"}
           opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}

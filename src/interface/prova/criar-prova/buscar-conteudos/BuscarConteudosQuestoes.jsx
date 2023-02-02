@@ -8,15 +8,13 @@ import FiltroConteudos from "../../../filtroBuscar/FiltroConteudos";
 import Tag from "../../../filtroBuscar/Tag";
 import "./BuscarConteudos.css";
 
-export default function BuscarConteudosEditarQuestao({
+export default function BuscarConteudosQuestoes({
+  tamanhoPagina,
   adicionarConteudos,
-  conteudosPreSelecionados,
 }) {
   const dispatch = useDispatch();
 
-  const [conteudosSelecionados, setConteudosSelecionados] = useState(
-    conteudosPreSelecionados
-  );
+  const [conteudosSelecionados, setConteudosSelecionados] = useState([]);
 
   const addConteudo = (nome, id) => {
     var selecionado = conteudosSelecionados.filter((cont) => cont.nome == nome);
@@ -32,36 +30,14 @@ export default function BuscarConteudosEditarQuestao({
     adicionarConteudos(id, nome);
   };
 
-  const [conteudo, setConteudo] = useState({ nome: "" });
-
-  const handleChangeCriarConteudo = (e) => {
-    const value = e.target.value;
-    setConteudo({ ...conteudo, nome: value });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (conteudo !== "") {
-      const res = await axios.post(
-        `http://localhost:8080/api/conteudo`,
-        conteudo,
-        { headers: AuthHeader() }
-      );
-      addConteudo(res.data.nome, res.data.idConteudo);
-    } else {
-      alert("preencha nome conteudo");
-    }
-  };
-  const [open, setOpen] = React.useState(false);
   const [openEscolher, setOpenEscolher] = React.useState(false);
 
   const handleClickOpenEscolher = (e) => {
     e.preventDefault();
     setOpenEscolher(true);
-    setOpen(false);
   };
 
   const handleClose = () => {
-    setOpen(false);
     setOpenEscolher(false);
   };
 
@@ -92,6 +68,7 @@ export default function BuscarConteudosEditarQuestao({
       </div>
       {openEscolher ? (
         <FiltroConteudos
+          tamanhoPagina={tamanhoPagina}
           handleClose={handleClose}
           titulo={"Escolher Conteudos"}
           opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}
