@@ -18,7 +18,7 @@ function FiltroBuscar({
     nome: "",
     pagina: 0,
     ordenacao: 0,
-    ordem: 0,
+    ordem: 1,
   });
   const handleChange = (e) => {
     const value = e.target.value;
@@ -123,7 +123,9 @@ function FiltroBuscar({
                         "/" +
                         objeto.notaMaxima,
                     "Data: " + objeto.dataResolucao,
+                    objeto.publica ? "Prova Pública" : "Prova Privada",
                   ]}
+                  publica={objeto.publica}
                 />
               ) : (
                 <ResultadoCard

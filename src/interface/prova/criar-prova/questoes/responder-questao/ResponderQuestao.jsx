@@ -35,7 +35,7 @@ function ResponderQuestao({ questao, atualizarRespostaQuestao }) {
                 <input
                   className="filtro-opcao"
                   type="radio"
-                  name="opcao-filtro"
+                  name={alt.id}
                   value={alt.id}
                   onChange={(e) => atualizarRespostaQuestao(e, questao.id)}
                 />

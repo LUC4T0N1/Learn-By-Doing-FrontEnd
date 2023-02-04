@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import "./VisualizarQuestoes.css";
 
-export default function VisualizarQuestoes({ questao, resposta }) {
+export default function VisualizarQuestoesProvaPublica({ questao, resposta }) {
   return (
     <div className="visualizar-questao">
       <div className="questao-header">
@@ -15,11 +15,19 @@ export default function VisualizarQuestoes({ questao, resposta }) {
       </div>
       <p className="visualizar-enunciado">{questao.enunciado}</p>
       <div className="campo-resposta">
-        <p className="resposta-label">Resposta: </p>
+        <p className="resposta-label">Sua Resposta: </p>
         {!questao.multiplaEscolha ? (
-          <div className="area-resposta">
-            <p>{questao.respostaAluno}</p>
-          </div>
+          <>
+            <div className="area-resposta">
+              <p>{questao.respostaAluno}</p>
+            </div>
+            <div className="campo-resposta">
+              <p className="resposta-label">Resposta Professor: </p>
+              <div className="area-resposta">
+                <p>{questao.resposta}</p>
+              </div>
+            </div>
+          </>
         ) : (
           <div className="area-resposta">
             {questao.alternativas.map((alt) => (

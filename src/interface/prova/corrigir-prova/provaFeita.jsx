@@ -13,11 +13,23 @@ import InfosProva from "../provaCompleta/InfosProva";
 
 export default function ProvaFeita() {
   const location = useLocation();
-  const idProvaFeita = location.state.idProva;
+  const obterIdProva = () => {
+    try {
+      let id = location.state.idProva;
+      return id;
+    } catch (e) {
+      return 0;
+    }
+  };
+  const idProvaFeita = obterIdProva();
   let history = useHistory();
 
   const dispatch = useDispatch();
   useEffect(() => {
+    if (idProvaFeita == 0) {
+      history.push("/");
+    }
+
     const fodase = async () => {
       const response = await axios.get(
         `http://localhost:8080/api/prova/buscarRID?id=${idProvaFeita}`,
@@ -58,6 +70,7 @@ export default function ProvaFeita() {
     for (var i = 0; i < correcao.questoes.length; i++) {
       if (
         correcao.questoes[i].notaQuestao < 0 ||
+        correcao.questoes[i].notaQuestao === "" ||
         correcao.questoes[i].notaQuestao > correcao.questoes[i].valorQuestao
       ) {
         errado = true;

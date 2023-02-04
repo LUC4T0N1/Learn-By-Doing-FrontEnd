@@ -45,7 +45,7 @@ function CriarProva() {
     if (errado) {
       alert("Uma ou mais questões estão com valor inválida!");
     } else {
-      if (prova.nome) {
+      if (prova.nome && prova.conteudos.length > 0) {
         const idQuestoes = prova.questoes.map((quest) => quest.id);
         dispatch(
           cadastrarNovaProva({

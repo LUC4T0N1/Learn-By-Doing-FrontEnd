@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   getProvaFazer,
   realizarProva,
@@ -12,12 +12,23 @@ import InfosProva from "./InfosProva";
 
 export default function ProvaCompleta() {
   const location = useLocation();
-  const idProva = location.state.idProva;
+  const obterIdProva = () => {
+    try {
+      let id = location.state.idProva;
+      return id;
+    } catch (e) {
+      return 0;
+    }
+  };
+  const idProva = obterIdProva();
 
   const [comecou, setComecou] = useState(false);
-
+  let history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
+    if (idProva == 0) {
+      history.push("/");
+    }
     dispatch(getProvaFazer({ idProva: idProva }));
   }, [dispatch]);
 

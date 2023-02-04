@@ -39,3 +39,10 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.trocar-senha {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 70%;
+}

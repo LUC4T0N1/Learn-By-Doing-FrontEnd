@@ -8,10 +8,21 @@ import InfosProva from "../prova/provaCompleta/InfosProva";
 export default function ProvaCriada() {
   let history = useHistory();
   const location = useLocation();
-  const idProva = location.state.idProva;
+  const obterIdProva = () => {
+    try {
+      let id = location.state.idProva;
+      return id;
+    } catch (e) {
+      return 0;
+    }
+  };
+  const idProva = obterIdProva();
 
   const dispatch = useDispatch();
   useEffect(() => {
+    if (idProva == 0) {
+      history.push("/");
+    }
     dispatch(getProva({ idProva: idProva }));
   }, [dispatch]);
 

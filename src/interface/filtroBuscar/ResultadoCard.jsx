@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./FiltroBuscar.css";
 
-function ResultadoCard({ nome, dados, idObjeto, tipo }) {
+function ResultadoCard({ nome, dados, idObjeto, tipo, publica }) {
   const definirCaminho = () => {
     if (tipo == 1) {
       return "/buscar-provas";
@@ -22,6 +22,8 @@ function ResultadoCard({ nome, dados, idObjeto, tipo }) {
   const definirState = () => {
     if (tipo == 1) {
       return { idConteudo: idObjeto };
+    } else if (tipo == 3) {
+      return { idProva: idObjeto, publica: publica };
     } else {
       return { idProva: idObjeto };
     }
