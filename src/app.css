@@ -223,3 +223,22 @@ body {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: rgb(0, 0, 0);
 }
+
+.error-message {
+  color: red;
+  padding: 0;
+  margin: 0;
+}
+
+.success-message {
+  background: linear-gradient(
+    165.57deg,
+    rgb(179, 105, 8),
+    rgb(202, 35, 85),
+    rgb(61, 11, 54)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0;
+  margin: 0;
+}

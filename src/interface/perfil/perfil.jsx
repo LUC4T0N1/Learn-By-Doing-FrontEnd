@@ -1,57 +1,41 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPerfil } from "../../application/perfilSlice";
+import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import AuthHeader from "../../AuthContext";
 import "./perfil.css";
 
 function Perfil() {
-  const dispatch = useDispatch();
+  const [erro, setErro] = useState(false);
+  const [sucesso, setSucesso] = useState(false);
+  const formRef = useRef();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const perfil = useSelector((state) => state.perfil);
   const [open, setOpen] = useState(false);
-  const [botaoOk, setBotaoOk] = useState(false);
-  const [novaSenhaOk, setNovaSenhaOk] = useState(false);
-  const [senhaForm, setSenhaForm] = useState({
-    senhaAtual: "",
-    senhaNova: "",
-    senhaNovaConfirmacao: "",
-  });
-  useEffect(() => {
-    dispatch(getPerfil());
-    if (
-      senhaForm.senhaAtual != "" &&
-      senhaForm.senhaNova != "" &&
-      senhaForm.senhaNovaConfirmacao != "" &&
-      senhaForm.senhaNova == senhaForm.senhaNovaConfirmacao
-    ) {
-      setBotaoOk(true);
-    } else {
-      setBotaoOk(false);
-    }
-    if (senhaForm.senhaNova == senhaForm.senhaNovaConfirmacao) {
-      setNovaSenhaOk(true);
-    } else {
-      setNovaSenhaOk(false);
-    }
-  }, [senhaForm]);
 
   const trocarSenha = async (e) => {
     try {
+      let senhaForm = {
+        senhaAtual: formRef.current.senhaAtual.value,
+        senhaNova: formRef.current.senhaNova.value,
+        senhaNovaConfirmacao: formRef.current.senhaNovaConfirmacao.value,
+      };
       await axios.put(
         `http://localhost:8080/api/usuario/trocarSenha`,
         senhaForm,
         { headers: AuthHeader() }
       );
-      alert("Sucesso!");
+      setSucesso(true);
+      setErro(false);
     } catch (error) {
-      alert("Senha antiga está errada!");
+      setSucesso(false);
+      setErro(true);
     }
-  };
-
-  const handleChange = (e) => {
-    let nome = e.target.name;
-    let valor = e.target.value;
-    setSenhaForm({ ...senhaForm, [nome]: valor });
   };
 
   return (
@@ -76,38 +60,87 @@ function Perfil() {
             </button>
           ) : (
             <>
-              <input
-                type="password"
-                className="input-texto-simples"
-                placeholder="Senha atual"
-                name="senhaAtual"
-                onChange={handleChange}
-              ></input>
-              <input
-                type="password"
-                name="senhaNova"
-                className="input-texto-simples"
-                placeholder="Senha Nova"
-                onChange={handleChange}
-              ></input>
-              <input
-                type="password"
-                name="senhaNovaConfirmacao"
-                className={
-                  novaSenhaOk ? "input-texto-simples" : "input-texto-erro"
-                }
-                placeholder="Confirmar Senha nova"
-                onChange={handleChange}
-              ></input>
-              {botaoOk ? (
-                <button className="botao-simples" onClick={trocarSenha}>
-                  Trocar senha
-                </button>
-              ) : (
-                <button className="botao-simples-sem-hover">
-                  Trocar senha
-                </button>
-              )}
+              <form
+                className="mudar-senha-form"
+                ref={formRef}
+                onSubmit={handleSubmit(trocarSenha)}
+              >
+                <input
+                  type="password"
+                  className="input-texto-simples"
+                  placeholder="Senha Atual..."
+                  {...register("senhaAtual", {
+                    required: "A senha atual é obrigatoria!",
+                    minLength: {
+                      value: 8,
+                      message: "A senha deve conter pelo menos 8 digitos!",
+                    },
+                    pattern: {
+                      value:
+                        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g,
+                      message:
+                        "A senha deve conter pelo menos uma letra maiúscula, um caracter especial, um número e 8 caracteres!",
+                    },
+                  })}
+                />
+                {errors.senhaAtual ? (
+                  <p className="error-message"> {errors.senhaAtual.message} </p>
+                ) : (
+                  ""
+                )}
+                <input
+                  type="password"
+                  className="input-texto-simples"
+                  placeholder="Senha Nova..."
+                  {...register("senhaNova", {
+                    required: "A senha atual é obrigatoria!",
+                    minLength: {
+                      value: 8,
+                      message: "A senha deve conter pelo menos 8 digitos!",
+                    },
+                    pattern: {
+                      value:
+                        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g,
+                      message:
+                        "A senha deve conter pelo menos uma letra maiúscula, um caracter especial, um número e 8 caracteres!",
+                    },
+                  })}
+                />
+                {errors.senhaNova ? (
+                  <p className="error-message"> {errors.senhaNova.message} </p>
+                ) : (
+                  ""
+                )}
+                <input
+                  type="password"
+                  className="input-texto-simples"
+                  placeholder="Confirmar Senha Nova ..."
+                  {...register("senhaNovaConfirmacao", {
+                    validate: (value) =>
+                      value === formRef.current.senhaNova.value ||
+                      "As senhas não são iguais!",
+                  })}
+                />
+                {errors.senhaNovaConfirmacao ? (
+                  <p className="error-message">
+                    {" "}
+                    {errors.senhaNovaConfirmacao.message}{" "}
+                  </p>
+                ) : (
+                  ""
+                )}
+                <button className="botao-simples">Trocar senha</button>
+                {sucesso ? (
+                  <p className="success-message">Senha trocada com sucesso!</p>
+                ) : (
+                  <></>
+                )}
+                {erro ? (
+                  <p className="error-message">Senha Antiga incorreta!</p>
+                ) : (
+                  <></>
+                )}
+              </form>
             </>
           )}
         </div>

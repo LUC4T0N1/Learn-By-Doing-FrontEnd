@@ -46,3 +46,12 @@
   gap: 8px;
   width: 70%;
 }
+
+.mudar-senha-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 4px;
+}
