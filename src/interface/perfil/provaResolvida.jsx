@@ -21,7 +21,7 @@ export default function ProvaResolvida() {
       let id = location.state.publica;
       return id;
     } catch (e) {
-      return 0;
+      return 3;
     }
   };
   const idProva = obterIdProva();
@@ -30,7 +30,7 @@ export default function ProvaResolvida() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (idProva == 0 || publica == 0) {
+    if (idProva == 0 || publica == 3) {
       history.push("/");
     }
     dispatch(getProvaFeita({ id: idProva }));

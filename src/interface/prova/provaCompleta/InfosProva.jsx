@@ -13,6 +13,19 @@ export default function InfosProva({ prova }) {
       ) : (
         <></>
       )}
+      {prova.tempo > 0 ? (
+        <div className="questao-header">Tempo: {prova.tempo}</div>
+      ) : (
+        <></>
+      )}
+      {prova.tentativas > 0 ? (
+        <>
+          <div className="questao-header">Tentativas: {prova.tentativas}</div>
+          <div className="questao-header">Realizações: {prova.realizacoes}</div>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

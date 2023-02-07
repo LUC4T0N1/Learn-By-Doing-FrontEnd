@@ -13,7 +13,8 @@ function CriarProva() {
 
   const handleChange = (e) => {
     const nome = e.target.name;
-    const value = e.target.value;
+    let value = e.target.value;
+    if (nome === "tentativas") value = Math.floor(value);
     dispatch(setProva({ ...prova, [nome]: value }));
   };
 
@@ -32,6 +33,7 @@ function CriarProva() {
   };
 
   const handleSubmit = (e) => {
+    console.log("AAAA " + prova.tentativas);
     e.preventDefault();
 
     let errado = false;
@@ -42,8 +44,15 @@ function CriarProva() {
         break;
       }
     }
-    if (errado) {
+    if (prova.questoes.length == 0) {
+      alert("A prova deve ter pelo menos uma questao!");
+    } else if (errado) {
       alert("Uma ou mais questões estão com valor inválida!");
+    } else if (
+      (prova.publica == false || prova.publica == "false") &&
+      prova.tentativas <= 0
+    ) {
+      alert("A prova deve permitir pelo menos uma tentativa!");
     } else {
       if (prova.nome && prova.conteudos.length > 0) {
         const idQuestoes = prova.questoes.map((quest) => quest.id);

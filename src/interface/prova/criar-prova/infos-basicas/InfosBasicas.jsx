@@ -43,9 +43,19 @@ export default function InfosBasicas({ handleChange }) {
             <input
               type="number"
               name="tempo"
+              step="1"
               onChange={handleChange}
               className="input-numero-simples"
               placeholder="Duração (minutos)..."
+            ></input>
+            <input
+              type="number"
+              min="1"
+              step="1"
+              name="tentativas"
+              onChange={handleChange}
+              className="input-numero-simples"
+              placeholder="Tentativas permitidas..."
             ></input>
             <div className="datas-prova">
               <label>Data permitida para fazer a prova: </label>

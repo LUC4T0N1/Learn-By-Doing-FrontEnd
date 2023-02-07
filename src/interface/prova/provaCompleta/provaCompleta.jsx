@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
@@ -6,8 +7,10 @@ import {
   realizarProva,
   setRealizarProva,
 } from "../../../application/provaSlice";
+import AuthHeader from "../../../AuthContext";
 import "../criar-prova/criarProva.css";
 import ResponderQuestao from "../criar-prova/questoes/responder-questao/ResponderQuestao";
+import Countdown from "./Countdown";
 import InfosProva from "./InfosProva";
 
 export default function ProvaCompleta() {
@@ -37,6 +40,7 @@ export default function ProvaCompleta() {
   const [open, setOpen] = React.useState(false);
 
   const finalizarProva = (e) => {
+    console.log("oi");
     dispatch(realizarProva({ ...prova, fodase: "" }));
     dispatch(
       setRealizarProva({
@@ -91,9 +95,54 @@ export default function ProvaCompleta() {
     );
   };
 
-  const comecarProva = () => {
-    setComecou(true);
+  const comecarProva = async () => {
+    if (!prova.publica) {
+      try {
+        await axios.get(
+          `http://localhost:8080/api/prova/validarDatas?id=${idProva}`,
+          { headers: AuthHeader() }
+        );
+      } catch (e) {
+        alert(
+          `Data inválida! Você só pode fazer essa prova entre ${prova.dataInicial} e  ${prova.dataFinal}`
+        );
+        return;
+      }
+    }
+    if (prova.tempo > 0 && !prova.publica) {
+      console.log("1");
+      try {
+        await axios.get(
+          `http://localhost:8080/api/prova/validarResolucoes?id=${idProva}`,
+          { headers: AuthHeader() }
+        );
+        const res = await axios.get(
+          `http://localhost:8080/api/prova/iniciarProva?id=${idProva}`,
+          { headers: AuthHeader() }
+        );
+        setTempoRestante(res.data.tempoRestante);
+        if (res.data.temTempo == true) setComecou(true);
+        else alert("Tempo Esgotado!");
+      } catch (e) {
+        alert("Numero máximo de tentativas atingido!");
+      }
+    } else if (prova.publica == true) {
+      setComecou(true);
+    } else {
+      console.log("3");
+      try {
+        await axios.get(
+          `http://localhost:8080/api/prova/validarResolucoes?id=${idProva}`,
+          { headers: AuthHeader() }
+        );
+        setComecou(true);
+      } catch (e) {
+        alert("Numero máximo de tentativas atingido!");
+      }
+    }
   };
+
+  const [tempoRestante, setTempoRestante] = useState(0);
   return (
     <div className="criar-prova">
       <div className="formulario-criar-prova">
@@ -101,6 +150,14 @@ export default function ProvaCompleta() {
         <InfosProva prova={prova} />
         {comecou ? (
           <>
+            {prova.tempo > 0 && !prova.publica ? (
+              <Countdown
+                seconds={tempoRestante}
+                finalizarProva={finalizarProva}
+              />
+            ) : (
+              <></>
+            )}
             {prova.questoes.map((questao) => (
               <ResponderQuestao
                 questao={questao}

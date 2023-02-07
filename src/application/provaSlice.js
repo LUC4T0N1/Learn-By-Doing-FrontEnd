@@ -14,8 +14,9 @@ const provaSlice = createSlice({
       idsQuestoes: [],
       quantidadeQuestoes: 0,
       tempo: 0,
-      dataInicial: new Date(),
-      dataFinal: new Date(),
+      dataInicial: null,
+      dataFinal: null,
+      tentativas: 0,
     },
     realizarProva: {
       nome: "",

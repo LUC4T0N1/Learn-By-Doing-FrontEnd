@@ -1,15 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const formatTime = (time) => {
-  let minutes = Math.floor(time / 60);
-  let seconds = Math.floor(time - minutes * 60);
+  let hours = Math.floor(time / 3600);
+  let minutes;
 
-  if (minutes <= 10) minutes = "0" + minutes;
-  if (seconds <= 10) seconds = "0" + seconds;
-  return minutes + ":" + seconds;
+  minutes = Math.floor(Number(time - hours * 3600) / 60);
+
+  let seconds = Math.floor(time - minutes * 60 - hours * 3600);
+
+  if (hours < 10) hours = "0" + hours;
+  if (minutes < 10) minutes = "0" + minutes;
+  if (seconds < 10) seconds = "0" + seconds;
+  return hours + ":" + minutes + ":" + seconds;
 };
 
-function Countdown({ seconds }) {
+function Countdown({ seconds, finalizarProva }) {
   const [countdown, setCountdown] = useState(seconds);
   const timerId = useRef();
 
@@ -23,7 +28,7 @@ function Countdown({ seconds }) {
   useEffect(() => {
     if (countdown <= 0) {
       clearInterval(timerId.current);
-      alert("end");
+      finalizarProva();
     }
   }, [countdown]);
 
