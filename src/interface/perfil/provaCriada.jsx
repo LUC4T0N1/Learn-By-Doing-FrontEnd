@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { getProva } from "../../application/provaSlice";
+import { getProvaCriada } from "../../application/provaSlice";
 import VisualizarQuestoesCriadas from "../prova/criar-prova/questoes/visualizar-questoes/VisualizarQuestoesCriadas";
 import InfosProva from "../prova/provaCompleta/InfosProva";
 
@@ -23,10 +23,10 @@ export default function ProvaCriada() {
     if (idProva == 0) {
       history.push("/");
     }
-    dispatch(getProva({ idProva: idProva }));
+    dispatch(getProvaCriada({ idProva: idProva }));
   }, [dispatch]);
 
-  const prova = useSelector((state) => state.provas.realizarProva);
+  const prova = useSelector((state) => state.provas.provaCriada);
 
   const atualizarRespostaQuestao = (e, idQuestao) => {
     return;

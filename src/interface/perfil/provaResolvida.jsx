@@ -36,7 +36,7 @@ export default function ProvaResolvida() {
     dispatch(getProvaFeita({ id: idProva }));
   }, [dispatch]);
 
-  const prova = useSelector((state) => state.provas.corrigirProva).provaDto;
+  const prova = useSelector((state) => state.provas.provaResolvida).provaDto;
 
   return (
     <div className="criar-prova">

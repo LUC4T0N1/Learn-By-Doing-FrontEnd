@@ -18,7 +18,6 @@ const autenticacaoSlice = createSlice({
       return { ...state, token: authData.token, uid: authData.usuario };
     },
     setRegistrar() {},
-    logar() {},
     logout(state, action) {
       localStorage.setItem("token", null);
       return { ...state, token: "", uid: "" };
@@ -26,6 +25,6 @@ const autenticacaoSlice = createSlice({
   },
 });
 
-export const { setUid, setToken, setRegistrar, logar, setAuth, logout } =
+export const { setUid, setToken, setRegistrar, setAuth, logout } =
   autenticacaoSlice.actions;
 export default autenticacaoSlice.reducer;

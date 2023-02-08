@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import {
   getProvaFazer,
-  realizarProva,
   setRealizarProva,
 } from "../../../application/provaSlice";
 import AuthHeader from "../../../AuthContext";
+import PopUp from "../../popup/PopUp";
 import "../criar-prova/criarProva.css";
 import ResponderQuestao from "../criar-prova/questoes/responder-questao/ResponderQuestao";
 import Countdown from "./Countdown";
@@ -37,11 +37,10 @@ export default function ProvaCompleta() {
 
   const prova = useSelector((state) => state.provas.realizarProva);
 
-  const [open, setOpen] = React.useState(false);
-
-  const finalizarProva = (e) => {
-    console.log("oi");
-    dispatch(realizarProva({ ...prova, fodase: "" }));
+  const finalizarProva = async (msg) => {
+    await axios.post(`http://localhost:8080/api/prova/realizar`, prova, {
+      headers: AuthHeader(),
+    });
     dispatch(
       setRealizarProva({
         realizarProva: {
@@ -57,19 +56,12 @@ export default function ProvaCompleta() {
         },
       })
     );
-  };
-  const handleClickOpen = (e) => {
-    setOpen(true);
-    let responderQuestoes = [];
-    prova.questoes.map((questao) => {
-      let quest = { respostaAluno: "", idQuestao: questao.id };
-      responderQuestoes.push(quest);
+    setPopup({
+      mensagem: msg,
+      mensagemFuncao: "Voltar para Home",
     });
-    dispatch(
-      setRealizarProva({ ...prova, questoesRespondidasDto: responderQuestoes })
-    );
+    setSucesso(false);
   };
-
   const atualizarRespostaQuestao = (e, idQuestao) => {
     const resposta = e.target.value;
     const resp = resposta;
@@ -103,14 +95,15 @@ export default function ProvaCompleta() {
           { headers: AuthHeader() }
         );
       } catch (e) {
-        alert(
-          `Data inválida! Você só pode fazer essa prova entre ${prova.dataInicial} e  ${prova.dataFinal}`
-        );
+        setPopup({
+          mensagem: `Data inválida! Você só pode fazer essa prova entre ${prova.dataInicial} e  ${prova.dataFinal}`,
+          mensagemFuncao: "Voltar para Home",
+        });
+        setSucesso(false);
         return;
       }
     }
     if (prova.tempo > 0 && !prova.publica) {
-      console.log("1");
       try {
         await axios.get(
           `http://localhost:8080/api/prova/validarResolucoes?id=${idProva}`,
@@ -121,15 +114,25 @@ export default function ProvaCompleta() {
           { headers: AuthHeader() }
         );
         setTempoRestante(res.data.tempoRestante);
-        if (res.data.temTempo == true) setComecou(true);
-        else alert("Tempo Esgotado!");
+        if (res.data.temTempo == true) {
+          setComecou(true);
+        } else {
+          setPopup({
+            mensagem: `Tempo Esgotado!`,
+            mensagemFuncao: "Voltar para Home",
+          });
+          setSucesso(false);
+        }
       } catch (e) {
-        alert("Numero máximo de tentativas atingido!");
+        setPopup({
+          mensagem: "Numero máximo de tentativas atingido!",
+          mensagemFuncao: "Voltar para Home",
+        });
+        setSucesso(false);
       }
     } else if (prova.publica == true) {
       setComecou(true);
     } else {
-      console.log("3");
       try {
         await axios.get(
           `http://localhost:8080/api/prova/validarResolucoes?id=${idProva}`,
@@ -137,45 +140,79 @@ export default function ProvaCompleta() {
         );
         setComecou(true);
       } catch (e) {
-        alert("Numero máximo de tentativas atingido!");
+        setPopup({
+          mensagem: "Numero máximo de tentativas atingido!",
+          mensagemFuncao: "Voltar para Home",
+        });
+        setSucesso(false);
       }
     }
   };
 
+  const [sucesso, setSucesso] = useState(true);
+  const [popup, setPopup] = useState({
+    mensagem: "",
+    mensagemFuncao: "",
+  });
+
+  function toHome() {
+    history.push(`/`);
+    setSucesso(true);
+  }
+
   const [tempoRestante, setTempoRestante] = useState(0);
   return (
-    <div className="criar-prova">
-      <div className="formulario-criar-prova">
-        <p className="criar-prova-titulo">{prova.nome}</p>
-        <InfosProva prova={prova} />
-        {comecou ? (
-          <>
-            {prova.tempo > 0 && !prova.publica ? (
-              <Countdown
-                seconds={tempoRestante}
-                finalizarProva={finalizarProva}
-              />
+    <>
+      {!sucesso ? (
+        <>
+          <PopUp
+            mensagem={popup.mensagem}
+            funcao={toHome}
+            mensagemFuncao={popup.mensagemFuncao}
+          />
+        </>
+      ) : (
+        <div className="criar-prova">
+          <div className="formulario-criar-prova">
+            <p className="criar-prova-titulo">{prova.nome}</p>
+            <InfosProva prova={prova} />
+            {comecou ? (
+              <>
+                {prova.tempo > 0 && !prova.publica ? (
+                  <Countdown
+                    seconds={tempoRestante}
+                    finalizarProva={() =>
+                      finalizarProva(
+                        "Tempo esgotado! Todo seu progresso foi salvo!"
+                      )
+                    }
+                  />
+                ) : (
+                  <></>
+                )}
+                {prova.questoes.map((questao) => (
+                  <ResponderQuestao
+                    questao={questao}
+                    atualizarRespostaQuestao={atualizarRespostaQuestao}
+                  />
+                ))}
+                <button
+                  className="botao-simples"
+                  onClick={() => finalizarProva("Prova enviada!")}
+                >
+                  Finalizar Prova
+                </button>
+              </>
             ) : (
-              <></>
+              <>
+                <button className="botao-simples" onClick={comecarProva}>
+                  Começar Prova
+                </button>
+              </>
             )}
-            {prova.questoes.map((questao) => (
-              <ResponderQuestao
-                questao={questao}
-                atualizarRespostaQuestao={atualizarRespostaQuestao}
-              />
-            ))}
-            <button className="botao-simples" onClick={finalizarProva}>
-              Finalizar Prova
-            </button>
-          </>
-        ) : (
-          <>
-            <button className="botao-simples" onClick={comecarProva}>
-              Começar Prova
-            </button>
-          </>
-        )}
-      </div>
-    </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

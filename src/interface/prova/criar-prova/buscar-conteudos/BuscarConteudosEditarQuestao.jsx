@@ -38,19 +38,7 @@ export default function BuscarConteudosEditarQuestao({
     const value = e.target.value;
     setConteudo({ ...conteudo, nome: value });
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (conteudo !== "") {
-      const res = await axios.post(
-        `http://localhost:8080/api/conteudo`,
-        conteudo,
-        { headers: AuthHeader() }
-      );
-      addConteudo(res.data.nome, res.data.idConteudo);
-    } else {
-      alert("preencha nome conteudo");
-    }
-  };
+
   const [open, setOpen] = React.useState(false);
   const [openEscolher, setOpenEscolher] = React.useState(false);
 

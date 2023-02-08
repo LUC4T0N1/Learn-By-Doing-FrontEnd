@@ -63,14 +63,31 @@ export default function CriarQuestoes({ handleClose }) {
   };
 
   const validar = () => {
-    if (
-      questao.enunciado &&
-      questao.valor > 0 &&
-      questao.conteudos.length > 0
-    ) {
+    if (!questao.enunciado) {
+      setErro({
+        erro: true,
+        mensagem: "O enunciado é obrigatório!",
+      });
+      return false;
+    } else if (questao.valor <= 0) {
+      setErro({
+        erro: true,
+        mensagem: "A questão deve valer mais que 0!",
+      });
+      return false;
+    } else if (questao.conteudos.length <= 0) {
+      setErro({
+        erro: true,
+        mensagem: "A questão deve pertencer a pelo menos um conteudo!",
+      });
+      return false;
+    } else {
       if (questao.multiplaEscolha) {
         if (questao.alternativas.length <= 1) {
-          alert("Crie pelo menos duas alternativas");
+          setErro({
+            erro: true,
+            mensagem: "Crie pelo menos duas alternativas!",
+          });
           return false;
         } else {
           let certos = 0;
@@ -83,7 +100,10 @@ export default function CriarQuestoes({ handleClose }) {
             }
           }
           if (certos != 1) {
-            alert("é permitido apenas uma alternativa correta");
+            setErro({
+              erro: true,
+              mensagem: "É permitida apenas uma alternativa correta",
+            });
             return false;
           } else {
             return true;
@@ -91,15 +111,15 @@ export default function CriarQuestoes({ handleClose }) {
         }
       } else {
         if (questao.resposta == "" || questao.resposta == null) {
-          alert("Escreva a resposta");
+          setErro({
+            erro: true,
+            mensagem: "Digite a resposta correta!",
+          });
           return false;
         } else {
           return true;
         }
       }
-    } else {
-      alert("preencha todos os campos");
-      return false;
     }
   };
 
@@ -156,6 +176,8 @@ export default function CriarQuestoes({ handleClose }) {
       );
     }
   };
+
+  const [erro, setErro] = useState({ erro: false, mensagem: "" });
 
   return (
     <div className="criar-questoes">
@@ -258,6 +280,7 @@ export default function CriarQuestoes({ handleClose }) {
       <button className="botao-simples" onClick={handleSubmit}>
         Criar Questão
       </button>
+      {erro.erro ? <p className="error-message">{erro.mensagem}</p> : <></>}
     </div>
   );
 }

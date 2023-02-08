@@ -1,23 +1,23 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import AuthHeader from "../../AuthContext";
 
 function ProvaPrivada() {
-  const [id, setId] = useState("");
-
+  const [erro, setErro] = useState(false);
+  const formRef = useRef();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   let history = useHistory();
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setId(value);
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const buscar = async (e) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/prova/obterIdProvaPrivada?idSecreto=${id}`,
+        `http://localhost:8080/api/prova/obterIdProvaPrivada?idSecreto=${formRef.current.idSecreto.value}`,
         { headers: AuthHeader() }
       );
       history.push({
@@ -25,33 +25,38 @@ function ProvaPrivada() {
         state: { idProva: response.data },
       });
     } catch (error) {
-      alert("Id inválido!");
+      setErro(true);
     }
   };
 
   return (
-    <div className="login">
-      <div className="login-container">
-        <div className="login-mini-container">
-          <div className="login-title" style={{ fontSize: "40px" }}>
-            Buscar Prova Privada
+    <form ref={formRef} onSubmit={handleSubmit(buscar)}>
+      <div className="login">
+        <div className="login-container">
+          <div className="login-mini-container">
+            <div className="login-title" style={{ fontSize: "40px" }}>
+              Buscar Prova Privada
+            </div>
+            <input
+              type="text"
+              className="input-texto-simples"
+              placeholder="ID Secreto..."
+              {...register("idSecreto", {
+                required: "Digitie o ID secreto da prova!",
+              })}
+            />
+            {errors.idSecreto ? (
+              <p className="error-message"> {errors.idSecreto.message} </p>
+            ) : (
+              ""
+            )}
+            {erro ? <p className="error-message"> ID inválido! </p> : ""}
+            <button className="botao-simples">Enviar</button>
           </div>
-          <input
-            type="text"
-            name="nome-prova"
-            className="input-texto-simples"
-            placeholder="ID Secreto..."
-            onChange={handleChange}
-          ></input>
-          <button className="botao-simples" onClick={handleSubmit}>
-            Enviar
-          </button>
         </div>
       </div>
-    </div>
+    </form>
   );
-  {
-  }
 }
 
 export default ProvaPrivada;

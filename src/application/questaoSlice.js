@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const questaoSlice = createSlice({
   name: "questoes",
   initialState: {
-    questoes: [],
     questao: {
       enunciado: "",
       publica: true,
@@ -14,7 +13,6 @@ const questaoSlice = createSlice({
       conteudos: [],
       nomeConteudos: [],
     },
-    filtroQuestoes: [],
   },
   reducers: {
     getQuestoes() {},

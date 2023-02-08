@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { cadastrarNovaProva, setProva } from "../../../application/provaSlice";
+import PopUp from "../../popup/PopUp";
 import BuscarConteudos from "./buscar-conteudos/BuscarConteudos";
 import "./criarProva.css";
 import InfosBasicas from "./infos-basicas/InfosBasicas";
@@ -32,12 +34,10 @@ function CriarProva() {
     }
   };
 
+  const [erro, setErro] = useState({ erro: false, mensagem: "" });
+
   const handleSubmit = (e) => {
-    console.log("AAAA " + prova.tentativas);
-    e.preventDefault();
-
     let errado = false;
-
     for (var i = 0; i < prova.questoes.length; i++) {
       if (prova.questoes[i].valor <= 0) {
         errado = true;
@@ -45,16 +45,35 @@ function CriarProva() {
       }
     }
     if (prova.questoes.length == 0) {
-      alert("A prova deve ter pelo menos uma questao!");
+      setErro({
+        erro: true,
+        mensagem: "A prova deve ter pelo menos uma questao!",
+      });
     } else if (errado) {
-      alert("Uma ou mais questões estão com valor inválida!");
+      setErro({
+        erro: true,
+        mensagem: "Uma ou mais questões estão com valor inválida!",
+      });
     } else if (
       (prova.publica == false || prova.publica == "false") &&
       prova.tentativas <= 0
     ) {
-      alert("A prova deve permitir pelo menos uma tentativa!");
+      setErro({
+        erro: true,
+        mensagem: "A prova deve permitir pelo menos uma tentativa!",
+      });
     } else {
-      if (prova.nome && prova.conteudos.length > 0) {
+      if (!prova.nome) {
+        setErro({
+          erro: true,
+          mensagem: "Digite o título da prova!",
+        });
+      } else if (prova.conteudos.length <= 0) {
+        setErro({
+          erro: true,
+          mensagem: "A prova deve conter pelo menos um conteúdo!",
+        });
+      } else {
         const idQuestoes = prova.questoes.map((quest) => quest.id);
         dispatch(
           cadastrarNovaProva({
@@ -63,8 +82,7 @@ function CriarProva() {
             quantidadeQuestoes: idQuestoes.length,
           })
         );
-      } else {
-        alert("preencha todos os campos");
+        setSucesso(true);
       }
     }
   };
@@ -75,43 +93,67 @@ function CriarProva() {
     return valor;
   };
 
+  let history = useHistory();
+  const [sucesso, setSucesso] = useState(false);
+  function toHome() {
+    history.push(`/`);
+    setSucesso(true);
+  }
+
   return (
-    <div className="criar-prova">
-      <div className="formulario-criar-prova">
-        <p className="criar-prova-titulo">Criar Prova</p>
-        <InfosBasicas handleChange={handleChange} />
-        <BuscarConteudos
-          tamanhoPagina={5}
-          adicionarConteudos={adicionarConteudosProva}
-        />
-        {prova.questoes.length > 0 ? (
-          prova.questoes.map((questao, index) => (
-            <VisualizarQuestoesCriadas
-              key={index}
-              questao={questao}
-              podeRemover={true}
-              numeroQuestao={index + 1}
-            />
-          ))
-        ) : (
-          <h1>Nenhuma Questão Adicionada</h1>
-        )}
-        <div className="footer-criar-prova">
-          <div className="infos-prova-footer">
-            <p>Valor Total: {obterValorTotal()}</p>
-            <p>Questões: {prova.questoes.length}</p>
-          </div>
-          <AdicionarQuestoes
-            idsQuestoes={prova.questoes.map((quest) => quest.id)}
+    <>
+      {sucesso ? (
+        <>
+          <PopUp
+            mensagem="Prova criada com sucesso!"
+            funcao={toHome}
+            mensagemFuncao="Voltar para Home"
           />
-          <div className="botao-criar-footer">
-            <button className="botao-simples" onClick={handleSubmit}>
-              Criar Prova
-            </button>
+        </>
+      ) : (
+        <div className="criar-prova">
+          <div className="formulario-criar-prova">
+            <p className="criar-prova-titulo">Criar Prova</p>
+            <InfosBasicas handleChange={handleChange} />
+            <BuscarConteudos
+              tamanhoPagina={5}
+              adicionarConteudos={adicionarConteudosProva}
+            />
+            {prova.questoes.length > 0 ? (
+              prova.questoes.map((questao, index) => (
+                <VisualizarQuestoesCriadas
+                  key={index}
+                  questao={questao}
+                  podeRemover={true}
+                  numeroQuestao={index + 1}
+                />
+              ))
+            ) : (
+              <h1>Nenhuma Questão Adicionada</h1>
+            )}
+            <div className="footer-criar-prova">
+              <div className="infos-prova-footer">
+                <p>Valor Total: {obterValorTotal()}</p>
+                <p>Questões: {prova.questoes.length}</p>
+              </div>
+              <AdicionarQuestoes
+                idsQuestoes={prova.questoes.map((quest) => quest.id)}
+              />
+              <div className="botao-criar-footer">
+                <button className="botao-simples" onClick={handleSubmit}>
+                  Criar Prova
+                </button>
+                {erro.erro ? (
+                  <p className="error-message">{erro.mensagem}</p>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

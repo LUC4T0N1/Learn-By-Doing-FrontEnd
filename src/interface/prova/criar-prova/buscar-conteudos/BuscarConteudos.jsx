@@ -48,10 +48,10 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
         setConteudo({ ...conteudo, nome: "" });
         setOpen(false);
       } catch {
-        alert("Conteudo já existente");
+        setErro({ erro: true, mensagem: "Conteudo já existente" });
       }
     } else {
-      alert("preencha nome conteudo");
+      setErro({ erro: true, mensagem: "Preencha o nome do conteudo" });
     }
   };
   const [open, setOpen] = React.useState(false);
@@ -92,6 +92,8 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
     }
   };
 
+  const [erro, setErro] = useState({ erro: false, mensagem: "" });
+
   return (
     <div className="buscar-conteudos">
       <div className="conteudos-selecionados">
@@ -123,6 +125,11 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
               <button className="botao-simples" onClick={handleSubmit}>
                 Criar
               </button>
+              {erro.erro ? (
+                <p className="error-message">{erro.mensagem}</p>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </>

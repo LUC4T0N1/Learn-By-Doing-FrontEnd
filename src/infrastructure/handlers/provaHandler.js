@@ -1,5 +1,9 @@
 import { call, put } from "@redux-saga/core/effects";
-import { setProvas, setRealizarProva } from "../../application/provaSlice";
+import {
+  setProvaCriada,
+  setProvas,
+  setRealizarProva,
+} from "../../application/provaSlice";
 import {
   cadastrarNovaProva,
   corrigirProva,
@@ -11,7 +15,6 @@ import {
   obterProvasFeitas,
   obterProvasPorConteudo,
   obterProvasRealizadas,
-  realizarProva,
 } from "../requests/provaRequest";
 
 export function* handleObterProvasPorConteudo(action) {
@@ -37,6 +40,17 @@ export function* handleObterProva(action) {
     const newObj = Object.assign({ selected: false }, prova);
     newObj["questoesRespondidasDto"] = [];
     yield put(setRealizarProva({ ...newObj }));
+  } catch (error) {}
+}
+
+export function* handleObterProvaCriada(action) {
+  try {
+    const { payload } = action;
+    const response = yield call(obterProva, payload.idProva);
+    const prova = response.data;
+    const newObj = Object.assign({ selected: false }, prova);
+    newObj["questoesRespondidasDto"] = [];
+    yield put(setProvaCriada({ ...newObj }));
   } catch (error) {}
 }
 
@@ -66,27 +80,6 @@ export function* handleCadastrarNovaProva(action) {
   try {
     const provaData = action.payload;
     const response = yield call(cadastrarNovaProva, provaData);
-    const status = response.status;
-    if (status == "200") {
-      alert("sucesso");
-    } else {
-      alert("erro");
-    }
-    window.location.reload();
-  } catch (error) {}
-}
-
-export function* handleRealizarProva(action) {
-  try {
-    const provaData = action.payload;
-    const response = yield call(realizarProva, provaData);
-    const status = response.status;
-    if (status == "200") {
-      alert("sucesso");
-    } else {
-      alert("erro");
-    }
-    window.location.reload();
   } catch (error) {}
 }
 
@@ -113,6 +106,17 @@ export function* handleObterProvaFeita(action) {
     const { payload } = action;
     const response = yield call(obterProvaFeita, payload.id);
     const data = {
+      provaResolvida: response.data,
+    };
+    yield put(setProvas({ ...data }));
+  } catch (error) {}
+}
+
+export function* handleObterProvaCorrigir(action) {
+  try {
+    const { payload } = action;
+    const response = yield call(obterProvaFeita, payload.id);
+    const data = {
       corrigirProva: response.data,
       provaCorrigida: { idProvaRealizada: response.data.id, questoes: [] },
     };
@@ -125,11 +129,6 @@ export function* handleCorrigirProva(action) {
     const { payload } = action;
     const response = yield call(corrigirProva, payload.body);
     const status = response.status;
-    if (status == "200") {
-      alert("sucesso");
-    } else {
-      alert("erro");
-    }
   } catch (error) {}
 }
 

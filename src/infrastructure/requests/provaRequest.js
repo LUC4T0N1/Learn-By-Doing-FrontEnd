@@ -30,10 +30,6 @@ export function cadastrarNovaProva(body) {
   return axios.post(`${url}`, body, { headers: AuthHeader() });
 }
 
-export function realizarProva(body) {
-  return axios.post(`${url}/realizar`, body, { headers: AuthHeader() });
-}
-
 export function obterProvasCriadas(pagina) {
   return axios.get(`${url}/buscarPU?pagina=${pagina}`, {
     headers: AuthHeader(),

@@ -3,8 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const provaSlice = createSlice({
   name: "provas",
   initialState: {
-    quantidade: 0,
-    provas: [],
     prova: {
       nome: "",
       publica: true,
@@ -29,9 +27,19 @@ const provaSlice = createSlice({
       tempo: 0,
       questoesRespondidasDto: [],
     },
-    provasCriadas: [],
-    provasFeitas: [],
+    provaCriada: {
+      nome: "",
+      publica: true,
+      conteudos: [],
+      nomeConteudos: [],
+      questoes: [],
+      idsQuestoes: [],
+      quantidadeQuestoes: 0,
+      tempo: 0,
+      questoesRespondidasDto: [],
+    },
     corrigirProva: { provaDto: { quantidadeQuestoes: 0, questoes: [] } },
+    provaResolvida: { provaDto: { quantidadeQuestoes: 0, questoes: [] } },
     provaCorrigida: { idProvaRealizada: 0, questoes: [] },
   },
   reducers: {
@@ -41,10 +49,11 @@ const provaSlice = createSlice({
     getProvasFeitas() {},
     getProvasRealizadas() {},
     getProvaFeita() {},
+    getProvaCorrigir() {},
     getProva() {},
+    getProvaCriada() {},
     getProvaFazer() {},
     getProvaPrivada() {},
-    realizarProva() {},
     cadastrarNovaProva() {},
     corrigirProva() {},
     setProva(state, action) {
@@ -54,6 +63,10 @@ const provaSlice = createSlice({
     setRealizarProva(state, action) {
       const provaData = action.payload;
       return { ...state, realizarProva: provaData };
+    },
+    setProvaCriada(state, action) {
+      const provaData = action.payload;
+      return { ...state, provaCriada: provaData };
     },
     setCorrecaoProva(state, action) {
       const provaData = action.payload;
@@ -77,16 +90,18 @@ const provaSlice = createSlice({
 export const {
   getProvasPorConteudo,
   getProva,
+  getProvaCriada,
   setProvas,
   setProva,
   cadastrarNovaProva,
   setRealizarProva,
+  setProvaCriada,
   setRespostaQuestao,
-  realizarProva,
   getProvasCriadas,
   setProvasCriadas,
   getProvasFeitas,
   getProvaFeita,
+  getProvaCorrigir,
   setCorrecaoProva,
   corrigirProva,
   getProvasRealizadas,

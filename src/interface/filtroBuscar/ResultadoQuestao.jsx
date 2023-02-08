@@ -9,6 +9,8 @@ export default function ResultadoQuestao({ questao, handleClose }) {
   const prova = useSelector((state) => state.provas.prova);
   const [valorQuestao, setValorQuestao] = useState(0);
 
+  const [erro, setErro] = useState(false);
+
   const addQuestao = () => {
     if (valorQuestao > 0) {
       let q = questao;
@@ -17,7 +19,7 @@ export default function ResultadoQuestao({ questao, handleClose }) {
       dispatch(setProva({ ...prova, questoes: prova.questoes.concat(q) }));
       handleClose();
     } else {
-      alert("O valor da questao deve ser maior que 0");
+      setErro(true);
     }
   };
 
@@ -77,6 +79,13 @@ export default function ResultadoQuestao({ questao, handleClose }) {
       </div>
       <div>
         <button onClick={addQuestao}>Adicionar à prova</button>
+        {erro ? (
+          <p className="error-message">
+            O valor da questao deve ser maior que 0
+          </p>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

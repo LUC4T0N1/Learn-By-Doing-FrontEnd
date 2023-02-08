@@ -20,12 +20,9 @@ const perfilSlice = createSlice({
       const perfilData = action.payload;
       return { ...state, ...perfilData };
     },
-    completarPerfil() {},
     getPerfil() {},
-    criarConta() {},
   },
 });
 
-export const { setPerfil, completarPerfil, getPerfil, criarConta } =
-  perfilSlice.actions;
+export const { setPerfil, getPerfil } = perfilSlice.actions;
 export default perfilSlice.reducer;

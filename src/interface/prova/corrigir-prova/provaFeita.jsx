@@ -1,12 +1,8 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import {
-  corrigirProva,
-  setCorrecaoProva,
-  setProvas,
-} from "../../../application/provaSlice";
+import { setCorrecaoProva, setProvas } from "../../../application/provaSlice";
 import AuthHeader from "../../../AuthContext";
 import CorrigirQuestao from "../criar-prova/questoes/corrigirQuestao/CorrigirQuestao";
 import InfosProva from "../provaCompleta/InfosProva";
@@ -29,8 +25,7 @@ export default function ProvaFeita() {
     if (idProvaFeita == 0) {
       history.push("/");
     }
-
-    const fodase = async () => {
+    const ajustar = async () => {
       const response = await axios.get(
         `http://localhost:8080/api/prova/buscarRID?id=${idProvaFeita}`,
         { headers: AuthHeader() }
@@ -57,18 +52,22 @@ export default function ProvaFeita() {
         })
       );
     };
-    fodase();
+    ajustar();
   }, [dispatch]);
 
   const prova = useSelector((state) => state.provas.corrigirProva);
   const correcao = useSelector((state) => state.provas.provaCorrigida);
+  const [sucesso, setSucesso] = useState(false);
+  const [correcaoInvalida, setCorrecaoInvalida] = useState(false);
+  const [erro, setErro] = useState(false);
 
-  const finalizarCorrecao = (e) => {
+  const finalizarCorrecao = async (e) => {
     e.preventDefault();
     let errado = false;
 
     for (var i = 0; i < correcao.questoes.length; i++) {
       if (
+        correcao.questoes[i].notaQuestao == undefined ||
         correcao.questoes[i].notaQuestao < 0 ||
         correcao.questoes[i].notaQuestao === "" ||
         correcao.questoes[i].notaQuestao > correcao.questoes[i].valorQuestao
@@ -78,9 +77,24 @@ export default function ProvaFeita() {
       }
     }
     if (errado) {
-      alert("Uma ou mais questões estão com uma nota inválida!");
+      setCorrecaoInvalida(true);
+      setSucesso(false);
     } else {
-      dispatch(corrigirProva({ body: correcao }));
+      setCorrecaoInvalida(false);
+      try {
+        await axios.put(
+          `http://localhost:8080/api/prova/corrigirDissertativa`,
+          correcao,
+          {
+            headers: AuthHeader(),
+          }
+        );
+        setSucesso(true);
+        setErro(false);
+      } catch (e) {
+        setErro(true);
+        setSucesso(false);
+      }
     }
   };
 
@@ -175,6 +189,28 @@ export default function ProvaFeita() {
         <button className="botao-simples" onClick={finalizarCorrecao}>
           Finalizar Correção
         </button>
+        {erro ? (
+          <p className="error-message">
+            Ocorreu algum erro! Tente novamente mais tarde
+          </p>
+        ) : (
+          <></>
+        )}
+        {correcaoInvalida ? (
+          <p className="error-message">
+            Uma ou mais questões estão com uma nota inválida!
+          </p>
+        ) : (
+          <></>
+        )}
+        {sucesso ? (
+          <p className="success-message">
+            Prova corrigida com sucesso! Você pode alterar a correção quantas
+            vezes quiser!
+          </p>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

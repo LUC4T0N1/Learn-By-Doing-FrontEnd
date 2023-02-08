@@ -1,7 +1,7 @@
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProva } from "../../../../../application/provaSlice";
 import { setQuestao } from "../../../../../application/questaoSlice";
@@ -37,13 +37,76 @@ export default function EditarQuestoes({ handleClose }) {
     dispatch(setQuestao({ ...questao, [nome]: value }));
   };
 
+  const validar = () => {
+    if (!questao.enunciado) {
+      setErro({
+        erro: true,
+        mensagem: "O enunciado é obrigatório!",
+      });
+      return false;
+    } else if (questao.valor <= 0) {
+      setErro({
+        erro: true,
+        mensagem: "A questão deve valer mais que 0!",
+      });
+      return false;
+    } else if (questao.conteudos.length <= 0) {
+      setErro({
+        erro: true,
+        mensagem: "A questão deve pertencer a pelo menos um conteudo!",
+      });
+      return false;
+    } else {
+      if (questao.multiplaEscolha) {
+        if (questao.alternativas.length <= 1) {
+          setErro({
+            erro: true,
+            mensagem: "Crie pelo menos duas alternativas!",
+          });
+          return false;
+        } else {
+          let certos = 0;
+          for (var i = 0; i < questao.alternativas.length; i++) {
+            if (
+              questao.alternativas[i].correta == true ||
+              questao.alternativas[i].correta == "true"
+            ) {
+              certos = certos + 1;
+            }
+          }
+          if (certos != 1) {
+            setErro({
+              erro: true,
+              mensagem: "É permitida apenas uma alternativa correta",
+            });
+            return false;
+          } else {
+            return true;
+          }
+        }
+      } else {
+        if (questao.resposta == "" || questao.resposta == null) {
+          setErro({
+            erro: true,
+            mensagem: "Digite a resposta correta!",
+          });
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (questao.enunciado) {
+    let questaoValida = validar();
+    if (questaoValida == true) {
       const res = await axios.put(
         `http://localhost:8080/api/questao`,
         questao,
-        { headers: AuthHeader() }
+        {
+          headers: AuthHeader(),
+        }
       );
       let questoes = prova.questoes.map((item) =>
         Object.assign({}, item, { selected: false })
@@ -67,8 +130,6 @@ export default function EditarQuestoes({ handleClose }) {
         })
       );
       handleClose();
-    } else {
-      alert("preencha todos os campos");
     }
   };
 
@@ -101,6 +162,8 @@ export default function EditarQuestoes({ handleClose }) {
     });
     return array;
   };
+
+  const [erro, setErro] = useState({ erro: false, mensagem: "" });
 
   return (
     <div className="criar-questoes">
@@ -229,6 +292,7 @@ export default function EditarQuestoes({ handleClose }) {
       <button className="botao-simples" onClick={handleSubmit}>
         Editar Questão
       </button>
+      {erro.erro ? <p className="error-message">{erro.mensagem}</p> : <></>}
     </div>
   );
 }

@@ -1,19 +1,11 @@
 import { takeLatest } from "redux-saga/effects";
-import { logar } from "../application/autenticacaoSlice";
-import {
-  criarConteudo,
-  filtrarConteudos,
-  getConteudos,
-} from "../application/conteudoSlice";
-import {
-  completarPerfil,
-  criarConta,
-  getPerfil,
-} from "../application/perfilSlice";
+import { getPerfil } from "../application/perfilSlice";
 import {
   cadastrarNovaProva,
   corrigirProva,
   getProva,
+  getProvaCorrigir,
+  getProvaCriada,
   getProvaFazer,
   getProvaFeita,
   getProvaPrivada,
@@ -21,24 +13,15 @@ import {
   getProvasFeitas,
   getProvasPorConteudo,
   getProvasRealizadas,
-  realizarProva,
 } from "../application/provaSlice";
 import { cadastrarNovaQuestao, getQuestoes } from "../application/questaoSlice";
-import { handleLogar } from "./handlers/autenticacaoHandler";
-import {
-  handleCriarConteudo,
-  handleFiltrarConteudos,
-  handleObterConteudos,
-} from "./handlers/conteudoHandler";
-import {
-  handleBuscarPerfil,
-  handleCompletarPerfil,
-  handleCriarConta,
-} from "./handlers/perfilHandler";
+import { handleBuscarPerfil } from "./handlers/perfilHandler";
 import {
   handleCadastrarNovaProva,
   handleCorrigirProva,
   handleObterProva,
+  handleObterProvaCorrigir,
+  handleObterProvaCriada,
   handleObterProvaFazer,
   handleObterProvaFeita,
   handleObterProvaPrivada,
@@ -46,7 +29,6 @@ import {
   handleObterProvasFeitas,
   handleObterProvasPorConteudo,
   handleObterProvasRealizadas,
-  handleRealizarProva,
 } from "./handlers/provaHandler";
 import {
   handleCriarQuestao,
@@ -54,24 +36,19 @@ import {
 } from "./handlers/questaoHandler";
 
 export function* watcherSaga() {
-  yield takeLatest(getConteudos.type, handleObterConteudos);
-  yield takeLatest(criarConteudo.type, handleCriarConteudo);
   yield takeLatest(getProvasPorConteudo.type, handleObterProvasPorConteudo);
   yield takeLatest(getProva.type, handleObterProva);
+  yield takeLatest(getProvaCriada.type, handleObterProvaCriada);
   yield takeLatest(cadastrarNovaProva.type, handleCadastrarNovaProva);
   yield takeLatest(cadastrarNovaQuestao.type, handleCriarQuestao);
   yield takeLatest(getQuestoes.type, handleObterQuestoes);
-  yield takeLatest(realizarProva.type, handleRealizarProva);
   yield takeLatest(getProvasCriadas.type, handleObterProvasCriadas);
   yield takeLatest(getProvasFeitas.type, handleObterProvasFeitas);
   yield takeLatest(getProvaFeita.type, handleObterProvaFeita);
+  yield takeLatest(getProvaCorrigir.type, handleObterProvaCorrigir);
   yield takeLatest(corrigirProva.type, handleCorrigirProva);
   yield takeLatest(getProvasRealizadas.type, handleObterProvasRealizadas);
-  yield takeLatest(completarPerfil.type, handleCompletarPerfil);
   yield takeLatest(getPerfil.type, handleBuscarPerfil);
-  yield takeLatest(filtrarConteudos.type, handleFiltrarConteudos);
   yield takeLatest(getProvaPrivada.type, handleObterProvaPrivada);
-  yield takeLatest(criarConta.type, handleCriarConta);
-  yield takeLatest(logar.type, handleLogar);
   yield takeLatest(getProvaFazer.type, handleObterProvaFazer);
 }

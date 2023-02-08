@@ -19,11 +19,6 @@ export function* handleCriarQuestao(action) {
         questoes: payload.prova.questoes.concat(newObj),
       })
     );
-    if (status == "200") {
-      alert("sucesso");
-    } else {
-      alert("erro");
-    }
   } catch (error) {}
 }
 
