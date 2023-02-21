@@ -2,6 +2,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { setProva } from "../../../../../application/provaSlice";
 import { setQuestao } from "../../../../../application/questaoSlice";
@@ -10,6 +11,7 @@ import BuscarConteudosEditarQuestao from "../../buscar-conteudos/BuscarConteudos
 import CriarAlternativas from "../criar-questao/criar-alternativas/CriarAlternativas";
 
 export default function EditarQuestoes({ handleClose }) {
+  const { t } = useTranslation();
   const prova = useSelector((state) => state.provas.prova);
   const questao = useSelector((state) => state.questoes.questao);
 
@@ -41,19 +43,19 @@ export default function EditarQuestoes({ handleClose }) {
     if (!questao.enunciado) {
       setErro({
         erro: true,
-        mensagem: "O enunciado é obrigatório!",
+        mensagem: t("questao-aviso-1"),
       });
       return false;
     } else if (questao.valor <= 0) {
       setErro({
         erro: true,
-        mensagem: "A questão deve valer mais que 0!",
+        mensagem: t("questao-aviso-2"),
       });
       return false;
     } else if (questao.conteudos.length <= 0) {
       setErro({
         erro: true,
-        mensagem: "A questão deve pertencer a pelo menos um conteudo!",
+        mensagem: t("questao-aviso-3"),
       });
       return false;
     } else {
@@ -61,7 +63,7 @@ export default function EditarQuestoes({ handleClose }) {
         if (questao.alternativas.length <= 1) {
           setErro({
             erro: true,
-            mensagem: "Crie pelo menos duas alternativas!",
+            mensagem: t("questao-aviso-4"),
           });
           return false;
         } else {
@@ -77,7 +79,7 @@ export default function EditarQuestoes({ handleClose }) {
           if (certos != 1) {
             setErro({
               erro: true,
-              mensagem: "É permitida apenas uma alternativa correta",
+              mensagem: t("questao-aviso-5"),
             });
             return false;
           } else {
@@ -88,7 +90,7 @@ export default function EditarQuestoes({ handleClose }) {
         if (questao.resposta == "" || questao.resposta == null) {
           setErro({
             erro: true,
-            mensagem: "Digite a resposta correta!",
+            mensagem: t("questao-aviso-6"),
           });
           return false;
         } else {
@@ -182,7 +184,7 @@ export default function EditarQuestoes({ handleClose }) {
           name="enunciado"
           className="input-texto-simples"
           value={questao.enunciado}
-          placeholder="Enunciado..."
+          placeholder={t("enunciado...")}
           onChange={handleChange}
         />
         <select
@@ -194,15 +196,15 @@ export default function EditarQuestoes({ handleClose }) {
           {questao.publica == true || questao.publica == "true" ? (
             <>
               <option selected="selected" value={true}>
-                Pública
+                {t("publica")}
               </option>
-              <option value={false}>Privada</option>
+              <option value={false}>{t("privada")}</option>
             </>
           ) : (
             <>
-              <option value={true}>Pública</option>
+              <option value={true}>{t("publica")}</option>
               <option selected="selected" value={false}>
-                Privada
+                {t("privada")}
               </option>
             </>
           )}
@@ -234,13 +236,13 @@ export default function EditarQuestoes({ handleClose }) {
           !questao.multiplaEscolha == "true" ? (
             <>
               <option selected="selected" value={false}>
-                Dissertativa
+                {t("dissertativa")}
               </option>
             </>
           ) : (
             <>
               <option selected="selected" value={true}>
-                Múltipla Escolha
+                {t("multipla-escolha")}
               </option>
             </>
           )}
@@ -253,7 +255,7 @@ export default function EditarQuestoes({ handleClose }) {
             type="text"
             name="resposta"
             className="input-texto-grande"
-            placeholder="Resposta..."
+            placeholder={t("resposta...")}
             value={questao.resposta}
             onChange={handleChange}
           ></textarea>
@@ -269,7 +271,8 @@ export default function EditarQuestoes({ handleClose }) {
                       {" "}
                       {questao.alternativas.findIndex((a) => a === alt) +
                         1}{" "}
-                      {alt.enunciado} {alt.correta ? "correta" : "incorreta"}{" "}
+                      {alt.enunciado}{" "}
+                      {alt.correta ? t("correta") : t("incorreta")}{" "}
                     </h3>
                     <button
                       className="remover-alternativa-botao"
@@ -281,7 +284,7 @@ export default function EditarQuestoes({ handleClose }) {
                 ))}
               </div>
             ) : (
-              <h3> Nenhuma Alternativa Por Enquanto </h3>
+              <h3> {t("zero-alternativas")}</h3>
             )}
           </div>
           <CriarAlternativas
@@ -290,7 +293,7 @@ export default function EditarQuestoes({ handleClose }) {
         </>
       )}
       <button className="botao-simples" onClick={handleSubmit}>
-        Editar Questão
+        {t("editar-questao")}
       </button>
       {erro.erro ? <p className="error-message">{erro.mensagem}</p> : <></>}
     </div>

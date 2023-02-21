@@ -1,6 +1,7 @@
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cadastrarNovaQuestao,
@@ -11,6 +12,7 @@ import CriarAlternativas from "./criar-alternativas/CriarAlternativas";
 import "./CriarQuestoes.css";
 
 export default function CriarQuestoes({ handleClose }) {
+  const { t } = useTranslation();
   const [publica, setPublica] = useState(true);
   const [dissertativa, setDissertativa] = useState(true);
 
@@ -66,19 +68,19 @@ export default function CriarQuestoes({ handleClose }) {
     if (!questao.enunciado) {
       setErro({
         erro: true,
-        mensagem: "O enunciado é obrigatório!",
+        mensagem: t("questao-aviso-1"),
       });
       return false;
     } else if (questao.valor <= 0) {
       setErro({
         erro: true,
-        mensagem: "A questão deve valer mais que 0!",
+        mensagem: t("questao-aviso-2"),
       });
       return false;
     } else if (questao.conteudos.length <= 0) {
       setErro({
         erro: true,
-        mensagem: "A questão deve pertencer a pelo menos um conteudo!",
+        mensagem: t("questao-aviso-3"),
       });
       return false;
     } else {
@@ -86,7 +88,7 @@ export default function CriarQuestoes({ handleClose }) {
         if (questao.alternativas.length <= 1) {
           setErro({
             erro: true,
-            mensagem: "Crie pelo menos duas alternativas!",
+            mensagem: t("questao-aviso-4"),
           });
           return false;
         } else {
@@ -102,7 +104,7 @@ export default function CriarQuestoes({ handleClose }) {
           if (certos != 1) {
             setErro({
               erro: true,
-              mensagem: "É permitida apenas uma alternativa correta",
+              mensagem: t("questao-aviso-5"),
             });
             return false;
           } else {
@@ -113,7 +115,7 @@ export default function CriarQuestoes({ handleClose }) {
         if (questao.resposta == "" || questao.resposta == null) {
           setErro({
             erro: true,
-            mensagem: "Digite a resposta correta!",
+            mensagem: t("questao-aviso-6"),
           });
           return false;
         } else {
@@ -195,7 +197,7 @@ export default function CriarQuestoes({ handleClose }) {
           type="text"
           name="enunciado"
           className="input-texto-simples"
-          placeholder="Enunciado..."
+          placeholder={t("enunciado...")}
           onChange={handleChange}
         ></input>
         <select
@@ -204,8 +206,8 @@ export default function CriarQuestoes({ handleClose }) {
           className="select-simples"
           onChange={mudarPrivacidade}
         >
-          <option value={true}>Pública</option>
-          <option value={false}>Privada</option>
+          <option value={true}>{t("publica")}</option>
+          <option value={false}>{t("privada")}</option>
         </select>
       </div>
       <div className="mini-container">
@@ -220,7 +222,7 @@ export default function CriarQuestoes({ handleClose }) {
           min="0.1"
           name="valor"
           className="input-numero-simples"
-          placeholder="Valor..."
+          placeholder={t("valor...")}
           onChange={handleChange}
         ></input>
         <select
@@ -229,8 +231,8 @@ export default function CriarQuestoes({ handleClose }) {
           className="select-simples"
           onChange={mudarTipoQuestao}
         >
-          <option value={false}>Dissertativa</option>
-          <option value={true}>Múltipla Escolha</option>
+          <option value={false}>{t("dissertativa")}</option>
+          <option value={true}>{t("multipla-escolha")}</option>
         </select>
       </div>
       {dissertativa ? (
@@ -239,7 +241,7 @@ export default function CriarQuestoes({ handleClose }) {
             type="text"
             name="resposta"
             className="input-texto-grande"
-            placeholder="Resposta..."
+            placeholder={t("resposta...")}
             onChange={handleChange}
           ></textarea>
         </>
@@ -256,8 +258,8 @@ export default function CriarQuestoes({ handleClose }) {
                         1}{" "}
                       {alt.enunciado}{" "}
                       {alt.correta == true || alt.correta == "true"
-                        ? "correta"
-                        : "incorreta"}{" "}
+                        ? t("correta")
+                        : t("incorreta")}{" "}
                     </h3>
                     <button
                       className="remover-alternativa-botao"
@@ -269,7 +271,7 @@ export default function CriarQuestoes({ handleClose }) {
                 ))}
               </div>
             ) : (
-              <h3> Nenhuma Alternativa Por Enquanto </h3>
+              <h3>{t("zero-alternativas")}</h3>
             )}
           </div>
           <CriarAlternativas
@@ -278,7 +280,7 @@ export default function CriarQuestoes({ handleClose }) {
         </>
       )}
       <button className="botao-simples" onClick={handleSubmit}>
-        Criar Questão
+        {t("criar-questao")}
       </button>
       {erro.erro ? <p className="error-message">{erro.mensagem}</p> : <></>}
     </div>

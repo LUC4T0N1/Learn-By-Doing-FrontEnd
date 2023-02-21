@@ -1,11 +1,14 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { getPerfil } from "../../application/perfilSlice";
 import AuthHeader from "../../AuthContext";
 import "./perfil.css";
 
 function Perfil() {
+  const { t } = useTranslation();
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const formRef = useRef();
@@ -38,11 +41,17 @@ function Perfil() {
     }
   };
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPerfil());
+  }, []);
+
   return (
     <div className="perfil">
       <div className="perfil-esquerda">
         <div className="perfil-campo">
-          <p className="perfil-campo-nome">Nome: </p>
+          <p className="perfil-campo-nome">{t("nome")}</p>
           <p className="perfil-campo-valor">{perfil.nome}</p>
         </div>
         <div className="perfil-campo">
@@ -50,13 +59,13 @@ function Perfil() {
           <p className="perfil-campo-valor">{perfil.email}</p>
         </div>
         <div className="perfil-campo">
-          <p className="perfil-campo-nome">Data de Criação do Perfil: </p>
+          <p className="perfil-campo-nome">{t("criacao-perfil-data")}</p>
           <p className="perfil-campo-valor">{perfil.dataCriacao}</p>
         </div>
         <div className="trocar-senha">
           {!open ? (
             <button className="botao-simples" onClick={() => setOpen(true)}>
-              Trocar senha
+              {t("trocar-senha")}
             </button>
           ) : (
             <>
@@ -68,18 +77,17 @@ function Perfil() {
                 <input
                   type="password"
                   className="input-texto-simples"
-                  placeholder="Senha Atual..."
+                  placeholder={t("senha-atual")}
                   {...register("senhaAtual", {
-                    required: "A senha atual é obrigatoria!",
+                    required: t("senha-atual-obrigatoria"),
                     minLength: {
                       value: 8,
-                      message: "A senha deve conter pelo menos 8 digitos!",
+                      message: t("senha-pequena"),
                     },
                     pattern: {
                       value:
                         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g,
-                      message:
-                        "A senha deve conter pelo menos uma letra maiúscula, um caracter especial, um número e 8 caracteres!",
+                      message: t("senha-invalida"),
                     },
                   })}
                 />
@@ -93,16 +101,15 @@ function Perfil() {
                   className="input-texto-simples"
                   placeholder="Senha Nova..."
                   {...register("senhaNova", {
-                    required: "A senha atual é obrigatoria!",
+                    required: t("senha-nova-obrigatoria"),
                     minLength: {
                       value: 8,
-                      message: "A senha deve conter pelo menos 8 digitos!",
+                      message: t("senha-pequena"),
                     },
                     pattern: {
                       value:
                         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g,
-                      message:
-                        "A senha deve conter pelo menos uma letra maiúscula, um caracter especial, um número e 8 caracteres!",
+                      message: t("senha-invalida"),
                     },
                   })}
                 />
@@ -118,7 +125,7 @@ function Perfil() {
                   {...register("senhaNovaConfirmacao", {
                     validate: (value) =>
                       value === formRef.current.senhaNova.value ||
-                      "As senhas não são iguais!",
+                      t("senhas-diferentes"),
                   })}
                 />
                 {errors.senhaNovaConfirmacao ? (
@@ -129,14 +136,14 @@ function Perfil() {
                 ) : (
                   ""
                 )}
-                <button className="botao-simples">Trocar senha</button>
+                <button className="botao-simples">{t("trocar-senha")}</button>
                 {sucesso ? (
-                  <p className="success-message">Senha trocada com sucesso!</p>
+                  <p className="success-message">{t("senha-trocada")}</p>
                 ) : (
                   <></>
                 )}
                 {erro ? (
-                  <p className="error-message">Senha Antiga incorreta!</p>
+                  <p className="error-message">{t("senha-antiga-incorreta")}</p>
                 ) : (
                   <></>
                 )}
@@ -147,27 +154,27 @@ function Perfil() {
       </div>
       <div className="perfil-direita">
         <div className="perfil-campo">
-          <p className="perfil-campo-nome">Provas Criadas: </p>
+          <p className="perfil-campo-nome">{t("provas-criadas")}</p>
           <p className="perfil-campo-valor">{perfil.provasCriadas}</p>
         </div>
         <div className="perfil-campo">
-          <p className="perfil-campo-nome">Provas Resolvidas: </p>
+          <p className="perfil-campo-nome">{t("provas-resolvidas")}</p>
           <p className="perfil-campo-valor">{perfil.provasResolvidas}</p>
         </div>
         <div className="perfil-campo">
-          <p className="perfil-campo-nome">Resolucoes das suas provas: </p>
+          <p className="perfil-campo-nome">{t("resolucoes-provas")}</p>
           <p className="perfil-campo-valor">{perfil.provasCorrigidas}</p>
         </div>
         <div className="perfil-campo">
-          <p className="perfil-campo-nome">Questões Criadas: </p>
+          <p className="perfil-campo-nome">{t("questoes-criadas")}</p>
           <p className="perfil-campo-valor">{perfil.questoesCriadas}</p>
         </div>
         <div className="perfil-campo">
-          <p className="perfil-campo-nome">Questões Resolvidas: </p>
+          <p className="perfil-campo-nome">{t("questoes-resolvidas")}</p>
           <p className="perfil-campo-valor">{perfil.questoesResolvidas}</p>
         </div>
         <div className="perfil-campo">
-          <p className="perfil-campo-nome">Conteudos Criados: </p>
+          <p className="perfil-campo-nome">{t("conteudos-criados")}</p>
           <p className="perfil-campo-valor">{perfil.conteudosCriados}</p>
         </div>
       </div>

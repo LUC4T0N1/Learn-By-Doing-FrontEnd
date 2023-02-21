@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { getProvaCriada } from "../../application/provaSlice";
@@ -6,6 +7,7 @@ import VisualizarQuestoesCriadas from "../prova/criar-prova/questoes/visualizar-
 import InfosProva from "../prova/provaCompleta/InfosProva";
 
 export default function ProvaCriada() {
+  const { t } = useTranslation();
   let history = useHistory();
   const location = useLocation();
   const obterIdProva = () => {
@@ -57,7 +59,7 @@ export default function ProvaCriada() {
           className="botao-simples"
           onClick={() => history.push("/perfil/provas-criadas")}
         >
-          Voltar
+          {t("voltar")}
         </button>
       </div>
     </div>

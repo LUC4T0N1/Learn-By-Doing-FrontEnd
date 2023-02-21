@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import AuthHeader from "../../AuthContext";
 import FiltroBuscar from "../filtroBuscar/FiltroBuscar";
 
 function ProvasResolvidas() {
+  const { t } = useTranslation();
   const [quantidade, setQuantidade] = useState(0);
   const [provas, setProvas] = useState([]);
 
@@ -20,8 +22,8 @@ function ProvasResolvidas() {
     <>
       <FiltroBuscar
         tamanhoPagina={5}
-        titulo={"Provas"}
-        opcoesFiltro={["Data"]}
+        titulo={t("provas")}
+        opcoesFiltro={[t("data")]}
         buscarFiltrado={buscarFiltrado}
         objetos={provas}
         quantidade={quantidade}

@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../application/autenticacaoSlice";
 import PopUp from "../popup/PopUp";
 
 function Registrar() {
+  const { t } = useTranslation();
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const formRef = useRef();
@@ -43,9 +45,9 @@ function Registrar() {
       {sucesso ? (
         <>
           <PopUp
-            mensagem={"Conta criada com sucesso!"}
+            mensagem={t("conta-criada")}
             funcao={toLogin}
-            mensagemFuncao={"Ir para o login"}
+            mensagemFuncao={t("ir-login")}
           />
         </>
       ) : (
@@ -53,16 +55,16 @@ function Registrar() {
           <div className="login">
             <div className="login-container">
               <div className="login-mini-container">
-                <div className="login-title">Criar Conta</div>
+                <div className="login-title">{t("criar-conta")}</div>
                 <input
                   className="input-texto-simples"
                   placeholder="E-mail..."
                   {...register("email", {
-                    required: "O e-mail é obrigatorio!",
+                    required: t("email-obrigatorio"),
                     pattern: {
                       value:
                         /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                      message: "E-mail com formato inválido!",
+                      message: t("email-invalido"),
                     },
                   })}
                 />
@@ -73,12 +75,12 @@ function Registrar() {
                 )}
                 <input
                   className="input-texto-simples"
-                  placeholder="Nome..."
+                  placeholder={t("nome...")}
                   {...register("nome", {
-                    required: "O nome é obrigatorio!",
+                    required: t("nome-obrigatorio"),
                     minLength: {
                       value: 6,
-                      message: "O nome deve conter pelo menos 6 digitos!",
+                      message: t("nome-pequeno"),
                     },
                   })}
                 />
@@ -90,18 +92,17 @@ function Registrar() {
                 <input
                   type="password"
                   className="input-texto-simples"
-                  placeholder="Senha..."
+                  placeholder={t("senha...")}
                   {...register("senha", {
-                    required: "A senha é obrigatoria!",
+                    required: t("senha-obrigatoria"),
                     minLength: {
                       value: 8,
-                      message: "A senha deve conter pelo menos 8 digitos!",
+                      message: t("senha-pequena"),
                     },
                     pattern: {
                       value:
                         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g,
-                      message:
-                        "A senha deve conter pelo menos uma letra maiúscula, um caracter especial, um número e 8 caracteres!",
+                      message: t("senha-invalida"),
                     },
                   })}
                 />
@@ -110,9 +111,9 @@ function Registrar() {
                 ) : (
                   ""
                 )}
-                <button className="botao-simples">Registrar</button>
+                <button className="botao-simples">{t("registrar")}</button>
                 {erro ? (
-                  <p className="error-message">E-mail já cadastrado!</p>
+                  <p className="error-message">{t("email-repetido")}</p>
                 ) : (
                   <></>
                 )}

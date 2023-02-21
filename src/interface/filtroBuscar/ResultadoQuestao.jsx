@@ -1,10 +1,12 @@
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { setProva } from "../../application/provaSlice";
 
 export default function ResultadoQuestao({ questao, handleClose }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const prova = useSelector((state) => state.provas.prova);
   const [valorQuestao, setValorQuestao] = useState(0);
@@ -31,14 +33,16 @@ export default function ResultadoQuestao({ questao, handleClose }) {
   return (
     <div className="visualizar-questao">
       <div className="questao-header">
-        <p className="questao-numero">Questão {questao.numeroQuestao}</p>
+        <p className="questao-numero">
+          {t("questao")} {questao.numeroQuestao}
+        </p>
         <div className="questao-dados">
           {questao.multiplaEscolha ? (
-            <p>· Multipla Escolha</p>
+            <p>· {t("multipla-escolha")}</p>
           ) : (
-            <p>· Dissertativa</p>
+            <p>· {t("dissertativa")}</p>
           )}
-          {questao.publica ? <p>· Publica</p> : <p>· Privada</p>}
+          {questao.publica ? <p>· {t("publica")}</p> : <p>· {t("privada")}</p>}
           <input
             type="number"
             min="0.1"
@@ -51,7 +55,7 @@ export default function ResultadoQuestao({ questao, handleClose }) {
       </div>
       <p className="visualizar-enunciado">{questao.enunciado}</p>
       <div className="campo-resposta">
-        <p className="resposta-label">Resposta: </p>
+        <p className="resposta-label">{t("resposta:")}</p>
         {!questao.multiplaEscolha ? (
           <div className="area-resposta">
             <p>{questao.resposta}</p>
@@ -78,11 +82,9 @@ export default function ResultadoQuestao({ questao, handleClose }) {
         )}
       </div>
       <div>
-        <button onClick={addQuestao}>Adicionar à prova</button>
+        <button onClick={addQuestao}>{t("add-a-prova")}</button>
         {erro ? (
-          <p className="error-message">
-            O valor da questao deve ser maior que 0
-          </p>
+          <p className="error-message">{t("aviso-questao-valor")}</p>
         ) : (
           <></>
         )}

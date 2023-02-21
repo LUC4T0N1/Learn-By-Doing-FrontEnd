@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import AuthHeader from "../../../AuthContext";
 import FiltroBuscar from "../../filtroBuscar/FiltroBuscar";
 
 function ProvasFeitas() {
+  const { t } = useTranslation();
   const [quantidade, setQuantidade] = useState(0);
   const [provas, setProvas] = useState([]);
   const location = useLocation();
@@ -40,8 +42,13 @@ function ProvasFeitas() {
     <>
       <FiltroBuscar
         tamanhoPagina={5}
-        titulo={"Aluno"}
-        opcoesFiltro={["Data", "Ordem Alfabética", "Nota", "Corrigida"]}
+        titulo={t("aluno")}
+        opcoesFiltro={[
+          t("data"),
+          t("ordem-alfabetica"),
+          t("nota"),
+          t("corrigida"),
+        ]}
         buscarFiltrado={buscarFiltrado}
         objetos={provas}
         quantidade={quantidade}

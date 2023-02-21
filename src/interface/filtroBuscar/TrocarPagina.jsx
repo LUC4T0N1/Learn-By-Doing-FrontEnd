@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function TrocarPagina({
   tamanhoPagina,
@@ -7,6 +8,7 @@ function TrocarPagina({
   proximaPagina,
   paginaAnterior,
 }) {
+  const { t } = useTranslation();
   const calcularTotalPaginas = () => {
     const divisaoSimples = Math.floor(quantidade / tamanhoPagina);
     const resto = quantidade % tamanhoPagina;
@@ -23,10 +25,12 @@ function TrocarPagina({
   return (
     <div className="trocar-pagina">
       {paginaAtual == 1 ? (
-        <button className="botao-simples-sem-hover">Pagina anterior</button>
+        <button className="botao-simples-sem-hover">
+          {t("pagina-anterior")}
+        </button>
       ) : (
         <button className="botao-simples" onClick={paginaAnterior}>
-          Pagina anterior
+          {t("pagina-anterior")}
         </button>
       )}
 
@@ -34,10 +38,12 @@ function TrocarPagina({
         {paginaAtual}/{calcularTotalPaginas()}
       </p>
       {paginaAtual == calcularTotalPaginas() ? (
-        <button className="botao-simples-sem-hover">Proxima Pagina</button>
+        <button className="botao-simples-sem-hover">
+          {t("proxima-pagina")}
+        </button>
       ) : (
         <button className="botao-simples" onClick={proximaPagina}>
-          Proxima Pagina
+          {t("proxima-pagina")}
         </button>
       )}
     </div>

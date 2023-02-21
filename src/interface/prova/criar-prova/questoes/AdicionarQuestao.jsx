@@ -2,6 +2,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../../../application/autenticacaoSlice";
@@ -11,6 +12,7 @@ import CriarQuestoes from "./criar-questao/CriarQuestoes";
 import "./Questao.css";
 
 export default function AdicionarQuestoes({ idsQuestoes }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [criar, setCriar] = useState(false);
   const [escolher, setEscolher] = useState(false);
@@ -78,7 +80,7 @@ export default function AdicionarQuestoes({ idsQuestoes }) {
   return (
     <div className="adicionar-questao">
       <button className="botao-simples" onClick={handleClickOpen}>
-        Adicionar Questão
+        {t("adicionar-questao")}
       </button>
       {open ? (
         <div className="escolher-opcao">
@@ -93,10 +95,10 @@ export default function AdicionarQuestoes({ idsQuestoes }) {
           </button>
           <div className="opcoes">
             <button className="botao-simples" onClick={handleOpenCriar}>
-              Criar Nova Questão
+              {t("criar-questao")}
             </button>
             <button className="botao-simples" onClick={handleOpenEscolher}>
-              Buscar Nova Questão
+              {t("buscar-questao")}
             </button>
           </div>
         </div>
@@ -110,7 +112,7 @@ export default function AdicionarQuestoes({ idsQuestoes }) {
           handleClose={handleClose}
           buscarFiltrado={buscarFiltrado}
           objetos={questoes}
-          opcoesFiltro={["ordem alfabética", "data"]}
+          opcoesFiltro={[t("ordem-alfabetica"), t("data")]}
         />
       ) : (
         <></>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { cadastrarNovaProva, setProva } from "../../../application/provaSlice";
@@ -10,6 +11,7 @@ import AdicionarQuestoes from "./questoes/AdicionarQuestao";
 import VisualizarQuestoesCriadas from "./questoes/visualizar-questoes/VisualizarQuestoesCriadas";
 
 function CriarProva() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const prova = useSelector((state) => state.provas.prova);
 
@@ -47,12 +49,12 @@ function CriarProva() {
     if (prova.questoes.length == 0) {
       setErro({
         erro: true,
-        mensagem: "A prova deve ter pelo menos uma questao!",
+        mensagem: t("prova-aviso-1"),
       });
     } else if (errado) {
       setErro({
         erro: true,
-        mensagem: "Uma ou mais questões estão com valor inválida!",
+        mensagem: t("prova-aviso-2"),
       });
     } else if (
       (prova.publica == false || prova.publica == "false") &&
@@ -60,18 +62,18 @@ function CriarProva() {
     ) {
       setErro({
         erro: true,
-        mensagem: "A prova deve permitir pelo menos uma tentativa!",
+        mensagem: t("prova-aviso-3"),
       });
     } else {
       if (!prova.nome) {
         setErro({
           erro: true,
-          mensagem: "Digite o título da prova!",
+          mensagem: t("prova-aviso-4"),
         });
       } else if (prova.conteudos.length <= 0) {
         setErro({
           erro: true,
-          mensagem: "A prova deve conter pelo menos um conteúdo!",
+          mensagem: t("prova-aviso-5"),
         });
       } else {
         const idQuestoes = prova.questoes.map((quest) => quest.id);
@@ -105,15 +107,15 @@ function CriarProva() {
       {sucesso ? (
         <>
           <PopUp
-            mensagem="Prova criada com sucesso!"
+            mensagem={t("prova-aviso-6")}
             funcao={toHome}
-            mensagemFuncao="Voltar para Home"
+            mensagemFuncao={t("voltar-home")}
           />
         </>
       ) : (
         <div className="criar-prova">
           <div className="formulario-criar-prova">
-            <p className="criar-prova-titulo">Criar Prova</p>
+            <p className="criar-prova-titulo">{t("criar-prova")}</p>
             <InfosBasicas handleChange={handleChange} />
             <BuscarConteudos
               tamanhoPagina={5}
@@ -129,19 +131,24 @@ function CriarProva() {
                 />
               ))
             ) : (
-              <h1>Nenhuma Questão Adicionada</h1>
+              <h1>{t("0-questoes")}</h1>
             )}
             <div className="footer-criar-prova">
               <div className="infos-prova-footer">
-                <p>Valor Total: {obterValorTotal()}</p>
-                <p>Questões: {prova.questoes.length}</p>
+                <p>
+                  {t("valor-total")}
+                  {obterValorTotal()}
+                </p>
+                <p>
+                  {t("questoes")} {prova.questoes.length}
+                </p>
               </div>
               <AdicionarQuestoes
                 idsQuestoes={prova.questoes.map((quest) => quest.id)}
               />
               <div className="botao-criar-footer">
                 <button className="botao-simples" onClick={handleSubmit}>
-                  Criar Prova
+                  {t("criar-prova")}
                 </button>
                 {erro.erro ? (
                   <p className="error-message">{erro.mensagem}</p>

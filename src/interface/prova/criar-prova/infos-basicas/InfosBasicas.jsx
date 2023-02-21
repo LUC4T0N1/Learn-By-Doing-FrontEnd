@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./InfosBasicas.css";
 
 export default function InfosBasicas({ handleChange }) {
+  const { t } = useTranslation();
   const [publica, setPublica] = useState(true);
 
   const mudarPrivacidade = (e) => {
@@ -20,7 +22,7 @@ export default function InfosBasicas({ handleChange }) {
           name="nome"
           onChange={handleChange}
           className="input-texto-simples"
-          placeholder="Título da Prova..."
+          placeholder={t("titulo-prova")}
         ></input>
         <select
           name="publica"
@@ -31,8 +33,8 @@ export default function InfosBasicas({ handleChange }) {
             handleChange(e);
           }}
         >
-          <option value={true}>Pública</option>
-          <option value={false}>Privada</option>
+          <option value={true}>{t("publica")}</option>
+          <option value={false}>{t("privada")}</option>
         </select>
       </div>
       {publica ? (
@@ -46,7 +48,7 @@ export default function InfosBasicas({ handleChange }) {
               step="1"
               onChange={handleChange}
               className="input-numero-simples"
-              placeholder="Duração (minutos)..."
+              placeholder={t("duracao")}
             ></input>
             <input
               type="number"
@@ -55,10 +57,10 @@ export default function InfosBasicas({ handleChange }) {
               name="tentativas"
               onChange={handleChange}
               className="input-numero-simples"
-              placeholder="Tentativas permitidas..."
+              placeholder={t("tentativas")}
             ></input>
             <div className="datas-prova">
-              <label>Data permitida para fazer a prova: </label>
+              <label>{t("data-prova")} </label>
               <input
                 className="input-data"
                 type="date"

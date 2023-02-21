@@ -1,14 +1,15 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setAuth } from "../../application/autenticacaoSlice";
-import { getPerfil } from "../../application/perfilSlice";
 import PopUp from "../popup/PopUp";
 import "./login.css";
 
 function Login() {
+  const { t } = useTranslation();
   const [erro, setErro] = useState(false);
   const [sucesso, setSucesso] = useState(false);
   const formRef = useRef();
@@ -22,14 +23,8 @@ function Login() {
   const dispatch = useDispatch();
 
   const toPerfil = async () => {
-    await dispatch(getPerfil());
     history.push(`/perfil`);
   };
-
-  /*   function delay(time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
- */
 
   const handleLogar = async (e) => {
     try {
@@ -53,9 +48,9 @@ function Login() {
       {sucesso ? (
         <>
           <PopUp
-            mensagem={"Login realizado com sucesso!"}
+            mensagem={t("login-sucesso")}
             funcao={toPerfil}
-            mensagemFuncao={"Ir para o site"}
+            mensagemFuncao={t("ir-site")}
           />
         </>
       ) : (
@@ -68,11 +63,11 @@ function Login() {
                   className="input-texto-simples"
                   placeholder="E-mail..."
                   {...register("email", {
-                    required: "O e-mail é obrigatorio!",
+                    required: t("email-obrigatorio"),
                     pattern: {
                       value:
                         /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                      message: "E-mail com formato inválido!",
+                      message: t("email-invalido"),
                     },
                   })}
                 />
@@ -84,18 +79,17 @@ function Login() {
                 <input
                   type="password"
                   className="input-texto-simples"
-                  placeholder="Senha..."
+                  placeholder={t("senha...")}
                   {...register("senha", {
-                    required: "A senha é obrigatoria!",
+                    required: t("senha-obrigatoria"),
                     minLength: {
                       value: 8,
-                      message: "A senha deve conter pelo menos 8 digitos!",
+                      message: t("senha-pequena"),
                     },
                     pattern: {
                       value:
                         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/g,
-                      message:
-                        "A senha deve conter pelo menos uma letra maiúscula, um caracter especial, um número e 8 caracteres!",
+                      message: t("senha-invalida"),
                     },
                   })}
                 />
@@ -104,9 +98,9 @@ function Login() {
                 ) : (
                   ""
                 )}
-                <button className="botao-simples">Enviar</button>
+                <button className="botao-simples">{t("enviar")}</button>
                 {erro ? (
-                  <p className="error-message">Login inválido!</p>
+                  <p className="error-message">{t("login-invalido")}</p>
                 ) : (
                   <></>
                 )}

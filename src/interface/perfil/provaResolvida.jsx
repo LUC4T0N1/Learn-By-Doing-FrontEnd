@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { getProvaFeita } from "../../application/provaSlice";
@@ -7,6 +8,7 @@ import VisualizarQuestoesProvaPublica from "../prova/criar-prova/questoes/visual
 import InfosProva from "../prova/provaCompleta/InfosProva";
 
 export default function ProvaResolvida() {
+  const { t } = useTranslation();
   const location = useLocation();
   const obterIdProva = () => {
     try {
@@ -86,7 +88,7 @@ export default function ProvaResolvida() {
           className="botao-simples"
           onClick={() => history.push("/perfil/provas-resolvidas")}
         >
-          Voltar
+          {t("voltar")}
         </button>
       </div>
     </div>

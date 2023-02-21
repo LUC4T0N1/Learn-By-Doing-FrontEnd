@@ -12,11 +12,11 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [isMobile, setIsMobile] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const autenticacao = useSelector((state) => state.autenticacao);
-  const { t } = useTranslation();
   const theme = useContext(ThemeContext);
   const handleDeslogar = () => {
     dispatch(logout({ ...{} }));
@@ -54,7 +54,7 @@ const NavBar = () => {
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
-                  Resolver Prova
+                  {t("resolver-prova")}
                 </Link>
               </li>
               <li className="nav-item">
@@ -63,7 +63,7 @@ const NavBar = () => {
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
-                  Criar Prova
+                  {t("criar-prova")}
                 </Link>
               </li>
               <li className="nav-item">
@@ -72,7 +72,7 @@ const NavBar = () => {
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
-                  Corrigir Prova
+                  {t("corrigir-prova")}
                 </Link>
               </li>
               <li className="nav-item">
@@ -81,7 +81,7 @@ const NavBar = () => {
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
-                  Histórico
+                  {t("historico")}
                 </Link>
               </li>
               <li className="nav-item">
@@ -90,7 +90,7 @@ const NavBar = () => {
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
-                  Perfil
+                  {t("perfil")}
                 </Link>
               </li>
               <li className="nav-item">
@@ -147,7 +147,7 @@ const NavBar = () => {
                 className="nav-link"
                 style={{ color: theme.state.darkMode ? "white" : "black" }}
               >
-                Registrar
+                {t("registrar")}
               </Link>
             </li>
             <li className="nav-item">

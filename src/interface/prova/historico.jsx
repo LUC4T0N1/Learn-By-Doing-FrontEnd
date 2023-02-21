@@ -1,17 +1,19 @@
 import { faCheck, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./escolherTipo.css";
 
 const Historico = () => {
+  const { t } = useTranslation();
   return (
     <div className="escolher-tipo">
-      <h1 className="escolher-titulo">Escolha uma Das Opções</h1>
+      <h1 className="escolher-titulo"> {t("escolher-prova")}</h1>
       <div className="items-container">
         <Link className="item" to="/perfil/provas-resolvidas">
           <div className="item-title">
-            Provas Resolvidas
+            {t("provas-resolvidas")}
             <i>
               <FontAwesomeIcon
                 icon={faCheck}
@@ -20,13 +22,11 @@ const Historico = () => {
               ></FontAwesomeIcon>
             </i>
           </div>
-          <div className="item-desc">
-            Ver todas as provas que você já resolveu
-          </div>
+          <div className="item-desc">{t("provas-resolvidas-desc")}</div>
         </Link>
         <Link className="item" to="/perfil/provas-criadas">
           <div className="item-title">
-            Provas Criadas
+            {t("provas-criadas")}
             <i>
               <FontAwesomeIcon
                 icon={faFolderPlus}
@@ -35,9 +35,7 @@ const Historico = () => {
               ></FontAwesomeIcon>
             </i>
           </div>
-          <div className="item-desc">
-            Ver todas as provas já criadas por você
-          </div>
+          <div className="item-desc">{t("provas-criadas-desc")}</div>
         </Link>
       </div>
     </div>

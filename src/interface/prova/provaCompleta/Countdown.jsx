@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const formatTime = (time) => {
   let hours = Math.floor(time / 3600);
@@ -15,6 +16,7 @@ const formatTime = (time) => {
 };
 
 function Countdown({ seconds, finalizarProva }) {
+  const { t } = useTranslation();
   const [countdown, setCountdown] = useState(seconds);
   const timerId = useRef();
 
@@ -32,7 +34,11 @@ function Countdown({ seconds, finalizarProva }) {
     }
   }, [countdown]);
 
-  return <div>Countdown: {formatTime(countdown)}</div>;
+  return (
+    <div>
+      {t("tempo")} {formatTime(countdown)}
+    </div>
+  );
 }
 
 export default Countdown;

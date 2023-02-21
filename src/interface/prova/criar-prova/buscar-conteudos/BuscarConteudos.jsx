@@ -2,6 +2,7 @@ import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../../../application/autenticacaoSlice";
@@ -11,6 +12,7 @@ import Tag from "../../../filtroBuscar/Tag";
 import "./BuscarConteudos.css";
 
 export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [conteudosSelecionados, setConteudosSelecionados] = useState([]);
@@ -48,10 +50,10 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
         setConteudo({ ...conteudo, nome: "" });
         setOpen(false);
       } catch {
-        setErro({ erro: true, mensagem: "Conteudo já existente" });
+        setErro({ erro: true, mensagem: t("conteudo-aviso-1") });
       }
     } else {
-      setErro({ erro: true, mensagem: "Preencha o nome do conteudo" });
+      setErro({ erro: true, mensagem: t("conteudo-aviso-2") });
     }
   };
   const [open, setOpen] = React.useState(false);
@@ -119,11 +121,11 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
                 type="text"
                 name="nome"
                 className="input-texto-simples"
-                placeholder="Conteúdo..."
+                placeholder={t("conteudo...")}
                 onChange={handleChangeCriarConteudo}
               ></input>
               <button className="botao-simples" onClick={handleSubmit}>
-                Criar
+                {t("criar")}
               </button>
               {erro.erro ? (
                 <p className="error-message">{erro.mensagem}</p>
@@ -135,7 +137,7 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
         </>
       ) : (
         <button className="botao-simples" onClick={handleClickOpen}>
-          Criar Conteúdo
+          {t("criar-conteudo")}
         </button>
       )}
 
@@ -143,8 +145,8 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
         <FiltroConteudos
           tamanhoPagina={tamanhoPagina}
           handleClose={handleClose}
-          titulo={"Escolher Conteudos"}
-          opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}
+          titulo={t("escolher-conteudos")}
+          opcoesFiltro={[t("ordem-alfabetica"), t("numero-provas")]}
           buscarFiltrado={buscarFiltrado}
           objetos={conteudos}
           quantidade={quantidade}
@@ -154,7 +156,7 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
         />
       ) : (
         <button className="botao-simples" onClick={handleClickOpenEscolher}>
-          Escolher Conteúdos
+          {t("escolher-conteudos")}
         </button>
       )}
     </div>

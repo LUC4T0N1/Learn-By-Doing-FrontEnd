@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AscDesc from "./AscDesc";
 import Filtro from "./Filtro";
 import "./FiltroBuscar.css";
@@ -14,6 +15,7 @@ function FiltroBuscar({
   objetos,
   tipo,
 }) {
+  const { t } = useTranslation();
   const [busca, setBusca] = useState({
     nome: "",
     pagina: 0,
@@ -58,13 +60,15 @@ function FiltroBuscar({
   return (
     <div className="filtro-buscar-container">
       <div className="filtro-buscar-form">
-        <p className="busca-titulo">Buscar {titulo}</p>
+        <p className="busca-titulo">
+          {t("buscar")} {titulo}
+        </p>
         <div className="busca-filtro">
           <input
             type="text"
             name="nome"
             className="input-texto-simples"
-            placeholder={"Buscar " + titulo}
+            placeholder={t("buscar") + " " + titulo}
             onChange={handleChange}
           ></input>
           <div className="filtros-container">
@@ -94,7 +98,7 @@ function FiltroBuscar({
                   tipo={tipo}
                   nome={objeto.nome}
                   idObjeto={objeto.idConteudo}
-                  dados={["Provas: " + objeto.numeroProvas]}
+                  dados={[t("provas") + ": " + objeto.numeroProvas]}
                 />
               ) : tipo == 2 || tipo == 4 || tipo == 5 ? (
                 <ResultadoCard
@@ -103,8 +107,9 @@ function FiltroBuscar({
                   nome={objeto.nome}
                   idObjeto={objeto.id}
                   dados={[
-                    "Questoes: " + objeto.quantidadeQuestoes,
-                    "Realizações: " + objeto.popularidade,
+                    t("questoes") + objeto.quantidadeQuestoes,
+                    t("realizacoes") + objeto.popularidade,
+                    t("nota-media") + objeto.mediaNotas + "%",
                   ]}
                 />
               ) : tipo == 3 ? (
@@ -114,16 +119,18 @@ function FiltroBuscar({
                   nome={objeto.nomeProva}
                   idObjeto={objeto.id}
                   dados={[
-                    "Corrigida Totalmente: " +
-                      (objeto.corrigida ? "Sim" : "Não"),
+                    t("questoes-corrigidas") +
+                      objeto.questoesCorrigidas +
+                      "/" +
+                      objeto.totalQuestoes,
                     objeto.corrigida
-                      ? "Nota Final: "
-                      : "Nota Parcial: " +
+                      ? t("nota-final")
+                      : t("nota-parcial") +
                         objeto.nota +
                         "/" +
                         objeto.notaMaxima,
-                    "Data: " + objeto.dataResolucao,
-                    objeto.publica ? "Prova Pública" : "Prova Privada",
+                    t("data") + ": " + objeto.dataResolucao,
+                    objeto.publica ? t("prova-publica") : t("prova-privada"),
                   ]}
                   publica={objeto.publica}
                 />
@@ -134,23 +141,24 @@ function FiltroBuscar({
                   nome={objeto.nomeAluno}
                   idObjeto={objeto.id}
                   dados={[
-                    "Corrigida Totalmente: " +
-                      (objeto.totalmenteCorrigida ? "Sim" : "Não"),
                     objeto.totalmenteCorrigida
-                      ? "Nota Final: "
-                      : "Nota Parcial: " +
+                      ? t("nota-final")
+                      : t("nota-parcial") +
                         objeto.notaAluno +
                         "/" +
                         objeto.notaMaxima,
-                    "Data: " + objeto.dataResolucao,
-                    "Questões Corrigidas: " + objeto.questoesCorrigidas,
-                    "Número de Questões: " + objeto.totalQuestoes,
+                    t("data") + ": " + objeto.dataResolucao,
+                    t("questoes-corrigidas") +
+                      objeto.questoesCorrigidas +
+                      "/" +
+                      objeto.totalQuestoes,
+                    objeto.publica ? t("prova-publica") : t("prova-privada"),
                   ]}
                 />
               )
             )
           ) : (
-            <div>Nenhum Resultado encontrado</div>
+            <div>{t("nenhum-resultado")}</div>
           )}
         </div>
         {busca.nome == "" ? (

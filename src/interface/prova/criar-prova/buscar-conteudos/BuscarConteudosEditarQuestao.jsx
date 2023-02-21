@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../../../application/autenticacaoSlice";
@@ -12,6 +13,7 @@ export default function BuscarConteudosEditarQuestao({
   adicionarConteudos,
   conteudosPreSelecionados,
 }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [conteudosSelecionados, setConteudosSelecionados] = useState(
@@ -30,13 +32,6 @@ export default function BuscarConteudosEditarQuestao({
       );
     }
     adicionarConteudos(id, nome);
-  };
-
-  const [conteudo, setConteudo] = useState({ nome: "" });
-
-  const handleChangeCriarConteudo = (e) => {
-    const value = e.target.value;
-    setConteudo({ ...conteudo, nome: value });
   };
 
   const [open, setOpen] = React.useState(false);
@@ -81,8 +76,8 @@ export default function BuscarConteudosEditarQuestao({
       {openEscolher ? (
         <FiltroConteudos
           handleClose={handleClose}
-          titulo={"Escolher Conteudos"}
-          opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}
+          titulo={t("escolher-conteudos")}
+          opcoesFiltro={[t("ordem-alfabetica"), t("numero-provas")]}
           buscarFiltrado={buscarFiltrado}
           objetos={conteudos}
           quantidade={quantidade}
@@ -92,7 +87,7 @@ export default function BuscarConteudosEditarQuestao({
         />
       ) : (
         <button className="botao-simples" onClick={handleClickOpenEscolher}>
-          Escolher Conteúdos
+          {t("escolher-conteudos")}
         </button>
       )}
     </div>

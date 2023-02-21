@@ -6,14 +6,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./items.css";
 function Items() {
+  const { t } = useTranslation();
   return (
     <div className="items-container">
       <Link className="item" to="/tipo-de-prova">
         <div className="item-title">
-          Resolver Prova
+          {t("resolver-prova")}
           <i>
             <FontAwesomeIcon
               icon={faFileUpload}
@@ -22,15 +24,11 @@ function Items() {
             ></FontAwesomeIcon>
           </i>
         </div>
-        <div className="item-desc">
-          Busque por provas públicas ou privadas, filtrando por conteúdo,
-          tamanho e popularidade. Todas as provas públicas podem ser realizadas
-          inúmeras vezes com o gabarito instantâneo
-        </div>
+        <div className="item-desc">{t("resolver-prova-desc")}</div>
       </Link>
       <Link className="item" to="/criar">
         <div className="item-title">
-          Criar Prova
+          {t("criar-prova")}
           <i>
             <FontAwesomeIcon
               icon={faPlus}
@@ -39,15 +37,11 @@ function Items() {
             ></FontAwesomeIcon>
           </i>
         </div>
-        <div className="item-desc">
-          Crie provas públicas para que todos possam resolver, ou crie uma prova
-          privada. Utilize questões públicas feitas por outras pessoas ou crie
-          suas próprias questões
-        </div>
+        <div className="item-desc">{t("criar-prova-desc")}</div>
       </Link>
       <Link className="item" to="/corrigir/buscarProva">
         <div className="item-title">
-          Corrigir Prova
+          {t("corrigir-prova")}
           <i>
             <FontAwesomeIcon
               icon={faPenFancy}
@@ -56,15 +50,11 @@ function Items() {
             ></FontAwesomeIcon>
           </i>
         </div>
-        <div className="item-desc">
-          Corrija suas provas resolvidas por outras pessoas. Questões de
-          múltipla-escolha são corrigidas automáticamente. Faça um comentário
-          sobre cada questão dissertativa corrigida{" "}
-        </div>
+        <div className="item-desc">{t("corrigir-prova-desc")}</div>
       </Link>
       <Link className="item" to="/historico">
         <div className="item-title">
-          Histórico
+          {t("historico")}
           <i>
             <FontAwesomeIcon
               icon={faHistory}
@@ -73,11 +63,7 @@ function Items() {
             ></FontAwesomeIcon>
           </i>
         </div>
-        <div className="item-desc">
-          Veja todas as provas ja criadas e resolvidas por você. Acompanhe seu
-          progresso e suas notas. Veja as correções dos professores para suas
-          provas realizadas.
-        </div>
+        <div className="item-desc">{t("historico-desc")}</div>
       </Link>
     </div>
   );

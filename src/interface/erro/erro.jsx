@@ -1,12 +1,14 @@
-import React from 'react'
-import './erro.css'
+import React from "react";
+import { useTranslation } from "react-i18next";
+import "./erro.css";
 
 function Erro() {
+  const { t } = useTranslation();
   return (
     <div className="mensagemErro">
-      <h1>ERRO - PAGINA NAO ENCONTRADA</h1>
+      <h1>{t("404")}</h1>
     </div>
-  )
+  );
 }
 
-export default Erro
+export default Erro;

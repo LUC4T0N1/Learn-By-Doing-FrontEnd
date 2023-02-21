@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../../application/autenticacaoSlice";
@@ -7,6 +8,7 @@ import AuthHeader from "../../../AuthContext";
 import FiltroBuscar from "../../filtroBuscar/FiltroBuscar";
 
 export default function ListaConteudos() {
+  const { t } = useTranslation();
   const [quantidade, setQuantidade] = useState(0);
   const [conteudos, setConteudos] = useState([]);
   const dispatch = useDispatch();
@@ -30,8 +32,8 @@ export default function ListaConteudos() {
     <>
       <FiltroBuscar
         tamanhoPagina={5}
-        titulo={"Conteúdos"}
-        opcoesFiltro={["Ordem Alfabética", "Número de Provas"]}
+        titulo={t("conteudos")}
+        opcoesFiltro={[t("ordem-alfabetica"), t("numero-provas")]}
         buscarFiltrado={buscarFiltrado}
         objetos={conteudos}
         quantidade={quantidade}

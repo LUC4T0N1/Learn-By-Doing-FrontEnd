@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { setCorrecaoProva, setProvas } from "../../../application/provaSlice";
@@ -8,6 +9,7 @@ import CorrigirQuestao from "../criar-prova/questoes/corrigirQuestao/CorrigirQue
 import InfosProva from "../provaCompleta/InfosProva";
 
 export default function ProvaFeita() {
+  const { t } = useTranslation();
   const location = useLocation();
   const obterIdProva = () => {
     try {
@@ -184,30 +186,19 @@ export default function ProvaFeita() {
           className="botao-simples"
           onClick={() => history.push("/corrigir/buscarProva")}
         >
-          Voltar
+          {t("voltar")}
         </button>
         <button className="botao-simples" onClick={finalizarCorrecao}>
-          Finalizar Correção
+          {t("finalizar-correcao")}
         </button>
-        {erro ? (
-          <p className="error-message">
-            Ocorreu algum erro! Tente novamente mais tarde
-          </p>
-        ) : (
-          <></>
-        )}
+        {erro ? <p className="error-message">{t("erro-generico")}</p> : <></>}
         {correcaoInvalida ? (
-          <p className="error-message">
-            Uma ou mais questões estão com uma nota inválida!
-          </p>
+          <p className="error-message">{t("erro-questao-invalida")}</p>
         ) : (
           <></>
         )}
         {sucesso ? (
-          <p className="success-message">
-            Prova corrigida com sucesso! Você pode alterar a correção quantas
-            vezes quiser!
-          </p>
+          <p className="success-message">{t("aviso-prova-corrigida")}</p>
         ) : (
           <></>
         )}

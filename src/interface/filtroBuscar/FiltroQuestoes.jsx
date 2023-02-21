@@ -1,6 +1,7 @@
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import BuscarConteudosQuestoes from "../prova/criar-prova/buscar-conteudos/BuscarConteudosQuestoes";
 import AscDesc from "./AscDesc";
 import "./FiltrarQuestao.css";
@@ -17,6 +18,7 @@ export default function FiltroQuestoes({
   tipo,
   conteudosSelecionados,
 }) {
+  const { t } = useTranslation();
   const [busca, setBusca] = useState({
     nome: "",
     pagina: 0,
@@ -111,7 +113,7 @@ export default function FiltroQuestoes({
       </button>
       <div className="filtro-buscar-container">
         <div className="filtro-buscar-form">
-          <p className="busca-titulo">Buscar Questão</p>
+          <p className="busca-titulo">{t("buscar-questao")}</p>
           <div className="busca-filtro-questao">
             <input
               type="text"
@@ -131,7 +133,7 @@ export default function FiltroQuestoes({
                     defaultChecked
                     onChange={mudarPublica}
                   />
-                  <label>Questões Públicas</label>
+                  <label>{t("questoes-publicas")}</label>
                 </div>
                 <div className="opcao">
                   <input
@@ -141,7 +143,7 @@ export default function FiltroQuestoes({
                     value={false}
                     onChange={mudarPublica}
                   />
-                  <label>Suas Questões</label>
+                  <label>{t("suas-questoes")}</label>
                 </div>
               </div>
               <div className="opcoes-filtro-questao">
@@ -155,7 +157,7 @@ export default function FiltroQuestoes({
                         name="opcao-filtro-ME"
                         onChange={mudarTipo}
                       />
-                      <label>Multipla Escolha</label>
+                      <label>{t("multipla-escolha")}</label>
                     </>
                   ) : (
                     <>
@@ -166,7 +168,7 @@ export default function FiltroQuestoes({
                         type="checkbox"
                         name="opcao-filtro-ME"
                       />
-                      <label>Multipla Escolha</label>
+                      <label>{t("multipla-escolha")}</label>
                     </>
                   )}
                 </div>
@@ -180,7 +182,7 @@ export default function FiltroQuestoes({
                         name="opcao-filtro-D"
                         onChange={mudarTipo}
                       />
-                      <label>Dissertativa</label>
+                      <label>{t("dissertativa")}</label>
                     </div>
                   </>
                 ) : (
@@ -193,7 +195,7 @@ export default function FiltroQuestoes({
                         type="checkbox"
                         name="opcao-filtro-D"
                       />
-                      <label>Dissertativa</label>
+                      <label>{t("dissertativa")}</label>
                     </div>
                   </>
                 )}

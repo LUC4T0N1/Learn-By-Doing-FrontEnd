@@ -1,6 +1,7 @@
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AscDesc from "./AscDesc";
 import Filtro from "./Filtro";
 import ResultadoCardConteudo from "./ResultadoCardConteudo";
@@ -19,13 +20,13 @@ export default function FiltroConteudos({
   conteudosSelecionados,
   addConteudo,
 }) {
+  const { t } = useTranslation();
   const [busca, setBusca] = useState({
     nome: "",
     pagina: 0,
     ordenacao: 0,
     ordem: 0,
   });
-  const [clicado, setClicado] = useState(false);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -75,13 +76,13 @@ export default function FiltroConteudos({
       </button>
       <div className="filtro-buscar-container">
         <div className="filtro-buscar-form">
-          <p className="busca-titulo">Buscar {titulo}</p>
+          <p className="busca-titulo">{titulo}</p>
           <div className="busca-filtro">
             <input
               type="text"
               name="nome"
               className="input-texto-simples"
-              placeholder={"Buscar " + titulo}
+              placeholder={titulo}
               onChange={handleChange}
             ></input>
             <div className="filtros-container">
@@ -108,30 +109,16 @@ export default function FiltroConteudos({
                 <Tag id={c.id} nome={c.nome} handleRemove={addConteudo} />
               ))}
             </div>
-            {objetos.map((objeto, index) =>
-              tipo == 1 ? (
-                <ResultadoCardConteudo
-                  addConteudo={addConteudo}
-                  key={index}
-                  tipo={tipo}
-                  nome={objeto.nome}
-                  idObjeto={objeto.idConteudo}
-                  dados={["Provas: " + objeto.numeroProvas]}
-                />
-              ) : (
-                <ResultadoCardConteudo
-                  addConteudo={addConteudo}
-                  key={index}
-                  tipo={tipo}
-                  nome={objeto.nome}
-                  idObjeto={objeto.id}
-                  dados={[
-                    "Questoes: " + objeto.quantidadeQuestoes,
-                    "Realizações: " + objeto.popularidade,
-                  ]}
-                />
-              )
-            )}
+            {objetos.map((objeto, index) => (
+              <ResultadoCardConteudo
+                addConteudo={addConteudo}
+                key={index}
+                tipo={tipo}
+                nome={objeto.nome}
+                idObjeto={objeto.idConteudo}
+                dados={[t("provas") + ": " + objeto.numeroProvas]}
+              />
+            ))}
           </div>
           {busca.nome == "" ? (
             <TrocarPagina

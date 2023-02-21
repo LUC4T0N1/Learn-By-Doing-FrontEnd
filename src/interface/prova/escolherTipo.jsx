@@ -1,17 +1,19 @@
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./escolherTipo.css";
 
 const EscolherTipo = () => {
+  const { t } = useTranslation();
   return (
     <div className="escolher-tipo">
-      <h1 className="escolher-titulo">Escolha uma Das Opções</h1>
+      <h1 className="escolher-titulo">{t("escolher-prova")}</h1>
       <div className="items-container">
         <Link className="item" to="/escolherProvaPrivada">
           <div className="item-title">
-            Prova Privada
+            {t("prova-privada")}
             <i>
               <FontAwesomeIcon
                 icon={faLock}
@@ -20,13 +22,11 @@ const EscolherTipo = () => {
               ></FontAwesomeIcon>
             </i>
           </div>
-          <div className="item-desc">
-            Resolver uma prova privada a partir de um ID único e secreto
-          </div>
+          <div className="item-desc">{t("prova-privada-desc")}</div>
         </Link>
         <Link className="item" to="/buscar-conteudos">
           <div className="item-title">
-            Prova Pública
+            {t("prova-publica")}
             <i>
               <FontAwesomeIcon
                 icon={faUnlock}
@@ -35,9 +35,7 @@ const EscolherTipo = () => {
               ></FontAwesomeIcon>
             </i>
           </div>
-          <div className="item-desc">
-            Escolher uma prova pública por conteúdo, tamanho ou popularidade
-          </div>
+          <div className="item-desc">{t("prova-publica-desc")}</div>
         </Link>
       </div>
     </div>

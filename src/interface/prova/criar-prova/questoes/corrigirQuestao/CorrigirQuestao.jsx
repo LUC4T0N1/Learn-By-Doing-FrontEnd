@@ -1,6 +1,7 @@
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./CorrigirQuestao.css";
 
 export default function CorrigirQuestao({
@@ -9,18 +10,27 @@ export default function CorrigirQuestao({
   atualizarNotaQuestao,
   qr,
 }) {
+  const { t } = useTranslation();
   return (
     <div className="visualizar-questao">
       <div className="questao-header">
-        <p className="questao-numero">Questão {questao.numeroQuestao}</p>
+        <p className="questao-numero">
+          {t("questao")} {questao.numeroQuestao}
+        </p>
         <div className="questao-dados">
-          <p>· Valor: {questao.valor}</p>
-          <p>· Nota: {questao.notaAluno}</p>
+          <p>
+            {t(".valor")}
+            {questao.valor}
+          </p>
+          <p>
+            {t(".nota")}
+            {questao.notaAluno}
+          </p>
         </div>
       </div>
       <p className="visualizar-enunciado">{questao.enunciado}</p>
       <div className="campo-resposta">
-        <p className="resposta-label">Resposta: </p>
+        <p className="resposta-label">{t("resposta:")}</p>
         <div className="area-resposta">
           {questao.multiplaEscolha ? (
             <>
@@ -56,7 +66,7 @@ export default function CorrigirQuestao({
         ) : (
           <>
             <input
-              placeholder="Nota"
+              placeholder={t("nota")}
               className="nota-questao"
               type="number"
               min="0"
@@ -67,7 +77,7 @@ export default function CorrigirQuestao({
               }
             ></input>
             <textarea
-              placeholder="Comentário"
+              placeholder={t("comentario")}
               className="comentario-questao"
               type="text"
               value={qr.comentarioProfessor}

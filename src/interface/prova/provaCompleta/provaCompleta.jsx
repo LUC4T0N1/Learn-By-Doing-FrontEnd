@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import {
@@ -14,6 +15,7 @@ import Countdown from "./Countdown";
 import InfosProva from "./InfosProva";
 
 export default function ProvaCompleta() {
+  const { t } = useTranslation();
   const location = useLocation();
   const obterIdProva = () => {
     try {
@@ -58,7 +60,7 @@ export default function ProvaCompleta() {
     );
     setPopup({
       mensagem: msg,
-      mensagemFuncao: "Voltar para Home",
+      mensagemFuncao: t("voltar-home"),
     });
     setSucesso(false);
   };
@@ -96,8 +98,9 @@ export default function ProvaCompleta() {
         );
       } catch (e) {
         setPopup({
-          mensagem: `Data inválida! Você só pode fazer essa prova entre ${prova.dataInicial} e  ${prova.dataFinal}`,
-          mensagemFuncao: "Voltar para Home",
+          mensagem:
+            t("data-invalida") + prova.dataInicial + t("e") + prova.dataFinal,
+          mensagemFuncao: t("voltar-home"),
         });
         setSucesso(false);
         return;
@@ -118,15 +121,15 @@ export default function ProvaCompleta() {
           setComecou(true);
         } else {
           setPopup({
-            mensagem: `Tempo Esgotado!`,
-            mensagemFuncao: "Voltar para Home",
+            mensagem: t("tempo-esgotado"),
+            mensagemFuncao: t("voltar-home"),
           });
           setSucesso(false);
         }
       } catch (e) {
         setPopup({
-          mensagem: "Numero máximo de tentativas atingido!",
-          mensagemFuncao: "Voltar para Home",
+          mensagem: t("maximo-tentativas"),
+          mensagemFuncao: t("voltar-home"),
         });
         setSucesso(false);
       }
@@ -141,8 +144,8 @@ export default function ProvaCompleta() {
         setComecou(true);
       } catch (e) {
         setPopup({
-          mensagem: "Numero máximo de tentativas atingido!",
-          mensagemFuncao: "Voltar para Home",
+          mensagem: t("maximo-tentativas"),
+          mensagemFuncao: t("voltar-home"),
         });
         setSucesso(false);
       }
@@ -182,31 +185,30 @@ export default function ProvaCompleta() {
                   <Countdown
                     seconds={tempoRestante}
                     finalizarProva={() =>
-                      finalizarProva(
-                        "Tempo esgotado! Todo seu progresso foi salvo!"
-                      )
+                      finalizarProva(t("tempo-esgotado-salvo"))
                     }
                   />
                 ) : (
                   <></>
                 )}
-                {prova.questoes.map((questao) => (
+                {prova.questoes.map((questao, index) => (
                   <ResponderQuestao
+                    numeroQuestao={index + 1}
                     questao={questao}
                     atualizarRespostaQuestao={atualizarRespostaQuestao}
                   />
                 ))}
                 <button
                   className="botao-simples"
-                  onClick={() => finalizarProva("Prova enviada!")}
+                  onClick={() => finalizarProva(t("prova-enviada"))}
                 >
-                  Finalizar Prova
+                  {t("finalizar-prova")}
                 </button>
               </>
             ) : (
               <>
                 <button className="botao-simples" onClick={comecarProva}>
-                  Começar Prova
+                  {t("comecar-prova")}
                 </button>
               </>
             )}

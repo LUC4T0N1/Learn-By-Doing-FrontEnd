@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import AuthHeader from "../../AuthContext";
 
@@ -28,6 +29,7 @@ function ProvaPrivada() {
       setErro(true);
     }
   };
+  const { t } = useTranslation();
 
   return (
     <form ref={formRef} onSubmit={handleSubmit(buscar)}>
@@ -35,14 +37,14 @@ function ProvaPrivada() {
         <div className="login-container">
           <div className="login-mini-container">
             <div className="login-title" style={{ fontSize: "40px" }}>
-              Buscar Prova Privada
+              {t("buscar-prova-privada")}
             </div>
             <input
               type="text"
               className="input-texto-simples"
-              placeholder="ID Secreto..."
+              placeholder={t("id-secreto")}
               {...register("idSecreto", {
-                required: "Digitie o ID secreto da prova!",
+                required: t("id-secreto-erro-1"),
               })}
             />
             {errors.idSecreto ? (
@@ -50,8 +52,12 @@ function ProvaPrivada() {
             ) : (
               ""
             )}
-            {erro ? <p className="error-message"> ID inválido! </p> : ""}
-            <button className="botao-simples">Enviar</button>
+            {erro ? (
+              <p className="error-message"> {t("id-secreto-erro-2")}</p>
+            ) : (
+              ""
+            )}
+            <button className="botao-simples">{t("buscar")}</button>
           </div>
         </div>
       </div>

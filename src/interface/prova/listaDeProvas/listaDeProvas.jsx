@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import AuthHeader from "../../../AuthContext";
 import FiltroBuscar from "../../filtroBuscar/FiltroBuscar";
 
 function ListaDeProvas() {
+  const { t } = useTranslation();
   const [quantidade, setQuantidade] = useState(0);
   const [provas, setProvas] = useState([]);
   const location = useLocation();
@@ -33,6 +35,7 @@ function ListaDeProvas() {
       `http://localhost:8080/api/prova/buscarPorConteudo?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&idConteudo=${idConteudo}&ordem=${busca.ordem}`,
       { headers: AuthHeader() }
     );
+    console.log("aaaa " + JSON.stringify(res.data));
     setProvas(res.data.provas);
     setQuantidade(res.data.quantidade);
   };
@@ -41,8 +44,13 @@ function ListaDeProvas() {
     <>
       <FiltroBuscar
         tamanhoPagina={5}
-        titulo={"Provas"}
-        opcoesFiltro={["Ordem Alfabética", "Tamanho", "Popularidade"]}
+        titulo={t("provas")}
+        opcoesFiltro={[
+          t("ordem-alfabetica"),
+          t("tamanho"),
+          t("popularidade"),
+          t("dificuldade"),
+        ]}
         buscarFiltrado={buscarFiltrado}
         objetos={provas}
         quantidade={quantidade}

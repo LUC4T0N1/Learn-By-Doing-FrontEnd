@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./CriarAlternativas.css";
 
 export default function CriarAlternativas({ handleAdicionarAlternativa }) {
+  const { t } = useTranslation();
   const [add, setAdd] = useState(false);
   const [alternativa, setAlternativa] = useState({
     enunciado: "",
@@ -38,7 +40,7 @@ export default function CriarAlternativas({ handleAdicionarAlternativa }) {
               type="text"
               name="enunciado"
               className="input-texto-simples"
-              placeholder="Enunciado..."
+              placeholder={t("enunciado...")}
               onChange={handleChange}
             ></input>
             <select
@@ -47,12 +49,12 @@ export default function CriarAlternativas({ handleAdicionarAlternativa }) {
               className="select-simples"
               onChange={handleChange}
             >
-              <option value={false}>Falsa</option>
-              <option value={true}>Verdadeira</option>
+              <option value={false}>{t("falsa")}</option>
+              <option value={true}>{t("verdadeira")}</option>
             </select>
           </div>
           <button className="botao-simples" onClick={addAlt}>
-            Adicionar
+            {t("adicionar")}
           </button>
         </>
       )}

@@ -1,28 +1,36 @@
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./VisualizarQuestoes.css";
 
 export default function VisualizarQuestoesProvaPublica({ questao, resposta }) {
+  const { t } = useTranslation();
   return (
     <div className="visualizar-questao">
       <div className="questao-header">
-        <p className="questao-numero">Questão {questao.numeroQuestao}</p>
+        <p className="questao-numero">
+          {t("questao")} {questao.numeroQuestao}
+        </p>
         <div className="questao-dados">
-          <p>· Valor: {questao.valor}</p>
-          <p>· Nota: {questao.notaAluno}</p>
+          <p>
+            {t(".valor")} {questao.valor}
+          </p>
+          <p>
+            {t(".nota")} {questao.notaAluno}
+          </p>
         </div>
       </div>
       <p className="visualizar-enunciado">{questao.enunciado}</p>
       <div className="campo-resposta">
-        <p className="resposta-label">Sua Resposta: </p>
+        <p className="resposta-label">{t("sua-resposta")}</p>
         {!questao.multiplaEscolha ? (
           <>
             <div className="area-resposta">
               <p>{questao.respostaAluno}</p>
             </div>
             <div className="campo-resposta">
-              <p className="resposta-label">Resposta Professor: </p>
+              <p className="resposta-label">{t("resposta-professor")} </p>
               <div className="area-resposta">
                 <p>{questao.resposta}</p>
               </div>
@@ -59,7 +67,7 @@ export default function VisualizarQuestoesProvaPublica({ questao, resposta }) {
       questao.comentario != null &&
       questao.comentario != "" ? (
         <div className="campo-resposta">
-          <p className="resposta-label">Comentário Professor: </p>
+          <p className="resposta-label">{t("comentario-professor")}</p>
           <div className="area-resposta">
             <p>{questao.comentario}</p>
           </div>
