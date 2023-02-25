@@ -116,11 +116,13 @@ function CriarProva() {
         <div className="criar-prova">
           <div className="formulario-criar-prova">
             <p className="criar-prova-titulo">{t("criar-prova")}</p>
-            <InfosBasicas handleChange={handleChange} />
-            <BuscarConteudos
-              tamanhoPagina={5}
-              adicionarConteudos={adicionarConteudosProva}
-            />
+            <div className="dados-provas-input">
+              <InfosBasicas handleChange={handleChange} />
+              <BuscarConteudos
+                tamanhoPagina={5}
+                adicionarConteudos={adicionarConteudosProva}
+              />
+            </div>
             {prova.questoes.length > 0 ? (
               prova.questoes.map((questao, index) => (
                 <VisualizarQuestoesCriadas

@@ -104,10 +104,11 @@ body {
     1;
   font-size: 16px;
   padding-left: 10px;
-  border-radius: 3px;
-  background-color: rgb(241, 237, 237);
-  color: rgb(0, 0, 0);
+  border-radius: 8px;
+  background-color: rgba(77, 76, 76, 0.4);
+  color: rgb(255, 255, 255);
   margin-bottom: 10px;
+  margin-left: -5px;
 }
 
 .input-numero-simples {
@@ -135,7 +136,7 @@ body {
 }
 
 .select-simples {
-  min-width: 11%;
+  min-width: 10%;
   height: 53px;
   border-top-style: none;
   border-left-style: none;
@@ -164,10 +165,10 @@ body {
 .botao-simples {
   min-width: 5%;
   height: 53px;
-  background: linear-gradient(167.57deg, #434343, #000000);
+  background: linear-gradient(167.57deg, #434343, #1a1919);
   font-size: 16px;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 4px;
   color: aliceblue;
   border-style: none;
 }
@@ -195,7 +196,7 @@ body {
   border-bottom-style: none;
   border-radius: 10px;
   margin-right: 2px;
-  width: 20%;
+  width: 100px;
 }
 
 .mini-container {
@@ -241,4 +242,43 @@ body {
   -webkit-text-fill-color: transparent;
   padding: 0;
   margin: 0;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.botao-direita {
+  /*   position: absolute;
+  right: 4.3%; */
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.botao-esquerda {
+  position: absolute;
+  left: 4.3%;
+}
+
+.botao-fim {
+  min-width: 5%;
+  height: 53px;
+  background: linear-gradient(167.57deg, #434343, #1a1919);
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  color: aliceblue;
+  border-style: none;
+}
+
+.botao-fim:hover {
+  cursor: pointer;
+  background: linear-gradient(
+    165.57deg,
+    rgb(196, 112, 3, 0.8),
+    rgb(202, 35, 85, 0.8),
+    rgb(77, 8, 65, 0.8)
+  );
 }

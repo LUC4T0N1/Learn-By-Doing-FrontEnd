@@ -12,41 +12,31 @@ function ResponderQuestao({
       <div className="questao-header">
         <p className="questao-numero">Questão {numeroQuestao}</p>
         <div className="questao-dados">
-          {questao.multiplaEscolha ? (
-            <p>· {t("multipla-escolha")}</p>
-          ) : (
-            <p>· {t("dissertativa")}</p>
-          )}
-          {questao.publica ? <p>· {t("publica")}</p> : <p>· {t("privada")}</p>}
-          {
-            <p>
-              {t(".valor")}
-              {questao.valor}
-            </p>
-          }
+          <p>
+            {t(".valor")}
+            {questao.valor}
+          </p>
         </div>
       </div>
       <p className="visualizar-enunciado">{questao.enunciado}</p>
       <div className="campo-resposta">
         <p className="resposta-label">{t("resposta:")} </p>
         {!questao.multiplaEscolha ? (
-          <div className="area-resposta">
-            <textarea
-              type="text"
-              name="resposta"
-              className="input-texto-grande"
-              placeholder={t("resposta...")}
-              onChange={(e) => atualizarRespostaQuestao(e, questao.id)}
-            ></textarea>
-          </div>
+          <textarea
+            type="text"
+            name="resposta"
+            className="input-texto-grande"
+            placeholder={t("resposta...")}
+            onChange={(e) => atualizarRespostaQuestao(e, questao.id)}
+          ></textarea>
         ) : (
           <div className="area-resposta">
-            {questao.alternativas.map((alt) => (
+            {questao.alternativas.map((alt, index) => (
               <div>
                 <input
                   className="filtro-opcao"
                   type="radio"
-                  name={alt.id}
+                  name={numeroQuestao}
                   value={alt.id}
                   onChange={(e) => atualizarRespostaQuestao(e, questao.id)}
                 />

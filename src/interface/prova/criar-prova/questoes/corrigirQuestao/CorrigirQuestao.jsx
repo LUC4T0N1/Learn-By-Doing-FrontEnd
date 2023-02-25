@@ -24,13 +24,27 @@ export default function CorrigirQuestao({
           </p>
           <p>
             {t(".nota")}
-            {questao.notaAluno}
+            {questao.multiplaEscolha ? (
+              questao.notaAluno
+            ) : (
+              <input
+                placeholder={t("nota")}
+                className="nota-questao"
+                type="number"
+                min="0"
+                max={questao.valor}
+                value={qr.notaQuestao}
+                onChange={(e) =>
+                  atualizarNotaQuestao(e, questao.idQuestaoResolvida)
+                }
+              ></input>
+            )}
           </p>
         </div>
       </div>
       <p className="visualizar-enunciado">{questao.enunciado}</p>
       <div className="campo-resposta">
-        <p className="resposta-label">{t("resposta:")}</p>
+        <p className="resposta-label">{t("resposta")} </p>
         <div className="area-resposta">
           {questao.multiplaEscolha ? (
             <>
@@ -65,17 +79,7 @@ export default function CorrigirQuestao({
           <></>
         ) : (
           <>
-            <input
-              placeholder={t("nota")}
-              className="nota-questao"
-              type="number"
-              min="0"
-              max={questao.valor}
-              value={qr.notaQuestao}
-              onChange={(e) =>
-                atualizarNotaQuestao(e, questao.idQuestaoResolvida)
-              }
-            ></input>
+            <p className="resposta-label">{t("comentario")}: </p>
             <textarea
               placeholder={t("comentario")}
               className="comentario-questao"

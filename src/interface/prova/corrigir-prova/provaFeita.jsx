@@ -155,7 +155,8 @@ export default function ProvaFeita() {
   return (
     <div className="criar-prova">
       <div className="formulario-criar-prova">
-        <p className="criar-prova-titulo">{prova.nome}</p>
+        <p className="criar-prova-titulo">{prova.provaDto.nome}</p>
+        <p className="nome-aluno">{prova.nomeAluno}</p>
         <InfosProva prova={prova.provaDto} />
         {prova.provaDto.questoes.map((questao, index) => (
           <CorrigirQuestao
@@ -182,26 +183,36 @@ export default function ProvaFeita() {
             atualizarNotaQuestao={atualizarNotaQuestao}
           />
         ))}
-        <button
-          className="botao-simples"
-          onClick={() => history.push("/corrigir/buscarProva")}
-        >
-          {t("voltar")}
-        </button>
-        <button className="botao-simples" onClick={finalizarCorrecao}>
-          {t("finalizar-correcao")}
-        </button>
-        {erro ? <p className="error-message">{t("erro-generico")}</p> : <></>}
-        {correcaoInvalida ? (
-          <p className="error-message">{t("erro-questao-invalida")}</p>
-        ) : (
-          <></>
-        )}
-        {sucesso ? (
-          <p className="success-message">{t("aviso-prova-corrigida")}</p>
-        ) : (
-          <></>
-        )}
+        <div className="footer-buttons">
+          <div className="botao-esquerda">
+            <button
+              className="botao-fim"
+              onClick={() => history.push("/corrigir/buscarProva")}
+            >
+              {t("voltar")}
+            </button>
+          </div>
+          <div className="botao-direita">
+            {erro ? (
+              <p className="error-message">{t("erro-generico")}</p>
+            ) : (
+              <></>
+            )}
+            {correcaoInvalida ? (
+              <p className="error-message">{t("erro-questao-invalida")}</p>
+            ) : (
+              <></>
+            )}
+            {sucesso ? (
+              <p className="success-message">{t("aviso-prova-corrigida")}</p>
+            ) : (
+              <></>
+            )}
+            <button className="botao-fim" onClick={finalizarCorrecao}>
+              {t("finalizar-correcao")}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

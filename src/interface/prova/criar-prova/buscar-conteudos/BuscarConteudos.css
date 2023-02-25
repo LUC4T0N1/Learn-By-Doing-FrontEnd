@@ -2,20 +2,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 100%;
+  gap: 10px;
 }
 
 .criar-conteudo {
-  background-color: rgba(0, 0, 0, 1);
-  position: fixed;
-  padding: 100px;
+  background-color: rgb(24, 24, 24);
+  padding: 15%;
   border-radius: 20px;
-  margin-top: 365px;
   color: aliceblue;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
 }
 
 .criar-conteudo .input-texto-simples {
@@ -23,15 +28,33 @@
 }
 
 .botao-fechar {
-  right: 111;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgb(24, 24, 24);
   border-style: none;
-  position: relative;
-  bottom: 90px;
-  left: 215px;
+  position: fixed;
+  top: 5%;
+  right: 5%;
+}
+
+.botao-fechar-2 {
+  background-color: rgb(24, 24, 24);
+  border-style: none;
+  position: fixed;
+  top: 5%;
+  right: 5%;
+}
+
+.botao-fechar-3 {
+  background-color: rgb(24, 24, 24);
+  border-style: none;
+  position: fixed;
+  top: 1%;
+  right: 5%;
 }
 
 .botao-fechar:hover {
+  cursor: pointer;
+}
+.botao-fechar-2:hover {
   cursor: pointer;
 }
 
@@ -45,9 +68,9 @@
 }
 
 .escolher-conteudo {
-  background-color: rgb(145, 143, 143);
+  background-color: rgb(24, 24, 24);
   position: fixed;
-  padding: 100px;
+  padding: 6%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -59,4 +82,11 @@
   flex-direction: column;
   width: 59%;
   height: 59%;
+}
+
+@media screen and (max-width: 660px) {
+  .botoes-conteudo {
+    display: flex;
+    flex-direction: column;
+  }
 }

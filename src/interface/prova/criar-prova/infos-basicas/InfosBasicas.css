@@ -1,7 +1,7 @@
 .infos-basicas {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   flex-direction: column;
   width: 100%;
 }
@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
   margin-left: 10px;
   margin-top: 10px;
@@ -44,4 +44,65 @@
 
 .datas-prova label {
   color: black;
+}
+
+.input-numero-simples-ib {
+  width: 7.7%;
+  height: 45px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+  /*   border-image: linear-gradient(to right, rgb(196, 112, 3, 0.8), rgb(202, 35, 85, 0.8), rgb(77, 8, 65, 0.8)) 1; */
+  font-size: 16px;
+  padding-left: 10px;
+  border-radius: 4px;
+  background-color: rgb(241, 237, 237);
+  color: aliceblue;
+  color: rgb(0, 0, 0);
+}
+
+.input-numero-simples-ib::placeholder {
+  font-size: 10px;
+}
+
+.datas-prova label {
+  font-size: 12px;
+}
+
+@media screen and (max-width: 1420px) {
+  .segunda-linha {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-numero-simples-ib {
+    width: 63%;
+  }
+
+  .datas-prova {
+    width: 63%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .primeira-linha {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .primeira-linha .input-texto-simples {
+    width: 63%;
+  }
+
+  .primeira-linha .select-simples {
+    padding-left: 10px;
+    padding-right: 5px;
+    width: 68%;
+    margin-left: 14px;
+  }
+
+  .input-numero-simples-ib::placeholder {
+    font-size: 17px;
+  }
 }

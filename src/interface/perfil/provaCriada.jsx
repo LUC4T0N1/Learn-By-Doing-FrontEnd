@@ -42,6 +42,8 @@ export default function ProvaCriada() {
         {prova.questoes.map((questao, index) => (
           <VisualizarQuestoesCriadas
             key={index}
+            provaCriada={true}
+            numeroQuestao={index + 1}
             questao={{
               numeroQuestao: index + 1,
               enunciado: questao.enunciado,

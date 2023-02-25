@@ -9,9 +9,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(75, 74, 74);
+  background-color: rgb(24, 24, 24);
   position: fixed;
-  padding: 70px;
+  padding: 13%;
   border-radius: 20px;
   color: aliceblue;
   display: flex;

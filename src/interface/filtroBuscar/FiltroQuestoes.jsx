@@ -102,7 +102,7 @@ export default function FiltroQuestoes({
 
   return (
     <div className="escolher-questao">
-      <button className="botao-fechar" onClick={handleClose}>
+      <button className="botao-fechar-2" onClick={handleClose}>
         <i>
           <FontAwesomeIcon
             icon={faX}

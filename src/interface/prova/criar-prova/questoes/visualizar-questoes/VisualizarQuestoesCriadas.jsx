@@ -13,6 +13,7 @@ export default function VisualizarQuestoesCriadas({
   nomeConteudos,
   podeRemover,
   numeroQuestao,
+  provaCriada,
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -60,9 +61,9 @@ export default function VisualizarQuestoesCriadas({
         <div className="visualizar-questao">
           <div className="questao-header">
             <p className="questao-numero">
-              {t("questao")} {questao.numeroQuestao}
+              {t("questao")} {numeroQuestao}
             </p>
-            <div className="questao-dados">
+            <div className="questao-dados-2">
               {questao.multiplaEscolha ? (
                 <p>· {t("multipla-escolha")}</p>
               ) : (
@@ -73,7 +74,7 @@ export default function VisualizarQuestoesCriadas({
               ) : (
                 <p>· {t("privada")}</p>
               )}
-              {
+              {!provaCriada ? (
                 <p>
                   {t(".valor")}
                   <input
@@ -85,35 +86,44 @@ export default function VisualizarQuestoesCriadas({
                     placeholder={questao.valor}
                   ></input>
                 </p>
-              }
-              <div className="botoes-questao">
-                {podeRemover ? (
-                  <button
-                    className="botao-remover-questao"
-                    onClick={removerQuestao}
-                  >
-                    {t("remover")}
-                  </button>
-                ) : (
-                  <></>
-                )}
+              ) : (
+                <p>
+                  {t(".valor")}
+                  {questao.valor}
+                </p>
+              )}
+              {!provaCriada ? (
+                <div className="botoes-questao">
+                  {podeRemover ? (
+                    <button
+                      className="botao-remover-questao"
+                      onClick={removerQuestao}
+                    >
+                      {t("remover")}
+                    </button>
+                  ) : (
+                    <></>
+                  )}
 
-                {questao.editavel == true || questao.editavel == "true" ? (
-                  <button
-                    className="botao-editar-questao"
-                    onClick={editarQuestao}
-                  >
-                    {t("editar")}
-                  </button>
-                ) : (
-                  <></>
-                )}
-              </div>
+                  {questao.editavel == true || questao.editavel == "true" ? (
+                    <button
+                      className="botao-editar-questao"
+                      onClick={editarQuestao}
+                    >
+                      {t("editar")}
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <p className="visualizar-enunciado">{questao.enunciado}</p>
           <div className="campo-resposta">
-            <p className="resposta-label">{t("resposta:")} </p>
+            <p className="resposta-label">{t("resposta")} </p>
             {!questao.multiplaEscolha ? (
               <div className="area-resposta">
                 <p>{questao.resposta}</p>

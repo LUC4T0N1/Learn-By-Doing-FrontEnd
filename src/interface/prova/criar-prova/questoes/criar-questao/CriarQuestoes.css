@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(75, 74, 74);
+  background-color: rgb(24, 24, 24);
   padding: 70px;
   border-radius: 20px;
   color: aliceblue;
@@ -25,10 +25,6 @@
 .criar-questoes .input-texto-simples {
   min-width: 80%;
 }
-
-/* .criar-questoes .mini-container .select-simples{
-  width: 17%;
-} */
 
 .alternativa {
   display: flex;

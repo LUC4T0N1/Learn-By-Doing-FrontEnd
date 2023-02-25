@@ -24,7 +24,7 @@ export default function VisualizarQuestoes({ questao, resposta }) {
       </div>
       <p className="visualizar-enunciado">{questao.enunciado}</p>
       <div className="campo-resposta">
-        <p className="resposta-label">{t("resposta:")} </p>
+        <p className="resposta-label">{t("resposta")} </p>
         {!questao.multiplaEscolha ? (
           <div className="area-resposta">
             <p>{questao.respostaAluno}</p>

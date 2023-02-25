@@ -104,61 +104,63 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
         ))}
       </div>
 
-      {open ? (
-        <>
-          <div className="criar-conteudo">
-            <button className="botao-fechar" onClick={handleClose}>
-              <i>
-                <FontAwesomeIcon
-                  icon={faX}
-                  rel="noreferrer"
-                  className="icon-fechar"
-                ></FontAwesomeIcon>
-              </i>
-            </button>
-            <div className="conteudo">
-              <input
-                type="text"
-                name="nome"
-                className="input-texto-simples"
-                placeholder={t("conteudo...")}
-                onChange={handleChangeCriarConteudo}
-              ></input>
-              <button className="botao-simples" onClick={handleSubmit}>
-                {t("criar")}
+      <div className="botoes-conteudo">
+        {open ? (
+          <>
+            <div className="criar-conteudo">
+              <button className="botao-fechar-2" onClick={handleClose}>
+                <i>
+                  <FontAwesomeIcon
+                    icon={faX}
+                    rel="noreferrer"
+                    className="icon-fechar"
+                  ></FontAwesomeIcon>
+                </i>
               </button>
-              {erro.erro ? (
-                <p className="error-message">{erro.mensagem}</p>
-              ) : (
-                <></>
-              )}
+              <div className="conteudo">
+                <input
+                  type="text"
+                  name="nome"
+                  className="input-texto-simples"
+                  placeholder={t("conteudo...")}
+                  onChange={handleChangeCriarConteudo}
+                ></input>
+                <button className="botao-simples" onClick={handleSubmit}>
+                  {t("criar")}
+                </button>
+                {erro.erro ? (
+                  <p className="error-message">{erro.mensagem}</p>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-          </div>
-        </>
-      ) : (
-        <button className="botao-simples" onClick={handleClickOpen}>
-          {t("criar-conteudo")}
-        </button>
-      )}
+          </>
+        ) : (
+          <button className="botao-fim" onClick={handleClickOpen}>
+            {t("criar-conteudo")}
+          </button>
+        )}
 
-      {openEscolher ? (
-        <FiltroConteudos
-          tamanhoPagina={tamanhoPagina}
-          handleClose={handleClose}
-          titulo={t("escolher-conteudos")}
-          opcoesFiltro={[t("ordem-alfabetica"), t("numero-provas")]}
-          buscarFiltrado={buscarFiltrado}
-          objetos={conteudos}
-          quantidade={quantidade}
-          tipo={1}
-          conteudosSelecionados={conteudosSelecionados}
-          addConteudo={addConteudo}
-        />
-      ) : (
-        <button className="botao-simples" onClick={handleClickOpenEscolher}>
-          {t("escolher-conteudos")}
-        </button>
-      )}
+        {openEscolher ? (
+          <FiltroConteudos
+            tamanhoPagina={tamanhoPagina}
+            handleClose={handleClose}
+            titulo={t("escolher-conteudos")}
+            opcoesFiltro={[t("ordem-alfabetica"), t("numero-provas")]}
+            buscarFiltrado={buscarFiltrado}
+            objetos={conteudos}
+            quantidade={quantidade}
+            tipo={1}
+            conteudosSelecionados={conteudosSelecionados}
+            addConteudo={addConteudo}
+          />
+        ) : (
+          <button className="botao-fim" onClick={handleClickOpenEscolher}>
+            {t("escolher-conteudos")}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

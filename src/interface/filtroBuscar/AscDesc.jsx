@@ -2,9 +2,9 @@ import { faDownLong, faUpLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-function AscDesc({ ordem, ascendente, descendente }) {
+function AscDesc({ ordem, ascendente, descendente, e2 }) {
   return (
-    <div className="setas-ordenacao">
+    <div className={e2 ? "setas-ordenacao2" : "setas-ordenacao"}>
       <button
         className={
           ordem == 0 ? "botao-seta-selecionada" : "botao-seta-nao-selecionada"

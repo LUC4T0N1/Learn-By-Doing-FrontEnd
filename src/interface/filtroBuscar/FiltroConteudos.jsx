@@ -77,7 +77,7 @@ export default function FiltroConteudos({
       <div className="filtro-buscar-container">
         <div className="filtro-buscar-form">
           <p className="busca-titulo">{titulo}</p>
-          <div className="busca-filtro">
+          <div className="busca-filtro2">
             <input
               type="text"
               name="nome"
@@ -85,8 +85,8 @@ export default function FiltroConteudos({
               placeholder={titulo}
               onChange={handleChange}
             ></input>
-            <div className="filtros-container">
-              <div className="opcoes-filtro">
+            <div className="filtros-container2">
+              <div className="opcoes-filtro2">
                 {opcoesFiltro.map((opcao, index) => (
                   <Filtro
                     key={index}
@@ -97,6 +97,7 @@ export default function FiltroConteudos({
                 ))}
               </div>
               <AscDesc
+                e2={true}
                 ordem={busca.ordem}
                 ascendente={ascendente}
                 descendente={descendente}
@@ -104,7 +105,7 @@ export default function FiltroConteudos({
             </div>
           </div>
           <div className={tipo == 1 ? "resultados" : "resultados-provas"}>
-            <div className="conteudos-selecionados">
+            <div className="conteudos-selecionados2">
               {conteudosSelecionados.map((c) => (
                 <Tag id={c.id} nome={c.nome} handleRemove={addConteudo} />
               ))}

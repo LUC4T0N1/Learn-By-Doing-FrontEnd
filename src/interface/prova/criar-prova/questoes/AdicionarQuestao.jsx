@@ -84,7 +84,7 @@ export default function AdicionarQuestoes({ idsQuestoes }) {
       </button>
       {open ? (
         <div className="escolher-opcao">
-          <button className="botao-fechar" onClick={handleClose}>
+          <button className="botao-fechar-2" onClick={handleClose}>
             <i>
               <FontAwesomeIcon
                 icon={faX}

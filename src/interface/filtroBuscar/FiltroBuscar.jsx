@@ -63,7 +63,7 @@ function FiltroBuscar({
         <p className="busca-titulo">
           {t("buscar")} {titulo}
         </p>
-        <div className="busca-filtro">
+        <div className="busca-filtro2">
           <input
             type="text"
             name="nome"
@@ -71,7 +71,14 @@ function FiltroBuscar({
             placeholder={t("buscar") + " " + titulo}
             onChange={handleChange}
           ></input>
+        </div>
+        <div className="busca-filtro">
           <div className="filtros-container">
+            <AscDesc
+              ordem={busca.ordem}
+              ascendente={ascendente}
+              descendente={descendente}
+            />
             <div className="opcoes-filtro">
               {opcoesFiltro.map((opcao, index) => (
                 <Filtro
@@ -82,11 +89,6 @@ function FiltroBuscar({
                 />
               ))}
             </div>
-            <AscDesc
-              ordem={busca.ordem}
-              ascendente={ascendente}
-              descendente={descendente}
-            />
           </div>
         </div>
         <div className={tipo == 1 ? "resultados" : "resultados-provas"}>

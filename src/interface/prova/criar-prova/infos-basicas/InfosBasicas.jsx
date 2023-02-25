@@ -47,7 +47,7 @@ export default function InfosBasicas({ handleChange }) {
               name="tempo"
               step="1"
               onChange={handleChange}
-              className="input-numero-simples"
+              className="input-numero-simples-ib"
               placeholder={t("duracao")}
             ></input>
             <input
@@ -56,7 +56,7 @@ export default function InfosBasicas({ handleChange }) {
               step="1"
               name="tentativas"
               onChange={handleChange}
-              className="input-numero-simples"
+              className="input-numero-simples-ib"
               placeholder={t("tentativas")}
             ></input>
             <div className="datas-prova">

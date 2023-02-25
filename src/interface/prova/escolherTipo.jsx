@@ -9,9 +9,9 @@ const EscolherTipo = () => {
   const { t } = useTranslation();
   return (
     <div className="escolher-tipo">
-      <h1 className="escolher-titulo">{t("escolher-prova")}</h1>
-      <div className="items-container">
-        <Link className="item" to="/escolherProvaPrivada">
+      <div className="escolher-titulo">{t("escolher-prova")}</div>
+      <div className="items-container-2">
+        <Link className="item-2" to="/escolherProvaPrivada">
           <div className="item-title">
             {t("prova-privada")}
             <i>
@@ -24,7 +24,7 @@ const EscolherTipo = () => {
           </div>
           <div className="item-desc">{t("prova-privada-desc")}</div>
         </Link>
-        <Link className="item" to="/buscar-conteudos">
+        <Link className="item-2" to="/buscar-conteudos">
           <div className="item-title">
             {t("prova-publica")}
             <i>

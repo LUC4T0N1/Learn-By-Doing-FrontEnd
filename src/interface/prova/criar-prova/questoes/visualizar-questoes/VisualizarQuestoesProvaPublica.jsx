@@ -10,7 +10,8 @@ export default function VisualizarQuestoesProvaPublica({ questao, resposta }) {
     <div className="visualizar-questao">
       <div className="questao-header">
         <p className="questao-numero">
-          {t("questao")} {questao.numeroQuestao}
+          {t("questao")}
+          {questao.numeroQuestao}
         </p>
         <div className="questao-dados">
           <p>

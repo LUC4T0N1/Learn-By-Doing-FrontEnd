@@ -1,4 +1,4 @@
-.infos-prova{
+.infos-prova {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,9 +6,16 @@
   margin-top: 250px;
   width: 100%;
   margin-bottom: 10px;
+  text-align: center;
 }
 
-.area-resposta{
+.area-resposta {
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 800px) {
+  .infos-prova {
+    flex-direction: column;
+  }
 }

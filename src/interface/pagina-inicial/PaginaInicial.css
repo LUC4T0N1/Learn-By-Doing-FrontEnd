@@ -1,3 +1,9 @@
 .pagina-inicial {
   height: 100vh;
 }
+
+@media screen and (max-width: 1000px) {
+  .pagina-inicial {
+    height: 290vh;
+  }
+}
