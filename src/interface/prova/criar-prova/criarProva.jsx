@@ -149,14 +149,14 @@ function CriarProva() {
                 idsQuestoes={prova.questoes.map((quest) => quest.id)}
               />
               <div className="botao-criar-footer">
-                <button className="botao-simples" onClick={handleSubmit}>
-                  {t("criar-prova")}
-                </button>
                 {erro.erro ? (
                   <p className="error-message">{erro.mensagem}</p>
                 ) : (
                   <></>
                 )}
+                <button className="botao-simples" onClick={handleSubmit}>
+                  {t("criar-prova")}
+                </button>
               </div>
             </div>
           </div>

@@ -18,6 +18,24 @@
   color: rgb(255, 255, 255);
 }
 
+.botao-add-prova-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao-add-prova {
+  min-width: 5%;
+  height: 33px;
+  background: linear-gradient(167.57deg, #434343, #1a1919);
+  font-size: 16px;
+  border-radius: 4px;
+  color: aliceblue;
+  border-style: none;
+  text-align: center;
+  margin-top: 5px;
+}
+
 .questao-numero {
   font-size: 19px;
 }
@@ -40,6 +58,15 @@
   gap: 6px;
   position: absolute;
   right: 6%;
+}
+
+.questao-dados2 {
+  display: flex;
+  gap: 6px;
+  position: absolute;
+  right: 0.1%;
+  align-items: center;
+  justify-content: center;
 }
 
 .questao-dados-2 {

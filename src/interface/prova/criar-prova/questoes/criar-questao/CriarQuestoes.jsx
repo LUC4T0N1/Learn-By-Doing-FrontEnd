@@ -1,4 +1,4 @@
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faX, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -183,7 +183,7 @@ export default function CriarQuestoes({ handleClose }) {
 
   return (
     <div className="criar-questoes">
-      <button className="botao-fechar" onClick={handleClose}>
+      <button className="botao-fechar-2" onClick={handleClose}>
         <i>
           <FontAwesomeIcon
             icon={faX}
@@ -192,7 +192,7 @@ export default function CriarQuestoes({ handleClose }) {
           ></FontAwesomeIcon>
         </i>
       </button>
-      <div className="mini-container">
+      <div className="mini-container2">
         <input
           type="text"
           name="enunciado"
@@ -200,23 +200,14 @@ export default function CriarQuestoes({ handleClose }) {
           placeholder={t("enunciado...")}
           onChange={handleChange}
         ></input>
-        <select
-          name="publica"
-          id="privacidade"
-          className="select-simples"
-          onChange={mudarPrivacidade}
-        >
-          <option value={true}>{t("publica")}</option>
-          <option value={false}>{t("privada")}</option>
-        </select>
       </div>
-      <div className="mini-container">
+      <div className="mini-container3">
         <BuscarConteudos
           tamanhoPagina={5}
           adicionarConteudos={adicionarConteudosQuestao}
         />
       </div>
-      <div className="mini-container">
+      <div className="mini-container2">
         <input
           type="number"
           min="0.1"
@@ -234,6 +225,15 @@ export default function CriarQuestoes({ handleClose }) {
           <option value={false}>{t("dissertativa")}</option>
           <option value={true}>{t("multipla-escolha")}</option>
         </select>
+        <select
+          name="publica"
+          id="privacidade"
+          className="select-simples"
+          onChange={mudarPrivacidade}
+        >
+          <option value={true}>{t("publica")}</option>
+          <option value={false}>{t("privada")}</option>
+        </select>
       </div>
       {dissertativa ? (
         <>
@@ -249,17 +249,24 @@ export default function CriarQuestoes({ handleClose }) {
         <>
           <div>
             {questao.alternativas.length !== 0 ? (
-              <div style={{ display: "block", flexWrap: "wrap" }}>
+              <div className="alternativas">
                 {questao.alternativas.map((alt) => (
                   <div className="alternativa">
                     <h3>
-                      {" "}
-                      {questao.alternativas.findIndex((a) => a === alt) +
-                        1}{" "}
-                      {alt.enunciado}{" "}
-                      {alt.correta == true || alt.correta == "true"
-                        ? t("correta")
-                        : t("incorreta")}{" "}
+                      {questao.alternativas.findIndex((a) => a === alt) + 1}
+                      {" - "}
+                      {alt.correta == true || alt.correta == "true" ? (
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className="alt-icon-verdadeiro"
+                        ></FontAwesomeIcon>
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faXmark}
+                          className="alt-icon-falso"
+                        ></FontAwesomeIcon>
+                      )}{" "}
+                      {alt.enunciado}
                     </h3>
                     <button
                       className="remover-alternativa-botao"

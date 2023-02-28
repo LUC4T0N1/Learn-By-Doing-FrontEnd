@@ -169,7 +169,7 @@
 
 .resultados-questoes {
   width: 40%;
-  margin-top: -25px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,6 +227,10 @@
   right: 30.5%;
 }
 
+.setas-ordenacao3 {
+  margin-left: 10px;
+}
+
 .seta {
   font-size: 24px;
 }
@@ -251,6 +255,29 @@
 
 .botao-seta-selecionada:hover,
 .botao-seta-nao-selecionada:hover {
+  cursor: pointer;
+}
+
+.botao-seta-selecionada2 {
+  background-color: rgb(24, 24, 24);
+  color: rgb(177, 150, 114);
+  height: 40px;
+  border: none;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.botao-seta-nao-selecionada2 {
+  background-color: rgb(24, 24, 24);
+  color: rgb(116, 115, 115);
+  height: 40px;
+  border: none;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.botao-seta-selecionada2:hover,
+.botao-seta-nao-selecionada2:hover {
   cursor: pointer;
 }
 
@@ -341,6 +368,35 @@ input[type="radio"]:checked:after {
   color: aliceblue;
   position: absolute;
   bottom: 49px;
+}
+
+.trocar-pagina2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: aliceblue;
+}
+
+.busca-filtro-questao {
+  width: 60%;
+  gap: 10px;
+  position: absolute;
+  top: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: aliceblue;
+}
+.busca-filtro-questao .input-texto-simples {
+  width: 60%;
+}
+
+.questoes-achadas {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .trocar-pagina .botao-simples {
@@ -747,6 +803,11 @@ input[type="radio"]:checked:after {
   }
   .resultado-card-c {
     height: 90px;
+  }
+
+  .conteudos-selecionados {
+    min-height: 32px;
+    margin-top: 10px;
   }
 }
 

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import BuscarConteudosQuestoes from "../prova/criar-prova/buscar-conteudos/BuscarConteudosQuestoes";
 import AscDesc from "./AscDesc";
-import "./FiltrarQuestao.css";
 import Filtro from "./Filtro";
 import ResultadoQuestao from "./ResultadoQuestao";
 import TrocarPagina from "./TrocarPagina";
@@ -211,6 +210,7 @@ export default function FiltroQuestoes({
                 ))}
               </div>
               <AscDesc
+                e3={true}
                 ordem={busca.ordem}
                 ascendente={ascendente}
                 descendente={descendente}
@@ -222,34 +222,37 @@ export default function FiltroQuestoes({
               tamanhoPagina={5}
               adicionarConteudos={adicionarConteudosFiltro}
             />
-            {objetos.map((objeto, index) => (
-              <ResultadoQuestao
-                key={index}
-                questao={{
-                  numeroQuestao: index + 1,
-                  enunciado: objeto.enunciado,
-                  publica: objeto.publica,
-                  multiplaEscolha: objeto.multiplaEscolha,
-                  id: objeto.id,
-                  valor: objeto.valor,
-                  resposta: objeto.resposta,
-                  alternativas: objeto.alternativas,
-                }}
-                handleClose={handleClose}
-              />
-            ))}
+            <div className="questoes-achadas">
+              {objetos.map((objeto, index) => (
+                <ResultadoQuestao
+                  key={index}
+                  questao={{
+                    numeroQuestao: index + 1,
+                    enunciado: objeto.enunciado,
+                    publica: objeto.publica,
+                    multiplaEscolha: objeto.multiplaEscolha,
+                    id: objeto.id,
+                    valor: objeto.valor,
+                    resposta: objeto.resposta,
+                    alternativas: objeto.alternativas,
+                  }}
+                  handleClose={handleClose}
+                />
+              ))}
+              {busca.nome == "" ? (
+                <TrocarPagina
+                  e2={true}
+                  tamanhoPagina={10}
+                  quantidade={quantidade}
+                  paginaAtual={busca.pagina + 1}
+                  proximaPagina={proximaPagina}
+                  paginaAnterior={paginaAnterior}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
-          {busca.nome == "" ? (
-            <TrocarPagina
-              tamanhoPagina={10}
-              quantidade={quantidade}
-              paginaAtual={busca.pagina + 1}
-              proximaPagina={proximaPagina}
-              paginaAnterior={paginaAnterior}
-            />
-          ) : (
-            <></>
-          )}
         </div>
       </div>
     </div>

@@ -82,7 +82,7 @@ export default function VisualizarQuestoesCriadas({
                     min="0.1"
                     name="valor"
                     onChange={changeValor}
-                    className="input-valor"
+                    className="nota-questao"
                     placeholder={questao.valor}
                   ></input>
                 </p>

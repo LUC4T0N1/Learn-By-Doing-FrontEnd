@@ -36,19 +36,18 @@ export default function ResultadoQuestao({ questao, handleClose }) {
         <p className="questao-numero">
           {t("questao")} {questao.numeroQuestao}
         </p>
-        <div className="questao-dados">
+        <div className="questao-dados2">
           {questao.multiplaEscolha ? (
             <p>· {t("multipla-escolha")}</p>
           ) : (
             <p>· {t("dissertativa")}</p>
           )}
-          {questao.publica ? <p>· {t("publica")}</p> : <p>· {t("privada")}</p>}
           <input
             type="number"
             min="0.1"
             name="valor"
             onChange={changeValor}
-            className="input-valor"
+            className="nota-questao2"
             placeholder="Valor.."
           ></input>
         </div>
@@ -81,8 +80,10 @@ export default function ResultadoQuestao({ questao, handleClose }) {
           </div>
         )}
       </div>
-      <div>
-        <button onClick={addQuestao}>{t("add-a-prova")}</button>
+      <div className="botao-add-prova-div">
+        <button className="botao-add-prova" onClick={addQuestao}>
+          {t("add-a-prova")}
+        </button>
         {erro ? (
           <p className="error-message">{t("aviso-questao-valor")}</p>
         ) : (

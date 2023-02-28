@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 function TrocarPagina({
+  e2,
   tamanhoPagina,
   quantidade,
   paginaAtual,
@@ -23,7 +24,7 @@ function TrocarPagina({
     return totalPaginas;
   };
   return (
-    <div className="trocar-pagina">
+    <div className={e2 ? "trocar-pagina2" : "trocar-pagina"}>
       {paginaAtual == 1 ? (
         <button className="botao-simples-sem-hover">
           {t("pagina-anterior")}

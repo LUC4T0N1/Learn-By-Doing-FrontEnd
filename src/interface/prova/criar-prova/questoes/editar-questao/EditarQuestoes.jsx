@@ -1,4 +1,4 @@
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faX, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
@@ -169,7 +169,7 @@ export default function EditarQuestoes({ handleClose }) {
 
   return (
     <div className="criar-questoes">
-      <button className="botao-fechar" onClick={handleClose}>
+      <button className="botao-fechar-2" onClick={handleClose}>
         <i>
           <FontAwesomeIcon
             icon={faX}
@@ -178,7 +178,7 @@ export default function EditarQuestoes({ handleClose }) {
           ></FontAwesomeIcon>
         </i>
       </button>
-      <div className="mini-container">
+      <div className="mini-container2">
         <input
           type="text"
           name="enunciado"
@@ -187,28 +187,6 @@ export default function EditarQuestoes({ handleClose }) {
           placeholder={t("enunciado...")}
           onChange={handleChange}
         />
-        <select
-          name="publica"
-          id="privacidade"
-          className="select-simples"
-          onChange={handleChange}
-        >
-          {questao.publica == true || questao.publica == "true" ? (
-            <>
-              <option selected="selected" value={true}>
-                {t("publica")}
-              </option>
-              <option value={false}>{t("privada")}</option>
-            </>
-          ) : (
-            <>
-              <option value={true}>{t("publica")}</option>
-              <option selected="selected" value={false}>
-                {t("privada")}
-              </option>
-            </>
-          )}
-        </select>
       </div>
       <div className="mini-container">
         <BuscarConteudosEditarQuestao
@@ -217,7 +195,7 @@ export default function EditarQuestoes({ handleClose }) {
           conteudosPreSelecionados={getConteudosPreSelecionados}
         />
       </div>
-      <div className="mini-container">
+      <div className="mini-container2">
         <input
           type="number"
           name="valor"
@@ -247,6 +225,28 @@ export default function EditarQuestoes({ handleClose }) {
             </>
           )}
         </select>
+        <select
+          name="publica"
+          id="privacidade"
+          className="select-simples"
+          onChange={handleChange}
+        >
+          {questao.publica == true || questao.publica == "true" ? (
+            <>
+              <option selected="selected" value={true}>
+                {t("publica")}
+              </option>
+              <option value={false}>{t("privada")}</option>
+            </>
+          ) : (
+            <>
+              <option value={true}>{t("publica")}</option>
+              <option selected="selected" value={false}>
+                {t("privada")}
+              </option>
+            </>
+          )}
+        </select>
       </div>
       {!questao.multiplaEscolha == true ||
       !questao.multiplaEscolha == "true" ? (
@@ -264,15 +264,24 @@ export default function EditarQuestoes({ handleClose }) {
         <>
           <div>
             {questao.alternativas.length !== 0 ? (
-              <div style={{ display: "block", flexWrap: "wrap" }}>
+              <div className="alternativas">
                 {questao.alternativas.map((alt) => (
                   <div className="alternativa">
                     <h3>
-                      {" "}
-                      {questao.alternativas.findIndex((a) => a === alt) +
-                        1}{" "}
-                      {alt.enunciado}{" "}
-                      {alt.correta ? t("correta") : t("incorreta")}{" "}
+                      {questao.alternativas.findIndex((a) => a === alt) + 1}
+                      {" - "}
+                      {alt.correta == true || alt.correta == "true" ? (
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className="alt-icon-verdadeiro"
+                        ></FontAwesomeIcon>
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faXmark}
+                          className="alt-icon-falso"
+                        ></FontAwesomeIcon>
+                      )}{" "}
+                      {alt.enunciado}
                     </h3>
                     <button
                       className="remover-alternativa-botao"

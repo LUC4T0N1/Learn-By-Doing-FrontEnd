@@ -20,6 +20,20 @@
   margin-bottom: 10px;
 }
 
+.nota-questao2 {
+  width: 20%;
+  height: 30px;
+  padding-left: 12px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  font-size: 16px;
+  border-radius: 3px;
+  background-color: rgb(68, 67, 67);
+  color: white;
+}
+
 .comentario-questao {
   width: 98%;
   resize: none;

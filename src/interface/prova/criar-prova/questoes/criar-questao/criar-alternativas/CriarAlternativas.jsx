@@ -20,9 +20,11 @@ export default function CriarAlternativas({ handleAdicionarAlternativa }) {
     setAlternativa({ ...alternativa, [nome]: value });
   };
   const addAlt = (e) => {
-    setAdd(false);
-    handleAdicionarAlternativa(alternativa);
-    setAlternativa({ enunciado: "", correta: false });
+    if (alternativa.enunciado != "") {
+      setAdd(false);
+      handleAdicionarAlternativa(alternativa);
+      setAlternativa({ enunciado: "", correta: false });
+    }
   };
 
   return (

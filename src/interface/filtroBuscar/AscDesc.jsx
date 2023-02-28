@@ -2,12 +2,22 @@ import { faDownLong, faUpLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-function AscDesc({ ordem, ascendente, descendente, e2 }) {
+function AscDesc({ ordem, ascendente, descendente, e2, e3 }) {
   return (
-    <div className={e2 ? "setas-ordenacao2" : "setas-ordenacao"}>
+    <div
+      className={
+        e2 ? "setas-ordenacao2" : e3 ? "setas-ordenacao3" : "setas-ordenacao"
+      }
+    >
       <button
         className={
-          ordem == 0 ? "botao-seta-selecionada" : "botao-seta-nao-selecionada"
+          ordem == 0
+            ? e2 || e3
+              ? "botao-seta-selecionada2"
+              : "botao-seta-selecionada"
+            : e2 || e3
+            ? "botao-seta-nao-selecionada2"
+            : "botao-seta-nao-selecionada"
         }
         onClick={ascendente}
       >
@@ -15,7 +25,13 @@ function AscDesc({ ordem, ascendente, descendente, e2 }) {
       </button>
       <button
         className={
-          ordem == 1 ? "botao-seta-selecionada" : "botao-seta-nao-selecionada"
+          ordem == 1
+            ? e2 || e3
+              ? "botao-seta-selecionada2"
+              : "botao-seta-selecionada"
+            : e2 || e3
+            ? "botao-seta-nao-selecionada2"
+            : "botao-seta-nao-selecionada"
         }
         onClick={descendente}
       >
