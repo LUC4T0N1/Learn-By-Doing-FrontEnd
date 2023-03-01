@@ -75,6 +75,7 @@ export default function BuscarConteudosEditarQuestao({
       </div>
       {openEscolher ? (
         <FiltroConteudos
+          e2={true}
           handleClose={handleClose}
           titulo={t("escolher-conteudos")}
           opcoesFiltro={[t("ordem-alfabetica"), t("numero-provas")]}

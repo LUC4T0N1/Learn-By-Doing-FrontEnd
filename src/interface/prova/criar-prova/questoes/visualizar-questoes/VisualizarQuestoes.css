@@ -22,6 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .botao-add-prova {
@@ -77,6 +78,15 @@
 }
 
 .questao-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: -17px;
+  color: rgb(250, 224, 190);
+}
+
+.questao-header2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -190,15 +200,62 @@
   background-color: rgb(175, 111, 28);
 }
 
+@media screen and (max-width: 1700px) {
+  .questao-dados2 {
+    right: -15.1%;
+  }
+}
+@media screen and (max-width: 990px) {
+  .questao-dados2 {
+    right: -5.1%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .questao-dados2 {
+    right: -7.1%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .questao-dados2 {
+    right: -9.1%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .questao-dados2 {
+    right: -11.1%;
+  }
+}
+@media screen and (max-width: 550px) {
+  .questao-dados2 {
+    right: -15.1%;
+  }
+}
 @media screen and (max-width: 500px) {
   .visualizar-questao {
     width: 80%;
     padding: 35px;
   }
+  .questao-dados2 {
+    margin-top: 70px;
+    right: 20%;
+    font-size: 13px;
+  }
+  .questao-dados2 .nota-questao2 {
+    height: 20px;
+  }
+  .error-message {
+    font-size: 15px;
+  }
 }
 
 @media screen and (max-width: 450px) {
   .questao-header {
+    margin-top: -15px;
+    font-size: 14px;
+  }
+  .questao-header2 {
     margin-top: -15px;
     font-size: 14px;
   }

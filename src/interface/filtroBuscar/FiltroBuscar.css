@@ -102,7 +102,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 50px;
+  height: 70px;
   border-top-style: none;
   border-left-style: none;
   border-right-style: none;
@@ -286,6 +286,15 @@
   justify-content: center;
   align-items: center;
 }
+.opcoes-filtro-questao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 1px;
+  font-size: 12px;
+  min-width: 130px;
+}
 
 .filtros-container2 {
   display: flex;
@@ -416,7 +425,10 @@ input[type="radio"]:checked:after {
 .escolher-questao {
   background-color: rgb(24, 24, 24);
   position: fixed;
-  padding: 100px;
+  padding-top: 6%;
+  padding-bottom: 6%;
+  padding-left: 10%;
+  padding-right: 10%;
   border-radius: 20px;
   color: aliceblue;
   display: flex;
@@ -524,6 +536,11 @@ input[type="radio"]:checked:after {
 }
 
 @media screen and (max-width: 990px) {
+  .resultados-questoes {
+    width: 80%;
+    margin-left: 141px;
+  }
+
   .busca-filtro2 .input-texto-simples {
     width: 52%;
   }
@@ -538,9 +555,17 @@ input[type="radio"]:checked:after {
   .opcoes-filtro {
     right: 14%;
   }
+  .opcoes-filtro-questao {
+    height: 1px;
+    font-size: 10px;
+    min-width: 100px;
+  }
 }
 
 @media screen and (max-width: 825px) {
+  .busca-filtro-questao .input-texto-simples {
+    width: 90%;
+  }
   .busca-filtro2 .input-texto-simples {
     width: 50%;
   }
@@ -564,6 +589,11 @@ input[type="radio"]:checked:after {
 }
 
 @media screen and (max-width: 700px) {
+  .opcoes-filtro-questao {
+    height: 1px;
+    font-size: 8px;
+    min-width: 90px;
+  }
   .busca-filtro2 {
     right: 12.8%;
   }
@@ -608,6 +638,17 @@ input[type="radio"]:checked:after {
 }
 
 @media screen and (max-width: 550px) {
+  .trocar-pagina2 {
+    margin-left: 70px;
+  }
+  .trocar-pagina2 .botao-simples {
+    font-size: 10px;
+    height: 43px;
+  }
+  .trocar-pagina2 .botao-simples-sem-hover {
+    font-size: 10px;
+    height: 43px;
+  }
   .busca-filtro2 {
     right: 24%;
   }
@@ -715,6 +756,12 @@ input[type="radio"]:checked:after {
   .trocar-pagina .botao-simples-sem-hover {
     font-size: 10px;
   }
+
+  .opcoes-filtro-questao {
+    height: 1px;
+    font-size: 7px;
+    min-width: 80px;
+  }
 }
 
 @media screen and (max-width: 350px) {
@@ -733,6 +780,28 @@ input[type="radio"]:checked:after {
   }
   .seta {
     font-size: 17px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .opcoes-filtro-questao {
+    font-size: 8px;
+    min-width: 78px;
+  }
+  input[type="radio"] {
+    border: 0px;
+    width: 0.5em;
+    height: 0.5em;
+  }
+  input[type="radio"]:checked:after {
+    width: 0.5em;
+    height: 0.5em;
+    margin-bottom: 5px;
+  }
+  .setas-ordenacao3 {
+    margin-left: -19px;
+  }
+  input[type="checkbox"] {
+    transform: scale(0.8);
   }
 }
 
@@ -779,9 +848,9 @@ input[type="radio"]:checked:after {
     height: 100px;
   }
 
-  .resultado-card-c {
+  /*   .resultado-card-c {
     height: 100px;
-  }
+  } */
 
   .resultados {
     top: 250px;
@@ -801,9 +870,9 @@ input[type="radio"]:checked:after {
   .resultado-card {
     height: 90px;
   }
-  .resultado-card-c {
+  /*   .resultado-card-c {
     height: 90px;
-  }
+  } */
 
   .conteudos-selecionados {
     min-height: 32px;
@@ -815,9 +884,9 @@ input[type="radio"]:checked:after {
   .resultado-card {
     height: 85px;
   }
-  .resultado-card-c {
+  /*   .resultado-card-c {
     height: 85px;
-  }
+  } */
   .busca-titulo {
     top: 50px;
     font-size: 60px;
@@ -831,9 +900,9 @@ input[type="radio"]:checked:after {
   .resultado-card {
     height: 80px;
   }
-  .resultado-card-c {
+  /*   .resultado-card-c {
     height: 80px;
-  }
+  } */
 }
 
 @media screen and (max-height: 739px) {
@@ -843,9 +912,9 @@ input[type="radio"]:checked:after {
   .resultado-card {
     height: 70px;
   }
-  .resultado-card-c {
+  /*   .resultado-card-c {
     height: 70px;
-  }
+  } */
 }
 
 @media screen and (max-height: 690px) {
@@ -855,9 +924,9 @@ input[type="radio"]:checked:after {
   .resultado-card {
     height: 70px;
   }
-  .resultado-card-c {
+  /*   .resultado-card-c {
     height: 70px;
-  }
+  } */
 
   .busca-titulo {
     top: 40px;
@@ -884,9 +953,9 @@ input[type="radio"]:checked:after {
   .resultado-card {
     height: 60px;
   }
-  .resultado-card-c {
+  /*   .resultado-card-c {
     height: 60px;
-  }
+  } */
 
   .busca-titulo {
     top: 40px;

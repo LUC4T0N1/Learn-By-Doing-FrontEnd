@@ -19,6 +19,7 @@ export default function FiltroConteudos({
   tipo,
   conteudosSelecionados,
   addConteudo,
+  e2,
 }) {
   const { t } = useTranslation();
   const [busca, setBusca] = useState({
@@ -64,7 +65,7 @@ export default function FiltroConteudos({
   }, [busca]);
 
   return (
-    <div className="escolher-conteudo">
+    <div className={e2 ? "escolher-conteudo2" : "escolher-conteudo"}>
       <button className="botao-fechar" onClick={handleClose}>
         <i>
           <FontAwesomeIcon
@@ -85,8 +86,16 @@ export default function FiltroConteudos({
               placeholder={titulo}
               onChange={handleChange}
             ></input>
-            <div className="filtros-container2">
-              <div className="opcoes-filtro2">
+          </div>
+          <div className="busca-filtro">
+            <div className="filtros-container">
+              <AscDesc
+                e4={true}
+                ordem={busca.ordem}
+                ascendente={ascendente}
+                descendente={descendente}
+              />
+              <div className="opcoes-filtro">
                 {opcoesFiltro.map((opcao, index) => (
                   <Filtro
                     key={index}
@@ -96,42 +105,39 @@ export default function FiltroConteudos({
                   />
                 ))}
               </div>
-              <AscDesc
-                e2={true}
-                ordem={busca.ordem}
-                ascendente={ascendente}
-                descendente={descendente}
-              />
             </div>
           </div>
+
           <div className={tipo == 1 ? "resultados" : "resultados-provas"}>
-            <div className="conteudos-selecionados2">
-              {conteudosSelecionados.map((c) => (
-                <Tag id={c.id} nome={c.nome} handleRemove={addConteudo} />
+            <div className="questoes-achadas">
+              <div className="conteudos-selecionados2">
+                {conteudosSelecionados.map((c) => (
+                  <Tag id={c.id} nome={c.nome} handleRemove={addConteudo} />
+                ))}
+              </div>
+              {objetos.map((objeto, index) => (
+                <ResultadoCardConteudo
+                  addConteudo={addConteudo}
+                  key={index}
+                  nome={objeto.nome}
+                  idObjeto={objeto.idConteudo}
+                  dados={[t("provas") + ": " + objeto.numeroProvas]}
+                />
               ))}
             </div>
-            {objetos.map((objeto, index) => (
-              <ResultadoCardConteudo
-                addConteudo={addConteudo}
-                key={index}
-                tipo={tipo}
-                nome={objeto.nome}
-                idObjeto={objeto.idConteudo}
-                dados={[t("provas") + ": " + objeto.numeroProvas]}
+            {busca.nome == "" ? (
+              <TrocarPagina
+                e2={true}
+                tamanhoPagina={tamanhoPagina}
+                quantidade={quantidade}
+                paginaAtual={busca.pagina + 1}
+                proximaPagina={proximaPagina}
+                paginaAnterior={paginaAnterior}
               />
-            ))}
+            ) : (
+              <></>
+            )}
           </div>
-          {busca.nome == "" ? (
-            <TrocarPagina
-              tamanhoPagina={tamanhoPagina}
-              quantidade={quantidade}
-              paginaAtual={busca.pagina + 1}
-              proximaPagina={proximaPagina}
-              paginaAnterior={paginaAnterior}
-            />
-          ) : (
-            <></>
-          )}
         </div>
       </div>
     </div>

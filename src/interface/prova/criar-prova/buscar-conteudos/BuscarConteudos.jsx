@@ -11,7 +11,11 @@ import FiltroConteudos from "../../../filtroBuscar/FiltroConteudos";
 import Tag from "../../../filtroBuscar/Tag";
 import "./BuscarConteudos.css";
 
-export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
+export default function BuscarConteudos({
+  e2,
+  tamanhoPagina,
+  adicionarConteudos,
+}) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -144,6 +148,7 @@ export default function BuscarConteudos({ tamanhoPagina, adicionarConteudos }) {
 
         {openEscolher ? (
           <FiltroConteudos
+            e2={e2 ? true : false}
             tamanhoPagina={tamanhoPagina}
             handleClose={handleClose}
             titulo={t("escolher-conteudos")}

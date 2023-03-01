@@ -5,6 +5,9 @@
 .campo {
   margin: 15px;
 }
+.zero-itens {
+  text-align: center;
+}
 
 .criar-prova {
   display: flex;
@@ -67,6 +70,7 @@
   left: 5%;
   position: absolute;
   color: rgb(143, 99, 19);
+  margin-top: 130px;
 }
 
 .botao-criar-footer {
@@ -75,6 +79,7 @@
   justify-content: left;
   right: 4.3%;
   position: absolute;
+  margin-top: 140px;
 }
 
 .dados-provas-input {
@@ -113,6 +118,13 @@
 @media screen and (max-width: 650px) {
   .criar-prova-titulo {
     font-size: 60px;
+  }
+  .infos-prova-footer {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .infos-prova-footer p {
+    margin-bottom: -10px;
   }
 }
 

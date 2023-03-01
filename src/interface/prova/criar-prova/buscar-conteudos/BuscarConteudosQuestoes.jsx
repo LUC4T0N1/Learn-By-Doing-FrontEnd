@@ -70,6 +70,7 @@ export default function BuscarConteudosQuestoes({
       </div>
       {openEscolher ? (
         <FiltroConteudos
+          e2={true}
           tamanhoPagina={tamanhoPagina}
           handleClose={handleClose}
           titulo={t("escolher-conteudos")}

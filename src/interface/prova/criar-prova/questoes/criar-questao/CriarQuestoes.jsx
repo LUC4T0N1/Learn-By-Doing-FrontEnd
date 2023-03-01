@@ -203,6 +203,7 @@ export default function CriarQuestoes({ handleClose }) {
       </div>
       <div className="mini-container3">
         <BuscarConteudos
+          e2={true}
           tamanhoPagina={5}
           adicionarConteudos={adicionarConteudosQuestao}
         />
@@ -278,7 +279,7 @@ export default function CriarQuestoes({ handleClose }) {
                 ))}
               </div>
             ) : (
-              <h3>{t("zero-alternativas")}</h3>
+              <h3 className="zero-itens">{t("zero-alternativas")}</h3>
             )}
           </div>
           <CriarAlternativas

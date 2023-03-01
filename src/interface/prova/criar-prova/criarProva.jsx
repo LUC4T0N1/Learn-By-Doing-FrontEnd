@@ -133,31 +133,40 @@ function CriarProva() {
                 />
               ))
             ) : (
-              <h1>{t("0-questoes")}</h1>
+              <h1 className="zero-itens">{t("0-questoes")}</h1>
             )}
             <div className="footer-criar-prova">
-              <div className="infos-prova-footer">
-                <p>
-                  {t("valor-total")}
-                  {obterValorTotal()}
-                </p>
-                <p>
-                  {t("questoes")} {prova.questoes.length}
-                </p>
-              </div>
+              {prova.questoes.length > 0 ? (
+                <div className="infos-prova-footer">
+                  <p>
+                    {t("valor-total")}
+                    {obterValorTotal()}
+                  </p>
+                  <p>
+                    {t("questoes")} {prova.questoes.length}
+                  </p>
+                </div>
+              ) : (
+                <></>
+              )}
+
               <AdicionarQuestoes
                 idsQuestoes={prova.questoes.map((quest) => quest.id)}
               />
-              <div className="botao-criar-footer">
-                {erro.erro ? (
-                  <p className="error-message">{erro.mensagem}</p>
-                ) : (
-                  <></>
-                )}
-                <button className="botao-simples" onClick={handleSubmit}>
-                  {t("criar-prova")}
-                </button>
-              </div>
+              {prova.questoes.length > 0 ? (
+                <div className="botao-criar-footer">
+                  {erro.erro ? (
+                    <p className="error-message">{erro.mensagem}</p>
+                  ) : (
+                    <></>
+                  )}
+                  <button className="botao-simples" onClick={handleSubmit}>
+                    {t("criar-prova")}
+                  </button>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>
