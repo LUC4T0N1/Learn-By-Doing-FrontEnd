@@ -2,13 +2,75 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 200px;
+  flex-direction: column;
+  padding: 5%;
+}
+
+.perfil-meio {
+  display: flex;
+  gap: 10px;
+  width: 80%;
+}
+
+.perfil-centro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  background: linear-gradient(165.57deg, rgb(1, 1, 1), rgb(15, 15, 15));
+  border-radius: 19px;
+  margin-top: 20px;
+}
+
+.perfil-baixo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  background: linear-gradient(165.57deg, rgb(1, 1, 1), rgb(15, 15, 15));
+  border-radius: 10px;
+}
+
+.perfil-esquerda {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: linear-gradient(90.57deg, rgb(15, 15, 15), rgb(1, 1, 1));
+  border-radius: 10px;
+  padding: 2%;
+}
+
+.perfil-direita {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(270.57deg, rgb(15, 15, 15), rgb(1, 1, 1));
+  border-radius: 10px;
+  padding: 2%;
+}
+
+.perfil-campo-1 {
+  display: flex;
+  gap: 8px;
+  font-size: 28px;
+  margin: 0px;
+  align-items: center;
+  justify-content: center;
 }
 
 .perfil-campo {
   display: flex;
   gap: 8px;
   font-size: 25px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .perfil-campo-nome {
@@ -16,6 +78,7 @@
 }
 
 .perfil-campo-valor {
+  text-align: center;
   background: linear-gradient(
     90deg,
     rgb(179, 105, 8),
@@ -26,25 +89,19 @@
   -webkit-text-fill-color: transparent;
 }
 
-.perfil-direita {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.perfil-esquerda {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
 .trocar-senha {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
-  width: 70%;
+  width: 50%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.trocar-senha .botao-simples {
+  width: 40%;
 }
 
 .mudar-senha-form {
@@ -54,4 +111,76 @@
   flex-direction: column;
   width: 100%;
   gap: 4px;
+}
+
+@media screen and (max-width: 1500px) {
+  .perfil-campo-1 {
+    display: flex;
+    gap: 8px;
+    font-size: 25px;
+    margin: 0px;
+  }
+
+  .perfil-campo {
+    display: flex;
+    gap: 8px;
+    font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .perfil-campo-1 {
+    font-size: 22px;
+  }
+
+  .perfil-campo {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .perfil-campo-1 {
+    font-size: 19px;
+  }
+
+  .perfil-campo {
+    font-size: 15px;
+  }
+
+  .trocar-senha .botao-simples {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .perfil-meio {
+    width: 85%;
+  }
+
+  .perfil-campo-1 {
+    font-size: 17px;
+  }
+
+  .perfil-campo {
+    font-size: 14px;
+    gap: 3px;
+  }
+  .trocar-senha .botao-simples {
+    font-size: 14px;
+  }
+
+  .mudar-senha-form .error-message {
+    font-size: 13px;
+    width: 130%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .perfil-campo-1 {
+    font-size: 15px;
+  }
+
+  .perfil-campo {
+    font-size: 13px;
+  }
 }

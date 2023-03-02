@@ -49,18 +49,51 @@ function Perfil() {
 
   return (
     <div className="perfil">
-      <div className="perfil-esquerda">
-        <div className="perfil-campo">
+      <div className="perfil-centro">
+        <div className="perfil-campo-1">
           <p className="perfil-campo-nome">{t("nome")}</p>
           <p className="perfil-campo-valor">{perfil.nome}</p>
         </div>
-        <div className="perfil-campo">
+        <div className="perfil-campo-1">
           <p className="perfil-campo-nome">Email: </p>
           <p className="perfil-campo-valor">{perfil.email}</p>
         </div>
-        <div className="perfil-campo">
+        <div className="perfil-campo-1">
           <p className="perfil-campo-nome">{t("criacao-perfil-data")}</p>
-          <p className="perfil-campo-valor">{perfil.dataCriacao}</p>
+          <p className="perfil-campo-valor">
+            {perfil.dataCriacao.substring(0, 10)}
+          </p>
+        </div>
+        <div className="perfil-meio">
+          <div className="perfil-direita">
+            <div className="perfil-campo">
+              <p className="perfil-campo-nome">{t("provas-criadas")}:</p>
+              <p className="perfil-campo-valor">{perfil.provasCriadas}</p>
+            </div>
+            <div className="perfil-campo">
+              <p className="perfil-campo-nome">{t("provas-resolvidas")}:</p>
+              <p className="perfil-campo-valor">{perfil.provasResolvidas}</p>
+            </div>
+
+            <div className="perfil-campo">
+              <p className="perfil-campo-nome">{t("resolucoes-provas")}</p>
+              <p className="perfil-campo-valor">{perfil.provasCorrigidas}</p>
+            </div>
+          </div>
+          <div className="perfil-esquerda">
+            <div className="perfil-campo">
+              <p className="perfil-campo-nome">{t("questoes-criadas")}</p>
+              <p className="perfil-campo-valor">{perfil.questoesCriadas}</p>
+            </div>
+            <div className="perfil-campo">
+              <p className="perfil-campo-nome">{t("questoes-resolvidas")}</p>
+              <p className="perfil-campo-valor">{perfil.questoesResolvidas}</p>
+            </div>
+            <div className="perfil-campo">
+              <p className="perfil-campo-nome">{t("conteudos-criados")}</p>
+              <p className="perfil-campo-valor">{perfil.conteudosCriados}</p>
+            </div>
+          </div>
         </div>
         <div className="trocar-senha">
           {!open ? (
@@ -150,32 +183,6 @@ function Perfil() {
               </form>
             </>
           )}
-        </div>
-      </div>
-      <div className="perfil-direita">
-        <div className="perfil-campo">
-          <p className="perfil-campo-nome">{t("provas-criadas")}</p>
-          <p className="perfil-campo-valor">{perfil.provasCriadas}</p>
-        </div>
-        <div className="perfil-campo">
-          <p className="perfil-campo-nome">{t("provas-resolvidas")}</p>
-          <p className="perfil-campo-valor">{perfil.provasResolvidas}</p>
-        </div>
-        <div className="perfil-campo">
-          <p className="perfil-campo-nome">{t("resolucoes-provas")}</p>
-          <p className="perfil-campo-valor">{perfil.provasCorrigidas}</p>
-        </div>
-        <div className="perfil-campo">
-          <p className="perfil-campo-nome">{t("questoes-criadas")}</p>
-          <p className="perfil-campo-valor">{perfil.questoesCriadas}</p>
-        </div>
-        <div className="perfil-campo">
-          <p className="perfil-campo-nome">{t("questoes-resolvidas")}</p>
-          <p className="perfil-campo-valor">{perfil.questoesResolvidas}</p>
-        </div>
-        <div className="perfil-campo">
-          <p className="perfil-campo-nome">{t("conteudos-criados")}</p>
-          <p className="perfil-campo-valor">{perfil.conteudosCriados}</p>
         </div>
       </div>
     </div>

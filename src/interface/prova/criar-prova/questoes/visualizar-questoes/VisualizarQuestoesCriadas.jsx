@@ -64,11 +64,6 @@ export default function VisualizarQuestoesCriadas({
               {t("questao")} {numeroQuestao}
             </p>
             <div className="questao-dados-2">
-              {questao.multiplaEscolha ? (
-                <p>· {t("multipla-escolha")}</p>
-              ) : (
-                <p>· {t("dissertativa")}</p>
-              )}
               {questao.publica ? (
                 <p>· {t("publica")}</p>
               ) : (
@@ -92,34 +87,34 @@ export default function VisualizarQuestoesCriadas({
                   {questao.valor}
                 </p>
               )}
-              {!provaCriada ? (
-                <div className="botoes-questao">
-                  {podeRemover ? (
-                    <button
-                      className="botao-remover-questao"
-                      onClick={removerQuestao}
-                    >
-                      {t("remover")}
-                    </button>
-                  ) : (
-                    <></>
-                  )}
-
-                  {questao.editavel == true || questao.editavel == "true" ? (
-                    <button
-                      className="botao-editar-questao"
-                      onClick={editarQuestao}
-                    >
-                      {t("editar")}
-                    </button>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              ) : (
-                <></>
-              )}
             </div>
+            {!provaCriada ? (
+              <div className="botoes-questao">
+                {podeRemover ? (
+                  <button
+                    className="botao-remover-questao"
+                    onClick={removerQuestao}
+                  >
+                    {t("remover")}
+                  </button>
+                ) : (
+                  <></>
+                )}
+
+                {questao.editavel == true || questao.editavel == "true" ? (
+                  <button
+                    className="botao-editar-questao"
+                    onClick={editarQuestao}
+                  >
+                    {t("editar")}
+                  </button>
+                ) : (
+                  <></>
+                )}
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           <p className="visualizar-enunciado">{questao.enunciado}</p>
           <div className="campo-resposta">

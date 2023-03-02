@@ -72,9 +72,24 @@
 
 .questao-dados-2 {
   display: flex;
+  justify-content: end;
+  gap: 6px;
+  position: absolute;
+  right: 5.1%;
+  width: 23%;
+}
+
+.questao-dados-2 .nota-questao {
+  width: 55px;
+}
+
+.botoes-questao {
+  display: flex;
   gap: 6px;
   position: absolute;
   right: 5%;
+  width: 6%;
+  margin-top: 100px;
 }
 
 .questao-header {
@@ -160,14 +175,11 @@
 .botao-remover-questao {
   border-radius: 5px;
   height: 35px;
-  width: 17%;
+  width: 70px;
   margin: 0;
   padding: 0;
   background-color: rgb(75, 50, 60);
   color: rgb(243, 243, 243);
-  position: absolute;
-  right: 65px;
-  top: 10px;
 }
 
 .botao-remover-questao:hover {
@@ -175,24 +187,14 @@
   background-color: rgb(105, 28, 58);
 }
 
-.botoes-questao {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .botao-editar-questao {
   border-radius: 5px;
   height: 35px;
-  width: 17%;
+  width: 70px;
   margin: 0;
   padding: 0;
   background-color: rgb(94, 72, 54);
   color: rgb(243, 243, 243);
-  position: absolute;
-  right: 65px;
-  top: 50px;
 }
 
 .botao-editar-questao:hover {
@@ -204,7 +206,39 @@
   .questao-dados2 {
     right: -15.1%;
   }
+  .botao-remover-questao {
+    border: none;
+  }
+  .botao-editar-questao {
+    border: none;
+  }
+  .botoes-questao {
+    width: 9%;
+  }
 }
+
+@media screen and (max-width: 1400px) {
+  .botoes-questao {
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .botoes-questao {
+    width: 10%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .botao-remover-questao {
+    font-size: 11px;
+    border: none;
+  }
+  .botao-editar-questao {
+    font-size: 11px;
+    border: none;
+  }
+}
+
 @media screen and (max-width: 990px) {
   .questao-dados2 {
     right: -5.1%;
@@ -214,11 +248,23 @@
   .questao-dados2 {
     right: -7.1%;
   }
+  .questao-dados-2 {
+    width: 50%;
+  }
+  .questao-dados-2 p {
+    font-size: 15px;
+  }
+  .botoes-questao {
+    width: 15%;
+  }
 }
 
 @media screen and (max-width: 700px) {
   .questao-dados2 {
     right: -9.1%;
+  }
+  .botoes-questao {
+    width: 18%;
   }
 }
 
@@ -233,6 +279,9 @@
   }
 }
 @media screen and (max-width: 500px) {
+  .botoes-questao {
+    width: 20%;
+  }
   .visualizar-questao {
     width: 80%;
     padding: 35px;
@@ -271,23 +320,27 @@
   .questao-dados p {
     margin: 0;
   }
-  .questao-dados-2 {
-    flex-direction: column;
-    gap: 0;
-    font-size: 11px;
-    right: 8%;
-  }
-
-  .questao-dados-2 p {
-    margin: 0;
-  }
   .botoes-questao {
-    flex-direction: row;
-    margin-left: 70px;
+    width: 25%;
   }
 }
 
 @media screen and (max-width: 350px) {
+  .botoes-questao {
+    width: 35%;
+  }
+  .questao-dados-2 {
+    margin-top: 10px;
+    width: 85%;
+    justify-content: end;
+  }
+  .questao-dados-2 p {
+    font-size: 13px;
+  }
+  .questao-dados-2 .nota-questao {
+    width: 30px;
+    font-size: 12px;
+  }
   .visualizar-questao {
     width: 70%;
     padding: 33px;

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { logout } from "../../application/autenticacaoSlice";
 import { ThemeContext } from "../../infrastructure/context";
 import Languages from "../languages-drop-down/Languages";
-import Toggle from "../toggle/Toggle";
 import "./NavBar.css";
 
 const NavBar = () => {
@@ -38,14 +37,18 @@ const NavBar = () => {
             >
               <li className="nav-item">
                 <Link
-                  className="nav-link-home"
+                  className={isMobile ? "nav-link" : "nav-link-home"}
                   to="/"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
-                  <FontAwesomeIcon
-                    icon={faHome}
-                    className="nav-icon"
-                  ></FontAwesomeIcon>
+                  {isMobile ? (
+                    <>{t("home")}</>
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faHome}
+                      className="nav-icon"
+                    ></FontAwesomeIcon>
+                  )}
                 </Link>
               </li>
               <li className="nav-item">
@@ -124,7 +127,7 @@ const NavBar = () => {
             </div>
           </div>
           <Languages />
-          <Toggle />
+          {/* <Toggle /> */}
         </>
       ) : (
         <div className="nav-menu" id="nav-menu">
@@ -161,7 +164,7 @@ const NavBar = () => {
             </li>
           </ul>
           <Languages />
-          <Toggle />
+          {/* <Toggle /> */}
         </div>
       )}
     </nav>

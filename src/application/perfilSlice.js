@@ -13,7 +13,7 @@ const perfilSlice = createSlice({
     questoesResolvidas: 0,
     provasCorrigidas: 0,
     conteudosCriados: 0,
-    dataCriacao: 0,
+    dataCriacao: "0",
   },
   reducers: {
     setPerfil(state, action) {

@@ -23,7 +23,7 @@
 .dropdown-content {
   position: absolute;
   right: -20px;
-  top: 30px;
+  top: 20px;
   display: block;
   border: none;
   border-radius: 10px;
@@ -82,10 +82,11 @@
 
   .dropdown-content {
     position: fixed;
-    right: 315px;
-    top: 30px;
+    top: 15px;
+    left: 5px;
     display: block;
-    width: 60px;
+    width: 52px;
+    padding-left: 0px;
   }
 
   .dropdown-item {
