@@ -67,96 +67,96 @@ const App = () => {
                   <CustomRoute exact path="/login" children={<Login />} />
                   <CustomRoute
                     exact
-                    path="/escolherProvaPrivada"
+                    path="/choosePrivateTest"
                     children={<ProvaPrivada />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/historico"
+                    path="/record"
                     children={<Historico />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/perfil"
+                    path="/profile"
                     children={<Perfil />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/perfil/provas-resolvidas"
+                    path="/profile/solvedTests"
                     children={<ProvasResolvidas />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/perfil/prova-resolvida"
+                    path="/profile/solvedTest"
                     children={<ProvaResolvida />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/perfil/provas-criadas"
+                    path="/profile/createdTests"
                     children={<ProvasCriadas />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/perfil/prova-criada"
+                    path="/profile/createdTest"
                     children={<ProvaCriada />}
                   />
                   <CustomRoute
                     exact
-                    path="/registrar"
+                    path="/register"
                     children={<Registrar />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/buscar-conteudos"
+                    path="/searchSubjects"
                     children={<ListaConteudos />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/criar"
+                    path="/createTest"
                     children={<CriarProva />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/corrigir/buscarProva"
+                    path="/toCorrect/searchTest"
                     children={<CorrigirProva />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/corrigir/buscarProvaFeita"
+                    path="/toCorrect/searchSolvedTest"
                     children={<ProvasFeitas />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/corrigir"
+                    path="/toCorrect"
                     children={<ProvaFeita />}
                   />
                   <CustomRoute exact path="/" children={<PaginaInicial />} />
                   <CustomRoute
                     exact
-                    path="/tipo-de-prova"
+                    path="/chooseType"
                     children={<EscolherTipo />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/buscar-provas"
+                    path="/searchTests"
                     children={<ListaDeProvas />}
                   />
                   <CustomRoute
                     isPrivate
                     exact
-                    path="/realizar-prova"
+                    path="/solveTest"
                     children={<ProvaCompleta />}
                   />
                   <Route path="*">

@@ -163,5 +163,7 @@
   "senha-nova-obrigatoria": "The new password is required!",
   "senhas-diferentes": "The passwords doesn't match!",
   "dificuldade": "Difficulty",
-  "nota-media": "Average Score: "
+  "nota-media": "Average Score: ",
+
+  "provas-publicas": "Public Tests: "
 }

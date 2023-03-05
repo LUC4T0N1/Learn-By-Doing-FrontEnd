@@ -37,6 +37,16 @@
   margin-top: 5px;
 }
 
+.botao-add-prova:hover {
+  cursor: pointer;
+  background: linear-gradient(
+    165.57deg,
+    rgb(196, 112, 3, 0.8),
+    rgb(202, 35, 85, 0.8),
+    rgb(77, 8, 65, 0.8)
+  );
+}
+
 .questao-numero {
   font-size: 19px;
 }

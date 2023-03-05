@@ -165,5 +165,7 @@
   "senha-nova-obrigatoria": "A senha nova é obrigatoria!",
   "senhas-diferentes": "As senhas não são iguais!",
   "dificuldade": "Dificuldade",
-  "nota-media": "Nota Média: "
+  "nota-media": "Nota Média: ",
+
+  "provas-publicas": "Provas Públicas: "
 }

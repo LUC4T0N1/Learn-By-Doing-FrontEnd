@@ -53,7 +53,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/tipo-de-prova"
+                  to="/chooseType"
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
@@ -62,7 +62,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/criar"
+                  to="/createTest"
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
@@ -80,7 +80,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/historico"
+                  to="/record"
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
@@ -89,7 +89,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/perfil"
+                  to="/profile"
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
@@ -146,7 +146,7 @@ const NavBar = () => {
             </li>
             <li className="nav-item">
               <Link
-                to="/registrar"
+                to="/register"
                 className="nav-link"
                 style={{ color: theme.state.darkMode ? "white" : "black" }}
               >

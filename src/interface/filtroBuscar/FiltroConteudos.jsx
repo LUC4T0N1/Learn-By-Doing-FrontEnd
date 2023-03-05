@@ -107,37 +107,40 @@ export default function FiltroConteudos({
               </div>
             </div>
           </div>
-
-          <div className={tipo == 1 ? "resultados" : "resultados-provas"}>
-            <div className="questoes-achadas">
-              <div className="conteudos-selecionados2">
-                {conteudosSelecionados.map((c) => (
-                  <Tag id={c.id} nome={c.nome} handleRemove={addConteudo} />
+          {objetos != undefined && objetos.length > 0 ? (
+            <div className={tipo == 1 ? "resultados" : "resultados-provas"}>
+              <div className="questoes-achadas">
+                <div className="conteudos-selecionados2">
+                  {conteudosSelecionados.map((c) => (
+                    <Tag id={c.id} nome={c.nome} handleRemove={addConteudo} />
+                  ))}
+                </div>
+                {objetos.map((objeto, index) => (
+                  <ResultadoCardConteudo
+                    addConteudo={addConteudo}
+                    key={index}
+                    nome={objeto.nome}
+                    idObjeto={objeto.idConteudo}
+                    dados={[t("provas") + ": " + objeto.numeroProvas]}
+                  />
                 ))}
               </div>
-              {objetos.map((objeto, index) => (
-                <ResultadoCardConteudo
-                  addConteudo={addConteudo}
-                  key={index}
-                  nome={objeto.nome}
-                  idObjeto={objeto.idConteudo}
-                  dados={[t("provas") + ": " + objeto.numeroProvas]}
+              {busca.nome == "" ? (
+                <TrocarPagina
+                  e2={true}
+                  tamanhoPagina={tamanhoPagina}
+                  quantidade={quantidade}
+                  paginaAtual={busca.pagina + 1}
+                  proximaPagina={proximaPagina}
+                  paginaAnterior={paginaAnterior}
                 />
-              ))}
+              ) : (
+                <></>
+              )}
             </div>
-            {busca.nome == "" ? (
-              <TrocarPagina
-                e2={true}
-                tamanhoPagina={tamanhoPagina}
-                quantidade={quantidade}
-                paginaAtual={busca.pagina + 1}
-                proximaPagina={proximaPagina}
-                paginaAnterior={paginaAnterior}
-              />
-            ) : (
-              <></>
-            )}
-          </div>
+          ) : (
+            <div className="nenhum-resultado">{t("nenhum-resultado")}</div>
+          )}
         </div>
       </div>
     </div>

@@ -217,42 +217,46 @@ export default function FiltroQuestoes({
               />
             </div>
           </div>
-          <div className={"resultados-questoes"}>
-            <BuscarConteudosQuestoes
-              tamanhoPagina={5}
-              adicionarConteudos={adicionarConteudosFiltro}
-            />
-            <div className="questoes-achadas">
-              {objetos.map((objeto, index) => (
-                <ResultadoQuestao
-                  key={index}
-                  questao={{
-                    numeroQuestao: index + 1,
-                    enunciado: objeto.enunciado,
-                    publica: objeto.publica,
-                    multiplaEscolha: objeto.multiplaEscolha,
-                    id: objeto.id,
-                    valor: objeto.valor,
-                    resposta: objeto.resposta,
-                    alternativas: objeto.alternativas,
-                  }}
-                  handleClose={handleClose}
-                />
-              ))}
-              {busca.nome == "" ? (
-                <TrocarPagina
-                  e2={true}
-                  tamanhoPagina={10}
-                  quantidade={quantidade}
-                  paginaAtual={busca.pagina + 1}
-                  proximaPagina={proximaPagina}
-                  paginaAnterior={paginaAnterior}
-                />
-              ) : (
-                <></>
-              )}
+          {objetos != undefined && objetos.length > 0 ? (
+            <div className={"resultados-questoes"}>
+              <BuscarConteudosQuestoes
+                tamanhoPagina={5}
+                adicionarConteudos={adicionarConteudosFiltro}
+              />
+              <div className="questoes-achadas">
+                {objetos.map((objeto, index) => (
+                  <ResultadoQuestao
+                    key={index}
+                    questao={{
+                      numeroQuestao: index + 1,
+                      enunciado: objeto.enunciado,
+                      publica: objeto.publica,
+                      multiplaEscolha: objeto.multiplaEscolha,
+                      id: objeto.id,
+                      valor: objeto.valor,
+                      resposta: objeto.resposta,
+                      alternativas: objeto.alternativas,
+                    }}
+                    handleClose={handleClose}
+                  />
+                ))}
+                {busca.nome == "" ? (
+                  <TrocarPagina
+                    e2={true}
+                    tamanhoPagina={10}
+                    quantidade={quantidade}
+                    paginaAtual={busca.pagina + 1}
+                    proximaPagina={proximaPagina}
+                    paginaAnterior={paginaAnterior}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="nenhum-resultado">{t("nenhum-resultado")}</div>
+          )}
         </div>
       </div>
     </div>

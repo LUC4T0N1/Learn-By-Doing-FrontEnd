@@ -13,7 +13,7 @@ function Items() {
   const { t } = useTranslation();
   return (
     <div className="items-container">
-      <Link className="item" to="/tipo-de-prova">
+      <Link className="item" to="/chooseType">
         <div className="item-title">
           {t("resolver-prova")}
           <i>
@@ -26,7 +26,7 @@ function Items() {
         </div>
         <div className="item-desc">{t("resolver-prova-desc")}</div>
       </Link>
-      <Link className="item" to="/criar">
+      <Link className="item" to="/createTest">
         <div className="item-title">
           {t("criar-prova")}
           <i>
@@ -39,7 +39,7 @@ function Items() {
         </div>
         <div className="item-desc">{t("criar-prova-desc")}</div>
       </Link>
-      <Link className="item" to="/corrigir/buscarProva">
+      <Link className="item" to="/toCorrect/searchTest">
         <div className="item-title">
           {t("corrigir-prova")}
           <i>
@@ -52,7 +52,7 @@ function Items() {
         </div>
         <div className="item-desc">{t("corrigir-prova-desc")}</div>
       </Link>
-      <Link className="item" to="/historico">
+      <Link className="item" to="/record">
         <div className="item-title">
           {t("historico")}
           <i>

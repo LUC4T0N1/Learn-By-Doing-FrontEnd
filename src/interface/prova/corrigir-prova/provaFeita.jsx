@@ -187,7 +187,7 @@ export default function ProvaFeita() {
           <div className="botao-esquerda">
             <button
               className="botao-fim"
-              onClick={() => history.push("/corrigir/buscarProva")}
+              onClick={() => history.push("/toCorrect/searchTest")}
             >
               {t("voltar")}
             </button>

@@ -59,7 +59,7 @@ export default function ProvaCriada() {
         ))}
         <button
           className="botao-simples"
-          onClick={() => history.push("/perfil/provas-criadas")}
+          onClick={() => history.push("/profile/createdTests")}
         >
           {t("voltar")}
         </button>

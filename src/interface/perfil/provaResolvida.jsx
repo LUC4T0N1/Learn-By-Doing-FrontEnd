@@ -86,7 +86,7 @@ export default function ProvaResolvida() {
         )}
         <button
           className="botao-simples"
-          onClick={() => history.push("/perfil/provas-resolvidas")}
+          onClick={() => history.push("/profile/solvedTests")}
         >
           {t("voltar")}
         </button>

@@ -11,7 +11,7 @@ const Historico = () => {
     <div className="escolher-tipo">
       <h1 className="escolher-titulo"> {t("escolher-prova")}</h1>
       <div className="items-container-2">
-        <Link className="item-2" to="/perfil/provas-resolvidas">
+        <Link className="item-2" to="/profile/solvedTests">
           <div className="item-title">
             {t("provas-resolvidas")}
             <i>
@@ -24,7 +24,7 @@ const Historico = () => {
           </div>
           <div className="item-desc">{t("provas-resolvidas-desc")}</div>
         </Link>
-        <Link className="item-2" to="/perfil/provas-criadas">
+        <Link className="item-2" to="/profile/createdTests">
           <div className="item-title">
             {t("provas-criadas")}
             <i>

@@ -610,6 +610,20 @@ input[type="radio"]:checked:after {
   .opcoes-filtro {
     right: 9%;
   }
+  .filtro-buscar-container {
+    height: 120vh;
+  }
+  .resultados-provas {
+    width: 55%;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+
+  .resultados {
+    width: 55%;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
 }
 
 @media screen and (max-width: 630px) {
@@ -638,9 +652,6 @@ input[type="radio"]:checked:after {
 }
 
 @media screen and (max-width: 550px) {
-  .trocar-pagina2 {
-    margin-left: 70px;
-  }
   .trocar-pagina2 .botao-simples {
     font-size: 10px;
     height: 43px;
@@ -678,6 +689,16 @@ input[type="radio"]:checked:after {
 }
 
 @media screen and (max-width: 480px) {
+  .resultado-card-direita {
+    margin-right: 10px;
+    font-size: 12px;
+  }
+
+  .resultado-card-esquerda {
+    font-size: 2px;
+    margin-left: 2px;
+  }
+
   .busca-titulo {
     font-size: 40px;
   }
@@ -780,6 +801,10 @@ input[type="radio"]:checked:after {
   }
   .seta {
     font-size: 17px;
+  }
+  .resultado-card-direita {
+    margin-right: 3px;
+    font-size: 9px;
   }
 }
 @media screen and (max-width: 350px) {
@@ -900,33 +925,18 @@ input[type="radio"]:checked:after {
   .resultado-card {
     height: 80px;
   }
-  /*   .resultado-card-c {
-    height: 80px;
-  } */
 }
 
 @media screen and (max-height: 739px) {
   .resultado-card-esquerda {
     font-size: 20px;
   }
-  .resultado-card {
-    height: 70px;
-  }
-  /*   .resultado-card-c {
-    height: 70px;
-  } */
 }
 
 @media screen and (max-height: 690px) {
   .resultado-card-esquerda {
     font-size: 20px;
   }
-  .resultado-card {
-    height: 70px;
-  }
-  /*   .resultado-card-c {
-    height: 70px;
-  } */
 
   .busca-titulo {
     top: 40px;
@@ -950,13 +960,6 @@ input[type="radio"]:checked:after {
 }
 
 @media screen and (max-height: 660px) {
-  .resultado-card {
-    height: 60px;
-  }
-  /*   .resultado-card-c {
-    height: 60px;
-  } */
-
   .busca-titulo {
     top: 40px;
     font-size: 30px;

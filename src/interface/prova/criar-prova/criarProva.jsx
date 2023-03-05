@@ -84,6 +84,22 @@ function CriarProva() {
             quantidadeQuestoes: idQuestoes.length,
           })
         );
+        dispatch(
+          setProva({
+            ...prova,
+            nome: "",
+            publica: true,
+            conteudos: [],
+            nomeConteudos: [],
+            questoes: [],
+            idsQuestoes: [],
+            quantidadeQuestoes: 0,
+            tempo: 0,
+            dataInicial: null,
+            dataFinal: null,
+            tentativas: 0,
+          })
+        );
         setSucesso(true);
       }
     }

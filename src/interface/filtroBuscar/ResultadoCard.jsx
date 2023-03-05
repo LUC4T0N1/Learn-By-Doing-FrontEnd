@@ -5,17 +5,17 @@ import "./FiltroBuscar.css";
 function ResultadoCard({ nome, dados, idObjeto, tipo, publica }) {
   const definirCaminho = () => {
     if (tipo == 1) {
-      return "/buscar-provas";
+      return "/searchTests";
     } else if (tipo == 2) {
-      return "/realizar-prova";
+      return "/solveTest";
     } else if (tipo == 3) {
-      return "/perfil/prova-resolvida";
+      return "/profile/solvedTest";
     } else if (tipo == 4) {
-      return "/perfil/prova-criada";
+      return "/profile/createdTest";
     } else if (tipo == 5) {
-      return "/corrigir/buscarProvaFeita";
+      return "/toCorrect/searchSolvedTest";
     } else if (tipo == 6) {
-      return "/corrigir";
+      return "/toCorrect";
     }
   };
 

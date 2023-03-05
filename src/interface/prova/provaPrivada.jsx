@@ -22,7 +22,7 @@ function ProvaPrivada() {
         { headers: AuthHeader() }
       );
       history.push({
-        pathname: "/realizar-prova",
+        pathname: "/solveTest",
         state: { idProva: response.data },
       });
     } catch (error) {

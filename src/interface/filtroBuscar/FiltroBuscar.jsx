@@ -91,16 +91,19 @@ function FiltroBuscar({
             </div>
           </div>
         </div>
-        <div className={tipo == 1 ? "resultados" : "resultados-provas"}>
-          {objetos != undefined ? (
-            objetos.map((objeto, index) =>
+        {objetos != undefined && objetos.length > 0 ? (
+          <div className={tipo == 1 ? "resultados" : "resultados-provas"}>
+            {objetos.map((objeto, index) =>
               tipo == 1 ? (
                 <ResultadoCard
                   key={index}
                   tipo={tipo}
                   nome={objeto.nome}
                   idObjeto={objeto.idConteudo}
-                  dados={[t("provas") + ": " + objeto.numeroProvas]}
+                  dados={[
+                    t("provas") + ": " + objeto.numeroProvas,
+                    t("provas-publicas") + objeto.numeroProvasPublicas,
+                  ]}
                 />
               ) : tipo == 2 || tipo == 4 || tipo == 5 ? (
                 <ResultadoCard
@@ -112,6 +115,7 @@ function FiltroBuscar({
                     t("questoes") + objeto.quantidadeQuestoes,
                     t("realizacoes") + objeto.popularidade,
                     t("nota-media") + objeto.mediaNotas + "%",
+                    objeto.publica ? t("prova-publica") : t("prova-privada"),
                   ]}
                 />
               ) : tipo == 3 ? (
@@ -121,17 +125,13 @@ function FiltroBuscar({
                   nome={objeto.nomeProva}
                   idObjeto={objeto.id}
                   dados={[
-                    t("questoes-corrigidas") +
-                      objeto.questoesCorrigidas +
-                      "/" +
-                      objeto.totalQuestoes,
                     objeto.corrigida
                       ? t("nota-final")
                       : t("nota-parcial") +
                         objeto.nota +
                         "/" +
                         objeto.notaMaxima,
-                    t("data") + ": " + objeto.dataResolucao,
+                    t("data") + ": " + objeto.dataResolucao.substring(0, 10),
                     objeto.publica ? t("prova-publica") : t("prova-privada"),
                   ]}
                   publica={objeto.publica}
@@ -144,35 +144,38 @@ function FiltroBuscar({
                   idObjeto={objeto.id}
                   dados={[
                     objeto.totalmenteCorrigida
-                      ? t("nota-final")
+                      ? t("nota-final") +
+                        objeto.notaAluno +
+                        "/" +
+                        objeto.notaMaxima
                       : t("nota-parcial") +
                         objeto.notaAluno +
                         "/" +
                         objeto.notaMaxima,
-                    t("data") + ": " + objeto.dataResolucao,
+                    t("data") + ": " + objeto.dataResolucao.substring(0, 10),
                     t("questoes-corrigidas") +
                       objeto.questoesCorrigidas +
                       "/" +
                       objeto.totalQuestoes,
-                    objeto.publica ? t("prova-publica") : t("prova-privada"),
                   ]}
                 />
               )
-            )
-          ) : (
-            <div>{t("nenhum-resultado")}</div>
-          )}
-        </div>
-        {busca.nome == "" ? (
-          <TrocarPagina
-            tamanhoPagina={tamanhoPagina}
-            quantidade={quantidade}
-            paginaAtual={busca.pagina + 1}
-            proximaPagina={proximaPagina}
-            paginaAnterior={paginaAnterior}
-          />
+            )}
+            {busca.nome == "" ? (
+              <TrocarPagina
+                e2={true}
+                tamanhoPagina={tamanhoPagina}
+                quantidade={quantidade}
+                paginaAtual={busca.pagina + 1}
+                proximaPagina={proximaPagina}
+                paginaAnterior={paginaAnterior}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
         ) : (
-          <></>
+          <div className="nenhum-resultado">{t("nenhum-resultado")}</div>
         )}
       </div>
     </div>
