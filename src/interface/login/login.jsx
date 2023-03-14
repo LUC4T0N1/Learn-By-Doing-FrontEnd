@@ -23,7 +23,7 @@ function Login() {
   const dispatch = useDispatch();
 
   const toPerfil = async () => {
-    history.push(`/perfil`);
+    history.push(`/profile`);
   };
 
   const handleLogar = async (e) => {
