@@ -1,7 +1,7 @@
 import axios from "axios";
 import AuthHeader from "../../AuthContext";
 
-const url = "http://localhost:8080/api/prova";
+const url = process.env.REACT_APP_SERVER_URL + "prova";
 
 export function obterProvasPorConteudo(pagina, nome, ordenacao, idConteudo) {
   return axios.get(

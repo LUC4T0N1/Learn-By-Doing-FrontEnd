@@ -11,7 +11,8 @@ function ProvasResolvidas() {
 
   const buscarFiltrado = async (nome, busca) => {
     const res = await axios.get(
-      `http://localhost:8080/api/prova/buscarResolucoesPorUsuario?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`,
+      process.env.REACT_APP_SERVER_URL +
+        `prova/buscarResolucoesPorUsuario?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`,
       { headers: AuthHeader() }
     );
     setProvas(res.data.provasResolvidas);

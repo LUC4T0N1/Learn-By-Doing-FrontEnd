@@ -48,7 +48,8 @@ export default function AdicionarQuestoes({ idsQuestoes }) {
   const buscarFiltrado = async (nome, busca) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/questao/filtrar?enunciado=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}&multiplaEscolha=${busca.tipo}&publica=${busca.publica}` +
+        process.env.REACT_APP_SERVER_URL +
+          `questao/filtrar?enunciado=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}&multiplaEscolha=${busca.tipo}&publica=${busca.publica}` +
           stringQueryConteudos(busca.conteudos) +
           stringQueryQuestoes(idsQuestoes),
         { headers: AuthHeader() }

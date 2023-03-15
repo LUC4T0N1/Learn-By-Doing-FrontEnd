@@ -46,7 +46,7 @@ export default function BuscarConteudos({
     if (conteudo.nome !== "") {
       try {
         const res = await axios.post(
-          `http://localhost:8080/api/conteudo`,
+          process.env.REACT_APP_SERVER_URL + `conteudo`,
           conteudo,
           { headers: AuthHeader() }
         );
@@ -87,7 +87,8 @@ export default function BuscarConteudos({
   const buscarFiltrado = async (nome, busca) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/conteudo/filtro?nome=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`,
+        process.env.REACT_APP_SERVER_URL +
+          `conteudo/filtro?nome=${nome}&pagina=${busca.pagina}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`,
         { headers: AuthHeader() }
       );
       setConteudos(response.data.conteudos);

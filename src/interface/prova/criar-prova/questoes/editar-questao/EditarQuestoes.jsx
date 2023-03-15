@@ -104,7 +104,7 @@ export default function EditarQuestoes({ handleClose }) {
     let questaoValida = validar();
     if (questaoValida == true) {
       const res = await axios.put(
-        `http://localhost:8080/api/questao`,
+        process.env.REACT_APP_SERVER_URL + `questao`,
         questao,
         {
           headers: AuthHeader(),

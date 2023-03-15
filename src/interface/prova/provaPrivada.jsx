@@ -18,7 +18,8 @@ function ProvaPrivada() {
   const buscar = async (e) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/prova/obterIdProvaPrivada?idSecreto=${formRef.current.idSecreto.value}`,
+        process.env.REACT_APP_SERVER_URL +
+          `prova/obterIdProvaPrivada?idSecreto=${formRef.current.idSecreto.value}`,
         { headers: AuthHeader() }
       );
       history.push({

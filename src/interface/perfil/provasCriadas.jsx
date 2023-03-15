@@ -18,7 +18,8 @@ function ProvasCriadas() {
   const buscarFiltrado = async (nome, busca) => {
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/prova/buscarPU?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`,
+        process.env.REACT_APP_SERVER_URL +
+          `prova/buscarPU?pagina=${busca.pagina}&nome=${nome}&ordenacao=${busca.ordenacao}&ordem=${busca.ordem}`,
         { headers: AuthHeader() }
       );
       setProvas(res.data.provas);

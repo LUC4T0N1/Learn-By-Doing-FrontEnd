@@ -29,7 +29,7 @@ export default function ProvaFeita() {
     }
     const ajustar = async () => {
       const response = await axios.get(
-        `http://localhost:8080/api/prova/buscarRID?id=${idProvaFeita}`,
+        process.env.REACT_APP_SERVER_URL + `prova/buscarRID?id=${idProvaFeita}`,
         { headers: AuthHeader() }
       );
       const data = {
@@ -85,7 +85,7 @@ export default function ProvaFeita() {
       setCorrecaoInvalida(false);
       try {
         await axios.put(
-          `http://localhost:8080/api/prova/corrigirDissertativa`,
+          process.env.REACT_APP_SERVER_URL + `prova/corrigirDissertativa`,
           correcao,
           {
             headers: AuthHeader(),

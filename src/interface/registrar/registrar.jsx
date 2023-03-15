@@ -28,7 +28,7 @@ function Registrar() {
         email: formRef.current.email.value,
         nome: formRef.current.nome.value,
       };
-      await axios.post(`http://localhost:8080/api/usuario`, login);
+      await axios.post(process.env.REACT_APP_SERVER_URL + `usuario`, login);
       setSucesso(true);
     } catch (error) {
       setErro(true);

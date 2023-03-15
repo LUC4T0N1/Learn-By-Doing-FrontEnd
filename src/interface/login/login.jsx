@@ -33,7 +33,7 @@ function Login() {
         email: formRef.current.email.value,
       };
       let response = await axios.post(
-        `http://localhost:8080/api/usuario/login`,
+        process.env.REACT_APP_SERVER_URL + `usuario/login`,
         login
       );
       dispatch(setAuth({ ...response.data }));

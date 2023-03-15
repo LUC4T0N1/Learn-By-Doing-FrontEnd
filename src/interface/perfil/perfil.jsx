@@ -29,7 +29,7 @@ function Perfil() {
         senhaNovaConfirmacao: formRef.current.senhaNovaConfirmacao.value,
       };
       await axios.put(
-        `http://localhost:8080/api/usuario/trocarSenha`,
+        process.env.REACT_APP_SERVER_URL + `usuario/trocarSenha`,
         senhaForm,
         { headers: AuthHeader() }
       );

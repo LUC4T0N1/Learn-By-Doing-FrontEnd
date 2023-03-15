@@ -40,9 +40,13 @@ export default function ProvaCompleta() {
   const prova = useSelector((state) => state.provas.realizarProva);
 
   const finalizarProva = async (msg) => {
-    await axios.post(`http://localhost:8080/api/prova/realizar`, prova, {
-      headers: AuthHeader(),
-    });
+    await axios.post(
+      process.env.REACT_APP_SERVER_URL + `prova/realizar`,
+      prova,
+      {
+        headers: AuthHeader(),
+      }
+    );
     dispatch(
       setRealizarProva({
         realizarProva: {
@@ -93,7 +97,7 @@ export default function ProvaCompleta() {
     if (!prova.publica) {
       try {
         await axios.get(
-          `http://localhost:8080/api/prova/validarDatas?id=${idProva}`,
+          process.env.REACT_APP_SERVER_URL + `prova/validarDatas?id=${idProva}`,
           { headers: AuthHeader() }
         );
       } catch (e) {
@@ -109,11 +113,12 @@ export default function ProvaCompleta() {
     if (prova.tempo > 0 && !prova.publica) {
       try {
         await axios.get(
-          `http://localhost:8080/api/prova/validarResolucoes?id=${idProva}`,
+          process.env.REACT_APP_SERVER_URL +
+            `prova/validarResolucoes?id=${idProva}`,
           { headers: AuthHeader() }
         );
         const res = await axios.get(
-          `http://localhost:8080/api/prova/iniciarProva?id=${idProva}`,
+          process.env.REACT_APP_SERVER_URL + `prova/iniciarProva?id=${idProva}`,
           { headers: AuthHeader() }
         );
         setTempoRestante(res.data.tempoRestante);
@@ -138,7 +143,8 @@ export default function ProvaCompleta() {
     } else {
       try {
         await axios.get(
-          `http://localhost:8080/api/prova/validarResolucoes?id=${idProva}`,
+          process.env.REACT_APP_SERVER_URL +
+            `prova/validarResolucoes?id=${idProva}`,
           { headers: AuthHeader() }
         );
         setComecou(true);
