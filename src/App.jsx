@@ -38,7 +38,7 @@ function CustomRoute({ isPrivate, ...rest }) {
   const autenticacao = useSelector((state) => state.autenticacao);
   const token = localStorage.getItem("token");
 
-  if (isPrivate && token.length == 4) {
+  if (isPrivate && (token == null || token.length == 4)) {
     return <Redirect to="/login" />;
   }
   return <Route {...rest} />;

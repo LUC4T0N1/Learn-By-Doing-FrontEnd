@@ -28,7 +28,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      {token.length !== 4 ? (
+      {token != null && token.length !== 4 ? (
         <>
           <div className="nav-menu" id="nav-menu">
             <ul
@@ -71,7 +71,7 @@ const NavBar = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/corrigir/buscarProva"
+                  to="/toCorrect/searchTest"
                   className="nav-link"
                   style={{ color: theme.state.darkMode ? "white" : "black" }}
                 >
