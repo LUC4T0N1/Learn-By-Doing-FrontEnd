@@ -140,6 +140,9 @@
 
 @media screen and (min-width: 1250px) and (max-height: 725px) {
   .item {
-    height: 190px;
+    height: 191px;
+  }
+  .item-desc {
+    font-size: 13px;
   }
 }

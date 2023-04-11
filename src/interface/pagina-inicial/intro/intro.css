@@ -68,6 +68,12 @@
     font-size: 60px;
   }
 }
+@media screen and (max-width: 1344px) {
+  .intro-description {
+    font-size: 17px;
+    margin: 0;
+  }
+}
 @media screen and (max-width: 1250px) {
   .intro-description {
     font-size: 15px;
