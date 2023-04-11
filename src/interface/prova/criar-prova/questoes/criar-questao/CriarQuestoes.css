@@ -20,6 +20,30 @@
   overflow-x: hidden;
 }
 
+.enunciado-questao {
+  resize: none;
+  min-width: 100%;
+  min-height: 200px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: solid;
+  border-image: linear-gradient(
+      to right,
+      rgb(196, 112, 3, 0.8),
+      rgb(202, 35, 85, 0.8),
+      rgb(77, 8, 65, 0.8)
+    )
+    1;
+  font-size: 16px;
+  padding-left: 10px;
+  border-radius: 8px;
+  background-color: rgba(230, 227, 227, 0.993);
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+  margin-left: -5px;
+}
+
 /* .criar-questoes .input-texto-simples {
   min-width: 80%;
 }

@@ -5,7 +5,7 @@ const questaoSlice = createSlice({
   initialState: {
     questao: {
       enunciado: "",
-      publica: true,
+      publica: false,
       multiplaEscolha: false,
       resposta: "",
       valor: 0,

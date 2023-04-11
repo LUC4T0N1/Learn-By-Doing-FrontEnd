@@ -64,7 +64,7 @@ export default function VisualizarQuestoesCriadas({
               {t("questao")} {numeroQuestao}
             </p>
             <div className="questao-dados-2">
-              {questao.publica ? (
+              {questao.publica === true || questao.publica === "true" ? (
                 <p>· {t("publica")}</p>
               ) : (
                 <p>· {t("privada")}</p>

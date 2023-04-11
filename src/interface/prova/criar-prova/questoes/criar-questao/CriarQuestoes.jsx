@@ -13,7 +13,7 @@ import "./CriarQuestoes.css";
 
 export default function CriarQuestoes({ handleClose }) {
   const { t } = useTranslation();
-  const [publica, setPublica] = useState(true);
+  const [publica, setPublica] = useState(false);
   const [dissertativa, setDissertativa] = useState(true);
 
   const mudarPrivacidade = (e) => {
@@ -52,6 +52,7 @@ export default function CriarQuestoes({ handleClose }) {
         resposta: "",
         valor: 0,
         alternativas: [],
+        publica: false,
       })
     );
   }, [dispatch]);
@@ -193,13 +194,13 @@ export default function CriarQuestoes({ handleClose }) {
         </i>
       </button>
       <div className="mini-container2">
-        <input
+        <textarea
           type="text"
           name="enunciado"
-          className="input-texto-simples"
+          className="enunciado-questao"
           placeholder={t("enunciado...")}
           onChange={handleChange}
-        ></input>
+        ></textarea>
       </div>
       <div className="mini-container3">
         <BuscarConteudos
@@ -232,8 +233,8 @@ export default function CriarQuestoes({ handleClose }) {
           className="select-simples"
           onChange={mudarPrivacidade}
         >
-          <option value={true}>{t("publica")}</option>
           <option value={false}>{t("privada")}</option>
+          <option value={true}>{t("publica")}</option>
         </select>
       </div>
       {dissertativa ? (
