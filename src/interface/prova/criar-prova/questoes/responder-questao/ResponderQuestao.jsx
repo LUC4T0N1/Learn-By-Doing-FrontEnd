@@ -23,6 +23,7 @@ function ResponderQuestao({
         <p className="resposta-label">{t("resposta:")} </p>
         {!questao.multiplaEscolha ? (
           <textarea
+            maxlength="20000"
             type="text"
             name="resposta"
             className="input-texto-grande"

@@ -124,6 +124,7 @@ export default function BuscarConteudos({
               </button>
               <div className="conteudo">
                 <input
+                  maxlength="40"
                   type="text"
                   name="nome"
                   className="input-texto-simples"

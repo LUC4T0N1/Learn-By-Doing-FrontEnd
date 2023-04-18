@@ -16,6 +16,7 @@
   margin-bottom: 30px;
   margin-top: 22px;
   color: rgb(255, 255, 255);
+  word-break: break-all;
 }
 
 .botao-add-prova-div {
@@ -62,6 +63,7 @@
   align-items: left;
   justify-content: space-between;
   flex-direction: column;
+  word-break: break-all;
 }
 
 .questao-dados {
@@ -99,7 +101,7 @@
   position: absolute;
   right: 5%;
   width: 6%;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 .questao-header {

@@ -195,6 +195,7 @@ export default function CriarQuestoes({ handleClose }) {
       </button>
       <div className="mini-container2">
         <textarea
+          maxlength="20000"
           type="text"
           name="enunciado"
           className="enunciado-questao"
@@ -240,6 +241,7 @@ export default function CriarQuestoes({ handleClose }) {
       {dissertativa ? (
         <>
           <textarea
+            maxlength="20000"
             type="text"
             name="resposta"
             className="input-texto-grande"

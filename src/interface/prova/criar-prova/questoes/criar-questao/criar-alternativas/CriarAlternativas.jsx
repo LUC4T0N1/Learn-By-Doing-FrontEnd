@@ -39,6 +39,7 @@ export default function CriarAlternativas({ handleAdicionarAlternativa }) {
         <>
           <div className="mini-container">
             <input
+              maxlength="10000"
               type="text"
               name="enunciado"
               className="input-texto-simples"

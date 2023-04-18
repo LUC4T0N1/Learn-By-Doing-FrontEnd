@@ -18,6 +18,7 @@ export default function InfosBasicas({ handleChange }) {
     <div className="infos-basicas">
       <div className="primeira-linha">
         <input
+          maxlength="49"
           type="text"
           name="nome"
           onChange={handleChange}
