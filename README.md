@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Learn By Doing
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/LUC4T0N1/Learn-By-Doing-FrontEnd/blob/master/LICENCE)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# About the project
+https://learn-by-doing.netlify.app/
 
-## Available Scripts
+An educational system focused on user learning. It provides an environment where any user can create and resolve tests on any subject. Right after the completion, it is possible to see the answers and even the correction of the test performed. The system has a wide search engine, which facilitates the search for testes and subjects, in addition to allowing the use of questions created by other users in your own tests.
+This is the repository for the Front End code. to check the Back End code click here -> https://github.com/LUC4T0N1/Learn-By-Doing-BackEnd
 
-In the project directory, you can run:
+![Home](https://github.com/LUC4T0N1/projects-prints/raw/master/LBD/Home.png)
 
-### `npm start`
+# Functionalities
+In this website you can switch between portuguese and english languages using a button on the navbar.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Create account
+To use the system the user needs to create an account and login. For that, is only needed a name, an email and a password.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Create Tests
+Create public tests for everyone to solve, or create a private test. Use public questions created by others or create your own questions.
+![Create](https://github.com/LUC4T0N1/projects-prints/raw/master/LBD/CreateTest.png)
 
-### `npm test`
+## Take Tests
+Take public tests to train your knowledge, or a private test to be evaluated. Filter exams by content, size, difficulty or popularity.
+![Take](https://github.com/LUC4T0N1/projects-prints/raw/master/LBD/TakeTest.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Correct Tests
+Correct your tests solved by others. Multiple-choice questions are automatically corrected. Make a comment on each question.
+![Correct](https://github.com/LUC4T0N1/projects-prints/raw/master/LBD/Correcting.png)
 
-### `npm run build`
+## Check your record
+See all the tests already created and solved by you. Track your progress and grades. See teachers' corrections to your completed tests.
+![Record](https://github.com/LUC4T0N1/projects-prints/raw/master/LBD/CheckingTest.png)
+![Profile](https://github.com/LUC4T0N1/projects-prints/raw/master/LBD/Profile.PNG)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Used Technologies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Back End
 
-### `npm run eject`
+- Quarkus | Java 
+- Mysql | Hibernate
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Front End
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React
+- HTML | CSS | JAVASCRIPT
+- Redux
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Deploy
+- Netlify
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## How to run the project
+```bash
+#clone repo
+git clone https://github.com/LUC4T0N1/Learn-By-Doing-FrontEnd
 
-## Learn More
+#run project
+  npm install
+  create a .env file on the client directory with the content: REACT_APP_SERVER_URL="http://localhost:8080/api/"
+  npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Author
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Lucas Moniz de Arruda
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://www.linkedin.com/in/lucas-moniz-de-arruda/
