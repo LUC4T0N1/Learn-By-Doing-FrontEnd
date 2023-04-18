@@ -56,7 +56,7 @@ git clone https://github.com/LUC4T0N1/Learn-By-Doing-FrontEnd
 
 #run project
   npm install
-  create a .env file on the client directory with the content: REACT_APP_SERVER_URL="http://localhost:8080/api/"
+  create a .env file on the root directory with the content: REACT_APP_SERVER_URL="http://localhost:8080/api/"
   npm start
 ```
 
