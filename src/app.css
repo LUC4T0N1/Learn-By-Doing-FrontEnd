@@ -161,6 +161,7 @@ body {
   border-radius: 10px;
   color: aliceblue;
   border-style: none;
+  word-break: keep-all;
 }
 
 .botao-simples {
@@ -172,6 +173,7 @@ body {
   border-radius: 4px;
   color: aliceblue;
   border-style: none;
+  word-break: keep-all;
 }
 
 .botao-simples:hover {
@@ -256,11 +258,13 @@ body {
   display: flex;
   gap: 5px;
   align-items: center;
+  word-break: keep-all;
 }
 
 .botao-esquerda {
   position: absolute;
   left: 4.3%;
+  word-break: keep-all;
 }
 
 .botao-fim {
@@ -273,6 +277,7 @@ body {
   color: aliceblue;
   border-style: none;
   text-align: center;
+  word-break: keep-all;
 }
 
 .botao-fim:hover {

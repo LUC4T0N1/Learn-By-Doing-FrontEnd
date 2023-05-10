@@ -163,6 +163,24 @@ const NavBar = () => {
               </Link>
             </li>
           </ul>
+          <div>
+            <button
+              className="mobile-menu-icon"
+              onClick={() => setIsMobile(!isMobile)}
+            >
+              {isMobile ? (
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className="fas fa-times"
+                ></FontAwesomeIcon>
+              ) : (
+                <FontAwesomeIcon
+                  icon={faBars}
+                  className="fas fa-bars"
+                ></FontAwesomeIcon>
+              )}
+            </button>
+          </div>
           <Languages />
           {/* <Toggle /> */}
         </div>
