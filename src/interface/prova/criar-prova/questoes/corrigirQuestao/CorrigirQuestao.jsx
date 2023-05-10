@@ -33,7 +33,7 @@ export default function CorrigirQuestao({
                 type="number"
                 min="0"
                 max={questao.valor}
-                value={qr.notaQuestao}
+                value={qr.notaQuestao !== undefined ? qr.notaQuestao : null}
                 onChange={(e) =>
                   atualizarNotaQuestao(e, questao.idQuestaoResolvida)
                 }
@@ -84,7 +84,7 @@ export default function CorrigirQuestao({
               placeholder={t("comentario")}
               className="comentario-questao"
               type="text"
-              value={qr.comentarioProfessor}
+              value={qr.comentarioProfessor ? qr.comentarioProfessor : ""}
               onChange={(e) =>
                 atualizarComentarioQuestao(e, questao.idQuestaoResolvida)
               }

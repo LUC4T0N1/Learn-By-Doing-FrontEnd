@@ -126,7 +126,7 @@ function FiltroBuscar({
                   idObjeto={objeto.id}
                   dados={[
                     objeto.corrigida
-                      ? t("nota-final")
+                      ? t("nota-final") + objeto.nota + "/" + objeto.notaMaxima
                       : t("nota-parcial") +
                         objeto.nota +
                         "/" +

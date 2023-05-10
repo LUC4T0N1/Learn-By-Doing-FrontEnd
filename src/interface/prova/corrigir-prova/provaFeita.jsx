@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { setCorrecaoProva, setProvas } from "../../../application/provaSlice";
 import AuthHeader from "../../../AuthContext";
+import { setCorrecaoProva, setProvas } from "../../../application/provaSlice";
 import CorrigirQuestao from "../criar-prova/questoes/corrigirQuestao/CorrigirQuestao";
 import InfosProva from "../provaCompleta/InfosProva";
 

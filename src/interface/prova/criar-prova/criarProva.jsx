@@ -20,6 +20,18 @@ function CriarProva() {
     let value = e.target.value;
     if (nome === "tentativas") value = Math.floor(value);
     dispatch(setProva({ ...prova, [nome]: value }));
+    if (nome === "publica") {
+      dispatch(
+        setProva({
+          ...prova,
+          tempo: 0,
+          dataInicial: null,
+          dataFinal: null,
+          tentativas: 0,
+          publica: value,
+        })
+      );
+    }
   };
 
   const adicionarConteudosProva = (id) => {

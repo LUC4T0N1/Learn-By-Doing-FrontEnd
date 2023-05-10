@@ -57,6 +57,7 @@ const provaSlice = createSlice({
     cadastrarNovaProva() {},
     corrigirProva() {},
     setProva(state, action) {
+      console.log("aaaa");
       const provaData = action.payload;
       return { ...state, prova: provaData };
     },

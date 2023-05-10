@@ -9,6 +9,8 @@ export default function InfosBasicas({ handleChange }) {
   const mudarPrivacidade = (e) => {
     if (e.target.value === "true") {
       setPublica(true);
+      /*       zerarDadosProvaPrivada();
+       */
     } else {
       setPublica(false);
     }
