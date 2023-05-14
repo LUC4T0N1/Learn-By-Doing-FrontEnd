@@ -189,9 +189,11 @@
   height: 35px;
   width: 70px;
   margin: 0;
-  padding: 0;
+  padding-right: 1;
   background-color: rgb(75, 50, 60);
   color: rgb(243, 243, 243);
+  word-break: keep-all;
+  border-style: none;
 }
 
 .botao-remover-questao:hover {
@@ -200,6 +202,7 @@
 }
 
 .botao-editar-questao {
+  word-break: keep-all;
   border-radius: 5px;
   height: 35px;
   width: 70px;
@@ -207,6 +210,7 @@
   padding: 0;
   background-color: rgb(94, 72, 54);
   color: rgb(243, 243, 243);
+  border-style: none;
 }
 
 .botao-editar-questao:hover {
