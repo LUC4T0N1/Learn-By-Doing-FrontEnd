@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { logout } from "../../../../application/autenticacaoSlice";
 import AuthHeader from "../../../../AuthContext";
+import { logout } from "../../../../application/autenticacaoSlice";
 import FiltroConteudos from "../../../filtroBuscar/FiltroConteudos";
 import Tag from "../../../filtroBuscar/Tag";
 import "./BuscarConteudos.css";
@@ -77,6 +77,7 @@ export default function BuscarConteudosEditarQuestao({
       {openEscolher ? (
         <FiltroConteudos
           e2={true}
+          tamanhoPagina={5}
           handleClose={handleClose}
           titulo={t("escolher-conteudos")}
           opcoesFiltro={[t("ordem-alfabetica"), t("numero-provas")]}
