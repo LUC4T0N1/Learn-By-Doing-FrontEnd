@@ -159,6 +159,8 @@
   "nome": "Name: ",
   "criacao-perfil-data": "Profile Creation Date: ",
   "senha-atual": "Current Password...",
+  "senha-nova": "New Password...",
+  "confirmar-senha-nova": "Confirm New Password...",
   "senha-atual-obrigatoria": "The current password is required!",
   "senha-nova-obrigatoria": "The new password is required!",
   "senhas-diferentes": "The passwords doesn't match!",

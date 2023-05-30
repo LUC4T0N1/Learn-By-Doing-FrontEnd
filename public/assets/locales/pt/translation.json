@@ -161,6 +161,8 @@
   "nome": "Nome: ",
   "criacao-perfil-data": "Data de Criação do Perfil: ",
   "senha-atual": "Senha Atual...",
+  "senha-nova": "Senha Nova...",
+  "confirmar-senha-nova": "Confirmar Senha Nova...",
   "senha-atual-obrigatoria": "A senha atual é obrigatoria!",
   "senha-nova-obrigatoria": "A senha nova é obrigatoria!",
   "senhas-diferentes": "As senhas não são iguais!",

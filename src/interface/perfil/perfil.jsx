@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { getPerfil } from "../../application/perfilSlice";
 import AuthHeader from "../../AuthContext";
+import { getPerfil } from "../../application/perfilSlice";
 import "./perfil.css";
 
 function Perfil() {
@@ -132,7 +132,7 @@ function Perfil() {
                 <input
                   type="password"
                   className="input-texto-simples"
-                  placeholder="Senha Nova..."
+                  placeholder={t("senha-nova")}
                   {...register("senhaNova", {
                     required: t("senha-nova-obrigatoria"),
                     minLength: {
@@ -154,7 +154,7 @@ function Perfil() {
                 <input
                   type="password"
                   className="input-texto-simples"
-                  placeholder="Confirmar Senha Nova ..."
+                  placeholder={t("confirmar-senha-nova")}
                   {...register("senhaNovaConfirmacao", {
                     validate: (value) =>
                       value === formRef.current.senhaNova.value ||
