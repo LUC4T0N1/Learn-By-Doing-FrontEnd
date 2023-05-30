@@ -10,7 +10,9 @@ function ResponderQuestao({
   return (
     <div className="visualizar-questao">
       <div className="questao-header">
-        <p className="questao-numero">Questão {numeroQuestao}</p>
+        <p className="questao-numero">
+          {t("questao")} {numeroQuestao}
+        </p>
         <div className="questao-dados">
           <p>
             {t(".valor")}
